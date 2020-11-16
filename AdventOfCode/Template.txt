@@ -1,0 +1,22 @@
+﻿namespace AdventOfCode.Solutions.Year<YEAR>
+{
+
+    class Day<DAY> : ASolution
+    {
+
+        public Day<DAY>() : base(<DAY>, <YEAR>, "")
+        {
+
+        }
+
+        protected override string SolvePartOne()
+        {
+            return null;
+        }
+
+        protected override string SolvePartTwo()
+        {
+            return null;
+        }
+    }
+}
