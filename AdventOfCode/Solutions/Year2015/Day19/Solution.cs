@@ -1,10 +1,10 @@
-﻿namespace AdventOfCode.Solutions.Year<YEAR>
+namespace AdventOfCode.Solutions.Year2015
 {
 
-    class Day<DAY> : ASolution
+    class Day19 : ASolution
     {
 
-        public Day<DAY>() : base(<DAY>, <YEAR>, "")
+        public Day19() : base(19, 2015, "")
         {
 
         }

@@ -1,0 +1,4 @@
+﻿[*.cs]
+
+# CS0251: Indexing an array with a negative index
+dotnet_diagnostic.CS0251.severity = none
