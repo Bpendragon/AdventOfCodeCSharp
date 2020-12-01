@@ -6,19 +6,52 @@ namespace AdventOfCode.Solutions.Year2020
 
     class Day01 : ASolution
     {
+        List<int> costs;
 
         public Day01() : base(01, 2020, "")
         {
+            costs = new List<int>(Utilities.ToIntArray(Input, "\n"));
+            costs.Sort();
 
+            
         }
 
         protected override string SolvePartOne()
         {
-            return null;
+            int i = 0;
+            int j = 1;
+
+            while(true)
+            {
+                int test = costs[i] + costs[^j];
+                if (test == 2020)
+                {
+                    break;
+                } else if (test > 2020)
+                {
+                    j++;
+                } else if(test <2020)
+                {
+                    i++;
+                }
+            }
+            return "" + (costs[i] * costs[^j]);
         }
 
         protected override string SolvePartTwo()
         {
+            for(int i = 0; i < costs.Count; i++)
+            {
+                for(int j = i+1; j<costs.Count; j++)
+                {
+                    for (int k = j+1; k<costs.Count; k++)
+                    {
+                        if (costs[i] + costs[j] + costs[k] == 2020) return (costs[i] * costs[j] * costs[k]).ToString();
+                    }
+                }
+            }
+            
+
             return null;
         }
     }
