@@ -24,12 +24,13 @@ namespace AdventOfCode.Solutions.Year2020
 
         protected override string SolvePartTwo()
         {
-            long res = (SlopeTrees(1, 1) *
-                    SlopeTrees(3,1) *
-                    SlopeTrees(5,1) *
-                    SlopeTrees(7,1) *
-                    SlopeTrees(1,2)
-                );
+            long res = 1;
+            foreach (var slope in new List<(int, int)> {
+                (1, 1), (3, 1), (5, 1), (7, 1), (1, 2)
+            })
+            {
+                res *= SlopeTrees(slope);
+            }
             return res.ToString();
         }
 
@@ -44,6 +45,11 @@ namespace AdventOfCode.Solutions.Year2020
                 xLoc  = (xLoc+x)%line.Length; 
             }
             return trees;
+        }
+
+        private long SlopeTrees((int, int) slope)
+        {
+            return SlopeTrees(slope.Item1, slope.Item2);
         }
 
         //Original Solution, kept for posterity
