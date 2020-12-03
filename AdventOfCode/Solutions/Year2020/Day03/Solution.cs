@@ -15,77 +15,109 @@ namespace AdventOfCode.Solutions.Year2020
             lines = new List<string>(Input.SplitByNewline());
         }
 
+
+
         protected override string SolvePartOne()
         {
-            int x =0;
-            int trees = 0;
-            foreach(var line in lines)
-            {
-                if (line[x] == '#') trees++;
-                x += 3;
-                if (x >= line.Length) x -= line.Length; 
-            }
-
-
-            return trees.ToString();
+            return SlopeTrees(3, 1).ToString();
         }
 
         protected override string SolvePartTwo()
         {
-            int x = 0;
-            int trees = 0;
-            long totalCount = 1;
-            foreach (var line in lines)
-            {
-                if (line[x] == '#') trees++;
-                x += 3;
-                if (x >= line.Length) x -= line.Length;
-            }
-            totalCount *= trees;
+            long res = (SlopeTrees(1, 1) *
+                    SlopeTrees(3,1) *
+                    SlopeTrees(5,1) *
+                    SlopeTrees(7,1) *
+                    SlopeTrees(1,2)
+                );
+            return res.ToString();
+        }
 
-            x = 0;
-            trees = 0;
-            foreach (var line in lines)
-            {
-                if (line[x] == '#') trees++;
-                x++;
-                if (x >= line.Length) x -= line.Length;
-            }
-            totalCount *= trees;
-
-            x = 0;
-            trees = 0;
-            foreach (var line in lines)
-            {
-                if (line[x] == '#') trees++;
-                x+=5;
-                if (x >= line.Length) x -= line.Length;
-            }
-            totalCount *= trees;
-
-             x = 0;
-            trees = 0;
-            foreach (var line in lines)
-            {
-                if (line[x] == '#') trees++;
-                x += 7;
-                if (x >= line.Length) x -= line.Length;
-            }
-            totalCount *= trees;
-
-            x = 0;
-            trees = 0;
-            for(int i = 0; i < lines.Count(); i+=2)
+        private long SlopeTrees(int x, int y)
+        {
+            long trees = 0;
+            int xLoc = 0;
+            for(int i = 0; i < lines.Count(); i+=y)
             {
                 string line = lines[i];
-                if (line[x] == '#') trees++;
-                x++;
-                if (x >= line.Length) x -= line.Length;
+                if (line[xLoc] == '#') trees++;
+                xLoc  = (xLoc+x)%line.Length; 
             }
-            totalCount *= trees;
-
-            
-            return totalCount.ToString() ;
+            return trees;
         }
+
+        //Original Solution, kept for posterity
+        //protected override string SolvePartOne()
+        //{
+        //    int x =0;
+        //    int trees = 0;
+        //    foreach(var line in lines)
+        //    {
+        //        if (line[x] == '#') trees++;
+        //        x += 3;
+        //        if (x >= line.Length) x -= line.Length; 
+        //    }
+
+
+        //    return trees.ToString();
+        //}
+
+        //protected override string SolvePartTwo()
+        //{
+        //    int x = 0;
+        //    int trees = 0;
+        //    long totalCount = 1;
+        //    foreach (var line in lines)
+        //    {
+        //        if (line[x] == '#') trees++;
+        //        x += 3;
+        //        if (x >= line.Length) x -= line.Length;
+        //    }
+        //    totalCount *= trees;
+
+        //    x = 0;
+        //    trees = 0;
+        //    foreach (var line in lines)
+        //    {
+        //        if (line[x] == '#') trees++;
+        //        x++;
+        //        if (x >= line.Length) x -= line.Length;
+        //    }
+        //    totalCount *= trees;
+
+        //    x = 0;
+        //    trees = 0;
+        //    foreach (var line in lines)
+        //    {
+        //        if (line[x] == '#') trees++;
+        //        x+=5;
+        //        if (x >= line.Length) x -= line.Length;
+        //    }
+        //    totalCount *= trees;
+
+        //     x = 0;
+        //    trees = 0;
+        //    foreach (var line in lines)
+        //    {
+        //        if (line[x] == '#') trees++;
+        //        x += 7;
+        //        if (x >= line.Length) x -= line.Length;
+        //    }
+        //    totalCount *= trees;
+
+        //    x = 0;
+        //    trees = 0;
+        //    for(int i = 0; i < lines.Count(); i+=2)
+        //    {
+        //        string line = lines[i];
+        //        if (line[x] == '#') trees++;
+        //        x++;
+        //        if (x >= line.Length) x -= line.Length;
+        //    }
+        //    totalCount *= trees;
+
+
+        //    return totalCount.ToString() ;
+        //}
     }
 }
