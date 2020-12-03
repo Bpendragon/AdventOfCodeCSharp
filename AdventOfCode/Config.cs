@@ -56,12 +56,12 @@ namespace AdventOfCode
             }
         }
 
-        void setDefaults()
+        void SetDefaults()
         {
             //Make sure we're looking at EST, or it might break for most of the US
             DateTime CURRENT_EST = TimeZoneInfo.ConvertTime(DateTime.Now, TimeZoneInfo.Utc).AddHours(-5);
-            if (Cookie == default(string)) Cookie = "";
-            if(Year == default(int)) Year = CURRENT_EST.Year;
+            if (Cookie == default) Cookie = "";
+            if(Year == default) Year = CURRENT_EST.Year;
             if(Days == default(int[])) Days = (CURRENT_EST.Month == 12 && CURRENT_EST.Day <= 25) ? new int[] { CURRENT_EST.Day } : new int[] { 0 };
         }
 
@@ -77,12 +77,12 @@ namespace AdventOfCode
             if(File.Exists(path))
             {
                 config = JsonSerializer.Deserialize<Config>(File.ReadAllText(path), options);
-                config.setDefaults();
+                config.SetDefaults();
             }
             else
             {
                 config = new Config();
-                config.setDefaults();
+                config.SetDefaults();
                 File.WriteAllText(path, JsonSerializer.Serialize<Config>(config, options));
             }
             return config;
@@ -115,7 +115,7 @@ namespace AdventOfCode
                 {
                     return new int[] { day };
                 }
-                return new int[0];
+                return Array.Empty<int>();
             });
         }
 

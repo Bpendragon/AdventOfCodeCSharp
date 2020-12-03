@@ -111,7 +111,7 @@ namespace AdventOfCode.Solutions
             
             foreach(var combination in Combinations(values, subcount))
             {
-                var perms = Permutations<T>(combination);
+                var perms = Permutations(combination);
                 foreach (int i in Enumerable.Range(0, perms.Count())) yield return perms.ElementAt(i);
             }
         }
