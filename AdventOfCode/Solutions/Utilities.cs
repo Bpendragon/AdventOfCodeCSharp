@@ -32,6 +32,11 @@ namespace AdventOfCode.Solutions
 
         }
 
+        public static int[] ToIntArray(this string[] array)
+        {
+            return string.Join(",", array).ToIntArray(",");
+        }
+
 
         public static int MinOfMany(params int[] items)
         {
@@ -157,6 +162,21 @@ namespace AdventOfCode.Solutions
             for (var i = 0; i < (float)array.Count() / size; i++)
             {
                 yield return array.Skip(i * size).Take(size);
+            }
+        }
+
+        /// <summary>
+        /// Rotates an IEnumarable by the requested amount
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="array"></param>
+        /// <param name="rotations">Number of steps to take, positive numbers move indices up (item at end moves to start), negative numbers move them down (first item moves to end of array)</param>
+        /// <returns></returns>
+        public static IEnumerable<T> Rotate<T>(this IEnumerable<T> array, int rotations)
+        {
+            for(int i = 0; i < array.Count(); i++)
+            {
+                yield return i + rotations >= 0 ? array.ElementAt((i + rotations) % array.Count()) : array.ElementAt((i + rotations) + array.Count());
             }
         }
 

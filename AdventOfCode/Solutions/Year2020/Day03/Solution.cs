@@ -38,11 +38,11 @@ namespace AdventOfCode.Solutions.Year2020
         {
             long trees = 0;
             int xLoc = 0;
-            for(int i = 0; i < lines.Count(); i+=y)
+            for(int i = 0; i < lines.Count; i+=y)
             {
                 string line = lines[i];
                 if (line[xLoc] == '#') trees++;
-                xLoc  = (xLoc+x)%line.Length; 
+                xLoc = (xLoc + x) % line.Length;
             }
             return trees;
         }
