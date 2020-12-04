@@ -16,7 +16,7 @@ namespace AdventOfCode.Solutions
         public int Year { get; }
         public string Title { get; }
         public string DebugInput { get; set; }
-        public string Input => DebugInput != null ? DebugInput : (string.IsNullOrEmpty(_input.Value) ? null : _input.Value);
+        public string Input => DebugInput ?? (string.IsNullOrEmpty(_input.Value) ? null : _input.Value);
         public string Part1 => string.IsNullOrEmpty(_part1.Value) ? "" : _part1.Value;
         public string Part2 => string.IsNullOrEmpty(_part2.Value) ? "" : _part2.Value;
 
@@ -97,12 +97,10 @@ namespace AdventOfCode.Solutions
                     DateTime CURRENT_EST = TimeZoneInfo.ConvertTime(DateTime.Now, TimeZoneInfo.Utc).AddHours(-5);
                     if (CURRENT_EST < new DateTime(Year, 12, Day)) throw new InvalidOperationException();
 
-                    using (var client = new WebClient())
-                    {
-                        client.Headers.Add(HttpRequestHeader.Cookie, Program.Config.Cookie);
-                        input = client.DownloadString(INPUT_URL).Trim();
-                        File.WriteAllText(INPUT_FILEPATH, input);
-                    }
+                    using var client = new WebClient();
+                    client.Headers.Add(HttpRequestHeader.Cookie, Program.Config.Cookie);
+                    input = client.DownloadString(INPUT_URL).Trim();
+                    File.WriteAllText(INPUT_FILEPATH, input);
                 }
                 catch (WebException e)
                 {

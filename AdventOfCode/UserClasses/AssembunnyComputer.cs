@@ -10,8 +10,10 @@ namespace AdventOfCode.UserClasses
     {
         public Dictionary<string, int> registers = new Dictionary<string, int>();
         List<string> regNames = new List<string>(new string[]{ "a", "b", "c", "d"});
+        public event EventHandler Output;
 
         public List<string> program;
+        public List<string> cleanProgram;
         private int sp = 0;
 
         public AssembunnyComputer()
@@ -24,37 +26,108 @@ namespace AdventOfCode.UserClasses
 
         public AssembunnyComputer(List<string> program)
         {
-            this.program = program;
+            this.cleanProgram = program;
             registers["a"] = 0;
             registers["b"] = 0;
             registers["c"] = 0;
             registers["d"] = 0;
         }
 
+        public void Reset()
+        {
+            registers["a"] = 0;
+            registers["b"] = 0;
+            registers["c"] = 0;
+            registers["d"] = 0;
+            sp = 0;
+        }
+
         public void Execute()
         {
+            program = new List<string>(cleanProgram);
             while(sp >= 0 && sp < program.Count)
             {
                 string[] command = program[sp].Split();
 
-                
 
+                int val; //value read from first instruction
+                int tgt; //num steps for a jnz/tgl etc
                 switch(command[0])
                 {
-                    case "cpy": 
+                    case "cpy":
+                        if (int.TryParse(command[2], out int _)) break;
+                        if (int.TryParse(command[1], out val))
+                        {
+                            registers[command[2]] = val;
+                        }
+                        else
+                        {
+                            registers[command[2]] = registers[command[1]];
+                        }
                         break;
-                    case "inc": 
+                    case "inc":
+                        registers[command[1]]++;
                         break;
-                    case "dec": 
+                    case "dec":
+                        registers[command[1]]--;
                         break;
-                    case "jnz": 
+                    case "jnz":
+                        if (!int.TryParse(command[1], out val)) val = registers[command[1]];
+                        if (!int.TryParse(command[2], out tgt)) tgt = registers[command[2]];
+                        if(val != 0)
+                        {
+                            sp += tgt;
+                            continue;
+                        }
                         break;
+                    case "tgl":
+                        if (!int.TryParse(command[1], out tgt)) tgt = registers[command[1]];
+                        if ((sp + tgt) < 0 || (sp + tgt) >= program.Count) break;
+                        ToggleCommand(sp + tgt);
+
+                        break;
+                    case "out":
+                        if (!int.TryParse(command[1], out val)) val = registers[command[1]];
+
+                        break;
+                    default:
+                        throw new FormatException($"Opcode not recognized {command[0]}");
                 }
+                sp++;
             }
+        }
+
+        private void ToggleCommand(int v)
+        {
+            string command = program[v];
+
+            var split = command.Split();
+
+            switch(split[0])
+            {
+                case "jnz":
+                    split[0] = "cpy";
+                    break;
+                case "cpy":
+                    split[0] = "jnz";
+                    break;
+                case "inc":
+                    split[0] = "dec";
+                    break;
+                case "dec": 
+                case "tgl":
+                    split[0] = "inc";
+                    break;
+            }
+
+            program[v] = string.Join(' ', split);
         }
 
 
     }
 
-
+    public class ABOutputEventArgs: EventArgs
+    {
+        public int output { get; set; }
+    }
 }
