@@ -10,7 +10,7 @@ namespace AdventOfCode.Solutions.Year2020
     {
         List<int> costs;
 
-        public Day01() : base(01, 2020, "")
+        public Day01() : base(01, 2020, "Report Repair")
         {
             costs = new List<int>(Utilities.ToIntArray(Input, "\n"));   
         }

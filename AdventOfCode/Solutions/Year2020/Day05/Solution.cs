@@ -11,7 +11,7 @@ namespace AdventOfCode.Solutions.Year2020
     {
         List<string> passes;
         List<int> passIDs;
-        public Day05() : base(05, 2020, "")
+        public Day05() : base(05, 2020, "Binary Boarding")
         {
             passes = new List<string>(Input.SplitByNewline());
             passIDs = new List<int>();

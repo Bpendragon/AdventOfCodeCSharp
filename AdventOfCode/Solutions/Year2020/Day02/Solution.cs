@@ -9,7 +9,7 @@ namespace AdventOfCode.Solutions.Year2020
     class Day02 : ASolution
     {
         List<string> passwords;
-        public Day02() : base(02, 2020, "")
+        public Day02() : base(02, 2020, "Password Philosophy")
         {
             passwords = new List<string>(Input.SplitByNewline());
         }
