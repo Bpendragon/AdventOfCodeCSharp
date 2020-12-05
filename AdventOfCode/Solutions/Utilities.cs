@@ -32,6 +32,25 @@ namespace AdventOfCode.Solutions
 
         }
 
+        public static long[] ToLongArray(this string str, string delimiter = "")
+        {
+            if (delimiter == "")
+            {
+                var result = new List<long>();
+                foreach (char c in str) if (long.TryParse(c.ToString(), out long n)) result.Add(n);
+                return result.ToArray();
+            }
+            else
+            {
+                return str
+                    .Split(delimiter)
+                    .Where(n => int.TryParse(n, out int v))
+                    .Select(n => Convert.ToInt64(n))
+                    .ToArray();
+            }
+
+        }
+
         public static int[] ToIntArray(this string[] array)
         {
             return string.Join(",", array).ToIntArray(",");
