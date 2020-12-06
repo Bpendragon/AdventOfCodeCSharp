@@ -11,7 +11,7 @@ namespace AdventOfCode.Solutions.Year2020
     class Day06 : ASolution
     {
         List<string> answers;
-        public Day06() : base(06, 2020, "")
+        public Day06() : base(06, 2020, "Custom Customs")
         {
             answers = new List<string>(Input.Split("\n\n"));
         }
