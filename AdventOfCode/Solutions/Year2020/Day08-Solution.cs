@@ -60,14 +60,14 @@ namespace AdventOfCode.Solutions.Year2020
                 switch (tokens[0])
                 {
                     case "acc":
-                        acc += int.Parse(tokens[1].TrimStart('+'));
+                        acc += int.Parse(tokens[1]);
                         pc++;
                         break;
                     case "nop":
                         pc++;
                         break;
                     case "jmp":
-                        pc += int.Parse(tokens[1].TrimStart('+'));
+                        pc += int.Parse(tokens[1]);
                         break;
                 }
             }
@@ -89,7 +89,7 @@ namespace AdventOfCode.Solutions.Year2020
                 switch (tokens[0])
                 {
                     case "acc":
-                        acc += int.Parse(tokens[1].TrimStart('+'));
+                        acc += int.Parse(tokens[1]);
                         previousPC = pc;
                         pc++;
                         break;
@@ -99,7 +99,7 @@ namespace AdventOfCode.Solutions.Year2020
                         break;
                     case "jmp":
                         previousPC = pc;
-                        pc += int.Parse(tokens[1].TrimStart('+'));
+                        pc += int.Parse(tokens[1]);
                         break;
                 }
             }
