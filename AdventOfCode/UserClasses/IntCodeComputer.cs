@@ -29,6 +29,8 @@ namespace AdventOfCode.UserClasses
         public event EventHandler<OutputEventArgs> ProgramOutput;
         public event EventHandler ProgramFinish;
 
+        public int WhiteSent = 0;
+
         public virtual void OnProgramOutput(OutputEventArgs e)
         {
             EventHandler<OutputEventArgs> handler = ProgramOutput;
@@ -105,6 +107,7 @@ namespace AdventOfCode.UserClasses
                             OutputValue = opParams[0]
                         };
                         OnProgramOutput(output);
+                        if (opParams[0] == 1) WhiteSent++;
                         PC += 2;
                         break;
 

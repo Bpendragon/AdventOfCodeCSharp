@@ -45,7 +45,7 @@ namespace AdventOfCode.Solutions
             {
                 if (Part1 != "")
                 {
-                    output += $"Part 1: {Part1}\n";
+                    output += $"Part 1: \n{Part1}\n";
                     doOutput = true;
                 }
                 else
@@ -58,7 +58,7 @@ namespace AdventOfCode.Solutions
             {
                 if (Part2 != "")
                 {
-                    output += $"Part 2: {Part2}\n";
+                    output += $"Part 2: \n{Part2}\n";
                     doOutput = true;
                 }
                 else

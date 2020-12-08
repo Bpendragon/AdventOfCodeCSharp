@@ -44,7 +44,7 @@ namespace AdventOfCode.Solutions
             {
                 return str
                     .Split(delimiter)
-                    .Where(n => int.TryParse(n, out int v))
+                    .Where(n => long.TryParse(n, out long v))
                     .Select(n => Convert.ToInt64(n))
                     .ToArray();
             }
