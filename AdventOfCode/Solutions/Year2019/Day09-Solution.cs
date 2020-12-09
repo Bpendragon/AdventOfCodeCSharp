@@ -18,33 +18,31 @@ namespace AdventOfCode.Solutions.Year2019
 
         protected override string SolvePartOne()
         {
-            IntCodeComputer pcA = new IntCodeComputer(program);
-            pcA.ProgramOutput += Pc_ProgramOutput;
-            pcA.ProgramFinish += Pc_ProgramFinish;
-            pcA.AddInput(1);
-            pcA.ProccessProgram();
-            return part1.ToString();
+            IntCode2 cpu = new IntCode2(program);
+            long lastItem = long.MinValue;
+            cpu.ReadyInput(1);
+            foreach (var item in cpu.RunProgram())
+            {
+                Console.WriteLine(item);
+                lastItem = item;
+            }
+            return lastItem.ToString();
         }
 
         protected override string SolvePartTwo()
         {
-            part1.Clear();
-            IntCodeComputer pcA = new IntCodeComputer(program);
-            pcA.ProgramOutput += Pc_ProgramOutput;
-            pcA.ProgramFinish += Pc_ProgramFinish;
-            pcA.AddInput(2);
-            pcA.ProccessProgram();
-            return part1.ToString();
+
+
+            IntCode2 cpu = new IntCode2(program);
+            long lastItem = long.MinValue;
+            cpu.ReadyInput(2);
+            foreach (var item in cpu.RunProgram())
+            {
+                Console.WriteLine(item);
+                lastItem = item;
+            }
+            return lastItem.ToString();
         }
 
-        private static void Pc_ProgramFinish(object sender, EventArgs e)
-        {
-
-        }
-
-        private static void Pc_ProgramOutput(object sender, OutputEventArgs e)
-        {
-            Console.WriteLine(e.OutputValue);
-        }
     }
 }

@@ -31,7 +31,16 @@ namespace AdventOfCode.Solutions.Year2019
 
         protected override string SolvePartTwo()
         {
-            return null;
+            Console.WriteLine("Begin Part 2");
+            cpu.ClearInputs();
+            cpu.ReadyInput(5);
+            long lastItem = long.MinValue;
+            foreach (var item in cpu.RunProgram())
+            {
+                Console.WriteLine(item);
+                lastItem = item;
+            }
+            return lastItem.ToString();
         }
     }
 }
