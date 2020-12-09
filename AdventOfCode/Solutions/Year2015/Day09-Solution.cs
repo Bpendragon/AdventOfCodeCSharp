@@ -8,9 +8,8 @@ namespace AdventOfCode.Solutions.Year2015
 
     class Day09 : ASolution
     {
-
-        Dictionary<string, City> Cities;
-        List<int> routeLengths;
+        readonly Dictionary<string, City> Cities;
+        readonly List<int> routeLengths;
         public Day09() : base(09, 2015, "")
         {
             Cities = new Dictionary<string, City>();

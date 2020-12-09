@@ -115,7 +115,7 @@ namespace AdventOfCode.Solutions.Year2019
                         }
                     }
                     else if (Tiles[(j, k)] == 0) sb.Append(' ');
-                    else sb.Append('■');
+                    else sb.Append('█');
                 }
                 sb.Append('\n');
             }

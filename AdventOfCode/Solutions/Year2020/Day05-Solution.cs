@@ -6,8 +6,8 @@ namespace AdventOfCode.Solutions.Year2020
 {
     class Day05 : ASolution
     {
-        List<string> passes;
-        List<int> passIDs;
+        readonly List<string> passes;
+        readonly List<int> passIDs;
         public Day05() : base(05, 2020, "Binary Boarding")
         {
             passes = new List<string>(Input.SplitByNewline());

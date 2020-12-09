@@ -7,8 +7,8 @@ namespace AdventOfCode.Solutions.Year2016
 
     class Day24 : ASolution
     {
-        List<List<bool>> maze;
-        Dictionary<string, Wire> Wires = new Dictionary<string, Wire>();
+        readonly List<List<bool>> maze;
+        readonly Dictionary<string, Wire> Wires = new Dictionary<string, Wire>();
 
         public Day24() : base(24, 2016, "")
         {

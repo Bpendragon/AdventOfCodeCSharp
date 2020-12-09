@@ -10,8 +10,8 @@ namespace AdventOfCode.Solutions.Year2019
 
     class Day10 : ASolution
     {
-        List<Asteroid> Asteroids;
-        Asteroid baseLoc;
+        readonly List<Asteroid> Asteroids;
+        readonly Asteroid baseLoc;
         public Day10() : base(10, 2019, "")
         {
             Asteroids = new List<Asteroid>();

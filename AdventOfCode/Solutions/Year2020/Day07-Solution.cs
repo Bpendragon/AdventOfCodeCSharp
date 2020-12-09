@@ -9,8 +9,8 @@ namespace AdventOfCode.Solutions.Year2020
 
     class Day07 : ASolution
     {
-        List<string> lines;
-        Dictionary<string, Bag> Bags;
+        readonly List<string> lines;
+        readonly Dictionary<string, Bag> Bags;
 
         public Day07() : base(07, 2020, "Handy Haversacks")
         {

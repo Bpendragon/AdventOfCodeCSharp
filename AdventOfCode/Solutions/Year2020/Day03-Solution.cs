@@ -9,7 +9,7 @@ namespace AdventOfCode.Solutions.Year2020
 
     class Day03 : ASolution
     {
-        List<string> lines;
+        readonly List<string> lines;
         public Day03() : base(03, 2020, "Toboggan Trajectory")
         {
             lines = new List<string>(Input.SplitByNewline());

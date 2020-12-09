@@ -10,8 +10,8 @@ namespace AdventOfCode.Solutions.Year2020
 
     class Day04 : ASolution
     {
-        List<string> passports;
-        List<string> semiValid;
+        readonly List<string> passports;
+        readonly List<string> semiValid;
         public Day04() : base(04, 2020, "Passport Processing")
         {
             passports = new List<String>(Input.Split("\n\n"));

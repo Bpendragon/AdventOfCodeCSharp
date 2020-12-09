@@ -9,8 +9,7 @@ namespace AdventOfCode.Solutions.Year2019
 
     class Day09 : ASolution
     {
-        long[] program;
-        private static StringBuilder part1 = new StringBuilder();
+        readonly long[] program;
         public Day09() : base(09, 2019, "")
         {
             program = Input.ToLongArray(",");

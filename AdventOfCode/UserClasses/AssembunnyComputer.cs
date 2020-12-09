@@ -9,8 +9,6 @@ namespace AdventOfCode.UserClasses
     class AssembunnyComputer
     {
         public Dictionary<string, int> registers = new Dictionary<string, int>();
-        List<string> regNames = new List<string>(new string[]{ "a", "b", "c", "d"});
-        public event EventHandler Output;
 
         public List<string> program;
         public List<string> cleanProgram;
@@ -55,7 +53,7 @@ namespace AdventOfCode.UserClasses
                 switch(command[0])
                 {
                     case "cpy":
-                        if (int.TryParse(command[2], out int _)) break;
+                        if (int.TryParse(command[2], out _)) break;
                         if (int.TryParse(command[1], out val))
                         {
                             registers[command[2]] = val;
@@ -87,7 +85,7 @@ namespace AdventOfCode.UserClasses
 
                         break;
                     case "out":
-                        if (!int.TryParse(command[1], out val)) val = registers[command[1]];
+                        if (!int.TryParse(command[1], out _)) _ = registers[command[1]];
 
                         break;
                     default:
@@ -128,6 +126,6 @@ namespace AdventOfCode.UserClasses
 
     public class ABOutputEventArgs: EventArgs
     {
-        public int output { get; set; }
+        public int Output { get; set; }
     }
 }

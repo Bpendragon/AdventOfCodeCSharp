@@ -13,7 +13,7 @@ namespace AdventOfCode.Solutions.Year2015
 
     class Day12 : ASolution
     {
-        dynamic root;
+        readonly dynamic root;
         public Day12() : base(12, 2015, "")
         {
             root = JsonConvert.DeserializeObject(Input);

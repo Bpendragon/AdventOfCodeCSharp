@@ -9,9 +9,9 @@ namespace AdventOfCode.Solutions.Year2015
 
     class Day16 : ASolution
     {
-        List<string> Lines;
-        List<AuntSue> Sues = new List<AuntSue>();
-        AuntSue tgtSue = new AuntSue(-1);
+        readonly List<string> Lines;
+        readonly List<AuntSue> Sues = new List<AuntSue>();
+        readonly AuntSue tgtSue = new AuntSue(-1);
         public Day16() : base(16, 2015, "")
         {
             tgtSue.Attributes = new Dictionary<string, int>()

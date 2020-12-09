@@ -9,10 +9,10 @@ namespace AdventOfCode.Solutions.Year2018
 
     class Day14 : ASolution
     {
-        List<int> recipes;
+        readonly List<int> recipes;
         int elf1;
         int elf2;
-        int day1tgt;
+        readonly int day1tgt;
         public Day14() : base(14, 2018, "")
         {
             day1tgt = int.Parse(Input);

@@ -8,8 +8,7 @@ namespace AdventOfCode.Solutions.Year2015
 
     class Day13 : ASolution
     {
-
-        Dictionary<string, Guest> GuestList = new Dictionary<string, Guest>();
+        readonly Dictionary<string, Guest> GuestList = new Dictionary<string, Guest>();
         public Day13() : base(13, 2015, "")
         {
             foreach(var line in Input.SplitByNewline())

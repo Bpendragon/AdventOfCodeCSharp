@@ -8,7 +8,7 @@ namespace AdventOfCode.Solutions.Year2020
 
     class Day01 : ASolution
     {
-        List<int> costs;
+        readonly List<int> costs;
 
         public Day01() : base(01, 2020, "Report Repair")
         {

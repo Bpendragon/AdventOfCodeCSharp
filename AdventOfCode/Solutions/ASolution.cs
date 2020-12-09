@@ -11,7 +11,7 @@ namespace AdventOfCode.Solutions
     abstract class ASolution
     {
         long _part1Time, _part2Time;
-        Lazy<string> _input, _part1, _part2;
+        readonly Lazy<string> _input, _part1, _part2;
 
         public int Day { get; }
         public int Year { get; }
@@ -88,11 +88,10 @@ namespace AdventOfCode.Solutions
                     DateTime CURRENT_EST = TimeZoneInfo.ConvertTime(DateTime.Now, TimeZoneInfo.Utc).AddHours(-5);
                     if( CURRENT_EST < new DateTime(Year, 12, Day) ) throw new InvalidOperationException();
 
-                    using( var client = new WebClient() ) {
-                        client.Headers.Add(HttpRequestHeader.Cookie, Program.Config.Cookie);
-                        input = client.DownloadString(INPUT_URL).Trim();
-                        File.WriteAllText(INPUT_FILEPATH, input);
-                    }
+                    using var client = new WebClient();
+                    client.Headers.Add(HttpRequestHeader.Cookie, Program.Config.Cookie);
+                    input = client.DownloadString(INPUT_URL).Trim();
+                    File.WriteAllText(INPUT_FILEPATH, input);
                 }
                 catch( WebException e ) {
                     var statusCode = ((HttpWebResponse)e.Response).StatusCode;
@@ -116,7 +115,7 @@ namespace AdventOfCode.Solutions
         protected abstract string SolvePartOne();
         protected abstract string SolvePartTwo();
 
-        private string SafelySolve(Func<string> partSolver, out long timeTaken) {
+        private static string SafelySolve(Func<string> partSolver, out long timeTaken) {
             Stopwatch clock = new Stopwatch(); clock.Start();
             string solution = string.Empty;
             try {

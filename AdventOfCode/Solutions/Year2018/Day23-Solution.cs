@@ -9,15 +9,9 @@ namespace AdventOfCode.Solutions.Year2018
 
     class Day23 : ASolution
     {
-        List<string> Lines;
         public Day23() : base(23, 2018, "")
         {
-            Lines = new List<string>(Input.SplitByNewline());
 
-            foreach(string line in Lines)
-            {
-
-            }
         }
 
         protected override string SolvePartOne()

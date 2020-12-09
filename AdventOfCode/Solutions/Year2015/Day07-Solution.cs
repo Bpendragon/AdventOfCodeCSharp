@@ -7,8 +7,8 @@ namespace AdventOfCode.Solutions.Year2015
 
     class Day07 : ASolution
     {
-        private List<string> Lines;
-        private Dictionary<string, Gate> circuit = new Dictionary<string, Gate>();
+        private readonly List<string> Lines;
+        private readonly Dictionary<string, Gate> circuit = new Dictionary<string, Gate>();
         public Day07() : base(07, 2015, "")
         {
             Lines = new List<string>(Input.SplitByNewline());

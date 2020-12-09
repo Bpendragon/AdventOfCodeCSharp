@@ -8,8 +8,8 @@ namespace AdventOfCode.Solutions.Year2015
 
     class Day14 : ASolution
     {
-        List<string> Lines;
-        List<Reindeer> Racers = new List<Reindeer>();
+        readonly List<string> Lines;
+        readonly List<Reindeer> Racers = new List<Reindeer>();
         public Day14() : base(14, 2015, "")
         {
             Lines = new List<string>(Input.SplitByNewline());
@@ -47,9 +47,9 @@ namespace AdventOfCode.Solutions.Year2015
     public class Reindeer
     {
         public string name;
-        int speed;
-        int moveTime;
-        int restTime;
+        readonly int speed;
+        readonly int moveTime;
+        readonly int restTime;
         bool isMoving = true;
         int movingFor = 0;
         int restingFor = 0;

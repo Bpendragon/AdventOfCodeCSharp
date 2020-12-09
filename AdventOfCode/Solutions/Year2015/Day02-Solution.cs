@@ -7,7 +7,7 @@ namespace AdventOfCode.Solutions.Year2015
 
     class Day02 : ASolution
     {
-        List<int[]> packages;
+        readonly List<int[]> packages;
         public Day02() : base(02, 2015, "")
         {
             packages = new List<int[]>(Input.SplitByNewline().Select(x => x.ToIntArray("x")));

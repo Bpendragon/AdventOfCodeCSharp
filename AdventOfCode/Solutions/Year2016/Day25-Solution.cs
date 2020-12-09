@@ -5,8 +5,8 @@ namespace AdventOfCode.Solutions.Year2016
 
     class Day25 : ASolution
     {
-        List<string> program;
-        int tgt;
+        readonly List<string> program;
+        readonly int tgt;
         public Day25() : base(25, 2016, "")
         {
             program = new List<string>(Input.SplitByNewline());

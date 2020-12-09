@@ -23,8 +23,4 @@
     </None>
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Solutions\Year2017\" />
-  </ItemGroup>
-
 </Project>

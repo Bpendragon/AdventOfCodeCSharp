@@ -13,7 +13,7 @@ namespace AdventOfCode.UserClasses
         public List<long> PreviousRunState;
         int PC;
         int RelativeBase;
-        private Queue<long> Inputs = new Queue<long>();
+        private readonly Queue<long> Inputs = new Queue<long>();
 
         public IntCode2(long[] Program)
         {
@@ -113,7 +113,7 @@ namespace AdventOfCode.UserClasses
             }
         }
 
-        private Mode[] GetModes(long instruction)
+        private static Mode[] GetModes(long instruction)
         {
             Mode[] res = new Mode[3];
             var tmp = instruction / 100;
@@ -125,79 +125,71 @@ namespace AdventOfCode.UserClasses
             return res;
         }
 
-        private long[] GetOperands(Operation opCode, int pC, Mode[] modes)
+        private long[] GetOperands(Operation opCode, int PC, Mode[] modes)
         {
             long src1, src2, tgt; // I'll have up to 3 arguments
             if (opCode == Operation.HALT) return null; //Sure I could use a switch statement here, I don't care.
             else if (opCode == Operation.JumpFalse || opCode == Operation.JumpTrue)
             {
-                switch (modes[0])
+                src1 = (modes[0]) switch
                 {
-                    case Mode.Position: src1 = WorkingProgram[(int)WorkingProgram[PC + 1]]; break;
-                    case Mode.Immediate: src1 = WorkingProgram[PC + 1]; break;
-                    case Mode.Relative: src1 = WorkingProgram[(int)WorkingProgram[PC + 1] + RelativeBase]; break;
-                    default: throw new NotImplementedException();
-
-                }
-
-                switch (modes[1])
+                    Mode.Position => WorkingProgram[(int)WorkingProgram[PC + 1]],
+                    Mode.Immediate => WorkingProgram[PC + 1],
+                    Mode.Relative => WorkingProgram[(int)WorkingProgram[PC + 1] + RelativeBase],
+                    _ => throw new NotImplementedException(),
+                };
+                tgt = (modes[1]) switch
                 {
-                    case Mode.Position: tgt = WorkingProgram[(int)WorkingProgram[PC + 2]]; break;
-                    case Mode.Immediate: tgt = WorkingProgram[PC + 2]; break;
-                    case Mode.Relative: tgt = WorkingProgram[(int)WorkingProgram[PC + 2] + RelativeBase]; break;
-                    default: throw new NotImplementedException();
-                }
-
+                    Mode.Position => WorkingProgram[(int)WorkingProgram[PC + 2]],
+                    Mode.Immediate => WorkingProgram[PC + 2],
+                    Mode.Relative => WorkingProgram[(int)WorkingProgram[PC + 2] + RelativeBase],
+                    _ => throw new NotImplementedException(),
+                };
                 return new long[] { src1, tgt };
             }
             else if (opCode == Operation.ReadInput)
             {
-                switch (modes[0])
+                return (modes[0]) switch
                 {
-                    case Mode.Position: return new long[] { WorkingProgram[PC + 1] };
-                    case Mode.Immediate: throw new ArgumentException("Input cannot be in Immediate mode");
-                    case Mode.Relative: return new long[] { WorkingProgram[PC + 1] + RelativeBase };
-                    default: throw new NotImplementedException();
-
-                }
+                    Mode.Position => new long[] { WorkingProgram[PC + 1] },
+                    Mode.Immediate => throw new ArgumentException("Input cannot be in Immediate mode"),
+                    Mode.Relative => new long[] { WorkingProgram[PC + 1] + RelativeBase },
+                    _ => throw new NotImplementedException(),
+                };
             }
             else if (opCode == Operation.WriteOutput || opCode == Operation.RelativeBaseAdjust)
             {
-                switch (modes[0])
+                return (modes[0]) switch
                 {
-                    case Mode.Position: return new long[] { WorkingProgram[(int)WorkingProgram[PC + 1]] };
-                    case Mode.Immediate: return new long[] { WorkingProgram[PC + 1] };
-                    case Mode.Relative: return new long[] { WorkingProgram[(int)WorkingProgram[PC + 1] + RelativeBase] };
-                    default: throw new NotImplementedException();
-                }
+                    Mode.Position => new long[] { WorkingProgram[(int)WorkingProgram[PC + 1]] },
+                    Mode.Immediate => new long[] { WorkingProgram[PC + 1] },
+                    Mode.Relative => new long[] { WorkingProgram[(int)WorkingProgram[PC + 1] + RelativeBase] },
+                    _ => throw new NotImplementedException(),
+                };
             }
             else
             {
-                switch (modes[0])
+                src1 = (modes[0]) switch
                 {
-                    case Mode.Position: src1 = WorkingProgram[(int)WorkingProgram[PC + 1]]; break;
-                    case Mode.Immediate: src1 = WorkingProgram[PC + 1]; break;
-                    case Mode.Relative: src1 = WorkingProgram[(int)WorkingProgram[PC + 1] + RelativeBase]; break;
-                    default: throw new NotImplementedException();
-
-                }
-
-                switch (modes[1])
+                    Mode.Position => WorkingProgram[(int)WorkingProgram[PC + 1]],
+                    Mode.Immediate => WorkingProgram[PC + 1],
+                    Mode.Relative => WorkingProgram[(int)WorkingProgram[PC + 1] + RelativeBase],
+                    _ => throw new NotImplementedException(),
+                };
+                src2 = (modes[1]) switch
                 {
-                    case Mode.Position: src2 = WorkingProgram[(int)WorkingProgram[PC + 2]]; break;
-                    case Mode.Immediate: src2 = WorkingProgram[PC + 2]; break;
-                    case Mode.Relative: src2 = WorkingProgram[(int)WorkingProgram[PC + 2] + RelativeBase]; break;
-                    default: throw new NotImplementedException();
-                }
-
-                switch (modes[2])
+                    Mode.Position => WorkingProgram[(int)WorkingProgram[PC + 2]],
+                    Mode.Immediate => WorkingProgram[PC + 2],
+                    Mode.Relative => WorkingProgram[(int)WorkingProgram[PC + 2] + RelativeBase],
+                    _ => throw new NotImplementedException(),
+                };
+                tgt = (modes[2]) switch
                 {
-                    case Mode.Position: tgt = WorkingProgram[PC + 3]; break;
-                    case Mode.Immediate: tgt = WorkingProgram[PC + 3]; break;
-                    case Mode.Relative: tgt = WorkingProgram[PC + 3] + RelativeBase; break;
-                    default: throw new NotImplementedException();
-                }
-
+                    Mode.Position => WorkingProgram[PC + 3],
+                    Mode.Immediate => WorkingProgram[PC + 3],
+                    Mode.Relative => WorkingProgram[PC + 3] + RelativeBase,
+                    _ => throw new NotImplementedException(),
+                };
                 return new long[] { src1, src2, tgt };
             }
         }

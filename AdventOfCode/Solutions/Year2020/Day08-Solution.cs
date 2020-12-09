@@ -9,7 +9,7 @@ namespace AdventOfCode.Solutions.Year2020
 
     class Day08 : ASolution
     {
-        List<string> Lines;
+        readonly List<string> Lines;
         int previousPC;
         public Day08() : base(08, 2020, "Handheld Halting")
         {

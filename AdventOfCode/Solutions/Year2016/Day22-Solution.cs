@@ -3,6 +3,7 @@ using System.Text;
 using System.Collections.Generic;
 using AdventOfCode.UserClasses;
 using System.Linq;
+using System.Diagnostics;
 
 namespace AdventOfCode.Solutions.Year2016
 {
@@ -10,7 +11,7 @@ namespace AdventOfCode.Solutions.Year2016
     class Day22 : ASolution
     {
 
-        private List<Node> Nodes;
+        private readonly List<Node> Nodes;
         public Day22() : base(22, 2016, "")
         {
             Nodes = new List<Node>();
@@ -19,7 +20,7 @@ namespace AdventOfCode.Solutions.Year2016
                 var tokens = line.Split(new char[] { '-', ' ', 'T', '%' , 'x', 'y'}).ToIntArray();
                 Nodes.Add(new Node()
                 {
-                    coords = new Coord(tokens[0], tokens[1]),
+                    Coords = (tokens[0], tokens[1]),
                     Size = tokens[2],
                     Used = tokens[3],
                     Avail = tokens[4],
@@ -46,7 +47,7 @@ namespace AdventOfCode.Solutions.Year2016
             Node[,] map = new Node[33, 30];
             foreach(Node node in Nodes)
             {
-                map[node.coords.x, node.coords.y] = node;
+                map[node.Coords.x, node.Coords.y] = node;
             }
             
             for(int i = 0; i < 30; i++)
@@ -58,12 +59,15 @@ namespace AdventOfCode.Solutions.Year2016
                 sb.Append('\n');
             }
 
+            Console.WriteLine("Just go use Excel it's easier, trust me!");
+            Trace.WriteLine("Just go use Excel it's easier, trust me!");
+
             return sb.ToString();
         }
 
         internal class Node
         {
-            public Coord coords { get; set; }
+            public (int x, int y) Coords { get; set; }
             public int Size { get; set; }
             public int Used { get; set; }
             public int Avail { get; set; }

@@ -11,8 +11,7 @@ namespace AdventOfCode.Solutions.Year2016
 
     class Day23 : ASolution
     {
-
-        AssembunnyComputer ab;
+        readonly AssembunnyComputer ab;
         public Day23() : base(23, 2016, "")
         {
             ab = new AssembunnyComputer(new List<string>(Input.SplitByNewline()));

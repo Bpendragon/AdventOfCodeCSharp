@@ -9,7 +9,7 @@ namespace AdventOfCode.Solutions.Year2019
 
     class Day02 : ASolution
     {
-        private IntCode2 pc;
+        private readonly IntCode2 pc;
 
         public Day02() : base(02, 2019, "")
         {
