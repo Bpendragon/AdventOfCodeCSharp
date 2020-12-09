@@ -44,7 +44,7 @@ namespace AdventOfCode.Solutions.Year2019
 
         private static void Pc_ProgramOutput(object sender, OutputEventArgs e)
         {
-            part1.Append(e.OutputValue);
+            Console.WriteLine(e.OutputValue);
         }
     }
 }

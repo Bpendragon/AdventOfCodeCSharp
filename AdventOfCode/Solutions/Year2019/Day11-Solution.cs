@@ -18,6 +18,7 @@ namespace AdventOfCode.Solutions.Year2019
 
         protected override string SolvePartOne()
         {
+            return null;
             PainterBot bot1 = new PainterBot(Program);
             bot1.cpu.ResetInputs();
             bot1.RunBot(0);
@@ -38,6 +39,16 @@ namespace AdventOfCode.Solutions.Year2019
                 for (int j = 0; j < 50; j++)
                 {
                     if (bot2.Tiles[(j, i)] == 0) sb.Append('.');
+                    else if(bot2.Coords == (i,j))
+                    {
+                        switch(bot2.CurrentlyFacing)
+                        {
+                            case Compass.North: sb.Append('^'); break;
+                            case Compass.East: sb.Append('>'); break;
+                            case Compass.South: sb.Append('v'); break;
+                            case Compass.West: sb.Append('<'); break;
+                        }
+                    }
                     else sb.Append('#');
                 }
                 sb.Append('\n');
@@ -71,7 +82,10 @@ namespace AdventOfCode.Solutions.Year2019
             {
                 for (int j = -1000; j < 1000; j++)
                 {
-                    Tiles[(i, j)] = 0;
+                    lock (Tiles)
+                    {
+                        Tiles[(i, j)] = 0;
+                    }
                 }
             }
         }
@@ -96,7 +110,10 @@ namespace AdventOfCode.Solutions.Year2019
         {
             isProcessing = true;
             Coords = (0, 0);
-            Tiles[Coords] = firstPanel;
+            lock (Tiles)
+            {
+                Tiles[Coords] = firstPanel;
+            }
             outPutStream.Clear();
             Thread a = new Thread(new ThreadStart(cpu.ProccessProgram));
             a.Start();
@@ -104,7 +121,10 @@ namespace AdventOfCode.Solutions.Year2019
             {
                 Visited.Add(Coords);
                 long curColor;
-                curColor = Tiles[Coords];
+                lock (Tiles)
+                {
+                    curColor = Tiles[Coords];
+                }
                 cpu.AddInput(curColor);
 
                 bool StepCompleted = false;
@@ -118,11 +138,13 @@ namespace AdventOfCode.Solutions.Year2019
                         int paintColor = outPutStream.Dequeue();
                         int turnDir = outPutStream.Dequeue();
                         StepCompleted = true;
-                        Tiles[Coords] = paintColor;
+                        lock (Tiles)
+                        {
+                            Tiles[Coords] = paintColor;
+                        }
                         if (paintColor == 1) numWhite++;
                         if (turnDir == 1) numWhite++;
                         Turn(turnDir);
-                        Move();
                         Monitor.Exit(outPutStream);
                     } else
                     {
@@ -130,7 +152,30 @@ namespace AdventOfCode.Solutions.Year2019
                     }
                 } while (!StepCompleted && isProcessing);
 
+                StringBuilder sb = new StringBuilder('\n');
 
+
+                for (int i = 0; i < 7; i++)
+                {
+                    for (int j = 0; j < 50; j++)
+                    {
+                        
+                        if (Coords == (j, i))
+                        {
+                            switch (CurrentlyFacing)
+                            {
+                                case Compass.North: sb.Append('^'); break;
+                                case Compass.East: sb.Append('<'); break;
+                                case Compass.South: sb.Append('v'); break;
+                                case Compass.West: sb.Append('>'); break;
+                            }
+                        } else if (Tiles[(j, i)] == 0) sb.Append('.');
+                        else sb.Append('#');
+                    }
+                    sb.Append('\n');
+                }
+                Console.WriteLine(sb.ToString());
+                Move();
                 /*
                 do
                 {

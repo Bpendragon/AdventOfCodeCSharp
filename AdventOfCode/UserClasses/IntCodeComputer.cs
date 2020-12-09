@@ -219,6 +219,24 @@ namespace AdventOfCode.UserClasses
                     }
                     break;
                 case Operation.WriteOutput:
+                    res = new long[1];
+
+                    immediate = WorkingProgram[PC + 1];
+                    if (modes[0] == Mode.Position)
+                    {
+
+                        res[0] = WorkingProgram[(int)immediate];
+                    }
+                    else if (modes[0] == Mode.Immediate)
+                    {
+                        res[0] = immediate;
+                    }
+                    else
+                    {
+                        res[0] = WorkingProgram[(int)immediate + RelativeBase];
+                    }
+
+                    break;
                 case Operation.RelativeBaseAdjust:
                     res = new long[1]; //Let's just assume that any operation can take 3 params except reading input (must wait for input) and Halting
 

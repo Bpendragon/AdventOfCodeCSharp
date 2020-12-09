@@ -9,19 +9,19 @@ namespace AdventOfCode.Solutions.Year2019
 
     class Day02 : ASolution
     {
-        private IntCodeComputer pc;
+        private IntCode2 pc;
 
         public Day02() : base(02, 2019, "")
         {
-            pc = new IntCodeComputer(Input.ToLongArray(","));
+            pc = new IntCode2(Input.ToLongArray(","));
         }
 
         protected override string SolvePartOne()
         {
             pc.Program[1] = 12;
             pc.Program[2] = 2;
-            pc.ProccessProgram();
-            return pc.PreviousExecution[0].ToString();
+            foreach (var _ in pc.RunProgram()) { }
+            return pc.PreviousRunState[0].ToString();
         }
 
         protected override string SolvePartTwo()
@@ -32,9 +32,9 @@ namespace AdventOfCode.Solutions.Year2019
                 {
                     pc.Program[1] = i;
                     pc.Program[2] = j;
-                    pc.ProccessProgram();
+                    foreach (var _ in pc.RunProgram()){ };
 
-                    if (pc.PreviousExecution[0] == 19690720) return ((100 * i) + j).ToString();
+                    if (pc.PreviousRunState[0] == 19690720) return ((100 * i) + j).ToString();
                 }
             }
 
