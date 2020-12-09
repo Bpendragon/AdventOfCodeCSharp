@@ -9,25 +9,55 @@ namespace AdventOfCode.Solutions.Year2020
 
     class Day09 : ASolution
     {
-        List<string> Lines;
+        List<long> Lines;
+        long problemChild = long.MinValue;
+
         public Day09() : base(09, 2020, "")
         {
-            Lines = new List<string>(Input.SplitByNewline());
-
-            foreach(string line in Lines)
-            {
-
-            }
+            Lines = new List<long>(Input.ToLongArray("\n"));  
         }
 
         protected override string SolvePartOne()
         {
+            int i = 25;
+            for(; i < Lines.Count; i++)
+            {
+                var prev25 = Lines.GetRange(i - 25, 25);
+                bool found = false;
+                foreach(var combo in prev25.Combinations(2))
+                {
+                    if(combo.Sum() == Lines[i])
+                    {
+                        found = true;
+                        break;
+                    }
+                }
+                if (!found)
+                {
+                    problemChild = Lines[i];
+                    return problemChild.ToString();
+                }
+            }
             return null;
         }
 
         protected override string SolvePartTwo()
         {
-            return null;
+            int lower = 0;
+            int upper = 1;
+
+            while(true)
+            {
+                List<long> r = Lines.GetRange(lower, (upper - lower) + 1);
+                long rSum = r.Sum();
+                if (rSum == problemChild) return (r.Min() + r.Max()).ToString();
+                else if (rSum < problemChild) upper++;
+                else
+                {
+                    lower++;
+                    upper = lower + 1;
+                }
+            }
         }
     }
 }
