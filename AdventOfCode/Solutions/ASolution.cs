@@ -50,7 +50,7 @@ namespace AdventOfCode.Solutions
                 }
                 else
                 {
-                    output += "Part 1: Unsolved\n";
+                    output += "Part 1: \nUnsolved\n";
                     if (part == 1) doOutput = true;
                 }
             }
@@ -63,7 +63,7 @@ namespace AdventOfCode.Solutions
                 }
                 else
                 {
-                    output += "Part 2: Unsolved\n";
+                    output += "Part 2: \nUnsolved\n";
                     if (part == 2) doOutput = true;
                 }
             }

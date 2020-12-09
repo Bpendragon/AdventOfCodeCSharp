@@ -12,7 +12,7 @@ namespace AdventOfCode.Solutions.Year2020
         List<long> Lines;
         long problemChild = long.MinValue;
 
-        public Day09() : base(09, 2020, "")
+        public Day09() : base(09, 2020, "Encoding Error")
         {
             Lines = new List<long>(Input.ToLongArray("\n"));  
         }
