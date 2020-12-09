@@ -51,6 +51,27 @@ namespace AdventOfCode.Solutions.Year2015
             return recipeScores.Max().ToString();
         }
 
+       
+
+        protected override string SolvePartTwo()
+        {
+            List<int> recipeScores = new List<int>();
+            for (int i = 0; i < 100; i++)
+            {
+                for (int j = 0; j < (100 - i); j++)
+                {
+                    for (int k = 0; k < (100 - i - j); k++)
+                    {
+                        int l = 100 - i - j - k;
+                        recipeScores.Add(GetScore(i, j, k, l, true));
+
+                    }
+                }
+            }
+            recipeScores = recipeScores.Distinct().ToList();
+            return recipeScores.Max().ToString();
+        }
+
         private int GetScore(int i, int j, int k, int l, bool part2 = false)
         {
             if (i + j + k + l != 100) throw new Exception();
@@ -60,22 +81,18 @@ namespace AdventOfCode.Solutions.Year2015
             int tex = (ings[0].texture * i) + (ings[1].texture * j) + (ings[2].texture * k) + (ings[3].texture * l);
             int cal = (ings[0].calories * i) + (ings[1].calories * j) + (ings[2].calories * k) + (ings[3].calories * l);
 
-            if(cap <= 0 || dur <= 0 || flav <= 0|| tex <= 0)
+            if (cap <= 0 || dur <= 0 || flav <= 0 || tex <= 0)
             {
                 return 0;
             }
 
-            if(part2)
+            if (part2)
             {
-
+                if (cal == 500) return cap * dur * flav * tex;
+                return 0;
             }
 
-            return cap * dur * flav * tex * cal;
-        }
-
-        protected override string SolvePartTwo()
-        {
-            return null;
+            return cap * dur * flav * tex;
         }
     }
 

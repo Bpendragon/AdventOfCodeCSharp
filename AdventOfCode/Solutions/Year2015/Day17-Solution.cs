@@ -9,25 +9,42 @@ namespace AdventOfCode.Solutions.Year2015
 
     class Day17 : ASolution
     {
-        List<string> Lines;
+        List<int> containers;
         public Day17() : base(17, 2015, "")
         {
-            Lines = new List<string>(Input.SplitByNewline());
-
-            foreach(string line in Lines)
-            {
-
-            }
+            containers = new List<int>(Input.ToIntArray("\n"));
         }
 
         protected override string SolvePartOne()
         {
-            return null;
+            int combos = 0;
+            for (int i = 1; i <= containers.Count; i++)
+            {
+                foreach (var c in containers.Combinations(i))
+                {
+                    if (c.Sum() == 150) combos++;
+                }
+            }
+            return combos.ToString();
         }
 
         protected override string SolvePartTwo()
         {
-            return null;
+            int combos = 0;
+            bool sizeFound = false;
+            for (int i = 1; i <= containers.Count; i++)
+            {
+                foreach (var c in containers.Combinations(i))
+                {
+                    if (c.Sum() == 150)
+                    {
+                        combos++;
+                        sizeFound = true;
+                    }
+                }
+                if (sizeFound) break;
+            }
+            return combos.ToString();
         }
     }
 }
