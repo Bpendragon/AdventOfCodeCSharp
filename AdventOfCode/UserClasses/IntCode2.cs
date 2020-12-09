@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AdventOfCode.UserClasses
 {
-    class IntCode2
+    public class IntCode2
     {
         public List<long> Program;
         List<long> WorkingProgram;

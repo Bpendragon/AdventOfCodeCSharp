@@ -1,26 +1,24 @@
-using System;
+﻿using System;
 using System.Text;
 using System.Collections.Generic;
 using AdventOfCode.UserClasses;
 using System.Linq;
-using System.Threading;
 
 namespace AdventOfCode.Solutions.Year2019
 {
 
     class Day11 : ASolution
     {
-        long[] Program;
-        public Day11() : base(11, 2019, "")
+        readonly long[] Program;
+        public Day11() : base(11, 2019, "Space Police")
         {
             Program = Input.ToLongArray(",");
         }
 
         protected override string SolvePartOne()
         {
-            return null;
             PainterBot bot1 = new PainterBot(Program);
-            bot1.cpu.ResetInputs();
+            bot1.cpu.ClearInputs();
             bot1.RunBot(0);
             return (bot1.Visited.Count - 1).ToString();
         }
@@ -28,55 +26,29 @@ namespace AdventOfCode.Solutions.Year2019
         protected override string SolvePartTwo()
         {
             PainterBot bot2 = new PainterBot(Program);
-            bot2.cpu.ResetInputs();
+            bot2.cpu.ClearInputs();
             bot2.RunBot(1);
 
-            StringBuilder sb = new StringBuilder('\n');
 
-
-            for (int i = 0; i < 7; i++)
-            {
-                for (int j = 0; j < 50; j++)
-                {
-                    if (bot2.Tiles[(j, i)] == 0) sb.Append('.');
-                    else if(bot2.Coords == (i,j))
-                    {
-                        switch(bot2.CurrentlyFacing)
-                        {
-                            case Compass.North: sb.Append('^'); break;
-                            case Compass.East: sb.Append('>'); break;
-                            case Compass.South: sb.Append('v'); break;
-                            case Compass.West: sb.Append('<'); break;
-                        }
-                    }
-                    else sb.Append('#');
-                }
-                sb.Append('\n');
-            }
-            
-
-            return sb.ToString();
+            return bot2.Draw();
         }
-                
+
 
 
     }
     public class PainterBot
     {
-        public IntCodeComputer cpu;
+        public IntCode2 cpu;
         public Compass CurrentlyFacing { get; set; } = Compass.North;
         public (int x, int y) Coords { get; set; } = new ValueTuple<int, int>(0, 0);
         public List<(int, int)> Visited { get; set; } = new List<(int, int)>();
         public Dictionary<(int, int), int> Tiles = new Dictionary<(int, int), int>();
         public Queue<int> outPutStream = new Queue<int>();
-        private bool isProcessing = false;
         public int numWhite = 0;
 
         public PainterBot(long[] program)
         {
-            cpu = new IntCodeComputer(program);
-            cpu.ProgramFinish += Cpu_ProgramFinish;
-            cpu.ProgramOutput += Cpu_ProgramOutput;
+            cpu = new IntCode2(program);
 
             for (int i = -1000; i < 1000; i++)
             {
@@ -91,115 +63,69 @@ namespace AdventOfCode.Solutions.Year2019
         }
 
 
-        private void Cpu_ProgramOutput(object sender, OutputEventArgs e)
-        {
-            lock (outPutStream)
-            {
-                int outValue = e.OutputValue == 0 ? 0 : 1;
-                outPutStream.Enqueue(outValue);
-            }
-
-        }
-
-        private void Cpu_ProgramFinish(object sender, EventArgs e)
-        {
-            isProcessing = false;
-        }
-
         public void RunBot(int firstPanel)
         {
-            isProcessing = true;
             Coords = (0, 0);
-            lock (Tiles)
+            Tiles[Coords] = firstPanel;
+
+            cpu.ReadyInput(firstPanel);
+
+            long i = 0;
+            Visited.Add(Coords);
+            long curColor;
+            long turnDir;
+            foreach (long output in cpu.RunProgram())
             {
-                Tiles[Coords] = firstPanel;
-            }
-            outPutStream.Clear();
-            Thread a = new Thread(new ThreadStart(cpu.ProccessProgram));
-            a.Start();
-                while (isProcessing)
-            {
-                Visited.Add(Coords);
-                long curColor;
-                lock (Tiles)
+                if (i % 2 == 0)
                 {
+                    Tiles[Coords] = (int)output;
+                }
+                else
+                {
+                    turnDir = output;
+                    Turn((int)turnDir);
+                    Move();
                     curColor = Tiles[Coords];
+                    Visited.Add(Coords);
+                    cpu.ReadyInput(curColor);
                 }
-                cpu.AddInput(curColor);
-
-                bool StepCompleted = false;
-
-
-                do
-                {
-                    Monitor.Enter(outPutStream);
-                    if(outPutStream.Count >= 2)
-                    {
-                        int paintColor = outPutStream.Dequeue();
-                        int turnDir = outPutStream.Dequeue();
-                        StepCompleted = true;
-                        lock (Tiles)
-                        {
-                            Tiles[Coords] = paintColor;
-                        }
-                        if (paintColor == 1) numWhite++;
-                        if (turnDir == 1) numWhite++;
-                        Turn(turnDir);
-                        Monitor.Exit(outPutStream);
-                    } else
-                    {
-                        Monitor.Exit(outPutStream);
-                    }
-                } while (!StepCompleted && isProcessing);
-
-                StringBuilder sb = new StringBuilder('\n');
-
-
-                for (int i = 0; i < 7; i++)
-                {
-                    for (int j = 0; j < 50; j++)
-                    {
-                        
-                        if (Coords == (j, i))
-                        {
-                            switch (CurrentlyFacing)
-                            {
-                                case Compass.North: sb.Append('^'); break;
-                                case Compass.East: sb.Append('<'); break;
-                                case Compass.South: sb.Append('v'); break;
-                                case Compass.West: sb.Append('>'); break;
-                            }
-                        } else if (Tiles[(j, i)] == 0) sb.Append('.');
-                        else sb.Append('#');
-                    }
-                    sb.Append('\n');
-                }
-                Console.WriteLine(sb.ToString());
-                Move();
-                /*
-                do
-                {
-                    Monitor.Enter(outPutStream);
-                    QL = outPutStream.Count;
-                    Monitor.Exit(outPutStream);
-                } while (QL < 2 && isProcessing);
-                if (!isProcessing) continue;
-
-                
-                Monitor.Enter(outPutStream);
-                paintColor = outPutStream.Dequeue();
-                turnDir = outPutStream.Dequeue();
-                Monitor.Exit(outPutStream);
-
-                Tiles[Coords] = paintColor;
-                Turn(turnDir);
-                Move();
-                */
+                i++;
             }
+
             Tiles[Coords] = 0;
             Visited = Visited.Distinct().ToList();
         }
 
+        public string Draw()
+        {
+            StringBuilder sb = new StringBuilder('\n');
+            for (int k = -1; k < 7; k++)
+            {
+                for (int j = -1; j < 45; j++)
+                {
+
+                    if (Coords == (j, k))
+                    {
+                        switch (CurrentlyFacing)
+                        {
+                            case Compass.North: sb.Append('^'); break;
+                            case Compass.East: sb.Append('<'); break;
+                            case Compass.South: sb.Append('v'); break;
+                            case Compass.West: sb.Append('>'); break;
+                        }
+                    }
+                    else if (Tiles[(j, k)] == 0) sb.Append(' ');
+                    else sb.Append('■');
+                }
+                sb.Append('\n');
+            }
+            return sb.ToString();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="direction"></param>
         private void Turn(int direction)
         {
             switch (direction)
@@ -222,20 +148,20 @@ namespace AdventOfCode.Solutions.Year2019
                         case Compass.West: CurrentlyFacing = Compass.South; break;
                     }
                     break;
-                default: throw new ArgumentOutOfRangeException("must be `0` (turn right), or `1` (turn left)");
+                default: throw new ArgumentOutOfRangeException(nameof(direction), "Must be 0 or 1");
             }
         }
 
         private void Move()
         {
-            switch (CurrentlyFacing)
+            Coords = CurrentlyFacing switch
             {
-                case Compass.North: Coords = (Coords.x, Coords.y - 1); break;
-                case Compass.East: Coords = (Coords.x - 1, Coords.y); break;
-                case Compass.South: Coords = (Coords.x, Coords.y + 1); break;
-                case Compass.West: Coords = (Coords.x + 1, Coords.y); break;
-                default: throw new Exception("Bot not facing a cardinal");
-            }
+                Compass.North => (Coords.x, Coords.y - 1),
+                Compass.East => (Coords.x - 1, Coords.y),
+                Compass.South => (Coords.x, Coords.y + 1),
+                Compass.West => (Coords.x + 1, Coords.y),
+                _ => throw new Exception("Bot not facing a cardinal"),
+            };
         }
     }
 
