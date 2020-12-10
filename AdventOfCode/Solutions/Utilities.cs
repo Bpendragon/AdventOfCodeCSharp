@@ -30,7 +30,6 @@ namespace AdventOfCode.Solutions
                     .Select(n => Convert.ToInt32(n))
                     .ToArray();
             }
-
         }
 
         public static long[] ToLongArray(this string str, string delimiter = "")
