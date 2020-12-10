@@ -9,19 +9,74 @@ namespace AdventOfCode.Solutions.Year2020
 
     class Day10 : ASolution
     {
+        List<int> Adapters;
+        readonly int yourAdapter;
+        Stack<int> toVisit = new Stack<int>();
+        Dictionary<int, long> KnownCounts = new Dictionary<int, long>();
+
+
         public Day10() : base(10, 2020, "")
         {
+            //UseDebugInput = true;
+            Adapters = new List<int>(Input.ToIntArray("\n")) ;
+            Adapters.Sort();
+            yourAdapter = Adapters.Last() + 3;
+            Adapters.Insert(0, 0);
+            Adapters.Add(yourAdapter);
 
         }
 
         protected override string SolvePartOne()
         {
-            return null;
+            var p1Adapters = new List<int>(Adapters);
+
+            int ones = 0;
+            int threes = 0; 
+            for(int i = 0; i < p1Adapters.Count - 1 ; i++)
+            {
+                if (p1Adapters[i + 1] - p1Adapters[i] == 3) threes++;
+                else if (p1Adapters[i + 1] - p1Adapters[i] == 1) ones++;
+            }
+            return (threes * ones).ToString();
         }
 
         protected override string SolvePartTwo()
         {
-            return null;
+            KnownCounts[Adapters.Count - 2] = 1;
+            FindValid(0);
+            return KnownCounts[0].ToString();
+        }
+
+        private int totalPaths = 0;
+        long FindValid(int start)
+        {
+
+            if (KnownCounts.ContainsKey(start)) return KnownCounts[start];
+
+            long tmp = 0;
+            for(int i = 1; i <= 3; i++)
+            {
+                if ((start + i < Adapters.Count) && (Adapters[start + i] - Adapters[start] <= 3))
+                {
+                    tmp += FindValid(start + i);
+                }
+            }
+            KnownCounts[start] = tmp;
+            return tmp ;
+        }
+
+
+
+        bool TestValid(List<int> aList)
+        {
+            aList.Sort();
+            aList.Insert(0, 0);
+            aList.Add(yourAdapter);
+            for(int i = 0; i < aList.Count - 1; i++)
+            {
+                if (aList[i + 1] - aList[i] > 3) return false;
+            }
+            return true;
         }
     }
 }
