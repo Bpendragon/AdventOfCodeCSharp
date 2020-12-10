@@ -227,7 +227,7 @@ namespace AdventOfCode.Solutions
         //https://stackoverflow.com/questions/2641326/finding-all-positions-of-substring-in-a-larger-string-in-c-sharp
         public static IEnumerable<int> AllIndexesOf(this string str, string value)
         {
-            if (String.IsNullOrEmpty(value))
+            if (string.IsNullOrEmpty(value))
                 throw new ArgumentException("the string to find may not be empty", nameof(value));
             for (int index = 0; ; index += value.Length)
             {
