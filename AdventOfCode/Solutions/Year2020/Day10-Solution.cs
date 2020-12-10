@@ -9,15 +9,13 @@ namespace AdventOfCode.Solutions.Year2020
 
     class Day10 : ASolution
     {
-        List<int> Adapters;
+        readonly List<int> Adapters;
         readonly int yourAdapter;
-        Stack<int> toVisit = new Stack<int>();
-        Dictionary<int, long> KnownCounts = new Dictionary<int, long>();
+        readonly Dictionary<int, long> KnownCounts = new Dictionary<int, long>();
+        readonly bool PrintAll = false;
 
-
-        public Day10() : base(10, 2020, "")
+        public Day10() : base(10, 2020, "Adapter Array")
         {
-            //UseDebugInput = true;
             Adapters = new List<int>(Input.ToIntArray("\n")) ;
             Adapters.Sort();
             yourAdapter = Adapters.Last() + 3;
@@ -42,15 +40,21 @@ namespace AdventOfCode.Solutions.Year2020
 
         protected override string SolvePartTwo()
         {
-            KnownCounts[Adapters.Count - 2] = 1;
+            KnownCounts[Adapters.Count - 1] = 0; //The Laptop has only paths to itself. 
+            KnownCounts[Adapters.Count - 2] = 1; //We know there is only one path from the final adapter to the laptop.
             FindValid(0);
+            if (PrintAll)
+            {
+                for (int i = Adapters.Count - 1; i >= 0; i--)
+                {
+                    Utilities.WriteLine($"Adapter '{i:D3}' has this many valid combinations below: {KnownCounts[i]}");
+                }
+            }
             return KnownCounts[0].ToString();
         }
 
-        private int totalPaths = 0;
         long FindValid(int start)
         {
-
             if (KnownCounts.ContainsKey(start)) return KnownCounts[start];
 
             long tmp = 0;
@@ -65,18 +69,5 @@ namespace AdventOfCode.Solutions.Year2020
             return tmp ;
         }
 
-
-
-        bool TestValid(List<int> aList)
-        {
-            aList.Sort();
-            aList.Insert(0, 0);
-            aList.Add(yourAdapter);
-            for(int i = 0; i < aList.Count - 1; i++)
-            {
-                if (aList[i + 1] - aList[i] > 3) return false;
-            }
-            return true;
-        }
     }
 }

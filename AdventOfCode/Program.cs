@@ -10,7 +10,7 @@ namespace AdventOfCode
         public static Config Config = Config.Get("config.json");
         static readonly SolutionCollector Solutions = new SolutionCollector(Config.Year, Config.Days);
 
-        static void Main(string[] args) {
+        static void Main(string[] _) {
             long total = 0;
             foreach( ASolution solution in Solutions ) {
                 solution.Solve();
