@@ -10,7 +10,7 @@ namespace AdventOfCode.Solutions.Year2020
     class Day11 : ASolution
     {
         Dictionary<(int, int), bool> Seats = new Dictionary<(int, int), bool>();
-        Dictionary<(int, int), bool> Seats2;
+        readonly Dictionary<(int, int), bool> Seats2;
         private readonly List<(int, int)> Neighbors = new List<(int x, int y)>()
         {
             (1,0),

@@ -2,3 +2,6 @@
 
 # CS0251: Indexing an array with a negative index
 dotnet_diagnostic.CS0251.severity = none
+
+# IDE0008: Use explicit type
+dotnet_diagnostic.IDE0008.severity = suggestion

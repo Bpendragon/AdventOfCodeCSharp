@@ -12,22 +12,38 @@ namespace AdventOfCode.Solutions.Year2017
         readonly List<string> danceMoves = new List<string>();
         List<char> dancers = new List<char>() { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p' };
         readonly List<char> dancers2 = new List<char>() { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p' };
+
+        List<string> completedDances = new List<string>();
+        const string original = "abcdefghijklmnop";
+
         public Day16() : base(16, 2017, "")
         {
             danceMoves.AddRange(Input.Split(','));
+            completedDances.Add(original);
         }
 
         protected override string SolvePartOne()
         {
             foreach (var move in danceMoves) Dance(move);
+            completedDances.Add(dancers.JoinAsStrings());
             return dancers.JoinAsStrings();
         }
 
         protected override string SolvePartTwo()
         {
 
-            foreach (long i in Enumerable.Range(0, 100000)) foreach (var move in danceMoves) Dance(move);
-            return dancers.JoinAsStrings();
+            foreach (long i in Enumerable.Range(0, 1000000000))
+            {
+                foreach (var move in danceMoves) Dance(move);
+
+                
+                if (dancers.JoinAsStrings() == original) break;
+                completedDances.Add(dancers.JoinAsStrings());
+            }
+
+            int indexOfDance = 1000000000 % completedDances.Count;
+
+            return completedDances[indexOfDance];
         }
 
         private void Dance(string move)
