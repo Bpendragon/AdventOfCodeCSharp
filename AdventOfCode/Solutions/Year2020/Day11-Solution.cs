@@ -25,7 +25,7 @@ namespace AdventOfCode.Solutions.Year2020
         readonly int maxX = 0;
         readonly int maxY = 0;
 
-        public Day11() : base(11, 2020, "")
+        public Day11() : base(11, 2020, "Seating System")
         {
             var lines = Input.SplitByNewline().ToList();
             maxY = lines.Count;
@@ -59,7 +59,6 @@ namespace AdventOfCode.Solutions.Year2020
                 Seats = new Dictionary<(int, int), bool>(nextSeats);
             } while (seatsChanged != 0);
 
-
             return Seats.Count(x => x.Value).ToString();
         }
 
@@ -81,7 +80,6 @@ namespace AdventOfCode.Solutions.Year2020
                 Seats = new Dictionary<(int, int), bool>(nextSeats);
             } while (seatsChanged != 0);
 
-
             return Seats.Count(x => x.Value).ToString();
         }
 
@@ -90,23 +88,23 @@ namespace AdventOfCode.Solutions.Year2020
             int livingNeighbors = 0;
             List<(int, int)> locNeighbors = new List<(int x, int y)>();
             List<(int, int)> extendedNeighbors = new List<(int x, int y)>();
+
             foreach (var n in Neighbors)
             {
                 locNeighbors.Add(c.Add(n));
-
-                var tmp = c.Add(n);
-                while(!Seats.ContainsKey(tmp))
+                
+                if (part2)
                 {
-                    if (tmp.Item1 < 0 || tmp.Item1 > maxX || tmp.Item2 < 0 || tmp.Item2 > maxY) break;
-                    tmp = tmp.Add(n);
+                    var tmp = c.Add(n);
+                    while (!Seats.ContainsKey(tmp))
+                    {
+                        if (tmp.Item1 < 0 || tmp.Item1 > maxX || tmp.Item2 < 0 || tmp.Item2 > maxY) break;
+                        tmp = tmp.Add(n);
+                    }
+                    extendedNeighbors.Add(tmp);
                 }
-
-                extendedNeighbors.Add(tmp);
             }
 
-            
-
-            
 
             if (part2)
             {
@@ -140,9 +138,7 @@ namespace AdventOfCode.Solutions.Year2020
                     if (livingNeighbors == 0) return true;
                 }
             }
-
-
-            
+                
             return false;
         }
     }
