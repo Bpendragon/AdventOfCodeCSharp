@@ -141,8 +141,8 @@ namespace AdventOfCode.Solutions
 
         public static IEnumerable<IEnumerable<T>> Permutations<T>(this IEnumerable<T> values, int subcount)
         {
-            
-            foreach(var combination in Combinations(values, subcount))
+
+            foreach (var combination in Combinations(values, subcount))
             {
                 var perms = Permutations(combination);
                 foreach (int i in Enumerable.Range(0, perms.Count())) yield return perms.ElementAt(i);
@@ -202,7 +202,7 @@ namespace AdventOfCode.Solutions
         /// <returns></returns>
         public static IEnumerable<T> Rotate<T>(this IEnumerable<T> array, int rotations)
         {
-            for(int i = 0; i < array.Count(); i++)
+            for (int i = 0; i < array.Count(); i++)
             {
                 yield return i + rotations >= 0 ? array.ElementAt((i + rotations) % array.Count()) : array.ElementAt((i + rotations) + array.Count());
             }
@@ -236,6 +236,11 @@ namespace AdventOfCode.Solutions
                     break;
                 yield return index;
             }
+        }
+
+        public static string HexStringToBinary(this string Hexstring)
+        {
+           return string.Join(string.Empty, Hexstring.Select(c => Convert.ToString(Convert.ToInt32(c.ToString(), 16), 2).PadLeft(4, '0')));
         }
     }
 }
