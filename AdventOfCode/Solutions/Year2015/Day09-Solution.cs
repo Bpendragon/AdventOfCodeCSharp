@@ -13,10 +13,10 @@ namespace AdventOfCode.Solutions.Year2015
         public Day09() : base(09, 2015, "")
         {
             Cities = new Dictionary<string, City>();
-            var lines = Input.SplitByNewline(true);
-            foreach(var line in lines)
+            string[] lines = Input.SplitByNewline(true);
+            foreach(string line in lines)
             {
-                var a = line.Split();
+                string[] a = line.Split();
                 if(!Cities.ContainsKey(a[0]))
                 {
                     Cities[a[0]] = new City(a[0]);
@@ -31,9 +31,9 @@ namespace AdventOfCode.Solutions.Year2015
             }
 
             routeLengths = new List<int>();
-            foreach (var p in Cities.Keys.Permutations())
+            foreach (IEnumerable<string> p in Cities.Keys.Permutations())
             {
-                var l = p.ToList();
+                List<string> l = p.ToList();
                 int r = 0;
 
                 for (int i = 0; i < l.Count() - 1; i++)

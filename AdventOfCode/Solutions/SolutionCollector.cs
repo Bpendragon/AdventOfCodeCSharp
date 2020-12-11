@@ -37,7 +37,7 @@ namespace AdventOfCode.Solutions
             }
 
             foreach( int day in days ) {
-                var solution = Type.GetType($"AdventOfCode.Solutions.Year{year}.Day{day.ToString("D2")}");
+                Type solution = Type.GetType($"AdventOfCode.Solutions.Year{year}.Day{day.ToString("D2")}");
                 if( solution != null ) {
                     Stopwatch sw = new Stopwatch();
                     sw.Start();

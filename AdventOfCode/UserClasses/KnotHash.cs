@@ -45,7 +45,7 @@ namespace AdventOfCode.UserClasses
         {
             byte[] bytes = Encoding.ASCII.GetBytes(ToHash);
             Sequence = new List<int>();
-            foreach (var b in bytes) Sequence.Add(b);
+            foreach (byte b in bytes) Sequence.Add(b);
             Sequence.AddRange(new int[] { 17, 31, 73, 47, 23 });
         }
 
@@ -110,7 +110,7 @@ namespace AdventOfCode.UserClasses
 
             StringBuilder sb = new StringBuilder();
 
-            foreach(var i in hashVals)
+            foreach(int i in hashVals)
             {
                 sb.Append(i.ToString("X2"));
             }

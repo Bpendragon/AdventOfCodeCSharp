@@ -16,7 +16,7 @@ namespace AdventOfCode.Solutions.Year2015
         protected override string SolvePartOne()
         {
             long sum = 0;
-            foreach(var package in packages)
+            foreach(int[] package in packages)
             {
                 int f1 = package[0] * package[1];
                 int f2 = package[0] * package[2];
@@ -31,7 +31,7 @@ namespace AdventOfCode.Solutions.Year2015
         {
             long sum = 0;
 
-            foreach (var package in packages)
+            foreach (int[] package in packages)
             {
                 int f1 = 2 * package[0] + 2 * package[1];
                 int f2 = 2 * package[0] + 2 * package[2];

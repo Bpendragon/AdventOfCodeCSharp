@@ -27,7 +27,7 @@ namespace AdventOfCode.Solutions.Year2020
             {
                 List<string> copy = new List<string>(Lines);
 
-                var tmp = Lines[i].Split();
+                string[] tmp = Lines[i].Split();
 
                 if (tmp[0] == "acc") continue;
 

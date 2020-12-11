@@ -16,9 +16,9 @@ namespace AdventOfCode.Solutions.Year2020
         {
             lines = new List<string>(Input.Replace(".", "").SplitByNewline());
             Bags = new Dictionary<string, Bag>();
-            foreach (var line in lines)
+            foreach (string line in lines)
             {
-                var tokens = line.Split(new string[] { "bags", "bag", "contain", "," }, StringSplitOptions.RemoveEmptyEntries);
+                string[] tokens = line.Split(new string[] { "bags", "bag", "contain", "," }, StringSplitOptions.RemoveEmptyEntries);
                 string baseBag = tokens[0].Trim();
 
                 if (!Bags.ContainsKey(baseBag))
@@ -26,9 +26,9 @@ namespace AdventOfCode.Solutions.Year2020
                     Bags[baseBag] = new Bag(baseBag);
                 }
 
-                foreach (var token in tokens.Skip(2))
+                foreach (string token in tokens.Skip(2))
                 {
-                    var tmp = token.Trim();
+                    string tmp = token.Trim();
                     if (tmp == "no other") continue;
                     string newBag = tmp.Substring(2).Trim();
                     Bag tmpBag;
@@ -54,9 +54,9 @@ namespace AdventOfCode.Solutions.Year2020
             visited.Add("shiny gold");
             while (q.Count > 0)
             {
-                var v = q.Dequeue();
+                string v = q.Dequeue();
 
-                foreach (var item in Bags[v].ContainedBy)
+                foreach (string item in Bags[v].ContainedBy)
                 {
                     if (!visited.Contains(item))
                     {
@@ -78,9 +78,9 @@ namespace AdventOfCode.Solutions.Year2020
             q.Enqueue("shiny gold");
             while (q.Count > 0)
             {
-                var v = q.Dequeue();
+                string v = q.Dequeue();
 
-                foreach (var item in Bags[v].Contents.Keys)
+                foreach (string item in Bags[v].Contents.Keys)
                 {
                     int tmpCount = Bags[v].Contents[item];
 

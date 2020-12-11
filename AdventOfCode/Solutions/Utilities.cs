@@ -18,7 +18,7 @@ namespace AdventOfCode.Solutions
         {
             if (delimiter == "")
             {
-                var result = new List<int>();
+                List<int> result = new List<int>();
                 foreach (char c in str) if (int.TryParse(c.ToString(), out int n)) result.Add(n);
                 return result.ToArray();
             }
@@ -36,7 +36,7 @@ namespace AdventOfCode.Solutions
         {
             if (delimiter == "")
             {
-                var result = new List<long>();
+                List<long> result = new List<long>();
                 foreach (char c in str) if (long.TryParse(c.ToString(), out long n)) result.Add(n);
                 return result.ToArray();
             }
@@ -64,7 +64,7 @@ namespace AdventOfCode.Solutions
 
         public static int MinOfMany(params int[] items)
         {
-            var result = items[0];
+            int result = items[0];
             for (int i = 1; i < items.Length; i++)
             {
                 result = Math.Min(result, items[i]);
@@ -74,7 +74,7 @@ namespace AdventOfCode.Solutions
 
         public static int MaxOfMany(params int[] items)
         {
-            var result = items[0];
+            int result = items[0];
             for (int i = 1; i < items.Length; i++)
             {
                 result = Math.Max(result, items[i]);
@@ -142,9 +142,9 @@ namespace AdventOfCode.Solutions
         public static IEnumerable<IEnumerable<T>> Permutations<T>(this IEnumerable<T> values, int subcount)
         {
 
-            foreach (var combination in Combinations(values, subcount))
+            foreach (IEnumerable<T> combination in Combinations(values, subcount))
             {
-                var perms = Permutations(combination);
+                IEnumerable<IEnumerable<T>> perms = Permutations(combination);
                 foreach (int i in Enumerable.Range(0, perms.Count())) yield return perms.ElementAt(i);
             }
         }
@@ -174,7 +174,7 @@ namespace AdventOfCode.Solutions
             if (values.Count() < subcount) throw new ArgumentException("Array Length can't be less than sub-array length");
             if (subcount < 1) throw new ArgumentException("Subarrays must be at least length 1 long");
             T[] res = new T[subcount];
-            foreach (var combination in Combinations(subcount, values.Count()))
+            foreach (int[] combination in Combinations(subcount, values.Count()))
             {
                 foreach (int i in Enumerable.Range(0, subcount))
                 {
@@ -187,7 +187,7 @@ namespace AdventOfCode.Solutions
 
         public static IEnumerable<IEnumerable<T>> Split<T>(this IEnumerable<T> array, int size)
         {
-            for (var i = 0; i < (float)array.Count() / size; i++)
+            for (int i = 0; i < (float)array.Count() / size; i++)
             {
                 yield return array.Skip(i * size).Take(size);
             }

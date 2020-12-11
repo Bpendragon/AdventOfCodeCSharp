@@ -88,13 +88,13 @@ namespace AdventOfCode.Solutions
                     DateTime CURRENT_EST = TimeZoneInfo.ConvertTime(DateTime.Now, TimeZoneInfo.Utc).AddHours(-5);
                     if( CURRENT_EST < new DateTime(Year, 12, Day) ) throw new InvalidOperationException();
 
-                    using var client = new WebClient();
+                    using WebClient client = new WebClient();
                     client.Headers.Add(HttpRequestHeader.Cookie, Program.Config.Cookie);
                     input = client.DownloadString(INPUT_URL).Trim();
                     File.WriteAllText(INPUT_FILEPATH, input);
                 }
                 catch( WebException e ) {
-                    var statusCode = ((HttpWebResponse)e.Response).StatusCode;
+                    HttpStatusCode statusCode = ((HttpWebResponse)e.Response).StatusCode;
                     if( statusCode == HttpStatusCode.BadRequest ) {
                         Console.WriteLine($"Day {Day}: Error code 400 when attempting to retrieve puzzle input through the web client. Your session cookie is probably not recognized.");
                     }

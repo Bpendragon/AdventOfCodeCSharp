@@ -26,7 +26,7 @@ namespace AdventOfCode.Solutions.Year2020
 
         protected override string SolvePartOne()
         {
-            var p1Adapters = new List<int>(Adapters);
+            List<int> p1Adapters = new List<int>(Adapters);
 
             int ones = 0;
             int threes = 0; 

@@ -27,7 +27,7 @@ namespace AdventOfCode.Solutions.Year2020
 
         public Day11() : base(11, 2020, "Seating System")
         {
-            var lines = Input.SplitByNewline().ToList();
+            List<string> lines = Input.SplitByNewline().ToList();
             maxY = lines.Count;
             for(int j = 0; j < lines.Count; j++)
             {
@@ -48,8 +48,8 @@ namespace AdventOfCode.Solutions.Year2020
             do
             {
                 seatsChanged = 0;
-                var nextSeats = new Dictionary<(int, int), bool>(Seats);
-                foreach(var seat in Seats)
+                Dictionary<(int, int), bool> nextSeats = new Dictionary<(int, int), bool>(Seats);
+                foreach(KeyValuePair<(int, int), bool> seat in Seats)
                 {
                     bool nextVal = AliveNext(seat.Key);
                     if (nextVal != seat.Value) seatsChanged++;
@@ -69,8 +69,8 @@ namespace AdventOfCode.Solutions.Year2020
             do
             {
                 seatsChanged = 0;
-                var nextSeats = new Dictionary<(int, int), bool>(Seats);
-                foreach (var seat in Seats)
+                Dictionary<(int, int), bool> nextSeats = new Dictionary<(int, int), bool>(Seats);
+                foreach (KeyValuePair<(int, int), bool> seat in Seats)
                 {
                     bool nextVal = AliveNext(seat.Key, true);
                     if (nextVal != seat.Value) seatsChanged++;
@@ -89,13 +89,13 @@ namespace AdventOfCode.Solutions.Year2020
             List<(int, int)> locNeighbors = new List<(int x, int y)>();
             List<(int, int)> extendedNeighbors = new List<(int x, int y)>();
 
-            foreach (var n in Neighbors)
+            foreach ((int, int) n in Neighbors)
             {
                 locNeighbors.Add(c.Add(n));
                 
                 if (part2)
                 {
-                    var tmp = c.Add(n);
+                    (int, int) tmp = c.Add(n);
                     while (!Seats.ContainsKey(tmp))
                     {
                         if (tmp.Item1 < 0 || tmp.Item1 > maxX || tmp.Item2 < 0 || tmp.Item2 > maxY) break;
@@ -108,7 +108,7 @@ namespace AdventOfCode.Solutions.Year2020
 
             if (part2)
             {
-                foreach (var n in extendedNeighbors)
+                foreach ((int, int) n in extendedNeighbors)
                 {
                     if (!Seats.ContainsKey(n)) continue;
                     if (Seats[n]) livingNeighbors++;
@@ -123,7 +123,7 @@ namespace AdventOfCode.Solutions.Year2020
                 }
             } else
             {
-                foreach (var n in locNeighbors)
+                foreach ((int, int) n in locNeighbors)
                 {
                     if (!Seats.ContainsKey(n)) continue;
                     if (Seats[n]) livingNeighbors++;

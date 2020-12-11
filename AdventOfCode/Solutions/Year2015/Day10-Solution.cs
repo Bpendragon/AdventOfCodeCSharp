@@ -16,7 +16,7 @@ namespace AdventOfCode.Solutions.Year2015
 
         protected override string SolvePartOne()
         {
-            var s = Input.Clone().ToString();
+            string s = Input.Clone().ToString();
 
             foreach (int i in Enumerable.Range(0, 40)) s = SpeakAndSay(s);
             return s.Length.ToString() ;
@@ -24,7 +24,7 @@ namespace AdventOfCode.Solutions.Year2015
 
         protected override string SolvePartTwo()
         {
-            var s = Input.Clone().ToString();
+            string s = Input.Clone().ToString();
 
             foreach (int i in Enumerable.Range(0, 50)) s = SpeakAndSay(s);
             return s.Length.ToString();

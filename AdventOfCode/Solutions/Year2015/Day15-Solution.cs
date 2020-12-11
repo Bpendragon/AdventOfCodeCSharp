@@ -18,7 +18,7 @@ namespace AdventOfCode.Solutions.Year2015
 
             foreach (string line in Lines)
             {
-                var tmp = line.Replace(":", "").Replace(",", " ").Split(" ", StringSplitOptions.RemoveEmptyEntries);
+                string[] tmp = line.Replace(":", "").Replace(",", " ").Split(" ", StringSplitOptions.RemoveEmptyEntries);
                 ings.Add(new Ingredient
                 {
                     name = tmp[0],

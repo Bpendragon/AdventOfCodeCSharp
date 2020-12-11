@@ -37,7 +37,7 @@ namespace AdventOfCode.Solutions.Year2017
             //Don't Actually run this please, it took 22 minutes and almost 5GB of RAM
             LinkedList<int> buffer = new LinkedList<int>();
             buffer.AddFirst(0);
-            var current = buffer.First;
+            LinkedListNode<int> current = buffer.First;
             for (int i = 1; i <= 50000000; i++)
             {
                 foreach(int _ in Enumerable.Range(0, Steps)) current = current.Next ?? current.List.First;

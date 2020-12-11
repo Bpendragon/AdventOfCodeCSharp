@@ -12,8 +12,7 @@ namespace AdventOfCode.Solutions.Year2017
         readonly List<string> danceMoves = new List<string>();
         List<char> dancers = new List<char>() { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p' };
         readonly List<char> dancers2 = new List<char>() { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p' };
-
-        List<string> completedDances = new List<string>();
+        readonly List<string> completedDances = new List<string>();
         const string original = "abcdefghijklmnop";
 
         public Day16() : base(16, 2017, "")
@@ -24,7 +23,7 @@ namespace AdventOfCode.Solutions.Year2017
 
         protected override string SolvePartOne()
         {
-            foreach (var move in danceMoves) Dance(move);
+            foreach (string move in danceMoves) Dance(move);
             completedDances.Add(dancers.JoinAsStrings());
             return dancers.JoinAsStrings();
         }
@@ -32,9 +31,9 @@ namespace AdventOfCode.Solutions.Year2017
         protected override string SolvePartTwo()
         {
 
-            foreach (long i in Enumerable.Range(0, 1000000000))
+            foreach (long _ in Enumerable.Range(0, 1000000000))
             {
-                foreach (var move in danceMoves) Dance(move);
+                foreach (string move in danceMoves) Dance(move);
 
                 
                 if (dancers.JoinAsStrings() == original) break;
@@ -48,7 +47,7 @@ namespace AdventOfCode.Solutions.Year2017
 
         private void Dance(string move)
         {
-            var splits = move[1..].Split('/');
+            string[] splits = move[1..].Split('/');
             char tmp;
             int a;
             int b;

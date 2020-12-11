@@ -67,7 +67,7 @@ namespace AdventOfCode
 
         public static Config Get(string path)
         {
-            var options = new JsonSerializerOptions()
+            JsonSerializerOptions options = new JsonSerializerOptions()
             {
                 IgnoreNullValues = true,
                 PropertyNameCaseInsensitive = true,
@@ -106,7 +106,7 @@ namespace AdventOfCode
             {
                 if(str.Contains(".."))
                 {
-                    var split = str.Split("..");
+                    string[] split = str.Split("..");
                     int start = int.Parse(split[0]);
                     int stop = int.Parse(split[1]);
                     return Enumerable.Range(start, stop - start + 1);

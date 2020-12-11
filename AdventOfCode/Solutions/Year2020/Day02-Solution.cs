@@ -17,7 +17,7 @@ namespace AdventOfCode.Solutions.Year2020
         protected override string SolvePartOne()
         {
             int validPass = 0;
-            foreach (var password in passwords)
+            foreach (string password in passwords)
             {
                 string[] splitline = password.Split(new char[] { ' ', ':', '-' });
                 int minCount = int.Parse(splitline[0]);
@@ -35,7 +35,7 @@ namespace AdventOfCode.Solutions.Year2020
         protected override string SolvePartTwo()
         {
             int validPass = 0;
-            foreach (var password in passwords)
+            foreach (string password in passwords)
             {
                 string[] splitline = password.Split(new char[] { ' ', ':', '-' });
                 int minCount = int.Parse(splitline[0]);

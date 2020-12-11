@@ -12,9 +12,9 @@ namespace AdventOfCode.Solutions.Year2015
         public Day07() : base(07, 2015, "")
         {
             Lines = new List<string>(Input.SplitByNewline());
-            foreach (var line in Lines)
+            foreach (string line in Lines)
             {
-                var tokens = line.Split();
+                string[] tokens = line.Split();
                 string gateName = tokens[^1];
                 Gate _gate;
                 if (!circuit.ContainsKey(gateName))
@@ -141,13 +141,13 @@ namespace AdventOfCode.Solutions.Year2015
             do
             {
                 changes = 0;
-                foreach (var key in circuit.Keys)
+                foreach (string key in circuit.Keys)
                 {
-                    var gateToCheck = circuit[key];
+                    Gate gateToCheck = circuit[key];
                     if (!gateToCheck.Output.HasValue && gateToCheck.Type != GateTypes.Unknown)
                     {
                         bool ready = true;
-                        foreach (var i in gateToCheck.Inputs)
+                        foreach (Gate i in gateToCheck.Inputs)
                         {
                             if (!i.Output.HasValue)
                             {
@@ -187,7 +187,7 @@ namespace AdventOfCode.Solutions.Year2015
 
         private void ResetCircuit()
         {
-            foreach(var key in circuit.Keys)
+            foreach(string key in circuit.Keys)
             {
                 circuit[key].Output = null;
             }
@@ -200,7 +200,7 @@ namespace AdventOfCode.Solutions.Year2015
 
         protected override string SolvePartTwo()
         {
-            var tmp = circuit["a"].Output;
+            ushort? tmp = circuit["a"].Output;
             ResetCircuit();
             circuit["b"].Output = tmp;
             UpdateCircuit();

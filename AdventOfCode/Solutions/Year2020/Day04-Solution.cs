@@ -25,7 +25,7 @@ namespace AdventOfCode.Solutions.Year2020
             foreach(string passport in passports)
             {
                 bool validB = true;
-                foreach(var item in requiredItems)
+                foreach(string item in requiredItems)
                 {
                     if (!passport.Contains(item)) validB = false;
                 }
@@ -48,7 +48,7 @@ namespace AdventOfCode.Solutions.Year2020
                 string[] tokens = passport.Split();
                 bool isValid = true;
 
-                foreach(var token in tokens)
+                foreach(string token in tokens)
                 {
                     if (!isValid) break;
                     string[] t = token.Split(':');

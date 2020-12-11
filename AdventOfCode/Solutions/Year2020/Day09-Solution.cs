@@ -22,9 +22,9 @@ namespace AdventOfCode.Solutions.Year2020
             int i = 25;
             for(; i < Lines.Count; i++)
             {
-                var prev25 = Lines.GetRange(i - 25, 25);
+                List<long> prev25 = Lines.GetRange(i - 25, 25);
                 bool found = false;
-                foreach(var combo in prev25.Combinations(2))
+                foreach(IEnumerable<long> combo in prev25.Combinations(2))
                 {
                     if(combo.Sum() == Lines[i])
                     {

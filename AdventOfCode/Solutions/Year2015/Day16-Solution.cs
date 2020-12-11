@@ -32,9 +32,9 @@ namespace AdventOfCode.Solutions.Year2015
 
             foreach (string line in Lines)
             {
-                var tmp = line.Replace(":", "").Replace(",", "");
-                var spl = tmp.Split();
-                var curSue = new AuntSue(int.Parse(spl[1]));
+                string tmp = line.Replace(":", "").Replace(",", "");
+                string[] spl = tmp.Split();
+                AuntSue curSue = new AuntSue(int.Parse(spl[1]));
                 for (int i = 2; i < spl.Length; i += 2)
                 {
                     curSue.Attributes[spl[i]] = int.Parse(spl[i + 1]);
@@ -44,8 +44,8 @@ namespace AdventOfCode.Solutions.Year2015
         }
 
         protected override string SolvePartOne()
-        {   
-            var shrunkList = new List<AuntSue>(Sues);
+        {
+            List<AuntSue> shrunkList = new List<AuntSue>(Sues);
 
             foreach(var p in tgtSue.Attributes)
             {
@@ -56,7 +56,7 @@ namespace AdventOfCode.Solutions.Year2015
 
         protected override string SolvePartTwo()
         {
-            var shrunkList = new List<AuntSue>(Sues);
+            List<AuntSue> shrunkList = new List<AuntSue>(Sues);
 
             foreach (var p in tgtSue.Attributes)
             {

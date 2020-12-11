@@ -116,7 +116,7 @@ namespace AdventOfCode.UserClasses
         private static Mode[] GetModes(long instruction)
         {
             Mode[] res = new Mode[3];
-            var tmp = instruction / 100;
+            long tmp = instruction / 100;
             res[0] = (Mode)(tmp % 10); //source 1 (target for input)
             tmp /= 10;
             res[1] = (Mode)(tmp % 10); //Source 2 

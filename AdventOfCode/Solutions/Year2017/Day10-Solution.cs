@@ -20,7 +20,7 @@ namespace AdventOfCode.Solutions.Year2017
             KnotHash kn = new KnotHash(lengths);
             List<int> knot = new List<int>(256);
             foreach (int i in Enumerable.Range(0, 256)) knot.Add(i);
-            var res = kn.Round(knot);
+            List<int> res = kn.Round(knot);
             return (res[0]*res[1]).ToString();
         }
 

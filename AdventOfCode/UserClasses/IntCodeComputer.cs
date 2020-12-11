@@ -102,7 +102,7 @@ namespace AdventOfCode.UserClasses
                         break;
 
                     case Operation.WriteOutput:
-                        var output = new OutputEventArgs
+                        OutputEventArgs output = new OutputEventArgs
                         {
                             OutputValue = opParams[0]
                         };
@@ -323,7 +323,7 @@ namespace AdventOfCode.UserClasses
 
         private static Mode[] GetModes(int instruction)
         {
-            var res = new Mode[3];
+            Mode[] res = new Mode[3];
             res[0] = (Mode)(instruction % 10);
             instruction /= 10;
 

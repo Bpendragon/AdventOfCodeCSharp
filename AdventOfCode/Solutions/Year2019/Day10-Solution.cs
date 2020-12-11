@@ -15,7 +15,7 @@ namespace AdventOfCode.Solutions.Year2019
         public Day10() : base(10, 2019, "")
         {
             Asteroids = new List<Asteroid>();
-            var lines = Input.SplitByNewline();
+            string[] lines = Input.SplitByNewline();
             for (int i = 0; i < lines[0].Length; i++)
             {
                 for (int j = 0; j < lines.Length; j++)
@@ -24,11 +24,11 @@ namespace AdventOfCode.Solutions.Year2019
                 }
             }
 
-            foreach (var pair in Asteroids.Combinations(2))
+            foreach (IEnumerable<Asteroid> pair in Asteroids.Combinations(2))
             {
 
-                var ast1 = pair.First();
-                var ast2 = pair.Last();
+                Asteroid ast1 = pair.First();
+                Asteroid ast2 = pair.Last();
                 double dX = Math.Abs(ast1.Coords.x - ast2.Coords.x);
                 double dY = Math.Abs(ast1.Coords.y - ast2.Coords.y);
                 int gcd = (int)Utilities.FindGCD(dX, dY);
@@ -77,7 +77,7 @@ namespace AdventOfCode.Solutions.Year2019
             using (System.IO.StreamWriter file =
             new System.IO.StreamWriter(@"D:\Users\campb\Documents\AdventOfCode\AdventOfCodeCSharp\AdventOfCode\Solutions\Year2019\Day10-visible.txt"))
             {
-                foreach (var vis in baseLoc.InView)
+                foreach (KeyValuePair<(int, int), Asteroid> vis in baseLoc.InView)
                 {
                     file.WriteLine(vis.Value.Coords);
                 }

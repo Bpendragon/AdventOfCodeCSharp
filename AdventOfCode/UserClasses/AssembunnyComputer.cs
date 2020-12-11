@@ -99,7 +99,7 @@ namespace AdventOfCode.UserClasses
         {
             string command = program[v];
 
-            var split = command.Split();
+            string[] split = command.Split();
 
             switch(split[0])
             {

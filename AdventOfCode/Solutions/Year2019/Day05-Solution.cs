@@ -21,7 +21,7 @@ namespace AdventOfCode.Solutions.Year2019
         {
             long lastItem = long.MinValue;
             cpu.ReadyInput(1);
-            foreach(var item in cpu.RunProgram())
+            foreach(long item in cpu.RunProgram())
             {
                 Console.WriteLine(item);
                 lastItem = item;
@@ -35,7 +35,7 @@ namespace AdventOfCode.Solutions.Year2019
             cpu.ClearInputs();
             cpu.ReadyInput(5);
             long lastItem = long.MinValue;
-            foreach (var item in cpu.RunProgram())
+            foreach (long item in cpu.RunProgram())
             {
                 Console.WriteLine(item);
                 lastItem = item;

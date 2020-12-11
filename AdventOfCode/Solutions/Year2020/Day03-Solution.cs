@@ -25,7 +25,7 @@ namespace AdventOfCode.Solutions.Year2020
         protected override string SolvePartTwo()
         {
             long res = 1;
-            foreach (var slope in new List<(int, int)> {
+            foreach ((int, int) slope in new List<(int, int)> {
                 (1, 1), (3, 1), (5, 1), (7, 1), (1, 2)
             })
             {

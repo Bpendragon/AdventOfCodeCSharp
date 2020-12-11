@@ -14,9 +14,9 @@ namespace AdventOfCode.Solutions.Year2017
         private int NumGroups = 0;
         public Day12() : base(12, 2017, "Digital Plumber")
         {
-            foreach(var line in Input.SplitByNewline())
+            foreach(string line in Input.SplitByNewline())
             {
-                var tokens = line.Split(" <-> ", StringSplitOptions.RemoveEmptyEntries);
+                string[] tokens = line.Split(" <-> ", StringSplitOptions.RemoveEmptyEntries);
 
                 Pipes[int.Parse(tokens[0])] = new List<int>(tokens[^1].ToIntArray(", "));
             }
@@ -49,7 +49,7 @@ namespace AdventOfCode.Solutions.Year2017
             {
                 int v = q.Dequeue();
 
-                foreach (var n in Pipes[v].Where(x => !Visited.Contains(x)))
+                foreach (int n in Pipes[v].Where(x => !Visited.Contains(x)))
                 {
                     q.Enqueue(n);
                     Visited.Add(n);

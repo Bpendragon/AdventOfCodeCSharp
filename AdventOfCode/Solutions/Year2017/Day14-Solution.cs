@@ -63,10 +63,10 @@ namespace AdventOfCode.Solutions.Year2017
 
                 while (q.Count > 0)
                 {
-                    var v = q.Dequeue();
-                    foreach(var d in dirs)
+                    (int, int) v = q.Dequeue();
+                    foreach((int, int) d in dirs)
                     {
-                        var s = v.Add(d);
+                        (int, int) s = v.Add(d);
                         if(nodes.ContainsKey(s) && nodes[s] && !visited.Contains(s))
                         {
                             q.Enqueue(s);

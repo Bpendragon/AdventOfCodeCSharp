@@ -36,7 +36,7 @@ namespace AdventOfCode.Solutions.Year2016
             
             foreach(var combo in Wires.Keys.Combinations(2))
             {
-                var pair = combo.ToArray();
+                string[] pair = combo.ToArray();
 
                 int dist = CalculateDistance(Wires[pair[0]].Coords, Wires[pair[1]].Coords);
 
@@ -55,11 +55,11 @@ namespace AdventOfCode.Solutions.Year2016
             q.Enqueue(start);
             while(q.Count > 0)
             {
-                var v = q.Dequeue();
-                var S = (v.Item1, v.Item2 + 1); //it grows down, higher Y means further down/south on the map
-                var E = (v.Item1 + 1, v.Item2);
-                var N = (v.Item1, v.Item2 - 1);
-                var W = (v.Item1 - 1, v.Item2);
+                (int, int) v = q.Dequeue();
+                (int, int) S = (v.Item1, v.Item2 + 1); //it grows down, higher Y means further down/south on the map
+                (int, int) E = (v.Item1 + 1, v.Item2);
+                (int, int) N = (v.Item1, v.Item2 - 1);
+                (int, int) W = (v.Item1 - 1, v.Item2);
 
                 if (N == end ||
                     E == end ||
@@ -67,7 +67,7 @@ namespace AdventOfCode.Solutions.Year2016
                     W == end )
                 {
                     int length = 1;
-                    var p = discovered[v];
+                    (int, int) p = discovered[v];
                     while (p != (-1, -1))
                     {
                         length++;
@@ -92,7 +92,7 @@ namespace AdventOfCode.Solutions.Year2016
             List<string> nodesToVisit = Wires.Keys.Where(x => x != "0").ToList();
             foreach (var p in nodesToVisit.Permutations())
             {
-                var l = p.ToList();
+                List<string> l = p.ToList();
                 l.Insert(0, "0");
                 int r = 0;
 
@@ -112,7 +112,7 @@ namespace AdventOfCode.Solutions.Year2016
             List<string> nodesToVisit = Wires.Keys.Where(x => x != "0").ToList();
             foreach (var p in nodesToVisit.Permutations())
             {
-                var l = p.ToList();
+                List<string> l = p.ToList();
                 l.Insert(0, "0");
                 l.Add("0");
                 int r = 0;

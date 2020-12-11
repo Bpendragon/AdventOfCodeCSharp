@@ -42,7 +42,7 @@ namespace AdventOfCode.Solutions.Year2015
 
             while(PC < WorkingProgram.Count)
             {
-                var tokens = WorkingProgram[PC].Replace(",", "").Split(" ", StringSplitOptions.RemoveEmptyEntries);
+                string[] tokens = WorkingProgram[PC].Replace(",", "").Split(" ", StringSplitOptions.RemoveEmptyEntries);
 
                 switch(tokens[0])
                 {

@@ -12,9 +12,9 @@ namespace AdventOfCode.Solutions.Year2017
         readonly Dictionary<int, int> Sentries = new Dictionary<int, int>();
         public Day13() : base(13, 2017, "Packet Scanners")
         {
-            foreach(var line in Input.SplitByNewline())
+            foreach(string line in Input.SplitByNewline())
             {
-                var s = line.ToIntArray(": ");
+                int[] s = line.ToIntArray(": ");
                 Sentries[s[0]] = s[^1];
             }
         }
@@ -22,7 +22,7 @@ namespace AdventOfCode.Solutions.Year2017
         protected override string SolvePartOne()
         {
 
-            var sev = CalculateSeverity(0, out bool _);
+            int sev = CalculateSeverity(0, out bool _);
             return sev.ToString();
         }
 

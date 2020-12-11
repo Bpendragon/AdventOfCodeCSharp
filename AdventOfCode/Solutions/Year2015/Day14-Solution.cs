@@ -14,15 +14,15 @@ namespace AdventOfCode.Solutions.Year2015
         {
             Lines = new List<string>(Input.SplitByNewline());
 
-            foreach(var line in Lines)
+            foreach(string line in Lines)
             {
-                var tmp = line.Split();
+                string[] tmp = line.Split();
                 Racers.Add(new Reindeer(tmp[0], int.Parse(tmp[3]), int.Parse(tmp[6]), int.Parse(tmp[^2])));
             }
 
             for (int i = 0; i < 2503; i++)
             {
-                foreach (var rdeer in Racers)
+                foreach (Reindeer rdeer in Racers)
                 {
                     rdeer.Step();
                 }

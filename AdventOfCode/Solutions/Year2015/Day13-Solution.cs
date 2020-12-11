@@ -11,10 +11,10 @@ namespace AdventOfCode.Solutions.Year2015
         readonly Dictionary<string, Guest> GuestList = new Dictionary<string, Guest>();
         public Day13() : base(13, 2015, "")
         {
-            foreach(var line in Input.SplitByNewline())
+            foreach(string line in Input.SplitByNewline())
             {
-                var tmp = line.TrimEnd('.');
-                var tokens = tmp.Split();
+                string tmp = line.TrimEnd('.');
+                string[] tokens = tmp.Split();
                 if(!GuestList.ContainsKey(tokens[0]))
                 {
                     GuestList[tokens[0]] = new Guest();
@@ -59,7 +59,7 @@ namespace AdventOfCode.Solutions.Year2015
         {
             Guest myself = new Guest();
             Dictionary<string, Guest> secondGuestList = new Dictionary<string, Guest>(GuestList);
-            foreach(var g in GuestList.Keys)
+            foreach(string g in GuestList.Keys)
             {
                 myself.Relationships[g] = 0;
                 secondGuestList[g].Relationships["myself"] = 0;

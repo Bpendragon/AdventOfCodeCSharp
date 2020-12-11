@@ -19,9 +19,9 @@ namespace AdventOfCode.Solutions.Year2020
         protected override string SolvePartOne()
         {
             int running = 0;
-            foreach (var answer in answers)
+            foreach (string answer in answers)
             {
-                var tmp = answer.Replace(" ", "").Replace("\n", "");
+                string tmp = answer.Replace(" ", "").Replace("\n", "");
                 running += tmp.Distinct().Count();
             }
             return running.ToString() ;
@@ -30,11 +30,11 @@ namespace AdventOfCode.Solutions.Year2020
         protected override string SolvePartTwo()
         {
             int running = 0;
-           foreach(var group in answers)
+           foreach(string group in answers)
             {
                 Dictionary<char, int> res = new Dictionary<char, int>();
-                var members = new List<string>(group.SplitByNewline());
-                foreach(var member in members)
+                List<string> members = new List<string>(group.SplitByNewline());
+                foreach(string member in members)
                 {
                     foreach(char c in member)
                     {

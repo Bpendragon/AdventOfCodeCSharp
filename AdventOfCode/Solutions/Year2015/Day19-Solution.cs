@@ -15,12 +15,12 @@ namespace AdventOfCode.Solutions.Year2015
 
         public Day19() : base(19, 2015, "")
         {
-            var s = Input.Split("\n\n", StringSplitOptions.RemoveEmptyEntries);
+            string[] s = Input.Split("\n\n", StringSplitOptions.RemoveEmptyEntries);
             baseChem = s[1].Trim();
 
-            foreach (var i in s[0].SplitByNewline())
+            foreach (string i in s[0].SplitByNewline())
             {
-                var j = i.Split(" => ", StringSplitOptions.RemoveEmptyEntries);
+                string[] j = i.Split(" => ", StringSplitOptions.RemoveEmptyEntries);
                 if (!Substitutions.ContainsKey(j[0]))
                 {
                     Substitutions[j[0]] = new List<string>() { j[1] };
@@ -31,9 +31,9 @@ namespace AdventOfCode.Solutions.Year2015
 
         protected override string SolvePartOne()
         {
-            foreach (var sub in Substitutions)
+            foreach (KeyValuePair<string, List<string>> sub in Substitutions)
             {
-                foreach (var v in sub.Value)
+                foreach (string v in sub.Value)
                 {
                     foreach (int index in baseChem.AllIndexesOf(sub.Key))
                     {

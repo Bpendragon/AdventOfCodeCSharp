@@ -15,9 +15,9 @@ namespace AdventOfCode.Solutions.Year2016
         public Day22() : base(22, 2016, "")
         {
             Nodes = new List<Node>();
-            foreach(var line in Input.SplitByNewline().Skip(2))
+            foreach(string line in Input.SplitByNewline().Skip(2))
             {
-                var tokens = line.Split(new char[] { '-', ' ', 'T', '%' , 'x', 'y'}).ToIntArray();
+                int[] tokens = line.Split(new char[] { '-', ' ', 'T', '%' , 'x', 'y'}).ToIntArray();
                 Nodes.Add(new Node()
                 {
                     Coords = (tokens[0], tokens[1]),

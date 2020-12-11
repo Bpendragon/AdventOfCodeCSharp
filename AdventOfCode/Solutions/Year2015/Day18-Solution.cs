@@ -48,13 +48,13 @@ namespace AdventOfCode.Solutions.Year2015
 
         protected override string SolvePartOne()
         {
-            var modLights = new Dictionary<(int, int), char>(Lights);
+            Dictionary<(int, int), char> modLights = new Dictionary<(int, int), char>(Lights);
 
             for (int k = 0; k < 100; k++) //number of iterations
             {
-                var nextLights = new Dictionary<(int, int), char>(modLights);
+                Dictionary<(int, int), char> nextLights = new Dictionary<(int, int), char>(modLights);
 
-                foreach (var i in modLights.Keys)
+                foreach ((int, int) i in modLights.Keys)
                 {
                     if (AliveNext(i, modLights))
                     {
@@ -73,13 +73,13 @@ namespace AdventOfCode.Solutions.Year2015
 
         protected override string SolvePartTwo()
         {
-            var modLights = new Dictionary<(int, int), char>(Lights);
+            Dictionary<(int, int), char> modLights = new Dictionary<(int, int), char>(Lights);
 
             for (int k = 0; k < 100; k++) //number of iterations
             {
-                var nextLights = new Dictionary<(int, int), char>(modLights);
+                Dictionary<(int, int), char> nextLights = new Dictionary<(int, int), char>(modLights);
 
-                foreach (var i in modLights.Keys)
+                foreach ((int, int) i in modLights.Keys)
                 {
                     if (AliveNext(i, modLights, true))
                     {
@@ -124,7 +124,7 @@ namespace AdventOfCode.Solutions.Year2015
         {
             int livingNeighbors = 0;
             List<(int, int)> locNeighbors = new List<(int x, int y)>();
-            foreach (var n in Neighbors)
+            foreach ((int, int) n in Neighbors)
             {
                 locNeighbors.Add(c.Add(n));
             }
@@ -134,7 +134,7 @@ namespace AdventOfCode.Solutions.Year2015
                 if (Corners.Contains(c)) return true;
             }
 
-            foreach (var n in locNeighbors)
+            foreach ((int, int) n in locNeighbors)
             {
                 if (!modLights.ContainsKey(n)) continue;
                 if (modLights[n] == '#') livingNeighbors++;

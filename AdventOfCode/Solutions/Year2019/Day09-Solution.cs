@@ -20,7 +20,7 @@ namespace AdventOfCode.Solutions.Year2019
             IntCode2 cpu = new IntCode2(program);
             long lastItem = long.MinValue;
             cpu.ReadyInput(1);
-            foreach (var item in cpu.RunProgram())
+            foreach (long item in cpu.RunProgram())
             {
                 Console.WriteLine(item);
                 lastItem = item;
@@ -35,7 +35,7 @@ namespace AdventOfCode.Solutions.Year2019
             IntCode2 cpu = new IntCode2(program);
             long lastItem = long.MinValue;
             cpu.ReadyInput(2);
-            foreach (var item in cpu.RunProgram())
+            foreach (long item in cpu.RunProgram())
             {
                 Console.WriteLine(item);
                 lastItem = item;

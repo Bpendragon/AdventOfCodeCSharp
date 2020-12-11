@@ -20,7 +20,7 @@ namespace AdventOfCode.Solutions.Year2019
         {
             pc.Program[1] = 12;
             pc.Program[2] = 2;
-            foreach (var _ in pc.RunProgram()) { }
+            foreach (long _ in pc.RunProgram()) { }
             return pc.PreviousRunState[0].ToString();
         }
 
@@ -32,7 +32,7 @@ namespace AdventOfCode.Solutions.Year2019
                 {
                     pc.Program[1] = i;
                     pc.Program[2] = j;
-                    foreach (var _ in pc.RunProgram()){ };
+                    foreach (long _ in pc.RunProgram()){ };
 
                     if (pc.PreviousRunState[0] == 19690720) return ((100 * i) + j).ToString();
                 }

@@ -12,9 +12,9 @@ namespace AdventOfCode.Solutions.Year2020
         {
             passes = new List<string>(Input.SplitByNewline());
             passIDs = new List<int>();
-            foreach (var pass in passes)
+            foreach (string pass in passes)
             {
-                var id = pass.Replace('F', '0').Replace('B', '1').Replace('R', '1').Replace('L', '0');
+                string id = pass.Replace('F', '0').Replace('B', '1').Replace('R', '1').Replace('L', '0');
                 int test = (Convert.ToInt32(id, 2));
                 passIDs.Add(test);
             }
