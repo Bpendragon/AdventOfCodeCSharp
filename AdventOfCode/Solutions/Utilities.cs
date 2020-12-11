@@ -242,5 +242,36 @@ namespace AdventOfCode.Solutions
         {
            return string.Join(string.Empty, Hexstring.Select(c => Convert.ToString(Convert.ToInt32(c.ToString(), 16), 2).PadLeft(4, '0')));
         }
+
+        public enum CompassDirection
+        {
+            N,
+            NE,
+            E,
+            SE,
+            S,
+            SW,
+            W,
+            NW
+        }
+
+        public static (int x, int y) MoveDirection(this (int, int) start, CompassDirection Direction)
+        {
+            return (Direction) switch
+            {
+                CompassDirection.N => start.Add((0, 1)),
+                CompassDirection.NE => start.Add((1, 1)),
+                CompassDirection.E => start.Add((1, 0)),
+                CompassDirection.SE => start.Add((1, -1)),
+                CompassDirection.S => start.Add((0, -1)),
+                CompassDirection.SW => start.Add((-1, -1)),
+                CompassDirection.W => start.Add((-1, 0)),
+                CompassDirection.NW => start.Add((-1, 1)),
+                _ => throw new ArgumentException("Direction is not valid", nameof(Direction))
+            };
+        }
+
     }
+
+    
 }
