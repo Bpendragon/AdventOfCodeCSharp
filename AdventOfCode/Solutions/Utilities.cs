@@ -224,6 +224,8 @@ namespace AdventOfCode.Solutions
 
         public static (int, int) Add(this (int x, int y) a, (int x, int y) b) => (a.x + b.x, a.y + b.y);
 
+        public static (int, int, int) Add(this (int x, int y, int z) a, (int x, int y, int z) b) => (a.x + b.x, a.y + b.y, a.z +b.z);
+
         //https://stackoverflow.com/questions/2641326/finding-all-positions-of-substring-in-a-larger-string-in-c-sharp
         public static IEnumerable<int> AllIndexesOf(this string str, string value)
         {
@@ -245,30 +247,51 @@ namespace AdventOfCode.Solutions
 
         public enum CompassDirection
         {
-            N,
-            NE,
-            E,
-            SE,
-            S,
-            SW,
-            W,
-            NW
+            N = 0,
+            NE = 45,
+            E = 90,
+            SE = 135,
+            S = 180,
+            SW = 225,
+            W = 270,
+            NW = 315
         }
 
         public static (int x, int y) MoveDirection(this (int, int) start, CompassDirection Direction)
         {
             return (Direction) switch
             {
-                CompassDirection.N => start.Add((0, 1)),
+                CompassDirection.N  => start.Add((0, 1)),
                 CompassDirection.NE => start.Add((1, 1)),
-                CompassDirection.E => start.Add((1, 0)),
+                CompassDirection.E  => start.Add((1, 0)),
                 CompassDirection.SE => start.Add((1, -1)),
-                CompassDirection.S => start.Add((0, -1)),
+                CompassDirection.S  => start.Add((0, -1)),
                 CompassDirection.SW => start.Add((-1, -1)),
-                CompassDirection.W => start.Add((-1, 0)),
+                CompassDirection.W  => start.Add((-1, 0)),
                 CompassDirection.NW => start.Add((-1, 1)),
                 _ => throw new ArgumentException("Direction is not valid", nameof(Direction))
             };
+        }
+
+        public static (int x, int y) MoveDirection(this (int, int) start, int distance, CompassDirection Direction)
+        {
+            return (Direction) switch
+            {
+                CompassDirection.N => start.Add((0, distance)),
+                CompassDirection.NE => start.Add((distance, distance)),
+                CompassDirection.E => start.Add((distance, 0)),
+                CompassDirection.SE => start.Add((distance, -distance)),
+                CompassDirection.S => start.Add((0, -distance)),
+                CompassDirection.SW => start.Add((-distance, -distance)),
+                CompassDirection.W => start.Add((-distance, 0)),
+                CompassDirection.NW => start.Add((-distance, distance)),
+                _ => throw new ArgumentException("Direction is not valid", nameof(Direction))
+            };
+        }
+
+        public static T GetDirection<T>(this Dictionary<(int, int), T> values, (int, int) location, CompassDirection Direction)
+        {
+            throw new NotImplementedException();
         }
 
     }
