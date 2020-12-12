@@ -10,7 +10,6 @@ namespace AdventOfCode.Solutions.Year2020
     class Day08 : ASolution
     {
         readonly List<string> Lines;
-        int previousPC;
         public Day08() : base(08, 2020, "Handheld Halting")
         {
             Lines = new List<string>(Input.SplitByNewline());
@@ -37,7 +36,7 @@ namespace AdventOfCode.Solutions.Year2020
                 string str = tmp[0] + " " + tmp[1];
                 copy[i] = str;
 
-                if(testProgram(copy))
+                if(TestProgram(copy))
                 {
                     return RunProgram(copy).ToString() ;
                 }
@@ -45,7 +44,7 @@ namespace AdventOfCode.Solutions.Year2020
             return null;
         }
 
-        private bool testProgram(List<string> program)
+        private static bool TestProgram(List<string> program)
         {
             List<int> visitedCommands = new List<int>();
             int pc = 0;
@@ -75,7 +74,7 @@ namespace AdventOfCode.Solutions.Year2020
             return true;
         }
 
-        private int RunProgram(List<string> Program)
+        private static int RunProgram(List<string> Program)
         {
             List<int> visitedCommands = new List<int>();
             int pc = 0;
@@ -90,15 +89,12 @@ namespace AdventOfCode.Solutions.Year2020
                 {
                     case "acc":
                         acc += int.Parse(tokens[1]);
-                        previousPC = pc;
                         pc++;
                         break;
                     case "nop":
-                        previousPC = pc;
                         pc++;
                         break;
                     case "jmp":
-                        previousPC = pc;
                         pc += int.Parse(tokens[1]);
                         break;
                 }

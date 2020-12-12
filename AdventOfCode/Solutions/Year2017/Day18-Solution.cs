@@ -10,7 +10,7 @@ namespace AdventOfCode.Solutions.Year2017
     class Day18 : ASolution
     {
         long lastPlayed = 0;
-        Dictionary<string, long> Registers = new Dictionary<string, long>();
+        readonly Dictionary<string, long> Registers = new Dictionary<string, long>();
         readonly List<string> Commands;
         public Day18() : base(18, 2017, "")
         {
@@ -64,8 +64,7 @@ namespace AdventOfCode.Solutions.Year2017
                 switch (tokens[0])
                 {
                     case "snd":
-                        if (long.TryParse(tokens[^1], out imm)) ;
-                        else imm = Registers[tokens[^1]];
+                        if (!long.TryParse(tokens[^1], out imm)) imm = Registers[tokens[^1]];
                         lastPlayed = imm;
                         pc++;
                         break;
@@ -90,16 +89,13 @@ namespace AdventOfCode.Solutions.Year2017
                         pc++;
                         break;
                     case "rcv":
-                        if (long.TryParse(tokens[^1], out imm)) ;
-                        else imm = Registers[tokens[^1]];
+                        if (!long.TryParse(tokens[^1], out imm)) imm = Registers[tokens[^1]];
                         if (imm != 0) yield return lastPlayed;
                         pc++;
                         break;
                     case "jgz":
-                        if (long.TryParse(tokens[1], out imm)) ;
-                        else imm = Registers[tokens[1]];
-                        if (long.TryParse(tokens[^1], out jmp)) ;
-                        else jmp = Registers[tokens[^1]];
+                        if (!long.TryParse(tokens[1], out imm)) imm = Registers[tokens[1]];
+                        if (!long.TryParse(tokens[^1], out jmp)) jmp = Registers[tokens[^1]];
                         if (imm > 0) pc += (int)jmp;
                         else pc++;
                         break;
@@ -111,9 +107,9 @@ namespace AdventOfCode.Solutions.Year2017
 
         private class DuetProgram
         {
-            Dictionary<string, long> Registers = new Dictionary<string, long>();
+            readonly Dictionary<string, long> Registers = new Dictionary<string, long>();
             int pc = 0;
-            List<string> Commands;
+            readonly List<string> Commands;
 
             public int SendCount { get; private set; }
 
@@ -143,8 +139,8 @@ namespace AdventOfCode.Solutions.Year2017
                     switch (tokens[0])
                     {
                         case "snd":
-                            if (long.TryParse(tokens[^1], out imm)) ;
-                            else imm = Registers[tokens[^1]];
+                            if (!long.TryParse(tokens[^1], out imm))
+                                imm = Registers[tokens[^1]];
                             SendQueue.Enqueue(imm);
                             SendCount++;
                             pc++;
@@ -175,10 +171,9 @@ namespace AdventOfCode.Solutions.Year2017
                             pc++;
                             break;
                         case "jgz":
-                            if (long.TryParse(tokens[1], out imm)) ;
-                            else imm = Registers[tokens[1]];
-                            if (long.TryParse(tokens[^1], out jmp)) ;
-                            else jmp = Registers[tokens[^1]];
+                            if (!long.TryParse(tokens[1], out imm))
+                                imm = Registers[tokens[1]];
+                            if (!long.TryParse(tokens[^1], out jmp)) jmp = Registers[tokens[^1]];
                             if (imm > 0) pc += (int)jmp;
                             else pc++;
                             break;

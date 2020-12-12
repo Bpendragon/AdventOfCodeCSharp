@@ -257,23 +257,7 @@ namespace AdventOfCode.Solutions
             NW = 315
         }
 
-        public static (int x, int y) MoveDirection(this (int, int) start, CompassDirection Direction)
-        {
-            return (Direction) switch
-            {
-                CompassDirection.N  => start.Add((0, 1)),
-                CompassDirection.NE => start.Add((1, 1)),
-                CompassDirection.E  => start.Add((1, 0)),
-                CompassDirection.SE => start.Add((1, -1)),
-                CompassDirection.S  => start.Add((0, -1)),
-                CompassDirection.SW => start.Add((-1, -1)),
-                CompassDirection.W  => start.Add((-1, 0)),
-                CompassDirection.NW => start.Add((-1, 1)),
-                _ => throw new ArgumentException("Direction is not valid", nameof(Direction))
-            };
-        }
-
-        public static (int x, int y) MoveDirection(this (int, int) start, int distance, CompassDirection Direction)
+        public static (int x, int y) MoveDirection(this (int, int) start, CompassDirection Direction, int distance = 1)
         {
             return (Direction) switch
             {

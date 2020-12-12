@@ -40,8 +40,8 @@ namespace AdventOfCode.Solutions.Year2016
 
                 int dist = CalculateDistance(Wires[pair[0]].Coords, Wires[pair[1]].Coords);
 
-                Wires[pair[0]].distances[pair[1]] = dist;
-                Wires[pair[1]].distances[pair[0]] = dist;
+                Wires[pair[0]].Distances[pair[1]] = dist;
+                Wires[pair[1]].Distances[pair[0]] = dist;
             }
 
         }
@@ -96,9 +96,9 @@ namespace AdventOfCode.Solutions.Year2016
                 l.Insert(0, "0");
                 int r = 0;
 
-                for (int i = 0; i < l.Count() - 1; i++)
+                for (int i = 0; i < l.Count - 1; i++)
                 {
-                    r += Wires[l[i]].distances[l[i + 1]];
+                    r += Wires[l[i]].Distances[l[i + 1]];
                 }
                 routeLengths.Add(r);
             }
@@ -117,9 +117,9 @@ namespace AdventOfCode.Solutions.Year2016
                 l.Add("0");
                 int r = 0;
 
-                for (int i = 0; i < l.Count() - 1; i++)
+                for (int i = 0; i < l.Count - 1; i++)
                 {
-                    r += Wires[l[i]].distances[l[i + 1]];
+                    r += Wires[l[i]].Distances[l[i + 1]];
                 }
                 routeLengths.Add(r);
             }
@@ -130,7 +130,7 @@ namespace AdventOfCode.Solutions.Year2016
         internal class Wire
         {
             public ValueTuple<int, int> Coords { get; set; }
-            public Dictionary<string, int> distances { get; set; } = new Dictionary<string, int>();
+            public Dictionary<string, int> Distances { get; set; } = new Dictionary<string, int>();
             public string Name { get; set; }
 
             public Wire (string Name, (int, int) Coords)

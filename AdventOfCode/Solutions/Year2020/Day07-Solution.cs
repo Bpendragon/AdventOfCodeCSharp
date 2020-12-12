@@ -30,7 +30,7 @@ namespace AdventOfCode.Solutions.Year2020
                 {
                     string tmp = token.Trim();
                     if (tmp == "no other") continue;
-                    string newBag = tmp.Substring(2).Trim();
+                    string newBag = tmp[2..].Trim();
                     Bag tmpBag;
                     if (!Bags.ContainsKey(newBag))
                     {
@@ -86,7 +86,7 @@ namespace AdventOfCode.Solutions.Year2020
 
                     bagContains += tmpCount;
                     visited.Add(item);
-                    foreach (int i in Enumerable.Range(0, tmpCount)) { q.Enqueue(item); }
+                    foreach (int _ in Enumerable.Range(0, tmpCount)) { q.Enqueue(item); }
 
                 }
             }

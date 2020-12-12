@@ -10,8 +10,8 @@ namespace AdventOfCode.Solutions.Year2020
 
     class Day12 : ASolution
     {
-        List<string> Lines;
-        public Day12() : base(12, 2020, "")
+        readonly List<string> Lines;
+        public Day12() : base(12, 2020, "Rain Risk")
         {
             Lines = new List<string>(Input.SplitByNewline());
 
@@ -28,14 +28,13 @@ namespace AdventOfCode.Solutions.Year2020
                 int val = int.Parse(line[1..]);
                 switch(instruction)
                 {
-                    case 'N': curPos = curPos.MoveDirection(val, CompassDirection.N); break;
-                    case 'S': curPos = curPos.MoveDirection(val, CompassDirection.S); break;
-                    case 'E': curPos = curPos.MoveDirection(val, CompassDirection.E); break;
-                    case 'W': curPos = curPos.MoveDirection(val, CompassDirection.W); break;
-                    case 'F': curPos = curPos.MoveDirection(val, curDirection); break;
+                    case 'N': curPos = curPos.MoveDirection(CompassDirection.N, val); break;
+                    case 'S': curPos = curPos.MoveDirection(CompassDirection.S, val); break;
+                    case 'E': curPos = curPos.MoveDirection(CompassDirection.E, val); break;
+                    case 'W': curPos = curPos.MoveDirection(CompassDirection.W, val); break;
+                    case 'F': curPos = curPos.MoveDirection(curDirection, val); break;
                     case 'L': curDirection = (CompassDirection)(((int)curDirection - val + 360) % 360); break;
                     case 'R': curDirection = (CompassDirection)(((int)curDirection + val) % 360); break;
-
                 }
             }
             return ManhattanDistance((0,0), curPos).ToString();
@@ -52,10 +51,10 @@ namespace AdventOfCode.Solutions.Year2020
                 int val = int.Parse(line[1..]);
                 switch (instruction)
                 {
-                    case 'N': wayPoint = wayPoint.MoveDirection(val, CompassDirection.N); break;
-                    case 'S': wayPoint = wayPoint.MoveDirection(val, CompassDirection.S); break;
-                    case 'E': wayPoint = wayPoint.MoveDirection(val, CompassDirection.E); break;
-                    case 'W': wayPoint = wayPoint.MoveDirection(val, CompassDirection.W); break;
+                    case 'N': wayPoint = wayPoint.MoveDirection(CompassDirection.N, val); break;
+                    case 'S': wayPoint = wayPoint.MoveDirection(CompassDirection.S, val); break;
+                    case 'E': wayPoint = wayPoint.MoveDirection(CompassDirection.E, val); break;
+                    case 'W': wayPoint = wayPoint.MoveDirection(CompassDirection.W, val); break;
                     case 'F': 
                         shipPos = shipPos.Add((val * wayPoint.x, val * wayPoint.y));
                         break;
@@ -78,7 +77,6 @@ namespace AdventOfCode.Solutions.Year2020
                 }
             }
             return ManhattanDistance((0, 0), shipPos).ToString();
-            return null;
         }
     }
 }

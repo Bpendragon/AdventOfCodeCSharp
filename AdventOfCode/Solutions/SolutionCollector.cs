@@ -31,13 +31,13 @@ namespace AdventOfCode.Solutions
             return GetEnumerator();
         }
 
-        IEnumerable<ASolution> LoadSolutions(int year, int[] days) {
+        static IEnumerable<ASolution> LoadSolutions(int year, int[] days) {
             if( days.Sum() == 0 ) {
                 days = Enumerable.Range(1, 25).ToArray();
             }
 
             foreach( int day in days ) {
-                Type solution = Type.GetType($"AdventOfCode.Solutions.Year{year}.Day{day.ToString("D2")}");
+                Type solution = Type.GetType($"AdventOfCode.Solutions.Year{year}.Day{day:D2}");
                 if( solution != null ) {
                     Stopwatch sw = new Stopwatch();
                     sw.Start();
