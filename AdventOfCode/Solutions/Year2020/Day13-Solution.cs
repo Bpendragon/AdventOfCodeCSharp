@@ -11,7 +11,7 @@ namespace AdventOfCode.Solutions.Year2020
     class Day13 : ASolution
     {
         string[] lines;
-        List<(int busID, int offSet)> busses = new List<(int busID, int offSet)>();
+        List<(long busID, long offSet)> busses = new List<(long busID, long offSet)>();
         public Day13() : base(13, 2020, "")
         {
             lines = Input.SplitByNewline();
@@ -46,19 +46,63 @@ namespace AdventOfCode.Solutions.Year2020
         }
 
         protected override string SolvePartTwo()
-        { 
-            CombinedPhaseRotations(busses[0].busID, -busses[0].offSet, busses[1].busID, -busses[1].offSet, out long prevPeriod, out long prevPhase);
+        {
+            long curTime = 0;
+            long curDelta = busses[0].busID;
+            long totalPeriod = busses.Aggregate((a, b) => (a.busID * b.busID,1)).busID;
 
-            foreach(var bus in busses.Skip(2))
+
+            foreach (var bus in busses.Skip(1).SkipLast(1))
             {
-                CombinedPhaseRotations(bus.busID, -bus.offSet, prevPeriod, -prevPhase, out long tmpPeriod, out long tmpPhase);
-                prevPeriod = tmpPeriod;
-                prevPhase = tmpPhase;
+                long firstHit = 0;
+                long secondHit = 0;
+
+                while((curTime + bus.offSet) % bus.busID != 0)
+                {
+                    curTime += curDelta;
+                }
+
+                firstHit = curTime;
+                curTime += curDelta;
+
+                while ((curTime + bus.offSet) % bus.busID != 0)
+                {
+                    curTime += curDelta;
+                }
+                secondHit = curTime;
+
+                curDelta = secondHit - firstHit;
             }
 
-            long firstHit = (-prevPeriod % prevPhase);
+            var lastBus = busses.Last();
+            while ((curTime + lastBus.offSet) % lastBus.busID != 0)
+            {
+                curTime += curDelta;
+            }
+
+            return curTime.ToString();
+            
+            
+            
+            //this should theoretically work, not sure why it isn't, works empirically on the first 4 items in the bus list. If it did, runs in mere ms
+            /*
+            long tgtPhase = 741745043105674;
+
+            CombinedPhaseRotations(busses[0].busID, busses[0].offSet, busses[1].busID, busses[1].offSet, out long prevPeriod, out long prevPhase);
+
+
+            foreach (var bus in busses.Skip(2))
+            {
+                CombinedPhaseRotations(prevPeriod, prevPhase, bus.busID, bus.offSet, out long tmpPeriod, out long tmpPhase);
+                prevPeriod = tmpPeriod;
+                prevPhase = tmpPhase;
+                //if (Math.Abs(prevPhase) > prevPeriod) prevPhase %= prevPeriod;
+            }
+
+            long firstHit2 = (-prevPhase % prevPeriod);
 
             return firstHit.ToString();
+            */
         }
 
 
