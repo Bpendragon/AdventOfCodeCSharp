@@ -99,6 +99,16 @@ namespace AdventOfCode.Solutions
             return string.Join("", items);
         }
 
+        public static string JoinAsStrings<T>(this IEnumerable<T> items, char seperator)
+        {
+            return string.Join(seperator, items);
+        }
+
+        public static string JoinAsStrings<T>(this IEnumerable<T> items, string seperator)
+        {
+            return string.Join(seperator, items);
+        }
+
         public static string[] SplitByNewline(this string input, bool shouldTrim = false)
         {
             return input
@@ -257,21 +267,50 @@ namespace AdventOfCode.Solutions
             NW = 315
         }
 
-        public static (int x, int y) MoveDirection(this (int, int) start, CompassDirection Direction, int distance = 1)
+        public static (int x, int y) MoveDirection(this (int, int) start, CompassDirection Direction, bool flipY = false, int distance = 1)
         {
-            return (Direction) switch
+            if (flipY)
             {
-                CompassDirection.N => start.Add((0, distance)),
-                CompassDirection.NE => start.Add((distance, distance)),
-                CompassDirection.E => start.Add((distance, 0)),
-                CompassDirection.SE => start.Add((distance, -distance)),
-                CompassDirection.S => start.Add((0, -distance)),
-                CompassDirection.SW => start.Add((-distance, -distance)),
-                CompassDirection.W => start.Add((-distance, 0)),
-                CompassDirection.NW => start.Add((-distance, distance)),
-                _ => throw new ArgumentException("Direction is not valid", nameof(Direction))
+                return (Direction) switch
+                {
+                    CompassDirection.N => start.Add((0, -distance)),
+                    CompassDirection.NE => start.Add((distance, -distance)),
+                    CompassDirection.E => start.Add((distance, 0)),
+                    CompassDirection.SE => start.Add((distance, distance)),
+                    CompassDirection.S => start.Add((0, distance)),
+                    CompassDirection.SW => start.Add((-distance, distance)),
+                    CompassDirection.W => start.Add((-distance, 0)),
+                    CompassDirection.NW => start.Add((-distance, -distance)),
+                    _ => throw new ArgumentException("Direction is not valid", nameof(Direction))
+                };
+            }
+            else
+            {
+                return (Direction) switch
+                {
+                    CompassDirection.N => start.Add((0, distance)),
+                    CompassDirection.NE => start.Add((distance, distance)),
+                    CompassDirection.E => start.Add((distance, 0)),
+                    CompassDirection.SE => start.Add((distance, -distance)),
+                    CompassDirection.S => start.Add((0, -distance)),
+                    CompassDirection.SW => start.Add((-distance, -distance)),
+                    CompassDirection.W => start.Add((-distance, 0)),
+                    CompassDirection.NW => start.Add((-distance, distance)),
+                    _ => throw new ArgumentException("Direction is not valid", nameof(Direction))
+                };
+            }
+        }
+
+        public static CompassDirection Turn(this CompassDirection value, string turnDir, int degrees = 90)
+        {
+            return (turnDir.ToLower()) switch
+            {
+                "l" or "ccw" => (CompassDirection)(((int)value - degrees + 360) % 360),
+                "r" or "cw" => (CompassDirection)(((int)value + degrees) % 360),
+                _ => throw new ArgumentException("Value must be L, R, CCW, or CW", nameof(turnDir)),
             };
         }
+
 
         public static T GetDirection<T>(this Dictionary<(int, int), T> values, (int, int) location, CompassDirection Direction)
         {

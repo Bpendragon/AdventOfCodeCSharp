@@ -28,11 +28,11 @@ namespace AdventOfCode.Solutions.Year2020
                 int val = int.Parse(line[1..]);
                 switch(instruction)
                 {
-                    case 'N': curPos = curPos.MoveDirection(CompassDirection.N, val); break;
-                    case 'S': curPos = curPos.MoveDirection(CompassDirection.S, val); break;
-                    case 'E': curPos = curPos.MoveDirection(CompassDirection.E, val); break;
-                    case 'W': curPos = curPos.MoveDirection(CompassDirection.W, val); break;
-                    case 'F': curPos = curPos.MoveDirection(curDirection, val); break;
+                    case 'N': curPos = curPos.MoveDirection(CompassDirection.N, distance:val); break;
+                    case 'S': curPos = curPos.MoveDirection(CompassDirection.S, distance: val); break;
+                    case 'E': curPos = curPos.MoveDirection(CompassDirection.E, distance: val); break;
+                    case 'W': curPos = curPos.MoveDirection(CompassDirection.W, distance: val); break;
+                    case 'F': curPos = curPos.MoveDirection(curDirection, distance: val); break;
                     case 'L': curDirection = (CompassDirection)(((int)curDirection - val + 360) % 360); break;
                     case 'R': curDirection = (CompassDirection)(((int)curDirection + val) % 360); break;
                 }
@@ -51,10 +51,10 @@ namespace AdventOfCode.Solutions.Year2020
                 int val = int.Parse(line[1..]);
                 switch (instruction)
                 {
-                    case 'N': wayPoint = wayPoint.MoveDirection(CompassDirection.N, val); break;
-                    case 'S': wayPoint = wayPoint.MoveDirection(CompassDirection.S, val); break;
-                    case 'E': wayPoint = wayPoint.MoveDirection(CompassDirection.E, val); break;
-                    case 'W': wayPoint = wayPoint.MoveDirection(CompassDirection.W, val); break;
+                    case 'N': wayPoint = wayPoint.MoveDirection(CompassDirection.N, distance: val); break;
+                    case 'S': wayPoint = wayPoint.MoveDirection(CompassDirection.S, distance: val); break;
+                    case 'E': wayPoint = wayPoint.MoveDirection(CompassDirection.E, distance: val); break;
+                    case 'W': wayPoint = wayPoint.MoveDirection(CompassDirection.W, distance: val); break;
                     case 'F': 
                         shipPos = shipPos.Add((val * wayPoint.x, val * wayPoint.y));
                         break;
