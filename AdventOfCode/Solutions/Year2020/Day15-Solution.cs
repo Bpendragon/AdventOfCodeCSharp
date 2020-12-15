@@ -12,19 +12,21 @@ namespace AdventOfCode.Solutions.Year2020
         public Dictionary<int, int> LastTimesSpoken = new Dictionary<int, int>();
         List<int> NumberString = new List<int>(); //direct from input.
         List<int> NumberString2;
-        int[] startNums = new int[] { 9, 19, 1, 6, 0, 5, 4 };
+        int[] startNums;
         public Day15() : base(15, 2020, "")
         {
+            startNums = Input.ToIntArray(",");
             NumberString.AddRange(startNums);
             NumberString2 = new List<int>(NumberString);
             NumberString.Reverse();
-           
+
         }
 
         protected override string SolvePartOne()
         {
             int lastNumSpoken = 0;
-            for(int i = 1; i <= 2020 - startNums.Length; i++)
+            NumberString.Capacity = 5000;
+            for (int i = 1; i <= 2020 - startNums.Length; i++)
             {
                 lastNumSpoken = NumberString[0];
                 var lastTimeSpoken = NumberString.IndexOf(lastNumSpoken, 1);
@@ -37,7 +39,8 @@ namespace AdventOfCode.Solutions.Year2020
 
         protected override string SolvePartTwo()
         {
-            for(int i = 0; i < startNums.Length - 1; i++)
+            NumberString2.Capacity = 30000000;
+            for (int i = 0; i < startNums.Length - 1; i++)
             {
                 LastTimesSpoken[startNums[i]] = i + 1;
             }
