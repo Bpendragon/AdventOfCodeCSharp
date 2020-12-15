@@ -125,10 +125,11 @@ namespace AdventOfCode.Solutions
             return new string(arr);
         }
 
-        public static int ManhattanDistance((int x, int y) a, (int x, int y) b)
+        public static int ManhattanDistance(this (int x, int y) a, (int x, int y) b)
         {
             return Math.Abs(a.x - b.x) + Math.Abs(a.y - b.y);
         }
+
 
         public static double FindGCD(double a, double b)
         {
@@ -232,7 +233,7 @@ namespace AdventOfCode.Solutions
             rest = list.Skip(2).ToList();
         }
 
-        public static (int, int) Add(this (int x, int y) a, (int x, int y) b) => (a.x + b.x, a.y + b.y);
+        public static (int x, int y) Add(this (int x, int y) a, (int x, int y) b) => (a.x + b.x, a.y + b.y);
 
         public static (int, int, int) Add(this (int x, int y, int z) a, (int x, int y, int z) b) => (a.x + b.x, a.y + b.y, a.z +b.z);
 

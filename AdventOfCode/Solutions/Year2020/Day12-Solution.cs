@@ -37,7 +37,7 @@ namespace AdventOfCode.Solutions.Year2020
                     case 'R': curDirection = (CompassDirection)(((int)curDirection + val) % 360); break;
                 }
             }
-            return ManhattanDistance((0,0), curPos).ToString();
+            return Utilities.ManhattanDistance((0,0), curPos).ToString();
         }
 
         protected override string SolvePartTwo()
@@ -76,7 +76,7 @@ namespace AdventOfCode.Solutions.Year2020
                         break;
                 }
             }
-            return ManhattanDistance((0, 0), shipPos).ToString();
+            return Utilities.ManhattanDistance((0, 0), shipPos).ToString();
         }
     }
 }
