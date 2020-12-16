@@ -3,25 +3,126 @@ using System.Text;
 using System.Collections.Generic;
 using AdventOfCode.UserClasses;
 using System.Linq;
+using AdventOfCode.UserClasses.DataStructures;
 
 namespace AdventOfCode.Solutions.Year2018
 {
 
     class Day21 : ASolution
     {
+        Dictionary<int, int> Registers = new Dictionary<int, int>();
+        List<(string i, int a, int b, int c)> instructions = new List<(string i, int a, int b, int c)>();
+        List<int> inputs =  new List<int>();
+        int boundRegister;
+
         public Day21() : base(21, 2018, "")
         {
+            for (int i = 0; i <= 5; i++)
+            {
+                Registers[i] = 0;
+            }
 
+            var lines = Input.SplitByNewline();
+            boundRegister = int.Parse(lines[0].Split(" ")[1]);
+
+            foreach (var line in lines.Skip(1))
+            {
+                var tokens = line.Split();
+                instructions.Add((tokens[0], int.Parse(tokens[1]), int.Parse(tokens[2]), int.Parse(tokens[3])));
+            }
         }
 
         protected override string SolvePartOne()
         {
-            return null;
+            while (true)
+            {
+                for (int i = 0; i <= 5; i++)
+                {
+                    Registers[i] = 0;
+                }
+
+                while (0 <= Registers[boundRegister] && Registers[boundRegister] < instructions.Count)
+                {
+                    if (Registers[boundRegister] == 28) break;
+                    RunCommand(instructions[Registers[boundRegister]]);
+                    Registers[boundRegister]++;
+                }
+                Utilities.WriteLine(Registers[4]);
+                return Registers[4].ToString(); //Change this register based on the EQRR instruction at index 28.
+                /*
+                 * The Processor only exits if the value supplied to register 0 == the value of Register[n] when line 28 is reached. (n seems to vary by input) 
+                 * Register 0 is never otherwise manipulated. Thus the fastest exit condition is the one that exits the first time instruction 28 is hit.
+                 */
+            }
+
         }
 
         protected override string SolvePartTwo()
         {
-            return null;
+            OrderedHashSet<int> seen = new OrderedHashSet<int>();
+            while (true)
+            {
+                for (int i = 0; i <= 5; i++)
+                {
+                    Registers[i] = 0;
+                }
+
+                while (0 <= Registers[boundRegister] && Registers[boundRegister] < instructions.Count)
+                {
+                    if (Registers[boundRegister] == 28)
+                    {
+                        if (seen.Contains(Registers[4]))
+                        {
+                            return seen.Last().ToString();
+                        }
+                        else seen.Add(Registers[4]); // Same as above
+                    }
+                    RunCommand(instructions[Registers[boundRegister]]);
+                    Registers[boundRegister]++;
+                    /*
+                    you can theoretically speed up the ElfCode dramatically by swapping in these lines near the end somewhere, but I can't get it to work:
+
+                    addi 2 -256 2
+                    divi 2 256 2
+                    addi 2 1 2
+                    noop 0 0 0
+                    noop 0 0 0
+                    noop 0 0 0
+
+                    */
+                }
+
+            }
+            
+        }
+
+        private (int a, int b, int c, int d) RunCommand((string i, int a, int b, int c) ops)
+        {
+            if(ops.i == "noop") return (Registers[0], Registers[1], Registers[2], Registers[3]);
+            Registers[ops.c] = (ops.i) switch
+            {
+                "addr" => Registers[ops.a] + Registers[ops.b],
+                "addi" => Registers[ops.a] + ops.b,
+                "mulr" => Registers[ops.a] * Registers[ops.b],
+                "muli" => Registers[ops.a] * ops.b,
+                "banr" => Registers[ops.a] & Registers[ops.b],
+                "bani" => Registers[ops.a] & ops.b,
+                "borr" => Registers[ops.a] | Registers[ops.b],
+                "bori" => Registers[ops.a] | ops.b,
+                "setr" => Registers[ops.a],
+                "seti" => ops.a,
+                "gtir" => ops.a > Registers[ops.b] ? 1 : 0,
+                "gtri" => Registers[ops.a] > ops.b ? 1 : 0,
+                "gtrr" => Registers[ops.a] > Registers[ops.b] ? 1 : 0,
+                "eqir" => ops.a == Registers[ops.b] ? 1 : 0,
+                "eqri" => Registers[ops.a] == ops.b ? 1 : 0,
+                "eqrr" => Registers[ops.a] == Registers[ops.b] ? 1 : 0,
+                "noop" => Registers[ops.c],
+                "divi" => Registers[ops.a] / ops.b,
+                _ => throw new Exception()
+            };
+
+            return (Registers[0], Registers[1], Registers[2], Registers[3]);
         }
     }
 }
