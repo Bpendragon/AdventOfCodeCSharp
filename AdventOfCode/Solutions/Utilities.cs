@@ -130,6 +130,20 @@ namespace AdventOfCode.Solutions
             return Math.Abs(a.x - b.x) + Math.Abs(a.y - b.y);
         }
 
+        public static int ManhattanDistance(this (int x, int y, int z) a, (int x, int y, int z) b)
+        {
+            return Math.Abs(a.x - b.x) + Math.Abs(a.y - b.y) + Math.Abs(a.z-b.z);
+        }
+
+        public static long ManhattanDistance(this (long x, long y) a, (long x, long y) b)
+        {
+            return Math.Abs(a.x - b.x) + Math.Abs(a.y - b.y);
+        }
+
+        public static long ManhattanDistance(this (long x, long y, long z) a, (long x, long y, long z) b)
+        {
+            return Math.Abs(a.x - b.x) + Math.Abs(a.y - b.y) + Math.Abs(a.z - b.z);
+        }
 
         public static double FindGCD(double a, double b)
         {
@@ -236,6 +250,8 @@ namespace AdventOfCode.Solutions
         public static (int x, int y) Add(this (int x, int y) a, (int x, int y) b) => (a.x + b.x, a.y + b.y);
 
         public static (int, int, int) Add(this (int x, int y, int z) a, (int x, int y, int z) b) => (a.x + b.x, a.y + b.y, a.z +b.z);
+
+        public static (int, int, int, int) Add(this (int x, int y, int z, int w) a, (int x, int y, int z, int w) b) => (a.x + b.x, a.y + b.y, a.z + b.z, a.w + b.w);
 
         //https://stackoverflow.com/questions/2641326/finding-all-positions-of-substring-in-a-larger-string-in-c-sharp
         public static IEnumerable<int> AllIndexesOf(this string str, string value)
