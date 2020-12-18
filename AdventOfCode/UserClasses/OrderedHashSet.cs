@@ -47,8 +47,7 @@ namespace AdventOfCode.UserClasses.DataStructures
 
         public bool Remove(T item)
         {
-            LinkedListNode<T> node;
-            bool found = m_Dictionary.TryGetValue(item, out node);
+            bool found = m_Dictionary.TryGetValue(item, out LinkedListNode<T> node);
             if (!found) return false;
             m_Dictionary.Remove(item);
             m_LinkedList.Remove(node);

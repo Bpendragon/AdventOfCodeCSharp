@@ -10,10 +10,9 @@ namespace AdventOfCode.Solutions.Year2018
 
     class Day21 : ASolution
     {
-        Dictionary<int, int> Registers = new Dictionary<int, int>();
-        List<(string i, int a, int b, int c)> instructions = new List<(string i, int a, int b, int c)>();
-        List<int> inputs =  new List<int>();
-        int boundRegister;
+        readonly Dictionary<int, int> Registers = new Dictionary<int, int>();
+        readonly List<(string i, int a, int b, int c)> instructions = new List<(string i, int a, int b, int c)>();
+        readonly int boundRegister;
 
         public Day21() : base(21, 2018, "")
         {

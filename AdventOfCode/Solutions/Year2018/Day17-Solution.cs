@@ -12,11 +12,11 @@ namespace AdventOfCode.Solutions.Year2018
         public char[,] grid;
         int x = 2000;
         int y = 2000;
-        int maxY = 0;
-        int minY = int.MaxValue; //get our vertical slice
+        readonly int maxY = 0;
+        readonly int minY = int.MaxValue; //get our vertical slice
 
-        int springX = 500;
-        int springY = 0;
+        readonly int springX = 500;
+        readonly int springY = 0;
         public Day17() : base(17, 2018, "")
         {
             grid = new char[x, y];

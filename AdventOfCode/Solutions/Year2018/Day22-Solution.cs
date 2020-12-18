@@ -11,8 +11,8 @@ namespace AdventOfCode.Solutions.Year2018
     {
         private const int SystemDepth = 11739; //Inserted directly from input. 
         private readonly (int x, int y) TargetLocation = (11, 718);
-        Dictionary<(int x, int y), int> cave = new Dictionary<(int x, int y), int>(); //specifically value is Erosion level
-        Dictionary<(int x, int y), SoilType> cave2 = new Dictionary<(int x, int y), SoilType>();
+        readonly Dictionary<(int x, int y), int> cave = new Dictionary<(int x, int y), int>(); //specifically value is Erosion level
+        readonly Dictionary<(int x, int y), SoilType> cave2 = new Dictionary<(int x, int y), SoilType>();
 
         public Day22() : base(22, 2018, "")
         {

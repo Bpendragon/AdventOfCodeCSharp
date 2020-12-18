@@ -9,8 +9,8 @@ namespace AdventOfCode.Solutions.Year2017
 
     class Day23 : ASolution
     {
-        Dictionary<string, long> Registers = new Dictionary<string, long>();
-        List<string> Commands;
+        readonly Dictionary<string, long> Registers = new Dictionary<string, long>();
+        readonly List<string> Commands;
         int multUses = 0;
         public Day23() : base(23, 2017, "")
         {

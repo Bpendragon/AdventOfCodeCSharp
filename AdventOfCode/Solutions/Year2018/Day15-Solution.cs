@@ -9,7 +9,7 @@ namespace AdventOfCode.Solutions.Year2018
 
     class Day15 : ASolution
     {
-        private Game game;
+        private readonly Game game;
         readonly string[] lines;
         public Day15() : base(15, 2018, "")
         {

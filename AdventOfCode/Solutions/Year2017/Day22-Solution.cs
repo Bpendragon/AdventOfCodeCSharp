@@ -10,7 +10,7 @@ namespace AdventOfCode.Solutions.Year2017
 
     class Day22 : ASolution
     {
-        Dictionary<(int x, int y), char> startMap = new Dictionary<(int x, int y), char>();
+        readonly Dictionary<(int x, int y), char> startMap = new Dictionary<(int x, int y), char>();
         const string L = "L";
         const string R = "R";
         readonly (int x, int y) center;

@@ -9,10 +9,9 @@ namespace AdventOfCode.Solutions.Year2018
 
     class Day19 : ASolution
     {
-        Dictionary<int, int> Registers = new Dictionary<int, int>();
-        List<(string i, int a, int b, int c)> instructions = new List<(string i, int a, int b, int c)>();
-        int boundRegister;
-        int ipx = 0;
+        readonly Dictionary<int, int> Registers = new Dictionary<int, int>();
+        readonly List<(string i, int a, int b, int c)> instructions = new List<(string i, int a, int b, int c)>();
+        readonly int boundRegister;
         public Day19() : base(19, 2018, "")
         {
             for(int i = 0; i <= 5; i++)

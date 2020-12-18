@@ -9,7 +9,7 @@ namespace AdventOfCode.Solutions.Year2018
 
     class Day20 : ASolution
     {
-        Dictionary<(int x, int y), int> map = new Dictionary<(int x, int y), int>();
+        readonly Dictionary<(int x, int y), int> map = new Dictionary<(int x, int y), int>();
 
         public Day20() : base(20, 2018, "")
         {

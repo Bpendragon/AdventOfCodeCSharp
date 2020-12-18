@@ -10,9 +10,9 @@ namespace AdventOfCode.Solutions.Year2020
     class Day15 : ASolution
     {
         public Dictionary<int, int> LastTimesSpoken = new Dictionary<int, int>();
-        List<int> NumberString = new List<int>(); //direct from input.
-        List<int> NumberString2;
-        int[] startNums;
+        readonly List<int> NumberString = new List<int>(); //direct from input.
+        readonly List<int> NumberString2;
+        readonly int[] startNums;
         public Day15() : base(15, 2020, "")
         {
             startNums = Input.ToIntArray(",");
@@ -24,11 +24,10 @@ namespace AdventOfCode.Solutions.Year2020
 
         protected override string SolvePartOne()
         {
-            int lastNumSpoken = 0;
             NumberString.Capacity = 5000;
             for (int i = 1; i <= 2020 - startNums.Length; i++)
             {
-                lastNumSpoken = NumberString[0];
+                int lastNumSpoken = NumberString[0];
                 var lastTimeSpoken = NumberString.IndexOf(lastNumSpoken, 1);
                 if (lastTimeSpoken == -1) lastTimeSpoken = 0;
                 NumberString.Insert(0, lastTimeSpoken);

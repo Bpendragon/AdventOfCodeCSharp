@@ -11,10 +11,10 @@ namespace AdventOfCode.Solutions.Year2018
     {
         readonly string part1;
         readonly string part2;
-        Dictionary<int, List<string>> knownOpcodes = new Dictionary<int, List<string>>();
-        Dictionary<int, int> Registers = new Dictionary<int, int>();
-        List<TestCase> testCases = new List<TestCase>();
-        static StringSplitOptions splitOpts = StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries;
+        readonly Dictionary<int, List<string>> knownOpcodes = new Dictionary<int, List<string>>();
+        readonly Dictionary<int, int> Registers = new Dictionary<int, int>();
+        readonly List<TestCase> testCases = new List<TestCase>();
+        static readonly StringSplitOptions splitOpts = StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries;
         readonly List<string> opNames = new List<string>(new string[]{ "addr", "addi", "mulr", "muli", "banr", "bani", "borr", "bori", "setr", "seti", "gtir", "gtri", "gtrr", "eqir", "eqri", "eqrr" });
         public Day16() : base(16, 2018, "")
         {

@@ -9,10 +9,10 @@ namespace AdventOfCode.Solutions.Year2020
 
     class Day16 : ASolution
     {
-        List<TicketField> ValidFields = new List<TicketField>();
-        List<string> tickets;
-        List<string> validTickets;
-        string myTicket;
+        readonly List<TicketField> ValidFields = new List<TicketField>();
+        readonly List<string> tickets;
+        readonly List<string> validTickets;
+        readonly string myTicket;
         public Day16() : base(16, 2020, "Rambunctious Recitation")
         {
             var firstSplit = Input.Split("\n\n");

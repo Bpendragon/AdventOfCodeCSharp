@@ -334,7 +334,231 @@ namespace AdventOfCode.Solutions
             throw new NotImplementedException();
         }
 
+        public static List<K> KeyList<K, V>(this Dictionary<K, V> dictionary, bool sorted = false)
+        {
+            List<K> keyList = new List<K>();
+
+            foreach (K key in dictionary.Keys)
+            {
+                keyList.Add(key);
+            }
+
+            if (sorted) keyList.Sort();
+
+            return keyList;
+        }
+
     }
 
     
+
+    public class Coordinate2D
+    {
+        public static readonly Coordinate2D origin = new Coordinate2D(0, 0);
+        public static readonly Coordinate2D unit_x = new Coordinate2D(1, 0);
+        public static readonly Coordinate2D unit_y = new Coordinate2D(0, 1);
+        readonly int x;
+        readonly int y;
+
+        public Coordinate2D(int x, int y)
+        {
+            this.x = x;
+            this.y = y;
+        }
+
+        public Coordinate2D((int x, int y) coord)
+        {
+            this.x = coord.x;
+            this.y = coord.y;
+        }
+
+        public Coordinate2D RotateCW(int degrees, Coordinate2D center)
+        {
+            Coordinate2D offset = center - this;
+            return center + offset.RotateCW(degrees);
+        }
+        public Coordinate2D RotateCW(int degrees)
+        {
+            return ((degrees / 90) % 4) switch
+            {
+                0 => this,
+                1 => RotateCW(),
+                2 => -this,
+                3 => RotateCCW(),
+                _ => this,
+            };
+        }
+
+        private Coordinate2D RotateCW()
+        {
+            return new Coordinate2D(y, -x);
+        }
+
+        public Coordinate2D RotateCCW(int degrees, Coordinate2D center)
+        {
+            Coordinate2D offset = center - this;
+            return center + offset.RotateCCW(degrees);
+        }
+        public Coordinate2D RotateCCW(int degrees)
+        {
+            return ((degrees / 90) % 4) switch
+            {
+                0 => this,
+                1 => RotateCCW(),
+                2 => -this,
+                3 => RotateCW(),
+                _ => this,
+            };
+        }
+
+        private Coordinate2D RotateCCW()
+        {
+            return new Coordinate2D(-y, x);
+        }
+
+        public static Coordinate2D operator +(Coordinate2D a) => a;
+        public static Coordinate2D operator +(Coordinate2D a, Coordinate2D b) => new Coordinate2D(a.x + b.x, a.y + b.y);
+        public static Coordinate2D operator -(Coordinate2D a) => new Coordinate2D(-a.x, -a.y);
+        public static Coordinate2D operator -(Coordinate2D a, Coordinate2D b) => a + (-b);
+        public static Coordinate2D operator *(int scale, Coordinate2D a) => new Coordinate2D(scale * a.x, scale * a.y);
+        public static bool operator ==(Coordinate2D a, Coordinate2D b) => (a.x == b.x && a.y == b.y);
+        public static bool operator !=(Coordinate2D a, Coordinate2D b) => (a.x != b.x || a.y != b.y);
+
+        public static implicit operator Coordinate2D((int x, int y) a) => new Coordinate2D(a.x, a.y);
+
+        public static implicit operator (int x, int y)(Coordinate2D a) => (a.x, a.y);
+        public override bool Equals(object obj)
+        {
+            if (obj.GetType() != typeof(Coordinate2D)) return false;
+            return this == (Coordinate2D)obj;
+        }
+
+        public override int GetHashCode()
+        {
+            return (100 * x + y).GetHashCode();
+        }
+
+    }
+
+    public class Coordinate3D
+    {
+        readonly int x;
+        readonly int y;
+        readonly int z;
+
+        public Coordinate3D(int x, int y, int z)
+        {
+            this.x = x;
+            this.y = y;
+            this.z = z;
+        }
+
+        public static implicit operator Coordinate3D((int x, int y, int z) a) => new Coordinate3D(a.x, a.y, a.z);
+
+        public static implicit operator (int x, int y, int z)(Coordinate3D a) => (a.x, a.y, a.z);
+        public static Coordinate3D operator +(Coordinate3D a) => a;
+        public static Coordinate3D operator +(Coordinate3D a, Coordinate3D b) => new Coordinate3D(a.x + b.x, a.y + b.y, a.z + b.z);
+        public static Coordinate3D operator -(Coordinate3D a) => new Coordinate3D(-a.x, -a.y, -a.z);
+        public static Coordinate3D operator -(Coordinate3D a, Coordinate3D b) => a + (-b);
+        public static bool operator ==(Coordinate3D a, Coordinate3D b) => (a.x == b.x && a.y == b.y && a.z == b.z);
+        public static bool operator !=(Coordinate3D a, Coordinate3D b) => (a.x != b.x || a.y != b.y || a.z != b.z);
+
+        public override bool Equals(object obj)
+        {
+            if (obj.GetType() != typeof(Coordinate3D)) return false;
+            return this == (Coordinate3D)obj;
+        }
+
+        public override int GetHashCode()
+        {
+            //Primes times coordinates for fewer collisions
+            return (137 * x + 149 * y + 163 * z);
+        }
+
+        public static Coordinate3D[] GetNeighbors()
+        {
+            return neighbors3D;
+        }
+
+        private static readonly Coordinate3D[] neighbors3D =
+        {
+                (-1,-1,-1),(-1,-1,0),(-1,-1,1),(-1,0,-1),(-1,0,0),(-1,0,1),(-1,1,-1),(-1,1,0),(-1,1,1),
+                (0,-1,-1), (0,-1,0), (0,-1,1), (0,0,-1),          (0,0,1), (0,1,-1), (0,1,0), (0,1,1),
+                (1,-1,-1), (1,-1,0), (1,-1,1), (1,0,-1), (1,0,0), (1,0,1), (1,1,-1), (1,1,0), (1,1,1)
+            };
+    }
+
+    public class Coordinate4D
+    {
+        readonly int x;
+        readonly int y;
+        readonly int z;
+        readonly int w;
+
+        public Coordinate4D(int x, int y, int z, int w)
+        {
+            this.x = x;
+            this.y = y;
+            this.z = z;
+            this.w = w;
+        }
+
+        public static implicit operator Coordinate4D((int x, int y, int z, int w) a) => new Coordinate4D(a.x, a.y, a.z, a.w);
+
+        public static implicit operator (int x, int y, int z, int w)(Coordinate4D a) => (a.x, a.y, a.z, a.w);
+        public static Coordinate4D operator +(Coordinate4D a) => a;
+        public static Coordinate4D operator +(Coordinate4D a, Coordinate4D b) => new Coordinate4D(a.x + b.x, a.y + b.y, a.z + b.z, a.w + b.w);
+        public static Coordinate4D operator -(Coordinate4D a) => new Coordinate4D(-a.x, -a.y, -a.z, -a.w);
+        public static Coordinate4D operator -(Coordinate4D a, Coordinate4D b) => a + (-b);
+        public static bool operator ==(Coordinate4D a, Coordinate4D b) => (a.x == b.x && a.y == b.y && a.z == b.z && a.w == b.w);
+        public static bool operator !=(Coordinate4D a, Coordinate4D b) => (a.x != b.x || a.y != b.y || a.z != b.z || a.z != b.z);
+
+        public int ManhattanDistance(Coordinate4D other) => (int)(Math.Abs(x - other.x) + Math.Abs(y - other.y) + Math.Abs(z - other.z) + Math.Abs(w - other.w));
+
+        public override bool Equals(object obj)
+        {
+            if (obj.GetType() != typeof(Coordinate4D)) return false;
+            return this == (Coordinate4D)obj;
+        }
+
+        public override int GetHashCode()
+        {
+            return (137 * x + 149 * y + 163 * z + 179 * w);
+        }
+
+
+        public static Coordinate4D[] GetNeighbors()
+        {
+            if (neighbors != null) return neighbors;
+
+            List<Coordinate4D> neighborList = new List<Coordinate4D>();
+
+            for (int x = -1; x <= 1; x++)
+            {
+                for (int y = -1; y <= 1; y++)
+                {
+                    for (int z = -1; z <= 1; z++)
+                    {
+                        for (int w = -1; w <= 1; w++)
+                        {
+                            if (!((0 == x) && (0 == y) && (0 == z) && (0 == w)))
+                            {
+                                neighborList.Add((x, y, z, w));
+                            }
+                        }
+                    }
+                }
+            }
+
+            neighbors = neighborList.ToArray();
+            return neighbors;
+        }
+
+
+
+        private static Coordinate4D[] neighbors;
+    }
 }
+
+    
+

@@ -10,8 +10,8 @@ namespace AdventOfCode.Solutions.Year2020
 
     class Day13 : ASolution
     {
-        string[] lines;
-        List<(long busID, long offSet)> busses = new List<(long busID, long offSet)>();
+        readonly string[] lines;
+        readonly List<(long busID, long offSet)> busses = new List<(long busID, long offSet)>();
         public Day13() : base(13, 2020, "")
         {
             lines = Input.SplitByNewline();

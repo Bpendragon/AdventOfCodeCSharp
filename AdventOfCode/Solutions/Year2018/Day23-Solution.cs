@@ -9,8 +9,8 @@ namespace AdventOfCode.Solutions.Year2018
 
     class Day23 : ASolution
     {
-        StringSplitOptions splitOpts = StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries;
-        Dictionary<(long x, long y, long z), long> nanos = new Dictionary<(long x, long y, long z), long>();
+        readonly StringSplitOptions splitOpts = StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries;
+        readonly Dictionary<(long x, long y, long z), long> nanos = new Dictionary<(long x, long y, long z), long>();
         public Day23() : base(23, 2018, "")
         {
             foreach (string line in Input.SplitByNewline())
@@ -32,6 +32,12 @@ namespace AdventOfCode.Solutions.Year2018
             return nanos.Where(x => strongestNano.ManhattanDistance(x.Key) <= radius).Count().ToString();
         }
 
+
+        /*
+         * 
+         * THIS DOES NOT WORK FOR ALL INPUTS
+         * 
+         */
         protected override string SolvePartTwo()
         {
             long minX = nanos.Min(x => x.Key.x);
@@ -43,7 +49,7 @@ namespace AdventOfCode.Solutions.Year2018
             long xRange = maxX - minX;
             long yRange = maxY - minY;
             long zRange = maxZ - minZ;
-            long resolution = (long)Math.Pow(2, 26); //sufficiently large 
+            long resolution = (long)Math.Pow(2, 25); //sufficiently large 
             long bestDist = long.MaxValue;
 
 
@@ -70,7 +76,10 @@ namespace AdventOfCode.Solutions.Year2018
                     }
                 }
 
-                resolution /= 2; xRange /= 2; yRange /= 2 ; zRange /= 2; //basically a binary search.
+                resolution /= 2; 
+                xRange = (long)(xRange/2); 
+                yRange = (long)(yRange/2) ; 
+                zRange = (long)(zRange/2); //something like a binary search
                 minX = bestLoc.x - (xRange / 2); maxX = bestLoc.x + (xRange / 2);
                 minY = bestLoc.y - (yRange / 2); maxY = bestLoc.y + (yRange / 2);
                 minZ = bestLoc.z - (zRange / 2); maxZ = bestLoc.z + (zRange / 2);

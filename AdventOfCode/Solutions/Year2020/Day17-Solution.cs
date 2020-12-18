@@ -115,14 +115,14 @@ namespace AdventOfCode.Solutions.Year2020
         }
 
 
-        private List<(int x, int y, int z)> neighborDirections = new List<(int x, int y, int z)>
+        private readonly List<(int x, int y, int z)> neighborDirections = new List<(int x, int y, int z)>
         {
             (-1,-1,-1),(-1,-1,0),(-1,-1,1), (-1, 0, -1), (-1,0,0), (-1,0,1), (-1,1,-1),(-1,1,0),(-1,1,1),
             (0,-1,-1),(0,-1,0),(0,-1,1), (0, 0, -1), (0,0,1), (0,1,-1),(0,1,0),(0,1,1),
             (1,-1,-1),(1,-1,0),(1,-1,1), (1, 0, -1), (1,0,0), (1,0,1), (1,1,-1),(1,1,0),(1,1,1)
         };
 
-        private List<(int x, int y, int z, int w)> fourDneighborDirections = new List<(int x, int y, int z, int w)>
+        private readonly List<(int x, int y, int z, int w)> fourDneighborDirections = new List<(int x, int y, int z, int w)>
         {
             (-1,-1,-1,-1),(-1,-1,0,-1),(-1,-1,1,-1), (-1, 0, -1,-1), (-1,0,0,-1), (-1,0,1,-1), (-1,1,-1,-1),(-1,1,0,-1),(-1,1,1,-1),
             (0,-1,-1,-1),(0,-1,0,-1),(0,-1,1,-1), (0, 0, -1,-1), (0,0,1,-1), (0,1,-1,-1),(0,1,0,-1),(0,1,1,-1),

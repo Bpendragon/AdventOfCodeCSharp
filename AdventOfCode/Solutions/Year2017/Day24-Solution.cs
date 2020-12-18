@@ -9,9 +9,9 @@ namespace AdventOfCode.Solutions.Year2017
 
     class Day24 : ASolution
     {
-        List<int> BridgeScores = new List<int>();
-        List<(int, int)> BridgeLengths = new List<(int, int)>();
-        List<BridgeComponent> pieces = new List<BridgeComponent>();
+        readonly List<int> BridgeScores = new List<int>();
+        readonly List<(int, int)> BridgeLengths = new List<(int, int)>();
+        readonly List<BridgeComponent> pieces = new List<BridgeComponent>();
         public Day24() : base(24, 2017, "")
         {
             int i = 0;
