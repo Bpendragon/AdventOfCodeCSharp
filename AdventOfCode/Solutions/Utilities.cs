@@ -145,6 +145,8 @@ namespace AdventOfCode.Solutions
             return Math.Abs(a.x - b.x) + Math.Abs(a.y - b.y) + Math.Abs(a.z - b.z);
         }
 
+        public static long ManhattanMagnitude(this (long x, long y, long z) a) => a.ManhattanDistance((0, 0, 0));
+
         public static double FindGCD(double a, double b)
         {
             if (a == 0 || b == 0) return Math.Max(a, b);
@@ -152,6 +154,14 @@ namespace AdventOfCode.Solutions
         }
 
         public static double FindLCM(double a, double b) => a * b / FindGCD(a, b);
+
+        public static long FindGCD(long a, long b)
+        {
+            if (a == 0 || b == 0) return Math.Max(a, b);
+            return (a % b == 0) ? b : FindGCD(b, a % b);
+        }
+
+        public static long FindLCM(long a, long b) => a * b / FindGCD(a, b);
 
         public static void Repeat(this Action action, int count)
         {
@@ -249,9 +259,15 @@ namespace AdventOfCode.Solutions
 
         public static (int x, int y) Add(this (int x, int y) a, (int x, int y) b) => (a.x + b.x, a.y + b.y);
 
-        public static (int, int, int) Add(this (int x, int y, int z) a, (int x, int y, int z) b) => (a.x + b.x, a.y + b.y, a.z +b.z);
+        public static (int x, int y, int z) Add(this (int x, int y, int z) a, (int x, int y, int z) b) => (a.x + b.x, a.y + b.y, a.z +b.z);
 
-        public static (int, int, int, int) Add(this (int x, int y, int z, int w) a, (int x, int y, int z, int w) b) => (a.x + b.x, a.y + b.y, a.z + b.z, a.w + b.w);
+        public static (int x, int y, int z, int w) Add(this (int x, int y, int z, int w) a, (int x, int y, int z, int w) b) => (a.x + b.x, a.y + b.y, a.z + b.z, a.w + b.w);
+
+        public static (long x, long y) Add(this (long x, long y) a, (long x, long y) b) => (a.x + b.x, a.y + b.y);
+
+        public static (long x, long y, long z) Add(this (long x, long y, long z) a, (long x, long y, long z) b) => (a.x + b.x, a.y + b.y, a.z + b.z);
+
+        public static (long x, long y, long z, long w) Add(this (long x, long y, long z, long w) a, (long x, long y, long z, long w) b) => (a.x + b.x, a.y + b.y, a.z + b.z, a.w + b.w);
 
         //https://stackoverflow.com/questions/2641326/finding-all-positions-of-substring-in-a-larger-string-in-c-sharp
         public static IEnumerable<int> AllIndexesOf(this string str, string value)
@@ -462,6 +478,9 @@ namespace AdventOfCode.Solutions
         public static Coordinate3D operator -(Coordinate3D a, Coordinate3D b) => a + (-b);
         public static bool operator ==(Coordinate3D a, Coordinate3D b) => (a.x == b.x && a.y == b.y && a.z == b.z);
         public static bool operator !=(Coordinate3D a, Coordinate3D b) => (a.x != b.x || a.y != b.y || a.z != b.z);
+
+        public int ManhattanDistance(Coordinate3D other) => (int)(Math.Abs(x - other.x) + Math.Abs(y - other.y) + Math.Abs(z - other.z));
+        public int ManhattanMagnitude() => Math.Abs(x) + Math.Abs(y) + Math.Abs(z);
 
         public override bool Equals(object obj)
         {

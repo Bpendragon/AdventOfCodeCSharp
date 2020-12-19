@@ -80,6 +80,7 @@ namespace AdventOfCode.Solutions.Year2020
          * Result is sitting as the only item in the numeric stack, pop and return it
          * 
          */
+
         private static long EvaluateExpression(string expression)
         {
             Stack<long> nums = new Stack<long>();
