@@ -127,6 +127,8 @@ namespace AdventOfCode.Solutions.Year2020
             ).ToArray();
         }
 
+
+        bool isEdge(string pattern, Dictionary<string, List<Tile>> pairs) => pairs[pattern].Count == 1;
         private Tile[][] AssemblePuzzle(string input)
         {
             var tiles = ParseTiles(input);
@@ -134,7 +136,7 @@ namespace AdventOfCode.Solutions.Year2020
             var pairs = new Dictionary<string, List<Tile>>();
             foreach (var tile in tiles)
             {
-                for (var i = 0; i < 8; i++)
+                for (var i = 0; i < 8; i++) //This works by going through all 8 possible orientations, equivalent to Matrix Transpose, check, then flip about the horizontal, check, repeat 4 times
                 {
                     var pattern = tile.Top();
                     if (!pairs.ContainsKey(pattern))
@@ -146,7 +148,7 @@ namespace AdventOfCode.Solutions.Year2020
                 }
             }
 
-            bool isEdge(string pattern) => pairs[pattern].Count == 1;
+            
             Tile getNeighbour(Tile tile, string pattern) => pairs[pattern].SingleOrDefault(other => other != tile);
 
             Tile putTileInPlace(Tile above, Tile left)
@@ -158,7 +160,7 @@ namespace AdventOfCode.Solutions.Year2020
                     {
                         for (var i = 0; i < 8; i++)
                         {
-                            if (isEdge(tile.Top()) && isEdge(tile.Left()))
+                            if (isEdge(tile.Top(), pairs) && isEdge(tile.Left(), pairs))
                             {
                                 return tile;
                             }
@@ -172,8 +174,8 @@ namespace AdventOfCode.Solutions.Year2020
                     var tile = above != null ? getNeighbour(above, above.Bottom()) : getNeighbour(left, left.Right());
                     while (true)
                     {
-                        var topMatch = above == null ? isEdge(tile.Top()) : tile.Top() == above.Bottom();
-                        var leftMatch = left == null ? isEdge(tile.Left()) : tile.Left() == left.Right();
+                        var topMatch = above == null ? isEdge(tile.Top(), pairs) : tile.Top() == above.Bottom();
+                        var leftMatch = left == null ? isEdge(tile.Left(), pairs) : tile.Left() == left.Right();
 
                         if (topMatch && leftMatch)
                         {
@@ -211,17 +213,17 @@ namespace AdventOfCode.Solutions.Year2020
             var tileCount = tiles.Length;
             for (var x = 0; x < tileCount; x++)
             {
-                for (var i = 1; i < tileSize - 1; i++)
+                for (var i = 1; i < tileSize - 1; i++) //leaves out top and bottom
                 {
                     var st = "";
                     for (var y = 0; y < tileCount; y++)
                     {
-                        st += tiles[x][y].Row(i).Substring(1, tileSize - 2);
+                        st += tiles[x][y].Row(i).Substring(1, tileSize - 2); //leaves out left and right
                     }
                     image.Add(st);
                 }
             }
-            return new Tile(42, image.ToArray());
+            return new Tile(00, image.ToArray());
         }
     }
 
