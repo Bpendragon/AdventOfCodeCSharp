@@ -204,12 +204,13 @@ namespace AdventOfCode.Solutions
             }
         }
 
-        public static IEnumerable<IEnumerable<T>> Combinations<T>(this IEnumerable<T> values, int subcount)
+        public static IEnumerable<T[]> Combinations<T>(this IEnumerable<T> values, int subcount)
         {
             if (values.Count() < subcount) throw new ArgumentException("Array Length can't be less than sub-array length");
             if (subcount < 1) throw new ArgumentException("Subarrays must be at least length 1 long");
             T[] res = new T[subcount];
-            foreach (int[] combination in Combinations(subcount, values.Count()))
+            var c = Combinations(subcount, values.Count()).ToArray();
+            foreach (int[] combination in c)
             {
                 foreach (int i in Enumerable.Range(0, subcount))
                 {
@@ -226,6 +227,16 @@ namespace AdventOfCode.Solutions
             {
                 yield return array.Skip(i * size).Take(size);
             }
+        }
+
+        public static string[] ToStringArray(this char[][] array)
+        {
+            var tmp = new string[array.GetLength(0)];
+
+            for(int i = 0; i < tmp.Length; i++) {
+                tmp[i] = array[i].JoinAsStrings();
+            }
+            return tmp;
         }
 
         /// <summary>
