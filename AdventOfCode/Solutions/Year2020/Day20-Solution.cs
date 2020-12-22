@@ -13,7 +13,7 @@ namespace AdventOfCode.Solutions.Year2020
         Tile[][] tiles;
         Tile BigTile;
         List<string> Image = new List<string>();
-        public Day20() : base(20, 2020, "")
+        public Day20() : base(20, 2020, "Jurassic Jigsaw")
         {
             tiles = AssemblePuzzle(Input);
             BigTile = MergeTiles(tiles);

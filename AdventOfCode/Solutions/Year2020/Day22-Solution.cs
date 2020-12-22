@@ -11,7 +11,7 @@ namespace AdventOfCode.Solutions.Year2020
     {
         Queue<long> playerCards = new Queue<long>();
         Queue<long> crabCards = new Queue<long>();
-        public Day22() : base(22, 2020, "")
+        public Day22() : base(22, 2020, "Crab Combat")
         {
             
         }
@@ -101,7 +101,6 @@ namespace AdventOfCode.Solutions.Year2020
                 WinnerScore = CalculateScore(new Queue<long>(p2Deck));
                 return false;
             }
-
         }
 
         private static (long p1, long p2) GetState(Queue<long> p1Deck, Queue<long> p2Deck) => (CalculateScore(p1Deck), CalculateScore(p2Deck));

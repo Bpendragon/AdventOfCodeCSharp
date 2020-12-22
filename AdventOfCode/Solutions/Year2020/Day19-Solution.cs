@@ -16,7 +16,7 @@ namespace AdventOfCode.Solutions.Year2020
         List<string> messages = new List<string>();
         Regex reg;
 
-        public Day19() : base(19, 2020, "")
+        public Day19() : base(19, 2020, "Monster Messages")
         {
             //UseDebugInput = true;
             string[] halves = Input.Split("\n\n", StringSplitOptions.TrimEntries);

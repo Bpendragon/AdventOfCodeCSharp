@@ -13,7 +13,7 @@ namespace AdventOfCode.Solutions.Year2020
         Dictionary<string, int> ingredientCounts = new Dictionary<string, int>();
 
         StringSplitOptions splitOpts = StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries;
-        public Day21() : base(21, 2020, "")
+        public Day21() : base(21, 2020, "Allergen Assessment")
         {
             //UseDebugInput = true;
             foreach(var line in Input.SplitByNewline(true))
