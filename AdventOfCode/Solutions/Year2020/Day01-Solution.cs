@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+
 using AdventOfCode.UserClasses;
 
 namespace AdventOfCode.Solutions.Year2020
@@ -12,7 +13,7 @@ namespace AdventOfCode.Solutions.Year2020
 
         public Day01() : base(01, 2020, "Report Repair")
         {
-            costs = new List<int>(Utilities.ToIntArray(Input, "\n"));   
+            costs = new List<int>(Utilities.ToIntArray(Input, "\n"));
         }
 
         protected override string SolvePartOne()
@@ -24,7 +25,7 @@ namespace AdventOfCode.Solutions.Year2020
             }
 
             throw new Exception("Sum Not Found");
-            
+
         }
 
         protected override string SolvePartTwo()
