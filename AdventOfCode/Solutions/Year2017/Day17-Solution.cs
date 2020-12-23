@@ -34,7 +34,23 @@ namespace AdventOfCode.Solutions.Year2017
 
         protected override string SolvePartTwo()
         {
+            long total = 50_000_000;
+
+            long pos = 0;
+            long target = 0;
+            for (int i = 1; i < total; i++)
+            {
+                pos = ((pos + Steps) % i) + 1;
+                if (pos == 1)
+                {
+                    target = i;
+                }
+            }
+            return target.ToString();
+
             //Don't Actually run this please, it took 22 minutes and almost 5GB of RAM
+
+            /*
             LinkedList<int> buffer = new LinkedList<int>();
             buffer.AddFirst(0);
             LinkedListNode<int> current = buffer.First;
@@ -50,6 +66,7 @@ namespace AdventOfCode.Solutions.Year2017
             current = current.Next ?? current.List.First;
 
             return current.Value.ToString();
+            */
         }
     }
 }

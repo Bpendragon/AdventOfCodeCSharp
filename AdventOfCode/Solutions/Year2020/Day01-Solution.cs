@@ -14,30 +14,45 @@ namespace AdventOfCode.Solutions.Year2020
         public Day01() : base(01, 2020, "Report Repair")
         {
             costs = new List<int>(Utilities.ToIntArray(Input, "\n"));
+            costs.Sort();
         }
 
         protected override string SolvePartOne()
         {
-            var combos = costs.Combinations(2);
-            foreach (var combo in combos)
-            {
-                if (combo.Sum() == 2020) return combo.Aggregate(1, (a, b) => a * b).ToString();
-            }
+            int i = 0, j = 1;
 
-            throw new Exception("Sum Not Found");
+            while(true)
+            {
+                int sum = costs[i] + costs[^j];
+                if (sum == 2020) return (costs[i] * costs[^j]).ToString();
+                else if (sum < 2020) i++;
+                else j++;
+            }
 
         }
 
         protected override string SolvePartTwo()
         {
-            var combos = costs.Combinations(3);
-            foreach (var combo in combos)
+            int i = 0, j = 1, k = 1;
+
+            while(true)
             {
-                if (combo.Sum() == 2020) return combo.Aggregate(1, (a, b) => a * b).ToString();
+                int sum = costs[i] + costs[j] + costs[^k];
+                if (sum == 2020) return (costs[i] * costs[j] * costs[^k]).ToString();
+                else if (sum < 2020)
+                {
+                    if (j < costs.Count - k) j++;
+                    else
+                    {
+                        i++;
+                        j = i + 1;
+                    }
+                } else
+                {
+                    if (j + 1 >= costs.Count - k) j = i + 1;
+                    k++;
+                }
             }
-
-            throw new Exception("Sum Not Found");
-
         }
     }
 }

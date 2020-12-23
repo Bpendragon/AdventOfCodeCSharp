@@ -8,44 +8,43 @@ namespace AdventOfCode.Solutions.Year2020
 
     class Day02 : ASolution
     {
-        readonly List<string> passwords;
+        readonly List<Password> passwords;
         public Day02() : base(02, 2020, "Password Philosophy")
         {
-            passwords = new List<string>(Input.SplitByNewline());
+            passwords = new List<Password>();
+            foreach (var l in Input.SplitByNewline()) passwords.Add(new Password(l));
         }
 
         protected override string SolvePartOne()
         {
-            int validPass = 0;
-            foreach (string password in passwords)
-            {
-                string[] splitline = password.Split(new char[] { ' ', ':', '-' });
-                int minCount = int.Parse(splitline[0]);
-                int maxcount = int.Parse(splitline[1]);
-                char check = splitline[2][0];
-
-                int count = splitline[^1].Count(x => (x == check));
-                if (count >= minCount && count <= maxcount) validPass++;
-            }
-
-            return validPass.ToString();
+            return passwords.Count(x => x.part1).ToString();
 
         }
 
         protected override string SolvePartTwo()
         {
-            int validPass = 0;
-            foreach (string password in passwords)
+            return passwords.Count(x => x.part2).ToString();
+        }
+
+        internal class Password
+        {
+            public string pass;
+            public int minCount;
+            public int maxCount;
+            public char checkChar;
+            private int charCount => pass.Count(x => x == checkChar);
+
+            public bool part1 => (minCount <= charCount && charCount <= maxCount);
+            public bool part2 => (checkChar == pass[minCount - 1] ^ checkChar == pass[maxCount - 1]);
+
+            public Password(string password)
             {
                 string[] splitline = password.Split(new char[] { ' ', ':', '-' });
-                int minCount = int.Parse(splitline[0]);
-                int maxcount = int.Parse(splitline[1]);
-                char check = splitline[2][0];
-
-                if (check == splitline[^1][minCount - 1] ^ splitline[^1][maxcount - 1] == check) validPass++;
+                pass = splitline[^1];
+                minCount = int.Parse(splitline[0]);
+                maxCount = int.Parse(splitline[1]);
+                checkChar = splitline[2][0];
             }
-
-            return validPass.ToString();
         }
     }
 }

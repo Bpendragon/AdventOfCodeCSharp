@@ -11,7 +11,7 @@ namespace AdventOfCode.Solutions.Year2020
     {
         Dictionary<(int x, int y, int z), bool> cyoob = new Dictionary<(int x, int y, int z), bool>();
         Dictionary<(int x, int y, int z, int w), bool> cyoob4D = new Dictionary<(int x, int y, int z, int w), bool>();
-        public Day17() : base(17, 2020, "")
+        public Day17() : base(17, 2020, "Conway Cubes")
         {
             var lines = Input.SplitByNewline();
             for (int x = 0; x < lines.Length; x++)
@@ -23,20 +23,24 @@ namespace AdventOfCode.Solutions.Year2020
                     
                 }
             }
+            foreach (var s in cyoob.Where(kvp => !kvp.Value).ToList()) cyoob.Remove(s.Key);
+            foreach (var s in cyoob4D.Where(kvp => !kvp.Value).ToList()) cyoob4D.Remove(s.Key);
 
-            for (int x = -10; x < 20; x++)
+            var CyoobList = cyoob.Keys.ToList();
+            foreach (var c in CyoobList)
             {
-                for (int y = -10; y < 20; y++)
+                foreach (var n in neighborDirections)
                 {
-                    for (int z = -10; z < 10; z++)
-                    {
-                        for(int w = -10; w<10;w++)
-                        {
-                            
-                            if (!cyoob4D.ContainsKey((x, y, z,w))) cyoob4D[(x, y, z,w)] = false;
-                        }
-                        if (!cyoob.ContainsKey((x, y, z))) cyoob[(x, y, z)] = false;
-                    }
+                    if (!cyoob.ContainsKey(c.Add(n))) cyoob[c.Add(n)] = false;
+                }
+            }
+
+            var CyoobList2 = cyoob4D.Keys.ToList();
+            foreach (var c in CyoobList2)
+            {
+                foreach (var n in fourDneighborDirections)
+                {
+                    if (!cyoob4D.ContainsKey(c.Add(n))) cyoob4D[c.Add(n)] = false;
                 }
             }
 
@@ -47,6 +51,14 @@ namespace AdventOfCode.Solutions.Year2020
             Dictionary<(int x, int y, int z), bool> nextCyoob;
             for (int i = 0; i < 6; i++)
             {
+                var CyoobList = cyoob.Keys.ToList();
+                foreach (var c in CyoobList)
+                {
+                    foreach (var n in neighborDirections)
+                    {
+                        if (!cyoob.ContainsKey(c.Add(n))) cyoob[c.Add(n)] = false; //expands the frontier to the neighboring cells (since they might become alive)
+                    }
+                }
                 nextCyoob = new Dictionary<(int x, int y, int z), bool>();
                 var list = cyoob.Keys.ToArray();
                 foreach (var c in list)
@@ -72,7 +84,10 @@ namespace AdventOfCode.Solutions.Year2020
                     }
                 }
 
+                foreach (var s in nextCyoob.Where(kvp => !kvp.Value).ToList()) nextCyoob.Remove(s.Key); //shrink dict down to more manageable chunk
+
                 cyoob = new Dictionary<(int x, int y, int z), bool>(nextCyoob);
+
             }
 
             return cyoob.Count(a => a.Value == true).ToString();
@@ -83,6 +98,14 @@ namespace AdventOfCode.Solutions.Year2020
             Dictionary<(int x, int y, int z, int w), bool> nextCyoob4D;
             for (int i = 0; i < 6; i++)
             {
+                var CyoobList2 = cyoob4D.Keys.ToList();
+                foreach (var c in CyoobList2)
+                {
+                    foreach (var n in fourDneighborDirections)
+                    {
+                        if (!cyoob4D.ContainsKey(c.Add(n))) cyoob4D[c.Add(n)] = false;
+                    }
+                }
                 nextCyoob4D = new Dictionary<(int x, int y, int z, int w), bool>();
                 var list = cyoob4D.Keys.ToArray();
                 foreach (var c in list)
@@ -107,7 +130,7 @@ namespace AdventOfCode.Solutions.Year2020
                         nextCyoob4D[c] = (numAlive == 3);
                     }
                 }
-
+                foreach (var s in nextCyoob4D.Where(kvp => !kvp.Value).ToList()) nextCyoob4D.Remove(s.Key); //shrink to be more manageable
                 cyoob4D = new Dictionary<(int x, int y, int z, int w), bool>(nextCyoob4D);
             }
 
