@@ -4,9 +4,6 @@ using System.Collections.Generic;
 using AdventOfCode.UserClasses;
 using System.Linq;
 using System.Drawing;
-using System.Drawing.Drawing2D;
-using System.Drawing.Text;
-using System.Drawing.Imaging;
 
 namespace AdventOfCode.Solutions.Year2019
 {

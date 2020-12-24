@@ -1,8 +1,6 @@
-using System;
-using System.Text;
 using System.Collections.Generic;
-using AdventOfCode.UserClasses;
 using System.Linq;
+using System.Runtime.CompilerServices;
 
 namespace AdventOfCode.Solutions.Year2020
 {
@@ -70,7 +68,7 @@ namespace AdventOfCode.Solutions.Year2020
 
                 if(p1 <= p1Deck.Count && p2 <= p2Deck.Count)
                 {
-                    p1Wins = RecursiveCombat(new Queue<long>(p1Deck.Take((int)p1)), new Queue<long>(p2Deck.Take((int)p2)), out long winnerScore);
+                    p1Wins = RecursiveCombat(new Queue<long>(p1Deck.Take((int)p1)), new Queue<long>(p2Deck.Take((int)p2)), out _);
                 } else if (p1 > p2)
                 {
                     p1Wins = true;
@@ -103,7 +101,9 @@ namespace AdventOfCode.Solutions.Year2020
             }
         }
 
+
         private static (long p1, long p2) GetState(Queue<long> p1Deck, Queue<long> p2Deck) => (CalculateScore(p1Deck), CalculateScore(p2Deck));
+
 
         private static long CalculateScore(Queue<long> deck)
         {

@@ -1,8 +1,5 @@
 using System;
-using System.Text;
 using System.Collections.Generic;
-using AdventOfCode.UserClasses;
-using System.Linq;
 using System.Text.RegularExpressions;
 
 namespace AdventOfCode.Solutions.Year2020

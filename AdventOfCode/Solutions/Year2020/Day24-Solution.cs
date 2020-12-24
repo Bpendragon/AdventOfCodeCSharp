@@ -1,7 +1,4 @@
-using System;
-using System.Text;
 using System.Collections.Generic;
-using AdventOfCode.UserClasses;
 using System.Linq;
 
 namespace AdventOfCode.Solutions.Year2020
@@ -9,7 +6,7 @@ namespace AdventOfCode.Solutions.Year2020
 
     class Day24 : ASolution
     {
-        Dictionary<string, (int q, int r)> Moves; //q = 'q'olumn, r = 'r'ow (not c since that's normally for chars)
+        readonly Dictionary<string, (int q, int r)> Moves; //q = 'q'olumn, r = 'r'ow (not c since that's normally for chars)
         List<string> instructions;
         Dictionary<(int q, int r), bool> TileStates = new Dictionary<(int q, int r), bool>(); //true = black, false = white
         public Day24() : base(24, 2020, "")

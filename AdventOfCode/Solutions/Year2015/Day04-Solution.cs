@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using AdventOfCode.UserClasses;
-using System.Linq;
 using System.Text;
 
 namespace AdventOfCode.Solutions.Year2015
