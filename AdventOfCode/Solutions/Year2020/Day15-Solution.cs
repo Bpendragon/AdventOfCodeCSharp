@@ -17,7 +17,8 @@ namespace AdventOfCode.Solutions.Year2020
         {
             startNums = Input.ToIntArray(",");
             NumberString.AddRange(startNums);
-            NumberString2 = new List<int>(NumberString);
+            NumberString2 = new List<int>(30_000_000);
+            NumberString2.AddRange(NumberString);
             NumberString.Reverse();
 
         }
@@ -38,13 +39,12 @@ namespace AdventOfCode.Solutions.Year2020
 
         protected override string SolvePartTwo()
         {
-            NumberString2.Capacity = 30000000;
             for (int i = 0; i < startNums.Length - 1; i++)
             {
                 LastTimesSpoken[startNums[i]] = i + 1;
             }
             int lastNumSpoken = 0;
-            for (int i = startNums.Length; i < 30000000; i++)
+            for (int i = startNums.Length; i < 30_000_000; i++)
             {
                 lastNumSpoken = NumberString2[^1];
                 var lastTimeSpoken = LastTimesSpoken.GetValueOrDefault(lastNumSpoken, -1);

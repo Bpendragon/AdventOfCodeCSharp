@@ -10,8 +10,8 @@ namespace AdventOfCode.Solutions.Year2015
 
     class Day03 : ASolution
     {
-        HashSet<(int x, int y)> HousesVisted1 = new HashSet<(int x, int y)>();
-        HashSet<(int x, int y)> HousesVisted2 = new HashSet<(int x, int y)>();
+        readonly HashSet<(int x, int y)> HousesVisted1 = new HashSet<(int x, int y)>();
+        readonly HashSet<(int x, int y)> HousesVisted2 = new HashSet<(int x, int y)>();
         public Day03() : base(03, 2015, "")
         {
 
@@ -29,6 +29,7 @@ namespace AdventOfCode.Solutions.Year2015
                     'v' => elf1.MoveDirection(Utilities.CompassDirection.S),
                     '>' => elf1.MoveDirection(Utilities.CompassDirection.E),
                     '<' => elf1.MoveDirection(Utilities.CompassDirection.W),
+                    _ => throw new Exception()
                 };
 
                 HousesVisted1.Add(elf1);
@@ -49,6 +50,7 @@ namespace AdventOfCode.Solutions.Year2015
                     'v' => elf1.MoveDirection(Utilities.CompassDirection.S),
                     '>' => elf1.MoveDirection(Utilities.CompassDirection.E),
                     '<' => elf1.MoveDirection(Utilities.CompassDirection.W),
+                    _ => throw new Exception()
                 };
 
                 elf2 = Input[i + 1] switch
@@ -57,6 +59,7 @@ namespace AdventOfCode.Solutions.Year2015
                     'v' => elf2.MoveDirection(Utilities.CompassDirection.S),
                     '>' => elf2.MoveDirection(Utilities.CompassDirection.E),
                     '<' => elf2.MoveDirection(Utilities.CompassDirection.W),
+                    _ => throw new Exception()
                 };
                 HousesVisted2.Add(elf1);
                 HousesVisted2.Add(elf2);

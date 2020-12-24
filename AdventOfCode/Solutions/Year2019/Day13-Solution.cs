@@ -13,7 +13,7 @@ namespace AdventOfCode.Solutions.Year2019
 
     class Day13 : ASolution
     {
-        Font font1;
+        readonly Font font1;
         IntCode2 cab;
         public Day13() : base(13, 2019, "")
         {

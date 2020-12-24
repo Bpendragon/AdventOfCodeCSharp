@@ -9,9 +9,9 @@ namespace AdventOfCode.Solutions.Year2020
 
     class Day23 : ASolution
     {
-        List<LLNode> Cups;
-        List<LLNode> Cups2;
-        Dictionary<long, LLNode> BigCupsDict = new Dictionary<long, LLNode>();
+        readonly List<LLNode> Cups;
+        readonly List<LLNode> Cups2;
+        readonly Dictionary<long, LLNode> BigCupsDict = new Dictionary<long, LLNode>();
 
 
         public Day23() : base(23, 2020, "Crab Cups")

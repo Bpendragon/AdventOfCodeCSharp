@@ -9,8 +9,8 @@ namespace AdventOfCode.Solutions.Year2020
 
     class Day22 : ASolution
     {
-        Queue<long> playerCards = new Queue<long>();
-        Queue<long> crabCards = new Queue<long>();
+        readonly Queue<long> playerCards = new Queue<long>();
+        readonly Queue<long> crabCards = new Queue<long>();
         public Day22() : base(22, 2020, "Crab Combat")
         {
             

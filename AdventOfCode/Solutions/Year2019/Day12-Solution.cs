@@ -9,14 +9,13 @@ namespace AdventOfCode.Solutions.Year2019
 
     class Day12 : ASolution
     {
-        List<Moon> Moons = new List<Moon>();
-        long? xCycle = null, 
+        readonly List<Moon> Moons = new List<Moon>();
+        readonly long? xCycle = null, 
               yCycle = null, 
               zCycle = null, 
               curSteps = 0;
-        long part1Energy = 0;
-
-        StringSplitOptions splitOps = StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries;
+        readonly long part1Energy = 0;
+        readonly StringSplitOptions splitOps = StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries;
         public Day12() : base(12, 2019, "")
         {
             foreach(var line in Input.SplitByNewline())

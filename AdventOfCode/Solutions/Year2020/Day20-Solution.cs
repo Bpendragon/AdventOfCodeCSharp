@@ -10,9 +10,9 @@ namespace AdventOfCode.Solutions.Year2020
 
     class Day20 : ASolution
     {
-        Tile[][] tiles;
-        Tile BigTile;
-        List<string> Image = new List<string>();
+        readonly Tile[][] tiles;
+        readonly Tile BigTile;
+        readonly List<string> Image = new List<string>();
         public Day20() : base(20, 2020, "Jurassic Jigsaw")
         {
             tiles = AssemblePuzzle(Input);

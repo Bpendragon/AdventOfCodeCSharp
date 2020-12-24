@@ -9,10 +9,9 @@ namespace AdventOfCode.Solutions.Year2020
 
     class Day21 : ASolution
     {
-        Dictionary<string, List<string>> AllergenPossibilities = new Dictionary<string, List<string>>();
-        Dictionary<string, int> ingredientCounts = new Dictionary<string, int>();
-
-        StringSplitOptions splitOpts = StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries;
+        readonly Dictionary<string, List<string>> AllergenPossibilities = new Dictionary<string, List<string>>();
+        readonly Dictionary<string, int> ingredientCounts = new Dictionary<string, int>();
+        readonly StringSplitOptions splitOpts = StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries;
         public Day21() : base(21, 2020, "Allergen Assessment")
         {
             foreach(var line in Input.SplitByNewline(true))

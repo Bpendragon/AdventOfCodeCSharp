@@ -9,9 +9,8 @@ namespace AdventOfCode.Solutions.Year2020
 
     class Day18 : ASolution
     {
-
-        List<string> Expressions = new List<string>();
-        List<string> PartTwoExpressions = new List<string>();
+        readonly List<string> Expressions = new List<string>();
+        readonly List<string> PartTwoExpressions = new List<string>();
         public Day18() : base(18, 2020, "Operation Order")
         {
             foreach(var l in Input.SplitByNewline())

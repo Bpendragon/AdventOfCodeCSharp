@@ -9,11 +9,11 @@ namespace AdventOfCode.Solutions.Year2019
 
     class Day15 : ASolution
     {
-        IntCode2 bot;
-        Dictionary<(int x, int y), int> map = new Dictionary<(int, int), int>();
+        readonly IntCode2 bot;
+        readonly Dictionary<(int x, int y), int> map = new Dictionary<(int, int), int>();
         (int x, int y) botLocation;
         (int x, int y) oxyGenLocation;
-        Random rand = new Random(); //gonna just random walk this;
+        readonly Random rand = new Random(); //gonna just random walk this;
         public Day15() : base(15, 2019, "")
         {
 
@@ -50,7 +50,7 @@ namespace AdventOfCode.Solutions.Year2019
             return map.Where(a => a.Value != 0).Max(a => AStar(oxyGenLocation, a.Key, map).Count() - 1).ToString();
         }
 
-        List<(int dX, int dY)> movementDirs = new List<(int dX, int dY)>() { (0, 1), (0, -1), (1, 0), (-1, 0) };
+        readonly List<(int dX, int dY)> movementDirs = new List<(int dX, int dY)>() { (0, 1), (0, -1), (1, 0), (-1, 0) };
         //A-Star, heuristic is Manhattan
         private List<(int x, int y)> AStar((int, int) start, (int x, int y) goal, Dictionary<(int x, int y), int> map)
         {
