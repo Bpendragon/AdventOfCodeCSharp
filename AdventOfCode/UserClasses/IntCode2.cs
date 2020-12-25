@@ -24,6 +24,7 @@ namespace AdventOfCode.UserClasses
             lock (Inputs) Inputs.Clear();
         }
 
+
         public IEnumerable<long> RunProgram()
         {
             WorkingProgram = new List<long>(Program);
