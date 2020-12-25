@@ -9,6 +9,7 @@ namespace AdventOfCode.Solutions.Year2020
         readonly List<LLNode> Cups;
         readonly List<LLNode> Cups2;
         readonly Dictionary<long, LLNode> BigCupsDict = new Dictionary<long, LLNode>();
+        readonly Dictionary<long, LLNode> SmallCupsDict = new Dictionary<long, LLNode>();
 
 
         public Day23() : base(23, 2020, "Crab Cups")
@@ -22,6 +23,7 @@ namespace AdventOfCode.Solutions.Year2020
                 var tmp2 = new LLNode(i);
                 Cups.Add(tmp);
                 Cups2.Add(tmp2);
+                SmallCupsDict[i] = tmp;
                 BigCupsDict[i] = tmp2;
             }
             for(int i = 0; i < Cups.Count; i++)
@@ -63,11 +65,7 @@ namespace AdventOfCode.Solutions.Year2020
                     if (nextNodeVal < 1) nextNodeVal = 9;
                 }
 
-                var insertPoint = cur.next;
-                while(insertPoint.val != nextNodeVal)
-                {
-                    insertPoint = insertPoint.next;
-                }
+                var insertPoint = SmallCupsDict[nextNodeVal];
 
                 groupStart.next.next.next = insertPoint.next;
                 insertPoint.next = groupStart;

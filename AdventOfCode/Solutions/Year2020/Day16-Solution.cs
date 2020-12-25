@@ -11,11 +11,11 @@ namespace AdventOfCode.Solutions.Year2020
         readonly List<string> tickets;
         readonly List<string> validTickets;
         readonly string myTicket;
-        public Day16() : base(16, 2020, "Rambunctious Recitation")
+        public Day16() : base(16, 2020, "Ticket Translation")
         {
             var firstSplit = Input.Split("\n\n");
 
-            foreach(var l in firstSplit[0].SplitByNewline())
+            foreach (var l in firstSplit[0].SplitByNewline())
             {
                 var ticketField = new TicketField();
                 var secondsplit = l.Split(':');
@@ -23,13 +23,11 @@ namespace AdventOfCode.Solutions.Year2020
 
                 var thirdSplit = secondsplit[1].Split("- or".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
 
-                if(thirdSplit.Length == 4)
-                {
-                    ticketField.lower = int.Parse(thirdSplit[0]);
-                    ticketField.upper = int.Parse(thirdSplit[1]);
-                    ticketField.lower2 = int.Parse(thirdSplit[2]);
-                    ticketField.upper2 = int.Parse(thirdSplit[3]);
-                }
+                ticketField.lower = int.Parse(thirdSplit[0]);
+                ticketField.upper = int.Parse(thirdSplit[1]);
+                ticketField.lower2 = int.Parse(thirdSplit[2]);
+                ticketField.upper2 = int.Parse(thirdSplit[3]);
+
 
                 ValidFields.Add(ticketField);
 
@@ -46,9 +44,9 @@ namespace AdventOfCode.Solutions.Year2020
         {
             int ticketScanningErrorRate = 0;
 
-            foreach(var ticket in tickets)
+            foreach (var ticket in tickets)
             {
-               
+
                 foreach (int field in ticket.ToIntArray(","))
                 {
                     bool isValid = false;
@@ -71,22 +69,22 @@ namespace AdventOfCode.Solutions.Year2020
             return ticketScanningErrorRate.ToString();
         }
 
-       
+
 
         protected override string SolvePartTwo()
         {
             Dictionary<int, string> KnownFields = new Dictionary<int, string>();
             Dictionary<(int ticketPosition, string name), int> TicketsThatMatch = new Dictionary<(int ticketPosition, string name), int>();
-            
+
             int t = 0;
-            while(t < validTickets.Count) //only go until we we have to
+            while (t < validTickets.Count) //only go until we we have to
             {
                 int[] tFields = validTickets[t].ToIntArray(",");
 
-                for(int i = 0; i < tFields.Length; i++)
+                for (int i = 0; i < tFields.Length; i++)
                 {
                     var field = tFields[i];
-                    for(int j = 0; j < ValidFields.Count; j++)
+                    for (int j = 0; j < ValidFields.Count; j++)
                     {
                         var v = ValidFields[j];
                         if (((v.lower <= field && field <= v.upper) || (v.lower2 <= field && field <= v.upper2)))
@@ -99,30 +97,31 @@ namespace AdventOfCode.Solutions.Year2020
                 t++;
             }
 
-            while (KnownFields.Count < ValidFields.Count) {
+            while (KnownFields.Count < ValidFields.Count)
+            {
                 for (int i = 0; i < ValidFields.Count; i++)
                 {
-                    var ValidAtPosition = TicketsThatMatch.Where(x => x.Key.ticketPosition == i).ToList(); 
+                    var ValidAtPosition = TicketsThatMatch.Where(x => x.Key.ticketPosition == i).ToList();
 
-                    if(ValidAtPosition.Count(x => x.Value == validTickets.Count) == 1)
+                    if (ValidAtPosition.Count(x => x.Value == validTickets.Count) == 1)
                     {
                         var tmp = ValidAtPosition.First(x => x.Value == validTickets.Count);
                         KnownFields[tmp.Key.ticketPosition] = tmp.Key.name;
 
-                        foreach(var k in TicketsThatMatch.Keys)
+                        foreach (var k in TicketsThatMatch.Keys)
                         {
                             if (k.name == tmp.Key.name) TicketsThatMatch.Remove(k);
                         }
 
                     }
-                } 
+                }
             }
 
             int[] myTicketFields = myTicket.ToIntArray(",");
 
             long departureFields = 1;
 
-            foreach(var f in KnownFields)
+            foreach (var f in KnownFields)
             {
                 if (f.Value.Contains("departure")) departureFields *= myTicketFields[f.Key];
             }
@@ -136,8 +135,8 @@ namespace AdventOfCode.Solutions.Year2020
             public string name;
             public int lower;
             public int upper;
-            public int? lower2 = null;
-            public int? upper2 = null;
+            public int lower2;
+            public int upper2;
         }
     }
 }

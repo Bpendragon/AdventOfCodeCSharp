@@ -9,7 +9,7 @@ namespace AdventOfCode.Solutions.Year2020
         readonly List<int> NumberString = new List<int>(); //direct from input.
         readonly List<int> NumberString2;
         readonly int[] startNums;
-        public Day15() : base(15, 2020, "")
+        public Day15() : base(15, 2020, "Rambunctious Recitation")
         {
             startNums = Input.ToIntArray(",");
             NumberString.AddRange(startNums);

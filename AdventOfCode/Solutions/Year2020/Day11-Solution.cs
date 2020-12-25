@@ -112,11 +112,11 @@ namespace AdventOfCode.Solutions.Year2020
                 }
                 if (Seats[c])
                 {
-                    if (livingNeighbors < 5) return true;
+                    return livingNeighbors < 5;
                 }
                 else
                 {
-                    if (livingNeighbors == 0) return true;
+                    return livingNeighbors == 0;
                 }
             } else
             {
@@ -128,15 +128,13 @@ namespace AdventOfCode.Solutions.Year2020
 
                 if (Seats[c])
                 {
-                    if (livingNeighbors < 4) return true;
+                    return (livingNeighbors < 4);
                 }
                 else
                 {
-                    if (livingNeighbors == 0) return true;
+                    return (livingNeighbors == 0);
                 }
             }
-                
-            return false;
         }
     }
 }
