@@ -7,8 +7,8 @@ namespace AdventOfCode.Solutions.Year2020
 
     class Day22 : ASolution
     {
-        readonly Queue<long> playerCards = new Queue<long>();
-        readonly Queue<long> crabCards = new Queue<long>();
+        readonly Queue<long> playerCards = new();
+        readonly Queue<long> crabCards = new();
         public Day22() : base(22, 2020, "Crab Combat")
         {
             
@@ -33,8 +33,8 @@ namespace AdventOfCode.Solutions.Year2020
                 }
             }
 
-            long sum = 0;
-            if(playerCards.Count > 0)
+            long sum;
+            if (playerCards.Count > 0)
             {
                 sum = CalculateScore(playerCards);
             } else
@@ -55,7 +55,7 @@ namespace AdventOfCode.Solutions.Year2020
 
         public static bool RecursiveCombat(Queue<long> p1Deck, Queue<long> p2Deck, out long WinnerScore)
         {
-            HashSet<(long p1, long p2)> previousStates = new HashSet<(long p1, long p2)>();
+            HashSet<(long p1, long p2)> previousStates = new();
             (long p1, long p2) curState = GetState(new Queue<long>(p1Deck), new Queue<long>(p2Deck));
             previousStates.Add(curState);
 

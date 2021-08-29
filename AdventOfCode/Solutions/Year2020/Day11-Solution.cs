@@ -6,9 +6,9 @@ namespace AdventOfCode.Solutions.Year2020
 
     class Day11 : ASolution
     {
-        Dictionary<(int, int), bool> Seats = new Dictionary<(int, int), bool>();
+        Dictionary<(int, int), bool> Seats = new();
         readonly Dictionary<(int, int), bool> Seats2;
-        private readonly List<(int, int)> Neighbors = new List<(int x, int y)>()
+        private readonly List<(int, int)> Neighbors = new()
         {
             (1,0),
             (1,1),
@@ -45,7 +45,7 @@ namespace AdventOfCode.Solutions.Year2020
             do
             {
                 seatsChanged = 0;
-                Dictionary<(int, int), bool> nextSeats = new Dictionary<(int, int), bool>(Seats);
+                Dictionary<(int, int), bool> nextSeats = new(Seats);
                 foreach(KeyValuePair<(int, int), bool> seat in Seats)
                 {
                     bool nextVal = AliveNext(seat.Key);
@@ -66,7 +66,7 @@ namespace AdventOfCode.Solutions.Year2020
             do
             {
                 seatsChanged = 0;
-                Dictionary<(int, int), bool> nextSeats = new Dictionary<(int, int), bool>(Seats);
+                Dictionary<(int, int), bool> nextSeats = new(Seats);
                 foreach (KeyValuePair<(int, int), bool> seat in Seats)
                 {
                     bool nextVal = AliveNext(seat.Key, true);
@@ -83,8 +83,8 @@ namespace AdventOfCode.Solutions.Year2020
         private bool AliveNext((int x, int y) c, bool part2 = false)
         {
             int livingNeighbors = 0;
-            List<(int, int)> locNeighbors = new List<(int x, int y)>();
-            List<(int, int)> extendedNeighbors = new List<(int x, int y)>();
+            List<(int, int)> locNeighbors = new();
+            List<(int, int)> extendedNeighbors = new();
 
             foreach ((int, int) n in Neighbors)
             {

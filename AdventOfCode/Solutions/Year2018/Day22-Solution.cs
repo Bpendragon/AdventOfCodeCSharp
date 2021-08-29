@@ -8,8 +8,8 @@ namespace AdventOfCode.Solutions.Year2018
     {
         private const int SystemDepth = 11739; //Inserted directly from input. 
         private readonly (int x, int y) TargetLocation = (11, 718);
-        readonly Dictionary<(int x, int y), int> cave = new Dictionary<(int x, int y), int>(); //specifically value is Erosion level
-        readonly Dictionary<(int x, int y), SoilType> cave2 = new Dictionary<(int x, int y), SoilType>();
+        readonly Dictionary<(int x, int y), int> cave = new(); //specifically value is Erosion level
+        readonly Dictionary<(int x, int y), SoilType> cave2 = new();
 
         public Day22() : base(22, 2018, "")
         {
@@ -52,11 +52,11 @@ namespace AdventOfCode.Solutions.Year2018
         //A*, Hueristic is Manhattan + cost of gear change, this is why the sets also include an item for gear
         private int TraversalTime((int x, int y) start, (int x, int y) tgt) 
         {
-            List<(int dX, int dY)> cardinalMoves = new List<(int dX, int dY)>() { (-1, 0), (1, 0), (0, -1), (0, 1) };
-            List<((int x, int y) loc, Gear gear)> openSet = new List<((int x, int y) loc, Gear gear)>(); // I wish ordered list allowed key collisions
-            Dictionary<((int x, int y) loc, Gear gear), ((int x, int y) loc, Gear gear)> cameFrom = new Dictionary<((int x, int y) loc, Gear gear), ((int x, int y) loc, Gear gear)>();
-            Dictionary<((int x, int y) loc, Gear gear), int> gScore = new Dictionary<((int x, int y) loc, Gear gear), int>();
-            Dictionary<((int x, int y) loc, Gear gear), int> fScore = new Dictionary<((int x, int y) loc, Gear gear), int>();
+            List<(int dX, int dY)> cardinalMoves = new() { (-1, 0), (1, 0), (0, -1), (0, 1) };
+            List<((int x, int y) loc, Gear gear)> openSet = new(); // I wish ordered list allowed key collisions
+            Dictionary<((int x, int y) loc, Gear gear), ((int x, int y) loc, Gear gear)> cameFrom = new();
+            Dictionary<((int x, int y) loc, Gear gear), int> gScore = new();
+            Dictionary<((int x, int y) loc, Gear gear), int> fScore = new();
 
             openSet.Add(((start), Gear.torch));
             gScore[(start, Gear.torch)] = 0;

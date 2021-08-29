@@ -5,7 +5,7 @@ namespace AdventOfCode.Solutions.Year2017
 
     class Day13 : ASolution
     {
-        readonly Dictionary<int, int> Sentries = new Dictionary<int, int>();
+        readonly Dictionary<int, int> Sentries = new();
         public Day13() : base(13, 2017, "Packet Scanners")
         {
             foreach(string line in Input.SplitByNewline())

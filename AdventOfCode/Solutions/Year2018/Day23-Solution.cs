@@ -8,7 +8,7 @@ namespace AdventOfCode.Solutions.Year2018
     class Day23 : ASolution
     {
         readonly StringSplitOptions splitOpts = StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries;
-        readonly Dictionary<(long x, long y, long z), long> nanos = new Dictionary<(long x, long y, long z), long>();
+        readonly Dictionary<(long x, long y, long z), long> nanos = new();
         public Day23() : base(23, 2018, "")
         {
             foreach (string line in Input.SplitByNewline())

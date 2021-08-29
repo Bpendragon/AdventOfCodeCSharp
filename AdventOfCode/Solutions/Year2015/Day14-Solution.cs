@@ -7,7 +7,7 @@ namespace AdventOfCode.Solutions.Year2015
     class Day14 : ASolution
     {
         readonly List<string> Lines;
-        readonly List<Reindeer> Racers = new List<Reindeer>();
+        readonly List<Reindeer> Racers = new();
         public Day14() : base(14, 2015, "")
         {
             Lines = new List<string>(Input.SplitByNewline());

@@ -17,7 +17,7 @@ namespace AdventOfCode.Solutions.Year2019
 
         protected override string SolvePartOne()
         {
-            PainterBot bot1 = new PainterBot(Program);
+            PainterBot bot1 = new(Program);
             bot1.cpu.ClearInputs();
             bot1.RunBot(0);
             return (bot1.Visited.Count - 1).ToString();
@@ -25,7 +25,7 @@ namespace AdventOfCode.Solutions.Year2019
 
         protected override string SolvePartTwo()
         {
-            PainterBot bot2 = new PainterBot(Program);
+            PainterBot bot2 = new(Program);
             bot2.cpu.ClearInputs();
             bot2.RunBot(1);
 
@@ -42,8 +42,8 @@ namespace AdventOfCode.Solutions.Year2019
         public Compass CurrentlyFacing { get; set; } = Compass.North;
         public (int x, int y) Coords { get; set; } = new ValueTuple<int, int>(0, 0);
         public List<(int, int)> Visited { get; set; } = new List<(int, int)>();
-        public Dictionary<(int, int), int> Tiles = new Dictionary<(int, int), int>();
-        public Queue<int> outPutStream = new Queue<int>();
+        public Dictionary<(int, int), int> Tiles = new();
+        public Queue<int> outPutStream = new();
         public int numWhite = 0;
 
         public PainterBot(long[] program)
@@ -98,7 +98,7 @@ namespace AdventOfCode.Solutions.Year2019
 
         public string Draw()
         {
-            StringBuilder sb = new StringBuilder('\n');
+            StringBuilder sb = new('\n');
             for (int k = -1; k < 7; k++)
             {
                 for (int j = -1; j < 45; j++)

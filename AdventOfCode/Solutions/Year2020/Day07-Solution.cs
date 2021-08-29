@@ -45,9 +45,9 @@ namespace AdventOfCode.Solutions.Year2020
 
         protected override string SolvePartOne()
         {
-            Queue<string> q = new Queue<string>();
+            Queue<string> q = new();
             int containedCount = 0;
-            List<string> visited = new List<string>();
+            List<string> visited = new();
             q.Enqueue("shiny gold");
             visited.Add("shiny gold");
             while (q.Count > 0)
@@ -70,9 +70,9 @@ namespace AdventOfCode.Solutions.Year2020
 
         protected override string SolvePartTwo()
         {
-            Queue<string> q = new Queue<string>();
+            Queue<string> q = new();
             int bagContains = 0;
-            List<string> visited = new List<string>();
+            List<string> visited = new();
             q.Enqueue("shiny gold");
             while (q.Count > 0)
             {

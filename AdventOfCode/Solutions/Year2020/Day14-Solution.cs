@@ -23,8 +23,8 @@ namespace AdventOfCode.Solutions.Year2020
                 var tokens = line.Split(" []=".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
                 if(tokens[0] == "mask")
                 {
-                    StringBuilder forcedMask = new StringBuilder();
-                    StringBuilder mask = new StringBuilder();
+                    StringBuilder forcedMask = new();
+                    StringBuilder mask = new();
 
                     foreach(char c in tokens[1])
                     {
@@ -50,7 +50,7 @@ namespace AdventOfCode.Solutions.Year2020
 
         protected override string SolvePartTwo()
         {
-            Dictionary<long, long> memory = new Dictionary<long, long>();
+            Dictionary<long, long> memory = new();
             string curVariableString = null ;
             foreach (var line in Input.SplitByNewline())
             {

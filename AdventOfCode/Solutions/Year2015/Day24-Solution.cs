@@ -15,7 +15,7 @@ namespace AdventOfCode.Solutions.Year2015
         protected override string SolvePartOne()
         {
             long tgt = Packages.Sum() / 3;
-            List<long> QEs = new List<long>();
+            List<long> QEs = new();
             bool setFound = false;
             for(int i = 2; i < Packages.Count; i++)
             {
@@ -36,7 +36,7 @@ namespace AdventOfCode.Solutions.Year2015
         protected override string SolvePartTwo()
         {
             long tgt = Packages.Sum() / 4;
-            List<long> QEs = new List<long>();
+            List<long> QEs = new();
             bool setFound = false;
             for (int i = 2; i < Packages.Count; i++)
             {

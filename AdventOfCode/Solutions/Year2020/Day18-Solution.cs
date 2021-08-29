@@ -6,8 +6,8 @@ namespace AdventOfCode.Solutions.Year2020
 
     class Day18 : ASolution
     {
-        readonly List<string> Expressions = new List<string>();
-        readonly List<string> PartTwoExpressions = new List<string>();
+        readonly List<string> Expressions = new();
+        readonly List<string> PartTwoExpressions = new();
         public Day18() : base(18, 2020, "Operation Order")
         {
             foreach(var l in Input.SplitByNewline())
@@ -79,8 +79,8 @@ namespace AdventOfCode.Solutions.Year2020
 
         private static long EvaluateExpression(string expression)
         {
-            Stack<long> nums = new Stack<long>();
-            Stack<char> operations = new Stack<char>();
+            Stack<long> nums = new();
+            Stack<char> operations = new();
 
             long opVal = 0;
 

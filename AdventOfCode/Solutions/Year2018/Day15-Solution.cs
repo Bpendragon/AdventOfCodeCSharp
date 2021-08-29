@@ -24,7 +24,7 @@ namespace AdventOfCode.Solutions.Year2018
         {
             for(int elfAttackPower = 4; ; elfAttackPower++)
             {
-                Game game = new Game(lines, elfAttackPower);
+                Game game = new(lines, elfAttackPower);
 
                 int? res = game.RunGame(true);
 
@@ -38,7 +38,7 @@ namespace AdventOfCode.Solutions.Year2018
     public class Game
     {
         private readonly string[] map;
-        private List<Unit> units = new List<Unit>();
+        private List<Unit> units = new();
         public Game(string[] initialMap, int elfAttackPower = 3)
         {
             for (int y = 0; y < initialMap.Length; y++)
@@ -104,7 +104,7 @@ namespace AdventOfCode.Solutions.Year2018
         private static readonly (int dx, int dy)[] s_neis = { (0, -1), (-1, 0), (1, 0), (0, 1) };
         private void TryMove(Unit u, List<Unit> targets)
         {
-            HashSet<(int x, int y)> inRange = new HashSet<(int x, int y)>();
+            HashSet<(int x, int y)> inRange = new();
             foreach (Unit target in targets)
             {
                 foreach ((int dx, int dy) p in s_neis)
@@ -114,8 +114,8 @@ namespace AdventOfCode.Solutions.Year2018
                 }
             }
 
-            Queue<(int x, int y)> queue = new Queue<(int x, int y)>();
-            Dictionary<(int x, int y), (int px, int py)> prevs = new Dictionary<(int x, int y), (int px, int py)>();
+            Queue<(int x, int y)> queue = new();
+            Dictionary<(int x, int y), (int px, int py)> prevs = new();
             queue.Enqueue((u.X, u.Y));
             prevs[(u.X, u.Y)] = (-1, -1);
             while (queue.Count > 0)
@@ -136,7 +136,7 @@ namespace AdventOfCode.Solutions.Year2018
             {
                 if (!prevs.ContainsKey((destX, destY)))
                     return null;
-                List<(int x, int y)> path = new List<(int x, int y)>();
+                List<(int x, int y)> path = new();
                 (int x, int y) = (destX, destY);
                 while (x != u.X || y != u.Y)
                 {

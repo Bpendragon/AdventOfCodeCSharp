@@ -6,8 +6,8 @@ namespace AdventOfCode.Solutions.Year2020
 
     class Day17 : ASolution
     {
-        Dictionary<(int x, int y, int z), bool> cyoob = new Dictionary<(int x, int y, int z), bool>();
-        Dictionary<(int x, int y, int z, int w), bool> cyoob4D = new Dictionary<(int x, int y, int z, int w), bool>();
+        Dictionary<(int x, int y, int z), bool> cyoob = new();
+        Dictionary<(int x, int y, int z, int w), bool> cyoob4D = new();
         public Day17() : base(17, 2020, "Conway Cubes")
         {
             var lines = Input.SplitByNewline();
@@ -135,14 +135,14 @@ namespace AdventOfCode.Solutions.Year2020
         }
 
 
-        private readonly List<(int x, int y, int z)> neighborDirections = new List<(int x, int y, int z)>
+        private readonly List<(int x, int y, int z)> neighborDirections = new()
         {
             (-1,-1,-1),(-1,-1,0),(-1,-1,1), (-1, 0, -1), (-1,0,0), (-1,0,1), (-1,1,-1),(-1,1,0),(-1,1,1),
             (0,-1,-1),(0,-1,0),(0,-1,1), (0, 0, -1), (0,0,1), (0,1,-1),(0,1,0),(0,1,1),
             (1,-1,-1),(1,-1,0),(1,-1,1), (1, 0, -1), (1,0,0), (1,0,1), (1,1,-1),(1,1,0),(1,1,1)
         };
 
-        private readonly List<(int x, int y, int z, int w)> fourDneighborDirections = new List<(int x, int y, int z, int w)>
+        private readonly List<(int x, int y, int z, int w)> fourDneighborDirections = new()
         {
             (-1,-1,-1,-1),(-1,-1,0,-1),(-1,-1,1,-1), (-1, 0, -1,-1), (-1,0,0,-1), (-1,0,1,-1), (-1,1,-1,-1),(-1,1,0,-1),(-1,1,1,-1),
             (0,-1,-1,-1),(0,-1,0,-1),(0,-1,1,-1), (0, 0, -1,-1), (0,0,1,-1), (0,1,-1,-1),(0,1,0,-1),(0,1,1,-1),

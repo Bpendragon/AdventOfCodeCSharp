@@ -7,8 +7,8 @@ namespace AdventOfCode.Solutions.Year2015
 
     class Day03 : ASolution
     {
-        readonly HashSet<(int x, int y)> HousesVisted1 = new HashSet<(int x, int y)>();
-        readonly HashSet<(int x, int y)> HousesVisted2 = new HashSet<(int x, int y)>();
+        readonly HashSet<(int x, int y)> HousesVisted1 = new();
+        readonly HashSet<(int x, int y)> HousesVisted2 = new();
         public Day03() : base(03, 2015, "")
         {
 

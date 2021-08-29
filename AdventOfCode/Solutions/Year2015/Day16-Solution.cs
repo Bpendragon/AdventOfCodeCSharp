@@ -7,8 +7,8 @@ namespace AdventOfCode.Solutions.Year2015
     class Day16 : ASolution
     {
         readonly List<string> Lines;
-        readonly List<AuntSue> Sues = new List<AuntSue>();
-        readonly AuntSue tgtSue = new AuntSue(-1);
+        readonly List<AuntSue> Sues = new();
+        readonly AuntSue tgtSue = new(-1);
         public Day16() : base(16, 2015, "")
         {
             tgtSue.Attributes = new Dictionary<string, int>()
@@ -31,7 +31,7 @@ namespace AdventOfCode.Solutions.Year2015
             {
                 string tmp = line.Replace(":", "").Replace(",", "");
                 string[] spl = tmp.Split();
-                AuntSue curSue = new AuntSue(int.Parse(spl[1]));
+                AuntSue curSue = new(int.Parse(spl[1]));
                 for (int i = 2; i < spl.Length; i += 2)
                 {
                     curSue.Attributes[spl[i]] = int.Parse(spl[i + 1]);
@@ -42,7 +42,7 @@ namespace AdventOfCode.Solutions.Year2015
 
         protected override string SolvePartOne()
         {
-            List<AuntSue> shrunkList = new List<AuntSue>(Sues);
+            List<AuntSue> shrunkList = new(Sues);
 
             foreach(var p in tgtSue.Attributes)
             {
@@ -53,7 +53,7 @@ namespace AdventOfCode.Solutions.Year2015
 
         protected override string SolvePartTwo()
         {
-            List<AuntSue> shrunkList = new List<AuntSue>(Sues);
+            List<AuntSue> shrunkList = new(Sues);
 
             foreach (var p in tgtSue.Attributes)
             {
@@ -79,7 +79,7 @@ namespace AdventOfCode.Solutions.Year2015
     class AuntSue
     {
         public int ID;
-        public Dictionary<string, int> Attributes = new Dictionary<string, int>();
+        public Dictionary<string, int> Attributes = new();
 
         public AuntSue(int ID)
         {

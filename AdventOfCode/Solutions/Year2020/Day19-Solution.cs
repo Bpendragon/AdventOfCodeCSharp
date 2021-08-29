@@ -9,9 +9,9 @@ namespace AdventOfCode.Solutions.Year2020
 
     class Day19 : ASolution
     {
-        readonly Dictionary<string, string> rules = new Dictionary<string, string>();
-        readonly Dictionary<string, string> processedRules = new Dictionary<string, string>();
-        readonly List<string> messages = new List<string>();
+        readonly Dictionary<string, string> rules = new();
+        readonly Dictionary<string, string> processedRules = new();
+        readonly List<string> messages = new();
         Regex reg;
 
         public Day19() : base(19, 2020, "Monster Messages")

@@ -7,8 +7,8 @@ namespace AdventOfCode.Solutions.Year2017
 
     class Day20 : ASolution
     {
-        readonly List<Particle> Particles = new List<Particle>();
-        readonly List<Particle> Particles2 = new List<Particle>();
+        readonly List<Particle> Particles = new();
+        readonly List<Particle> Particles2 = new();
         public Day20() : base(20, 2017, "")
         {
             int i = 0;

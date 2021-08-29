@@ -7,7 +7,7 @@ namespace AdventOfCode.Solutions.Year2019
 
     class Day12 : ASolution
     {
-        readonly List<Moon> Moons = new List<Moon>();
+        readonly List<Moon> Moons = new();
         readonly long? xCycle = null, 
               yCycle = null, 
               zCycle = null, 

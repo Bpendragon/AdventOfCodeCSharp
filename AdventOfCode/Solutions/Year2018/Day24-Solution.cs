@@ -14,7 +14,7 @@ namespace AdventOfCode.Solutions.Year2018
 
         protected override string SolvePartOne()
         {
-            List<Unit> Units = new List<Unit>(GetUnits());
+            List<Unit> Units = new(GetUnits());
             var res = SimulateCombat(Units, out bool _);
             return res.ToString();
         }
@@ -44,8 +44,8 @@ namespace AdventOfCode.Solutions.Year2018
             public long attackDamage;
             public AttackTypes attackType;
             public long initiative;
-            public List<AttackTypes> Immunities = new List<AttackTypes>();
-            public List<AttackTypes> Weaknesses = new List<AttackTypes>();
+            public List<AttackTypes> Immunities = new();
+            public List<AttackTypes> Weaknesses = new();
 
             public long EffectivePower => numAlive * attackDamage;
 
@@ -89,8 +89,8 @@ namespace AdventOfCode.Solutions.Year2018
                 //Target Selection Phase
                 long numTargetsKilled = 0;
                 var targetSelectionOrder = units.OrderByDescending(a => a.EffectivePower).ThenByDescending(a => a.initiative); //must re-sort every time
-                List<Unit> alreadySelected = new List<Unit>();
-                SortedDictionary<Unit, Unit> attackplan = new SortedDictionary<Unit, Unit>();
+                List<Unit> alreadySelected = new();
+                SortedDictionary<Unit, Unit> attackplan = new();
                 foreach (var unit in targetSelectionOrder)
                 {
                     var possibleTargets = units.Where(x => x.isImmuneSystem != unit.isImmuneSystem).Except(alreadySelected);
@@ -182,7 +182,7 @@ namespace AdventOfCode.Solutions.Year2018
                     var m = Regex.Match(line, rx);
                     if (m.Success)
                     {
-                        Unit g = new Unit
+                        Unit g = new()
                         {
                             isImmuneSystem = immuneSystem,
                             numAlive = int.Parse(m.Groups[1].Value),

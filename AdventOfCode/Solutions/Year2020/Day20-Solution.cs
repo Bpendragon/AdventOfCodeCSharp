@@ -10,7 +10,7 @@ namespace AdventOfCode.Solutions.Year2020
     {
         readonly Tile[][] tiles;
         readonly Tile BigTile;
-        readonly List<string> Image = new List<string>();
+        readonly List<string> Image = new();
         public Day20() : base(20, 2020, "Jurassic Jigsaw")
         {
             tiles = AssemblePuzzle(Input);
@@ -33,7 +33,7 @@ namespace AdventOfCode.Solutions.Year2020
 
         protected override string SolvePartTwo()
         {
-            List<(int x, int y)> Nessie = new List<(int x, int y)>() //these are *just* the offsets from the tip off the tail
+            List<(int x, int y)> Nessie = new() //these are *just* the offsets from the tip off the tail
             {
                 (0,0), //include the tail in case it gets ripped out of our dictionary early
                 (1, -1),
@@ -52,7 +52,7 @@ namespace AdventOfCode.Solutions.Year2020
                 (19, 0)
             };
 
-            Dictionary<(int x, int y), char> map = new Dictionary<(int x, int y), char>();
+            Dictionary<(int x, int y), char> map = new();
 
             for (int y = 0; y < BigTile.data.Length; y++)
             {

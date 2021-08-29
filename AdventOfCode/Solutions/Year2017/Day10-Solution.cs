@@ -14,9 +14,9 @@ namespace AdventOfCode.Solutions.Year2017
 
         protected override string SolvePartOne()
         {
-            List<int> lengths = new List<int>(Input.ToIntArray(","));
-            KnotHash kn = new KnotHash(lengths);
-            List<int> knot = new List<int>(256);
+            List<int> lengths = new(Input.ToIntArray(","));
+            KnotHash kn = new(lengths);
+            List<int> knot = new(256);
             foreach (int i in Enumerable.Range(0, 256)) knot.Add(i);
             List<int> res = kn.Round(knot);
             return (res[0]*res[1]).ToString();
@@ -24,7 +24,7 @@ namespace AdventOfCode.Solutions.Year2017
 
         protected override string SolvePartTwo()
         {
-            KnotHash kn = new KnotHash();
+            KnotHash kn = new();
             return kn.CalculateHash(Input);
         }
     }

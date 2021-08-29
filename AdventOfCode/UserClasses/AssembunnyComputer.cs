@@ -5,7 +5,7 @@ namespace AdventOfCode.UserClasses
 {
     class AssembunnyComputer
     {
-        public Dictionary<string, int> registers = new Dictionary<string, int>();
+        public Dictionary<string, int> registers = new();
 
         public List<string> program;
         public List<string> cleanProgram;

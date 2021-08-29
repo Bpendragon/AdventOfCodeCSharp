@@ -32,7 +32,7 @@ namespace AdventOfCode.Solutions.Year2015
 
         protected override string SolvePartOne()
         {
-            List<int> recipeScores = new List<int>();
+            List<int> recipeScores = new();
             for (int i = 0; i < 100; i++)
             {
                 for (int j = 0; j < (100 - i); j++)
@@ -53,7 +53,7 @@ namespace AdventOfCode.Solutions.Year2015
 
         protected override string SolvePartTwo()
         {
-            List<int> recipeScores = new List<int>();
+            List<int> recipeScores = new();
             for (int i = 0; i < 100; i++)
             {
                 for (int j = 0; j < (100 - i); j++)

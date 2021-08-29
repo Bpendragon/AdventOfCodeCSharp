@@ -8,8 +8,8 @@ namespace AdventOfCode.Solutions.Year2020
 
     class Day21 : ASolution
     {
-        readonly Dictionary<string, List<string>> AllergenPossibilities = new Dictionary<string, List<string>>();
-        readonly Dictionary<string, int> ingredientCounts = new Dictionary<string, int>();
+        readonly Dictionary<string, List<string>> AllergenPossibilities = new();
+        readonly Dictionary<string, int> ingredientCounts = new();
         readonly StringSplitOptions splitOpts = StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries;
         public Day21() : base(21, 2020, "Allergen Assessment")
         {
@@ -53,7 +53,7 @@ namespace AdventOfCode.Solutions.Year2020
 
         protected override string SolvePartTwo()
         {
-            Dictionary<string, string> knownAllergens = new Dictionary<string, string>();
+            Dictionary<string, string> knownAllergens = new();
 
 
             while(AllergenPossibilities.Any(x => x.Value.Count > 1))
@@ -68,7 +68,7 @@ namespace AdventOfCode.Solutions.Year2020
                 }
             }
 
-            StringBuilder sb = new StringBuilder();
+            StringBuilder sb = new();
 
             List<string> sortedAllergens = AllergenPossibilities.Keys.ToList();
             sortedAllergens.Sort();

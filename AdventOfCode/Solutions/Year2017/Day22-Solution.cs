@@ -8,7 +8,7 @@ namespace AdventOfCode.Solutions.Year2017
 
     class Day22 : ASolution
     {
-        readonly Dictionary<(int x, int y), char> startMap = new Dictionary<(int x, int y), char>();
+        readonly Dictionary<(int x, int y), char> startMap = new();
         const string L = "L";
         const string R = "R";
         readonly (int x, int y) center;
@@ -20,7 +20,7 @@ namespace AdventOfCode.Solutions.Year2017
 
             center = (xOffset, yOffset);
 
-            StringBuilder sb = new StringBuilder();
+            StringBuilder sb = new();
             for (int j = 0; j < lines.Length; j++)
             {
                 for (int i = 0; i < lines[0].Length; i++)

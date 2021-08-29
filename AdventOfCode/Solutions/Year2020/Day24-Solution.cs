@@ -8,7 +8,7 @@ namespace AdventOfCode.Solutions.Year2020
     {
         readonly Dictionary<string, (int q, int r)> Moves; //q = 'q'olumn, r = 'r'ow (not c since that's normally for chars)
         List<string> instructions;
-        Dictionary<(int q, int r), bool> TileStates = new Dictionary<(int q, int r), bool>(); //true = black, false = white
+        Dictionary<(int q, int r), bool> TileStates = new(); //true = black, false = white
         public Day24() : base(24, 2020, "")
         {
             //UseDebugInput = true;

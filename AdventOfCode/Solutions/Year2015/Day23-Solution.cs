@@ -7,7 +7,7 @@ namespace AdventOfCode.Solutions.Year2015
     class Day23 : ASolution
     {
         readonly List<string> Program;
-        public Dictionary<string, int> Regs = new Dictionary<string, int>()
+        public Dictionary<string, int> Regs = new()
         {
             {"a", 0 },
             {"b", 0 }
@@ -34,7 +34,7 @@ namespace AdventOfCode.Solutions.Year2015
 
         public void RunProgram()
         {
-            List<string> WorkingProgram = new List<string>(Program);
+            List<string> WorkingProgram = new(Program);
             int PC = 0;
 
             while(PC < WorkingProgram.Count)

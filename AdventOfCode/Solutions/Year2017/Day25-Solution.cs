@@ -13,7 +13,7 @@ namespace AdventOfCode.Solutions.Year2017
 
         protected override string SolvePartOne()
         {
-            TuringMachine tm = new TuringMachine();
+            TuringMachine tm = new();
 
             foreach (int _ in Enumerable.Range(0, 12629077)) tm.Step();
 
@@ -29,7 +29,7 @@ namespace AdventOfCode.Solutions.Year2017
     public class TuringMachine
     {
         //This entire thing is handcoded from my input. It probably won't work for you.
-        public Dictionary<int, int> Tape = new Dictionary<int, int>();
+        public Dictionary<int, int> Tape = new();
         private int Cursor = 0;
         private States CurrentState = States.A;
 

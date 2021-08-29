@@ -37,7 +37,7 @@ namespace AdventOfCode.Solutions
             if( Input == null ) return;
 
             bool doOutput = false;
-            StringBuilder output = new StringBuilder($"--- Day {Day}: {Title} --- \n");
+            StringBuilder output = new($"--- Day {Day}: {Title} --- \n");
             if( DebugInput != null ) {
                 output.Append($"!!! DebugInput used !!!\n");
             }
@@ -87,7 +87,7 @@ namespace AdventOfCode.Solutions
                     DateTime CURRENT_EST = TimeZoneInfo.ConvertTime(DateTime.Now, TimeZoneInfo.Utc).AddHours(-5);
                     if( CURRENT_EST < new DateTime(Year, 12, Day) ) throw new InvalidOperationException();
 
-                    using WebClient client = new WebClient();
+                    using WebClient client = new();
                     client.Headers.Add(HttpRequestHeader.Cookie, Program.Config.Cookie);
                     input = client.DownloadString(INPUT_URL).Trim();
                     File.WriteAllText(INPUT_FILEPATH, input);
@@ -115,7 +115,7 @@ namespace AdventOfCode.Solutions
         protected abstract string SolvePartTwo();
 
         private static string SafelySolve(Func<string> partSolver, out long timeTaken) {
-            Stopwatch clock = new Stopwatch(); clock.Start();
+            Stopwatch clock = new(); clock.Start();
             string solution = string.Empty;
             try {
                 solution = partSolver();

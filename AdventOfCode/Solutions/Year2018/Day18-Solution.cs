@@ -9,7 +9,7 @@ namespace AdventOfCode.Solutions.Year2018
 
     class Day18 : ASolution
     {
-        readonly Dictionary<(int x, int y), char> baseMap = new Dictionary<(int x, int y), char>();
+        readonly Dictionary<(int x, int y), char> baseMap = new();
         public Day18() : base(18, 2018, "")
         {
             int y = 0;
@@ -43,7 +43,7 @@ namespace AdventOfCode.Solutions.Year2018
 
         private string LoggingSteps(Dictionary<(int x, int y), char> p1, int numIterations)
         {
-            List<string> SeenLayouts = new List<string>();
+            List<string> SeenLayouts = new();
             Dictionary<(int x, int y), char> next;
             foreach (int i in Enumerable.Range(1, numIterations))
             {
@@ -79,7 +79,7 @@ namespace AdventOfCode.Solutions.Year2018
                 }
                 p1 = new Dictionary<(int x, int y), char>(next);
 
-                StringBuilder sb = new StringBuilder();
+                StringBuilder sb = new();
                 for(int y = 0; y < 50; y++)
                 {
                     for(int x = 0; x < 50; x++)

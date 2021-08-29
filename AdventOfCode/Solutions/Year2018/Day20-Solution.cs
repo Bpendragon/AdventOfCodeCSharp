@@ -6,13 +6,13 @@ namespace AdventOfCode.Solutions.Year2018
 
     class Day20 : ASolution
     {
-        readonly Dictionary<(int x, int y), int> map = new Dictionary<(int x, int y), int>();
+        readonly Dictionary<(int x, int y), int> map = new();
 
         public Day20() : base(20, 2018, "")
         {
             int dist = 0;
             (int x, int y) curLoc = (0, 0);
-            Stack<(int dist, (int x, int y) loc)> s = new Stack<(int dist, (int x, int y) loc)>();
+            Stack<(int dist, (int x, int y) loc)> s = new();
 
             map[(0, 0)] = 0;
             foreach (char c in Input[1..^1]) //who cares about the first and last items.

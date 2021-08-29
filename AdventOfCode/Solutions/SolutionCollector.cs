@@ -38,7 +38,7 @@ namespace AdventOfCode.Solutions
             foreach( int day in days ) {
                 Type solution = Type.GetType($"AdventOfCode.Solutions.Year{year}.Day{day:D2}");
                 if( solution != null ) {
-                    Stopwatch sw = new Stopwatch();
+                    Stopwatch sw = new();
                     sw.Start();
                     ASolution val = (ASolution)Activator.CreateInstance(solution);
                     sw.Stop();

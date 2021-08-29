@@ -8,7 +8,7 @@ namespace AdventOfCode.Solutions.Year2020
     {
         readonly List<int> Adapters;
         readonly int yourAdapter;
-        readonly Dictionary<int, long> KnownCounts = new Dictionary<int, long>();
+        readonly Dictionary<int, long> KnownCounts = new();
         readonly bool PrintAll = false;
 
         public Day10() : base(10, 2020, "Adapter Array")
@@ -23,7 +23,7 @@ namespace AdventOfCode.Solutions.Year2020
 
         protected override string SolvePartOne()
         {
-            List<int> p1Adapters = new List<int>(Adapters);
+            List<int> p1Adapters = new(Adapters);
 
             int ones = 0;
             int threes = 0; 

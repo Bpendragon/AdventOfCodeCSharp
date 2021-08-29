@@ -6,7 +6,7 @@ namespace AdventOfCode.Solutions.Year2018
 
     class Day25 : ASolution
     {
-        readonly HashSet<Coordinate4D> stars = new HashSet<Coordinate4D>();
+        readonly HashSet<Coordinate4D> stars = new();
         public Day25() : base(25, 2018, "")
         {
             foreach(var line in Input.SplitByNewline())
@@ -18,13 +18,13 @@ namespace AdventOfCode.Solutions.Year2018
 
         protected override string SolvePartOne()
         {
-            HashSet<Coordinate4D> visited = new HashSet<Coordinate4D>();
+            HashSet<Coordinate4D> visited = new();
 
             int groups = 0;
             while (stars.Count > visited.Count)
             {
                 groups++;
-                Queue<Coordinate4D> q = new Queue<Coordinate4D>();
+                Queue<Coordinate4D> q = new();
                 q.Enqueue(stars.Except(visited).First());
                 while(q.Count > 0)
                 {

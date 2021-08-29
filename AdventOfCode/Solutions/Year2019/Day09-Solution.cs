@@ -15,7 +15,7 @@ namespace AdventOfCode.Solutions.Year2019
 
         protected override string SolvePartOne()
         {
-            IntCode2 cpu = new IntCode2(program);
+            IntCode2 cpu = new(program);
             long lastItem = long.MinValue;
             cpu.ReadyInput(1);
             foreach (long item in cpu.RunProgram())
@@ -30,7 +30,7 @@ namespace AdventOfCode.Solutions.Year2019
         {
 
 
-            IntCode2 cpu = new IntCode2(program);
+            IntCode2 cpu = new(program);
             long lastItem = long.MinValue;
             cpu.ReadyInput(2);
             foreach (long item in cpu.RunProgram())

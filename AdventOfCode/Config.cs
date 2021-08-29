@@ -67,7 +67,7 @@ namespace AdventOfCode
 
         public static Config Get(string path)
         {
-            JsonSerializerOptions options = new JsonSerializerOptions()
+            JsonSerializerOptions options = new()
             {
                 IgnoreNullValues = true,
                 PropertyNameCaseInsensitive = true,

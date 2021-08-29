@@ -5,8 +5,8 @@ namespace AdventOfCode.Solutions.Year2020
 
     class Day15 : ASolution
     {
-        public Dictionary<int, int> LastTimesSpoken = new Dictionary<int, int>();
-        readonly List<int> NumberString = new List<int>(); //direct from input.
+        public Dictionary<int, int> LastTimesSpoken = new();
+        readonly List<int> NumberString = new(); //direct from input.
         readonly List<int> NumberString2;
         readonly int[] startNums;
         public Day15() : base(15, 2020, "Rambunctious Recitation")

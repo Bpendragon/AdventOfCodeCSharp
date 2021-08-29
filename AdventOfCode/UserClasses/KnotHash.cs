@@ -11,7 +11,7 @@ namespace AdventOfCode.UserClasses
         private int CurPosition = 0;
         private int SkipSize = 0;
         private List<int> Sequence;
-        private List<int> knot = new List<int>(256);
+        private List<int> knot = new(256);
         public string Hash { get; private set; }
 
 
@@ -50,11 +50,11 @@ namespace AdventOfCode.UserClasses
 
         public List<int> Round(List<int> input)
         {
-            List<int> res = new List<int>(input);
+            List<int> res = new(input);
             foreach(int length in Sequence)
             {
                 //Get Substring and reverse
-                List<int> sub = new List<int>(res);
+                List<int> sub = new(res);
                 if(CurPosition + length >= res.Count)
                 {
                     sub.AddRange(res);
@@ -107,7 +107,7 @@ namespace AdventOfCode.UserClasses
                 hashVals[i] = groups[i].Aggregate((a, b) => a ^ b);
             }
 
-            StringBuilder sb = new StringBuilder();
+            StringBuilder sb = new();
 
             foreach(int i in hashVals)
             {

@@ -72,7 +72,7 @@ namespace AdventOfCode.Solutions.Year2019
         {
             //I tried to do something fancy, then I decided I'd just do it using excel and sorting. 
             using (System.IO.StreamWriter file =
-            new System.IO.StreamWriter(@"D:\Users\campb\Documents\AdventOfCode\AdventOfCodeCSharp\AdventOfCode\Solutions\Year2019\Day10-visible.txt"))
+            new(@"D:\Users\campb\Documents\AdventOfCode\AdventOfCodeCSharp\AdventOfCode\Solutions\Year2019\Day10-visible.txt"))
             {
                 foreach (KeyValuePair<(int, int), Asteroid> vis in baseLoc.InView)
                 {

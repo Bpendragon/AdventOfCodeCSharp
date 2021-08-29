@@ -10,7 +10,7 @@ namespace AdventOfCode.UserClasses
         public List<long> PreviousRunState;
         int PC;
         int RelativeBase;
-        private readonly Queue<long> Inputs = new Queue<long>();
+        private readonly Queue<long> Inputs = new();
 
         public IntCode2(long[] Program)
         {

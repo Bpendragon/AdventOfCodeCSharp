@@ -20,7 +20,7 @@ namespace AdventOfCode.Solutions.Year2020
         {
             for(int i = 0; i < Lines.Count; i++)
             {
-                List<string> copy = new List<string>(Lines);
+                List<string> copy = new(Lines);
 
                 string[] tmp = Lines[i].Split();
 
@@ -42,7 +42,7 @@ namespace AdventOfCode.Solutions.Year2020
 
         private static bool TestProgram(List<string> program)
         {
-            List<int> visitedCommands = new List<int>();
+            List<int> visitedCommands = new();
             int pc = 0;
             int acc = 0;
 
@@ -72,7 +72,7 @@ namespace AdventOfCode.Solutions.Year2020
 
         private static int RunProgram(List<string> Program)
         {
-            List<int> visitedCommands = new List<int>();
+            List<int> visitedCommands = new();
             int pc = 0;
             int acc = 0;
 

@@ -42,7 +42,7 @@ namespace AdventOfCode.Solutions.Year2016
 
         protected override string SolvePartTwo()
         {
-            StringBuilder sb = new StringBuilder('\n');
+            StringBuilder sb = new('\n');
             Node[,] map = new Node[33, 30];
             foreach(Node node in Nodes)
             {

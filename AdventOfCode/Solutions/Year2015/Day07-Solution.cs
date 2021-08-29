@@ -6,7 +6,7 @@ namespace AdventOfCode.Solutions.Year2015
     class Day07 : ASolution
     {
         private readonly List<string> Lines;
-        private readonly Dictionary<string, Gate> circuit = new Dictionary<string, Gate>();
+        private readonly Dictionary<string, Gate> circuit = new();
         public Day07() : base(07, 2015, "")
         {
             Lines = new List<string>(Input.SplitByNewline());
@@ -32,7 +32,7 @@ namespace AdventOfCode.Solutions.Year2015
                     }
                     else
                     {
-                        Gate _gate2 = new Gate(tokens[1]);
+                        Gate _gate2 = new(tokens[1]);
                         circuit[_gate2.Name] = _gate2;
                         _gate.Inputs.Add(_gate2);
                     }
@@ -58,7 +58,7 @@ namespace AdventOfCode.Solutions.Year2015
                         }
                         else
                         {
-                            Gate _gate2 = new Gate(tokens[0]);
+                            Gate _gate2 = new(tokens[0]);
                             circuit[_gate2.Name] = _gate2;
                             _gate.Inputs.Add(_gate2);
                         }
@@ -90,7 +90,7 @@ namespace AdventOfCode.Solutions.Year2015
                     {
                         if (ushort.TryParse(tokens[0], out ushort val))
                         {
-                            Gate _gateD = new Gate()
+                            Gate _gateD = new()
                             {
                                 Output = val,
                                 Type = GateTypes.Direct
@@ -100,7 +100,7 @@ namespace AdventOfCode.Solutions.Year2015
                         }
                         else
                         {
-                            Gate _gate2 = new Gate(tokens[0]);
+                            Gate _gate2 = new(tokens[0]);
                             circuit[_gate2.Name] = _gate2;
                             _gate.Inputs.Add(_gate2);
                         }
@@ -122,7 +122,7 @@ namespace AdventOfCode.Solutions.Year2015
                         }
                         else
                         {
-                            Gate _gate2 = new Gate(tokens[2]);
+                            Gate _gate2 = new(tokens[2]);
                             circuit[_gate2.Name] = _gate2;
                             _gate.Inputs.Add(_gate2);
                         }

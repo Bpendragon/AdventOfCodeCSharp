@@ -7,8 +7,8 @@ namespace AdventOfCode.Solutions.Year2017
 
     class Day12 : ASolution
     {
-        readonly Dictionary<int, List<int>> Pipes = new Dictionary<int, List<int>>();
-        readonly List<int> Visited = new List<int>();
+        readonly Dictionary<int, List<int>> Pipes = new();
+        readonly List<int> Visited = new();
         private int NumGroups = 0;
         public Day12() : base(12, 2017, "Digital Plumber")
         {
@@ -40,7 +40,7 @@ namespace AdventOfCode.Solutions.Year2017
 
         private void BFS(int start)
         {
-            Queue<int> q = new Queue<int>();
+            Queue<int> q = new();
             q.Enqueue(start);
             Visited.Add(start);
             while (q.Count > 0)

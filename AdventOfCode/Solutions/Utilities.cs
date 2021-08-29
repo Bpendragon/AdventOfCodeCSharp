@@ -18,7 +18,7 @@ namespace AdventOfCode.Solutions
         {
             if (delimiter == "")
             {
-                List<int> result = new List<int>();
+                List<int> result = new();
                 foreach (char c in str) if (int.TryParse(c.ToString(), out int n)) result.Add(n);
                 return result.ToArray();
             }
@@ -36,7 +36,7 @@ namespace AdventOfCode.Solutions
         {
             if (delimiter == "")
             {
-                List<long> result = new List<long>();
+                List<long> result = new();
                 foreach (char c in str) if (long.TryParse(c.ToString(), out long n)) result.Add(n);
                 return result.ToArray();
             }
@@ -187,7 +187,7 @@ namespace AdventOfCode.Solutions
         private static IEnumerable<int[]> Combinations(int subcount, int length)
         {
             int[] res = new int[subcount];
-            Stack<int> stack = new Stack<int>(subcount);
+            Stack<int> stack = new(subcount);
             stack.Push(0);
             while (stack.Count > 0)
             {
@@ -363,7 +363,7 @@ namespace AdventOfCode.Solutions
 
         public static List<K> KeyList<K, V>(this Dictionary<K, V> dictionary, bool sorted = false)
         {
-            List<K> keyList = new List<K>();
+            List<K> keyList = new();
 
             foreach (K key in dictionary.Keys)
             {
@@ -381,9 +381,9 @@ namespace AdventOfCode.Solutions
 
     public class Coordinate2D
     {
-        public static readonly Coordinate2D origin = new Coordinate2D(0, 0);
-        public static readonly Coordinate2D unit_x = new Coordinate2D(1, 0);
-        public static readonly Coordinate2D unit_y = new Coordinate2D(0, 1);
+        public static readonly Coordinate2D origin = new(0, 0);
+        public static readonly Coordinate2D unit_x = new(1, 0);
+        public static readonly Coordinate2D unit_y = new(0, 1);
         readonly int x;
         readonly int y;
 
@@ -444,14 +444,14 @@ namespace AdventOfCode.Solutions
         }
 
         public static Coordinate2D operator +(Coordinate2D a) => a;
-        public static Coordinate2D operator +(Coordinate2D a, Coordinate2D b) => new Coordinate2D(a.x + b.x, a.y + b.y);
-        public static Coordinate2D operator -(Coordinate2D a) => new Coordinate2D(-a.x, -a.y);
+        public static Coordinate2D operator +(Coordinate2D a, Coordinate2D b) => new(a.x + b.x, a.y + b.y);
+        public static Coordinate2D operator -(Coordinate2D a) => new(-a.x, -a.y);
         public static Coordinate2D operator -(Coordinate2D a, Coordinate2D b) => a + (-b);
-        public static Coordinate2D operator *(int scale, Coordinate2D a) => new Coordinate2D(scale * a.x, scale * a.y);
+        public static Coordinate2D operator *(int scale, Coordinate2D a) => new(scale * a.x, scale * a.y);
         public static bool operator ==(Coordinate2D a, Coordinate2D b) => (a.x == b.x && a.y == b.y);
         public static bool operator !=(Coordinate2D a, Coordinate2D b) => (a.x != b.x || a.y != b.y);
 
-        public static implicit operator Coordinate2D((int x, int y) a) => new Coordinate2D(a.x, a.y);
+        public static implicit operator Coordinate2D((int x, int y) a) => new(a.x, a.y);
 
         public static implicit operator (int x, int y)(Coordinate2D a) => (a.x, a.y);
         public override bool Equals(object obj)
@@ -480,12 +480,12 @@ namespace AdventOfCode.Solutions
             this.z = z;
         }
 
-        public static implicit operator Coordinate3D((int x, int y, int z) a) => new Coordinate3D(a.x, a.y, a.z);
+        public static implicit operator Coordinate3D((int x, int y, int z) a) => new(a.x, a.y, a.z);
 
         public static implicit operator (int x, int y, int z)(Coordinate3D a) => (a.x, a.y, a.z);
         public static Coordinate3D operator +(Coordinate3D a) => a;
-        public static Coordinate3D operator +(Coordinate3D a, Coordinate3D b) => new Coordinate3D(a.x + b.x, a.y + b.y, a.z + b.z);
-        public static Coordinate3D operator -(Coordinate3D a) => new Coordinate3D(-a.x, -a.y, -a.z);
+        public static Coordinate3D operator +(Coordinate3D a, Coordinate3D b) => new(a.x + b.x, a.y + b.y, a.z + b.z);
+        public static Coordinate3D operator -(Coordinate3D a) => new(-a.x, -a.y, -a.z);
         public static Coordinate3D operator -(Coordinate3D a, Coordinate3D b) => a + (-b);
         public static bool operator ==(Coordinate3D a, Coordinate3D b) => (a.x == b.x && a.y == b.y && a.z == b.z);
         public static bool operator !=(Coordinate3D a, Coordinate3D b) => (a.x != b.x || a.y != b.y || a.z != b.z);
@@ -533,12 +533,12 @@ namespace AdventOfCode.Solutions
             this.w = w;
         }
 
-        public static implicit operator Coordinate4D((int x, int y, int z, int w) a) => new Coordinate4D(a.x, a.y, a.z, a.w);
+        public static implicit operator Coordinate4D((int x, int y, int z, int w) a) => new(a.x, a.y, a.z, a.w);
 
         public static implicit operator (int x, int y, int z, int w)(Coordinate4D a) => (a.x, a.y, a.z, a.w);
         public static Coordinate4D operator +(Coordinate4D a) => a;
-        public static Coordinate4D operator +(Coordinate4D a, Coordinate4D b) => new Coordinate4D(a.x + b.x, a.y + b.y, a.z + b.z, a.w + b.w);
-        public static Coordinate4D operator -(Coordinate4D a) => new Coordinate4D(-a.x, -a.y, -a.z, -a.w);
+        public static Coordinate4D operator +(Coordinate4D a, Coordinate4D b) => new(a.x + b.x, a.y + b.y, a.z + b.z, a.w + b.w);
+        public static Coordinate4D operator -(Coordinate4D a) => new(-a.x, -a.y, -a.z, -a.w);
         public static Coordinate4D operator -(Coordinate4D a, Coordinate4D b) => a + (-b);
         public static bool operator ==(Coordinate4D a, Coordinate4D b) => (a.x == b.x && a.y == b.y && a.z == b.z && a.w == b.w);
         public static bool operator !=(Coordinate4D a, Coordinate4D b) => (a.x != b.x || a.y != b.y || a.z != b.z || a.z != b.z);
@@ -561,7 +561,7 @@ namespace AdventOfCode.Solutions
         {
             if (neighbors != null) return neighbors;
 
-            List<Coordinate4D> neighborList = new List<Coordinate4D>();
+            List<Coordinate4D> neighborList = new();
 
             for (int x = -1; x <= 1; x++)
             {

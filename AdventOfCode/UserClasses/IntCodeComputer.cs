@@ -99,7 +99,7 @@ namespace AdventOfCode.UserClasses
                         break;
 
                     case Operation.WriteOutput:
-                        OutputEventArgs output = new OutputEventArgs
+                        OutputEventArgs output = new()
                         {
                             OutputValue = opParams[0]
                         };

@@ -7,9 +7,9 @@ namespace AdventOfCode.Solutions.Year2015
 
     class Day19 : ASolution
     {
-        readonly Dictionary<string, List<string>> Substitutions = new Dictionary<string, List<string>>();
+        readonly Dictionary<string, List<string>> Substitutions = new();
         readonly string baseChem;
-        readonly List<string> subbedChems = new List<string>();
+        readonly List<string> subbedChems = new();
 
         public Day19() : base(19, 2015, "")
         {

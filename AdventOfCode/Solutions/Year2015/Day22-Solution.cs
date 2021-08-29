@@ -28,7 +28,7 @@ namespace AdventOfCode.Solutions.Year2015
         //available actions "NotEnough" indicates the player ran out of mana and is therefore dead.
         enum ActionType { NotEnough = -1, Missile, Drain, Poison, Shield, Recharge }
 
-        readonly Random r = new Random(); //I've got a fast computer, let's just simulate a few hundred thousand runs and be done with it.
+        readonly Random r = new(); //I've got a fast computer, let's just simulate a few hundred thousand runs and be done with it.
 
 
         public Day22() : base(22, 2015, "")

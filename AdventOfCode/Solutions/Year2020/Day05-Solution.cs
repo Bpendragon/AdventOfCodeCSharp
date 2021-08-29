@@ -18,13 +18,11 @@ namespace AdventOfCode.Solutions.Year2020
                 int test = (Convert.ToInt32(id, 2));
                 passIDs.Add(test);
             }
-
-            passIDs.Sort();
         }
 
         protected override string SolvePartOne()
         {
-            return passIDs.Last().ToString();
+            return passIDs.Max().ToString();
         }
 
         protected override string SolvePartTwo()

@@ -8,7 +8,7 @@ namespace AdventOfCode.Solutions.Year2017
 
     class Day21 : ASolution
     {
-        readonly Dictionary<string, string> rulesMap = new Dictionary<string, string>();
+        readonly Dictionary<string, string> rulesMap = new();
         public Day21() : base(21, 2017, "")
         {
             foreach (var line in Input.SplitByNewline())

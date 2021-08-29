@@ -6,7 +6,7 @@ namespace AdventOfCode.Solutions.Year2015
 
     class Day13 : ASolution
     {
-        readonly Dictionary<string, Guest> GuestList = new Dictionary<string, Guest>();
+        readonly Dictionary<string, Guest> GuestList = new();
         public Day13() : base(13, 2015, "")
         {
             foreach(string line in Input.SplitByNewline())
@@ -38,7 +38,7 @@ namespace AdventOfCode.Solutions.Year2015
 
         protected override string SolvePartOne()
         {
-            List<int> orderScores = new List<int>();
+            List<int> orderScores = new();
             foreach(var o in GuestList.Keys.Permutations())
             {
                 List<string> order = o.ToList();
@@ -55,8 +55,8 @@ namespace AdventOfCode.Solutions.Year2015
 
         protected override string SolvePartTwo()
         {
-            Guest myself = new Guest();
-            Dictionary<string, Guest> secondGuestList = new Dictionary<string, Guest>(GuestList);
+            Guest myself = new();
+            Dictionary<string, Guest> secondGuestList = new(GuestList);
             foreach(string g in GuestList.Keys)
             {
                 myself.Relationships[g] = 0;
@@ -66,7 +66,7 @@ namespace AdventOfCode.Solutions.Year2015
             secondGuestList["myself"] = myself;
 
 
-            List<int> orderScores = new List<int>();
+            List<int> orderScores = new();
             foreach (var o in secondGuestList.Keys.Permutations())
             {
                 List<string> order = o.ToList();

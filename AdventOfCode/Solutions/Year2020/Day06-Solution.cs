@@ -28,8 +28,8 @@ namespace AdventOfCode.Solutions.Year2020
             int running = 0;
            foreach(string group in answers)
             {
-                Dictionary<char, int> res = new Dictionary<char, int>();
-                List<string> members = new List<string>(group.SplitByNewline());
+                Dictionary<char, int> res = new();
+                List<string> members = new(group.SplitByNewline());
                 foreach(string member in members)
                 {
                     foreach(char c in member)

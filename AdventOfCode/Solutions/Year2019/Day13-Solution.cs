@@ -20,7 +20,7 @@ namespace AdventOfCode.Solutions.Year2019
 
         protected override string SolvePartOne()
         {
-            Dictionary<(long x, long y), long> screen = new Dictionary<(long x, long y), long>();
+            Dictionary<(long x, long y), long> screen = new();
             var outputStream = cab.RunProgram().ToList();
 
             for(int i = 0; i < outputStream.Count;  i+=3)
@@ -36,7 +36,7 @@ namespace AdventOfCode.Solutions.Year2019
         {
             cab = new IntCode2(Input.ToLongArray(","));
             cab.Program[0] = 2; //set it up for quarters
-            Dictionary<(long x, long y), long> screen = new Dictionary<(long x, long y), long>();
+            Dictionary<(long x, long y), long> screen = new();
 
             long? nextX = null, nextY = null;
             long score = 0;
@@ -109,7 +109,7 @@ namespace AdventOfCode.Solutions.Year2019
 
         public void DrawScreen(Dictionary<(long x, long y), long> screen)
         {
-            StringBuilder sb = new StringBuilder();
+            StringBuilder sb = new();
             if(screen.ContainsKey((-1,0)))
             {
                 sb.Append($"Score: {screen[(-1, 0)]}\n");

@@ -8,8 +8,8 @@ namespace AdventOfCode.Solutions.Year2015
     class Day21 : ASolution
     {
         readonly int playerHP = 100;
-        readonly List<int> CostsOfVictory = new List<int>();
-        readonly List<int> CostsOfFailure = new List<int>();
+        readonly List<int> CostsOfVictory = new();
+        readonly List<int> CostsOfFailure = new();
 
         //FROM INPUT
         const int bossHP = 103;

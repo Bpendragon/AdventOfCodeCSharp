@@ -8,10 +8,10 @@ namespace AdventOfCode.Solutions.Year2017
 
     class Day19 : ASolution
     {
-        readonly List<char> lettersSeen = new List<char>();
+        readonly List<char> lettersSeen = new();
         int steps = 0;
         readonly List<string> Lines;
-        readonly Dictionary<(int, int), char> map = new Dictionary<(int, int), char>();
+        readonly Dictionary<(int, int), char> map = new();
         public Day19() : base(19, 2017, "")
         {
             Lines = new List<string>(Input.Split('\n'));

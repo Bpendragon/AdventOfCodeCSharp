@@ -14,7 +14,7 @@ namespace AdventOfCode.Solutions.Year2017
 
         protected override string SolvePartOne()
         {
-            List<int> buffer = new List<int>() { 0 };
+            List<int> buffer = new() { 0 };
             int curPos = 0;
             for(int i = 1; i <= 2017; i++)
             {

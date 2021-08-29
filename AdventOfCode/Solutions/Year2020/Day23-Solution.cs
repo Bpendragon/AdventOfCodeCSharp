@@ -8,8 +8,8 @@ namespace AdventOfCode.Solutions.Year2020
     {
         readonly List<LLNode> Cups;
         readonly List<LLNode> Cups2;
-        readonly Dictionary<long, LLNode> BigCupsDict = new Dictionary<long, LLNode>();
-        readonly Dictionary<long, LLNode> SmallCupsDict = new Dictionary<long, LLNode>();
+        readonly Dictionary<long, LLNode> BigCupsDict = new();
+        readonly Dictionary<long, LLNode> SmallCupsDict = new();
 
 
         public Day23() : base(23, 2020, "Crab Cups")
@@ -52,7 +52,7 @@ namespace AdventOfCode.Solutions.Year2020
                 var groupStart = cur.next; //need to know where our group of three starts
                 cur.next = cur.next.next.next.next; //this is after we excise our group of 3
 
-                List<long> forbiddenValues = new List<long>(3)
+                List<long> forbiddenValues = new(3)
                 {
                     groupStart.val,
                     groupStart.next.val,
@@ -73,7 +73,7 @@ namespace AdventOfCode.Solutions.Year2020
 
             }
 
-            StringBuilder sb = new StringBuilder();
+            StringBuilder sb = new();
             while(cur.val != 1)
             {
                 cur = cur.next;
@@ -97,7 +97,7 @@ namespace AdventOfCode.Solutions.Year2020
                 var groupStart = cur.next; //need to know where our group of three starts
                 cur.next = cur.next.next.next.next; //this is after we excise our group of 3
 
-                List<long> forbiddenValues = new List<long>(3)
+                List<long> forbiddenValues = new(3)
                 {
                     groupStart.val,
                     groupStart.next.val,

@@ -7,7 +7,7 @@ namespace AdventOfCode.Solutions.Year2020
 
     class Day16 : ASolution
     {
-        readonly List<TicketField> ValidFields = new List<TicketField>();
+        readonly List<TicketField> ValidFields = new();
         readonly List<string> tickets;
         readonly List<string> validTickets;
         readonly string myTicket;
@@ -73,8 +73,8 @@ namespace AdventOfCode.Solutions.Year2020
 
         protected override string SolvePartTwo()
         {
-            Dictionary<int, string> KnownFields = new Dictionary<int, string>();
-            Dictionary<(int ticketPosition, string name), int> TicketsThatMatch = new Dictionary<(int ticketPosition, string name), int>();
+            Dictionary<int, string> KnownFields = new();
+            Dictionary<(int ticketPosition, string name), int> TicketsThatMatch = new();
 
             int t = 0;
             while (t < validTickets.Count) //only go until we we have to

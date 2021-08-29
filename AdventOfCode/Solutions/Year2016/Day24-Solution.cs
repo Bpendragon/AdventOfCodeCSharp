@@ -8,7 +8,7 @@ namespace AdventOfCode.Solutions.Year2016
     class Day24 : ASolution
     {
         readonly List<List<bool>> maze;
-        readonly Dictionary<string, Wire> Wires = new Dictionary<string, Wire>();
+        readonly Dictionary<string, Wire> Wires = new();
 
         public Day24() : base(24, 2016, "")
         {
@@ -48,9 +48,9 @@ namespace AdventOfCode.Solutions.Year2016
 
         private int CalculateDistance((int, int) start, (int, int) end)
         {
-            Dictionary<(int, int), (int, int)> discovered = new Dictionary<(int, int), (int, int)>();
+            Dictionary<(int, int), (int, int)> discovered = new();
 
-            Queue<(int, int)> q = new Queue<(int, int)>();
+            Queue<(int, int)> q = new();
             discovered[start] = (-1, -1);
             q.Enqueue(start);
             while(q.Count > 0)
@@ -88,7 +88,7 @@ namespace AdventOfCode.Solutions.Year2016
 
         protected override string SolvePartOne()
         {
-            List<int> routeLengths = new List<int>();
+            List<int> routeLengths = new();
             List<string> nodesToVisit = Wires.Keys.Where(x => x != "0").ToList();
             foreach (var p in nodesToVisit.Permutations())
             {
@@ -108,7 +108,7 @@ namespace AdventOfCode.Solutions.Year2016
 
         protected override string SolvePartTwo()
         {
-            List<int> routeLengths = new List<int>();
+            List<int> routeLengths = new();
             List<string> nodesToVisit = Wires.Keys.Where(x => x != "0").ToList();
             foreach (var p in nodesToVisit.Permutations())
             {

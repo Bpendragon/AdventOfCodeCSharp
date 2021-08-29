@@ -7,10 +7,10 @@ namespace AdventOfCode.Solutions.Year2017
 
     class Day14 : ASolution
     {
-        private readonly KnotHash kn = new KnotHash();
-        readonly Dictionary<(int, int), bool> nodes = new Dictionary<(int, int), bool>();
-        private readonly List<(int, int)> onNodes = new List<(int, int)>();
-        private readonly List<(int, int)> dirs = new List<(int, int)>()
+        private readonly KnotHash kn = new();
+        readonly Dictionary<(int, int), bool> nodes = new();
+        private readonly List<(int, int)> onNodes = new();
+        private readonly List<(int, int)> dirs = new()
         {
             (0, 1),
             (1, 0),
@@ -50,11 +50,11 @@ namespace AdventOfCode.Solutions.Year2017
         private int FindRegions()
         {
             int regions = 0;
-            List<(int, int)> visited = new List<(int, int)>();
+            List<(int, int)> visited = new();
             while(onNodes.Count > 0)
             {
                 regions++;
-                Queue<(int, int)> q = new Queue<(int, int)>();
+                Queue<(int, int)> q = new();
                 q.Enqueue(onNodes[0]);
                 visited.Add(onNodes[0]);
                 onNodes.RemoveAt(0);

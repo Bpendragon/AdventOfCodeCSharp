@@ -9,11 +9,11 @@ namespace AdventOfCode.Solutions.Year2018
     {
         readonly string part1;
         readonly string part2;
-        readonly Dictionary<int, List<string>> knownOpcodes = new Dictionary<int, List<string>>();
-        readonly Dictionary<int, int> Registers = new Dictionary<int, int>();
-        readonly List<TestCase> testCases = new List<TestCase>();
+        readonly Dictionary<int, List<string>> knownOpcodes = new();
+        readonly Dictionary<int, int> Registers = new();
+        readonly List<TestCase> testCases = new();
         static readonly StringSplitOptions splitOpts = StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries;
-        readonly List<string> opNames = new List<string>(new string[]{ "addr", "addi", "mulr", "muli", "banr", "bani", "borr", "bori", "setr", "seti", "gtir", "gtri", "gtrr", "eqir", "eqri", "eqrr" });
+        readonly List<string> opNames = new(new string[]{ "addr", "addi", "mulr", "muli", "banr", "bani", "borr", "bori", "setr", "seti", "gtir", "gtri", "gtrr", "eqir", "eqri", "eqrr" });
         public Day16() : base(16, 2018, "")
         {
             string[] parts = Input.Split("\n\n\n", splitOpts);
@@ -51,7 +51,7 @@ namespace AdventOfCode.Solutions.Year2018
             int threeOrMore = 0;
             foreach(var _case in testCases)
             {
-                List<string> workingValues = new List<string>();
+                List<string> workingValues = new();
                 foreach(var op in opNames)
                 {
                     Registers[0] = _case.InitialState.a;

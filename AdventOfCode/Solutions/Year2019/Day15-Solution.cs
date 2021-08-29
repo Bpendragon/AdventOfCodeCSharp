@@ -10,10 +10,10 @@ namespace AdventOfCode.Solutions.Year2019
     class Day15 : ASolution
     {
         readonly IntCode2 bot;
-        readonly Dictionary<(int x, int y), int> map = new Dictionary<(int, int), int>();
+        readonly Dictionary<(int x, int y), int> map = new();
         (int x, int y) botLocation;
         (int x, int y) oxyGenLocation;
-        readonly Random rand = new Random(); //gonna just random walk this;
+        readonly Random rand = new(); //gonna just random walk this;
         public Day15() : base(15, 2019, "")
         {
 
@@ -50,14 +50,14 @@ namespace AdventOfCode.Solutions.Year2019
             return map.Where(a => a.Value != 0).Max(a => AStar(oxyGenLocation, a.Key, map).Count() - 1).ToString();
         }
 
-        readonly List<(int dX, int dY)> movementDirs = new List<(int dX, int dY)>() { (0, 1), (0, -1), (1, 0), (-1, 0) };
+        readonly List<(int dX, int dY)> movementDirs = new() { (0, 1), (0, -1), (1, 0), (-1, 0) };
         //A-Star, heuristic is Manhattan
         private List<(int x, int y)> AStar((int, int) start, (int x, int y) goal, Dictionary<(int x, int y), int> map)
         {
-            List<(int x, int y)> openSet = new List<(int x, int y)>();
-            Dictionary<(int x, int y), (int x, int y)> cameFrom = new Dictionary<(int x, int y), (int x, int y)>();
-            Dictionary<(int x, int y), int> gScore = new Dictionary<(int x, int y), int>();
-            Dictionary<(int x, int y), int> fScore = new Dictionary<(int x, int y), int>();
+            List<(int x, int y)> openSet = new();
+            Dictionary<(int x, int y), (int x, int y)> cameFrom = new();
+            Dictionary<(int x, int y), int> gScore = new();
+            Dictionary<(int x, int y), int> fScore = new();
 
             openSet.Add(start);
             gScore[start] = 0;
@@ -92,7 +92,7 @@ namespace AdventOfCode.Solutions.Year2019
 
         private List<(int x, int y)> reconstructPath(Dictionary<(int x, int y), (int x, int y)> cameFrom, (int x, int y) current)
         {
-            List<(int x, int y)> totalPath = new List<(int x, int y)>();
+            List<(int x, int y)> totalPath = new();
             totalPath.Add(current);
             while(cameFrom.TryGetValue(current, out var next))
             {
@@ -124,7 +124,7 @@ namespace AdventOfCode.Solutions.Year2019
 
         private void DrawMap()
         {
-            StringBuilder sb = new StringBuilder("\n");
+            StringBuilder sb = new("\n");
             for (int y = map.Keys.Max(a => a.y) + 1; y >= map.Keys.Min(a => a.y) - 1; y--)
             {
                 for (int x = map.Keys.Min(a => a.x) -1 ; x <= map.Keys.Max(a => a.x) + 1; x++)

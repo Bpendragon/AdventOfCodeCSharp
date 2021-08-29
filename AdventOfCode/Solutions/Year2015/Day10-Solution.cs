@@ -30,8 +30,8 @@ namespace AdventOfCode.Solutions.Year2015
 
         private string SpeakAndSay(string value)
         {
-            StringBuilder sb = new StringBuilder();
-            Queue<char> q = new Queue<char>(value);
+            StringBuilder sb = new();
+            Queue<char> q = new(value);
             while(q.Count > 0)
             {
                 char cur = q.Dequeue();

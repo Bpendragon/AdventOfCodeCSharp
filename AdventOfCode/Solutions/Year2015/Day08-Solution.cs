@@ -11,7 +11,7 @@ namespace AdventOfCode.Solutions.Year2015
         public Day08() : base(08, 2015, "")
         {
             int[] test = new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
-            List<int> test2 = new List<int>(test);
+            List<int> test2 = new(test);
 
 
             //Array Examples [lowerInclusive..upperExclusive]

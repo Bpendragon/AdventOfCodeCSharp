@@ -6,10 +6,10 @@ namespace AdventOfCode.Solutions.Year2017
 
     class Day16 : ASolution
     {
-        readonly List<string> danceMoves = new List<string>();
-        List<char> dancers = new List<char>() { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p' };
-        readonly List<char> dancers2 = new List<char>() { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p' };
-        readonly List<string> completedDances = new List<string>();
+        readonly List<string> danceMoves = new();
+        List<char> dancers = new() { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p' };
+        readonly List<char> dancers2 = new() { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p' };
+        readonly List<string> completedDances = new();
         const string original = "abcdefghijklmnop";
 
         public Day16() : base(16, 2017, "")
