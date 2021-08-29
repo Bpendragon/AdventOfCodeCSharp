@@ -5,6 +5,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 
@@ -356,9 +357,21 @@ namespace AdventOfCode.Solutions
         }
 
 
-        public static T GetDirection<T>(this Dictionary<(int, int), T> values, (int, int) location, CompassDirection Direction)
+        public static T GetDirection<T>(this Dictionary<(int, int), T> values, (int, int) location, CompassDirection Direction, T defaultVal)
         {
-            throw new NotImplementedException();
+            var n = location.MoveDirection(Direction);
+            return values.GetValueOrDefault(n, defaultVal);
+        }
+
+        public static List<T> Get2dNeighborVals<T>(this Dictionary<(int, int), T> values, (int, int) location, T defaultVal)
+        {
+            List<T> res = new();
+            res.Add(values.GetDirection(location, CompassDirection.N, defaultVal));
+            res.Add(values.GetDirection(location, CompassDirection.E, defaultVal));
+            res.Add(values.GetDirection(location, CompassDirection.S, defaultVal));
+            res.Add(values.GetDirection(location, CompassDirection.W, defaultVal));
+
+            return res;
         }
 
         public static List<K> KeyList<K, V>(this Dictionary<K, V> dictionary, bool sorted = false)
