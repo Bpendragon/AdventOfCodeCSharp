@@ -62,6 +62,11 @@ namespace AdventOfCode.Solutions
             Console.WriteLine(str);
             Trace.WriteLine(str);
         }
+        public static void Write(object str)
+        {
+            Console.Write(str);
+            Trace.Write(str);
+        }
 
         public static int MinOfMany(params int[] items)
         {

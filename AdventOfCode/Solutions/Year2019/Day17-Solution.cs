@@ -58,15 +58,15 @@ namespace AdventOfCode.Solutions.Year2019
         {
             int maxX = map.KeyList().Max(a => a.x);
             int maxY = map.KeyList().Max(a => a.y);
-            Console.WriteLine();
-            for (int i = 0; i <= maxY; i++)
-            {
-                for(int j = 0; j<= maxX; j++)
-                {
-                    Console.Write(map.GetValueOrDefault((j,i), ' '));
-                }
-                Console.WriteLine();
-            }
+            //WriteLine("");
+            //for (int i = 0; i <= maxY; i++)
+            //{
+            //    for(int j = 0; j<= maxX; j++)
+            //    {
+            //        Write(map.GetValueOrDefault((j,i), ' '));
+            //    }
+            //    WriteLine(string.Empty);
+            //}
 
 
             long AlignParamsSum = 0;
@@ -103,7 +103,7 @@ namespace AdventOfCode.Solutions.Year2019
 
             foreach(var output in bot.RunProgram())
             {
-                if (output < 256) Console.Write((char)output);
+                if (output < 256) ; //Write((char)output);
                 else return output.ToString();
 
                 if(output == 10)
@@ -112,22 +112,27 @@ namespace AdventOfCode.Solutions.Year2019
                     {
                         case 0: //Main
                             foreach (char c in mainRoutine) bot.ReadyInput(c);
+                            WriteLine(mainRoutine);
                             inputsGiven++;
                             break;
                         case 1: //Sub A
                             foreach (char c in subA) bot.ReadyInput(c);
+                            WriteLine(subA);
                             inputsGiven++;
                             break;
                         case 2: //Sub B
                             foreach (char c in subB) bot.ReadyInput(c);
+                            WriteLine(subB);
                             inputsGiven++;
                             break;
                         case 3: //Sub C
                             foreach (char c in subC) bot.ReadyInput(c);
+                            WriteLine(subC);
                             inputsGiven++;
                             break;
                         case 4: //continous video
                             foreach (char c in "n\n") bot.ReadyInput(c);
+                            WriteLine("n");
                             inputsGiven++;
                             break;
                     }
