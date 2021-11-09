@@ -1,164 +1,289 @@
-using System.Collections;
+using System;
+using System.Text;
 using System.Collections.Generic;
+using AdventOfCode.UserClasses;
 using System.Linq;
-using System.Reflection.Metadata;
-using System.Reflection.Metadata.Ecma335;
-using System.Runtime.InteropServices;
+using System.Data;
+using System.Threading;
+using System.Security;
+using static AdventOfCode.Solutions.Utilities;
+using System.Runtime.CompilerServices;
 
 namespace AdventOfCode.Solutions.Year2019
 {
 
     class Day18 : ASolution
     {
-        HashSet<(int x, int y)> map;
-        Dictionary<(int x, int y), char> keys;
-        Dictionary<(int x, int y), char> doors;
-        (int x, int y) start;
-        HashSet<(int x, int y)> visited = new();
-        HashSet<Node> graph = new();
-        Node root;
-
+        Dictionary<Coordinate2D, Tile> map;
+        Dictionary<Coordinate2D, Tile> map2;
+        Dictionary<Coordinate2D, char> nodes;
+        Dictionary<Coordinate2D, char> nodes2;
+        //Key is the Key or Door we are at, value is other directly reachable keys and doors and distance to them.
+        Dictionary<char, Node> graph;
+        Dictionary<char, Node> graph2;
+        HashSet<char> allKeys;
+        string allKeysString;
         public Day18() : base(18, 2019, "")
         {
-            map = new(); //Only store walkable tiles (including keys and doors
-            keys = new();
-            doors = new();
-            var lines = Input.SplitByNewline(true);
+            map = new();
+            nodes = new();
+            graph = new();
+            graph2 = new();
+            allKeys = new();
+            var cols = Input.SplitIntoColumns();
+            map = GenerateMap(cols);
 
-            for(int i = 0; i < lines.Length; i++)
+
+
+            map2 = new(map);
+
+            map2[new Coordinate2D(40, 40)] = Tile.Wall;
+            map2[new Coordinate2D(39, 40)] = Tile.Wall;
+            map2[new Coordinate2D(40, 39)] = Tile.Wall;
+            map2[new Coordinate2D(41, 40)] = Tile.Wall;
+            map2[new Coordinate2D(40, 41)] = Tile.Wall;
+
+            map2[new Coordinate2D(41, 41)] = Tile.Node;
+            map2[new Coordinate2D(39, 41)] = Tile.Node;
+            map2[new Coordinate2D(39, 39)] = Tile.Node;
+            map2[new Coordinate2D(41, 39)] = Tile.Node;
+
+            nodes2 = new(nodes);
+
+            nodes2.Remove(new Coordinate2D(40, 40));
+            nodes2[new Coordinate2D(41, 41)] = '=';
+            nodes2[new Coordinate2D(39, 41)] = '+';
+            nodes2[new Coordinate2D(39, 39)] = '-';
+            nodes2[new Coordinate2D(41, 39)] = '%';
+
+            foreach (var node in nodes)
             {
-                string line = lines[i];
-                for(int j = 0; j < line.Length; j++)
+                if (!graph.TryGetValue(node.Value, out Node workingNode))
                 {
-                    char c = line[j];
-
-                    if (c == '#') continue;
-                    else if (char.IsUpper(c)) doors[(j, i)] = c;
-                    else if (char.IsLower(c)) keys[(j, i)] = c;
-                    else if (c == '@') start = (j, i);
-                    else if (c != '.') continue;
-                    map.Add((j, i));
+                    workingNode = new Node(node.Value);
+                    graph[node.Value] = workingNode;
                 }
+
+
+                FindNeighbors(node.Key, workingNode, map, nodes);
             }
 
-            root = new Node()
+            foreach (var node in nodes2)
             {
-                name = '@',
-            };
-            graph.Add(root);
-            visited.Add(start);
-            RecursiveDFS(start, 0, root);
+                if (!graph2.TryGetValue(node.Value, out Node workingNode))
+                {
+                    workingNode = new Node(node.Value);
+                    graph2[node.Value] = workingNode;
+                }
+
+
+                FindNeighbors(node.Key, workingNode, map2, nodes2);
+            }
+
+            var keyList = allKeys.ToList();
+            keyList.Sort();
+            allKeysString = keyList.JoinAsStrings();
+        }
+
+        private Dictionary<Coordinate2D, Tile> GenerateMap(string[] cols)
+        {
+            var map = new Dictionary<Coordinate2D, Tile>();
+            for (int x = 0; x < cols.Length; x++)
+            {
+                for (int y = 0; y < cols[x].Length; y++)
+                {
+                    Tile tile = cols[x][y] switch
+                    {
+                        '.' => Tile.Empty,
+                        '#' => Tile.Wall,
+                        _ => Tile.Node
+                    };
+
+                    if (tile is Tile.Node)
+                    {
+                        nodes[new Coordinate2D(x, y)] = cols[x][y];
+                        if (char.IsLower(cols[x][y])) allKeys.Add(cols[x][y]);
+                    }
+
+                    map[new Coordinate2D(x, y)] = tile;
+                }
+            }
+            return map;
+
         }
 
         protected override string SolvePartOne()
         {
-            
-            return null;
+            var val = Search(new char[] { '@' }, graph);
+            return val.ToString();
         }
 
         protected override string SolvePartTwo()
         {
-            return null;
+            var val = SearchWithoutDoors(new char[] { '=', '+', '-', '%' }, graph2);
+            return val.ToString();
         }
 
-
-        private void RecursiveDFS((int x, int y) loc, int depthSinceLast, Node curNode)
+        //BFS to find other reachable nodes, Stops at first set of reachable.
+        private void FindNeighbors(Coordinate2D coord, Node node, Dictionary<Coordinate2D, Tile> map, Dictionary<Coordinate2D, char> nodes)
         {
-            visited.Add(loc);
-            depthSinceLast++;
-            Node nextNode = null;
-            if (keys.ContainsKey(loc))
+            var visited = new HashSet<Coordinate2D>();
+            var q = new Queue<(Coordinate2D loc, int steps)>();
+
+            visited.Add(coord);
+            q.Enqueue((coord, 0));
+            while (q.Count > 0)
             {
-                nextNode = graph.Where(x => x.name == keys[loc]).FirstOrDefault();
-                if(nextNode == null)
+                var cur = q.Dequeue();
+                foreach (var neighbor in cur.loc.Neighbors())
                 {
-                    nextNode = new Node()
+                    if (map.TryGetValue(neighbor, out Tile tile))
                     {
-                        name = keys[loc],
-                    };
-                    graph.Add(nextNode);
-                }
-            }
-            else if (doors.ContainsKey(loc))
-            {
-                nextNode = graph.Where(x => x.name == doors[loc]).FirstOrDefault();
-                if (nextNode == null)
-                {
-                    nextNode = new Node()
-                    {
-                        name = doors[loc],
-                        isOpen = false
-                    };
-                    graph.Add(nextNode);
-                }
-            }
-
-            if (nextNode != null && nextNode.name != curNode.name)
-            {
-                int oldDist = nextNode.neighbors.GetValueOrDefault(curNode, int.MaxValue);
-                if (oldDist > depthSinceLast)
-                {
-                    curNode.neighbors[nextNode] = depthSinceLast;
-                    nextNode.neighbors[curNode] = depthSinceLast;
-                }
-                curNode = nextNode;
-                depthSinceLast = 0;
-            }
-            else if (nextNode != null && nextNode.name == curNode.name) return;
-
-            if(map.Contains(loc.MoveDirection(Utilities.CompassDirection.N, true)))
-            {
-                if(!visited.Contains(loc.MoveDirection(Utilities.CompassDirection.N, true)) ||
-                    keys.ContainsKey(loc.MoveDirection(Utilities.CompassDirection.N, true)) ||
-                    doors.ContainsKey(loc.MoveDirection(Utilities.CompassDirection.N, true)))
-                {
-                    RecursiveDFS(loc.MoveDirection(Utilities.CompassDirection.N, true), depthSinceLast, curNode);
-                }
-            }
-
-            if (map.Contains(loc.MoveDirection(Utilities.CompassDirection.E, true)))
-            {
-                if (!visited.Contains(loc.MoveDirection(Utilities.CompassDirection.E, true)) ||
-                    keys.ContainsKey(loc.MoveDirection(Utilities.CompassDirection.E, true)) ||
-                    doors.ContainsKey(loc.MoveDirection(Utilities.CompassDirection.E, true)))
-                {
-                    RecursiveDFS(loc.MoveDirection(Utilities.CompassDirection.E, true), depthSinceLast, curNode);
-                }
-            }
-
-            if (map.Contains(loc.MoveDirection(Utilities.CompassDirection.S, true)))
-            {
-                if (!visited.Contains(loc.MoveDirection(Utilities.CompassDirection.S, true)) ||
-                    keys.ContainsKey(loc.MoveDirection(Utilities.CompassDirection.S, true)) ||
-                    doors.ContainsKey(loc.MoveDirection(Utilities.CompassDirection.S, true)))
-                {
-                    RecursiveDFS(loc.MoveDirection(Utilities.CompassDirection.S, true), depthSinceLast, curNode);
-                }
-            }
-
-            if (map.Contains(loc.MoveDirection(Utilities.CompassDirection.W, true)))
-            {
-                if (!visited.Contains(loc.MoveDirection(Utilities.CompassDirection.W, true)) ||
-                    keys.ContainsKey(loc.MoveDirection(Utilities.CompassDirection.W, true)) ||
-                    doors.ContainsKey(loc.MoveDirection(Utilities.CompassDirection.W, true)))
-                {
-                    RecursiveDFS(loc.MoveDirection(Utilities.CompassDirection.W, true), depthSinceLast, curNode);
+                        if (!visited.Contains(neighbor))
+                        {
+                            visited.Add(neighbor);
+                            switch (tile)
+                            {
+                                case Tile.Node: node.distances[nodes[neighbor]] = cur.steps + 1; break;
+                                case Tile.Empty: q.Enqueue((neighbor, cur.steps + 1)); break;
+                                default: break;
+                            }
+                        }
+                    }
                 }
             }
         }
 
-        private class PathCandidate
+        int Search(char[] startNode, Dictionary<char, Node> graph)
         {
-            bool isPossible { get; set; } = true;
-            List<char> keysGrabbed { get; set; } = new();
-            int totalLength { get; set; } = 0;
+            HashSet<(char pos, string keys)> visited = new();
+            PriorityQueue<(int steps, char pos, string keys), int> pq = new();
+
+            foreach (char c in startNode)
+            {
+                var startTuple = (0, c, string.Empty);
+
+                pq.Enqueue(startTuple, 0);
+            }
+
+
+            while (pq.Count > 0)
+            {
+                var (steps, pos, keys) = pq.Dequeue();
+                if (keys == allKeysString) return steps;
+                if (visited.Contains((pos, keys))) continue;
+                visited.Add((pos, keys));
+                foreach (var neighbor in graph[pos].distances)
+                {
+                    HashSet<char> nextKeys = new(keys);
+                    if (char.IsUpper(neighbor.Key) && !keys.Contains(char.ToLower(neighbor.Key))) continue;
+                    var nextPos = neighbor.Key;
+                    if (char.IsLower(nextPos)) nextKeys.Add(nextPos);
+
+                    var keyList = nextKeys.ToList();
+                    keyList.Sort();
+                    string nextKeyString = keyList.JoinAsStrings();
+                    var nextTuple = (steps + neighbor.Value, nextPos, nextKeyString);
+                    int priority = (nextTuple.Item1 * 100) + nextKeys.Count;
+                    pq.Enqueue(nextTuple, priority);
+                }
+            }
+
+            return int.MaxValue;
+        }
+
+        int SearchWithoutDoors(char[] StartNodes, Dictionary<char, Node> graph)
+        {
+            HashSet<(char pos, string keys)> visited = new();
+            PriorityQueue<(int steps, char pos, string keys), int> pq = new();
+
+            List<string> keySubsets = new();
+            foreach (char c in StartNodes)
+            {
+                List<char> segmentKeys = new();
+                HashSet<char> quickVisited = new();
+                Queue<char> queue = new Queue<char>();
+
+                queue.Enqueue(c);
+                while (queue.Count > 0)
+                {
+                    char c2 = queue.Dequeue();
+                    quickVisited.Add(c2);
+                    if (char.IsLower(c2)) segmentKeys.Add(c2);
+                    foreach (var neighbor in graph[c2].distances)
+                    {
+                        if (!quickVisited.Contains(neighbor.Key))
+                        {
+                            quickVisited.Add(neighbor.Key);
+                            queue.Enqueue(neighbor.Key);
+                        }
+                    }
+                }
+
+                segmentKeys.Sort();
+                keySubsets.Add(segmentKeys.JoinAsStrings());
+            }
+
+
+            int total = 0;
+            foreach (char c in StartNodes)
+            {
+                var startTuple = (0, c, string.Empty);
+
+                pq.Enqueue(startTuple, 0);
+
+
+                while (pq.Count > 0)
+                {
+                    var (steps, pos, keys) = pq.Dequeue();
+                    if (keySubsets.Any(a => a == keys))
+                    {
+                        total += steps;
+                        break;
+                    }
+                    if (visited.Contains((pos, keys))) continue;
+                    visited.Add((pos, keys));
+                    foreach (var neighbor in graph[pos].distances)
+                    {
+                        HashSet<char> nextKeys = new(keys);
+                        var nextPos = neighbor.Key;
+                        if (char.IsLower(nextPos)) nextKeys.Add(nextPos);
+
+                        var keyList = nextKeys.ToList();
+                        keyList.Sort();
+                        string nextKeyString = keyList.JoinAsStrings();
+                        var nextTuple = (steps + neighbor.Value, nextPos, nextKeyString);
+                        int priority = (nextTuple.Item1);
+                        pq.Enqueue(nextTuple, priority);
+                    }
+                }
+            }
+
+            return total;
+        }
+
+        enum Tile
+        {
+            Wall,
+            Empty,
+            Node
         }
 
         private class Node
         {
-            public char name { get; set; }
-            public bool isOpen { get; set; } = true;
-            public Dictionary<Node, int> neighbors = new(); //val is weight/distance
+            public char Name { get; }
+            public Dictionary<char, int> distances { get; set; } = new();
+            public Node(char Name)
+            {
+                this.Name = Name;
+            }
+
+        }
+
+        private class State
+        {
+            public int Steps { get; set; } = 0;
+            public HashSet<char> CollectedKeys { get; set; } = new();
         }
     }
 }

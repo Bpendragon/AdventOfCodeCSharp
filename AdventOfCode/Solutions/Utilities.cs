@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
+using System.Text;
 
 namespace AdventOfCode.Solutions
 {
@@ -122,6 +123,38 @@ namespace AdventOfCode.Solutions
                 .Where(s => !string.IsNullOrWhiteSpace(s))
                 .Select(s => shouldTrim ? s.Trim() : s)
                 .ToArray();
+        }
+
+        /// <summary>
+        /// Splits the input into columns, this is sometimes nice for maps drawing. 
+        /// Automatically expands to a full rectangle iff needed based on max length and number of rows. 
+        /// Empty cells are denoted as ' ' (Space character)
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public static string[] SplitIntoColumns(this string input)
+        {
+            var rows = input.SplitByNewline();
+            int numColumns = rows.Max(x=> x.Length);
+
+            var res = new string[numColumns];
+            for (int i = 0; i < numColumns; i++)
+            {
+                StringBuilder sb = new();
+                foreach (var row in rows)
+                {
+                    try
+                    {
+                        sb.Append(row[i]);
+                    }
+                    catch (IndexOutOfRangeException e)
+                    {
+                        sb.Append(' ');
+                    }
+                }
+                res[i] = sb.ToString();
+            }
+            return res;
         }
 
         public static string Reverse(this string str)
@@ -393,17 +426,26 @@ namespace AdventOfCode.Solutions
             return keyList;
         }
 
-    }
+        public static List<Coordinate2D> Neighbors(this Coordinate2D val)
+        {
+            return new List<Coordinate2D>()
+        {
+            new Coordinate2D(val.x - 1, val.y),
+            new Coordinate2D(val.x + 1, val.y),
+            new Coordinate2D(val.x, val.y - 1),
+            new Coordinate2D(val.x, val.y + 1),
+        };
+        }
 
-    
+    }
 
     public class Coordinate2D
     {
         public static readonly Coordinate2D origin = new(0, 0);
         public static readonly Coordinate2D unit_x = new(1, 0);
         public static readonly Coordinate2D unit_y = new(0, 1);
-        readonly int x;
-        readonly int y;
+        public readonly int x;
+        public readonly int y;
 
         public Coordinate2D(int x, int y)
         {
