@@ -514,8 +514,16 @@ namespace AdventOfCode.Solutions
         public static implicit operator Coordinate2D((int x, int y) a) => new(a.x, a.y);
 
         public static implicit operator (int x, int y)(Coordinate2D a) => (a.x, a.y);
+
+        public int ManDistance(Coordinate2D other)
+        {
+            int x = Math.Abs(this.x - other.x);
+            int y = Math.Abs(this.y - other.y);
+            return x + y;
+        }
         public override bool Equals(object obj)
         {
+            if(obj == null) return false;
             if (obj.GetType() != typeof(Coordinate2D)) return false;
             return this == (Coordinate2D)obj;
         }

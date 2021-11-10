@@ -114,13 +114,13 @@ namespace AdventOfCode.Solutions.Year2019
 
         protected override string SolvePartOne()
         {
-            var val = Search(new char[] { '@' }, graph);
+            var val = Search(new List<char> { '@' }, graph);
             return val.ToString();
         }
 
         protected override string SolvePartTwo()
         {
-            var val = SearchWithoutDoors(new char[] { '=', '+', '-', '%' }, graph2);
+            var val = Search(new List<char> { '=', '+', '-', '%' }, graph2);
             return val.ToString();
         }
 
@@ -154,18 +154,16 @@ namespace AdventOfCode.Solutions.Year2019
             }
         }
 
-        int Search(char[] startNode, Dictionary<char, Node> graph)
+        int Search(List<char> startNodes, Dictionary<char, Node> graph)
         {
-            HashSet<(char pos, string keys)> visited = new();
-            PriorityQueue<(int steps, char pos, string keys), int> pq = new();
+            HashSet<(string pos, string keys)> visited = new();
+            PriorityQueue<(int steps, string pos, string keys), int> pq = new();
 
-            foreach (char c in startNode)
-            {
-                var startTuple = (0, c, string.Empty);
+            startNodes.Sort();
 
-                pq.Enqueue(startTuple, 0);
-            }
+            var startTuple = (0, startNodes.JoinAsStrings(), string.Empty);
 
+            pq.Enqueue(startTuple, 0);
 
             while (pq.Count > 0)
             {
@@ -173,19 +171,24 @@ namespace AdventOfCode.Solutions.Year2019
                 if (keys == allKeysString) return steps;
                 if (visited.Contains((pos, keys))) continue;
                 visited.Add((pos, keys));
-                foreach (var neighbor in graph[pos].distances)
+                foreach (char c in pos)
                 {
-                    HashSet<char> nextKeys = new(keys);
-                    if (char.IsUpper(neighbor.Key) && !keys.Contains(char.ToLower(neighbor.Key))) continue;
-                    var nextPos = neighbor.Key;
-                    if (char.IsLower(nextPos)) nextKeys.Add(nextPos);
+                    foreach (var neighbor in graph[c].distances)
+                    {
+                        HashSet<char> nextKeys = new(keys);
+                        if (char.IsUpper(neighbor.Key) && !keys.Contains(char.ToLower(neighbor.Key))) continue;
+                        var nextNode = neighbor.Key;
+                        if (char.IsLower(nextNode)) nextKeys.Add(nextNode);
 
-                    var keyList = nextKeys.ToList();
-                    keyList.Sort();
-                    string nextKeyString = keyList.JoinAsStrings();
-                    var nextTuple = (steps + neighbor.Value, nextPos, nextKeyString);
-                    int priority = (nextTuple.Item1 * 100) + nextKeys.Count;
-                    pq.Enqueue(nextTuple, priority);
+                        var keyList = nextKeys.ToList();
+                        keyList.Sort();
+                        string nextKeyString = keyList.JoinAsStrings();
+                        string nextPos = pos.Replace(c, nextNode);
+                        if (visited.Contains((nextPos, nextKeyString))) continue;
+                        var nextTuple = (steps + neighbor.Value, nextPos, nextKeyString);
+                        int priority = nextTuple.Item1 * 100 + nextKeyString.Length;
+                        pq.Enqueue(nextTuple, priority);
+                    }
                 }
             }
 
