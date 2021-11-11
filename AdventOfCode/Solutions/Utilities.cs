@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 
 namespace AdventOfCode.Solutions
@@ -207,6 +208,36 @@ namespace AdventOfCode.Solutions
             for (int i = 0; i < count; i++) action();
         }
 
+        public static (long gcd, long x, long y) ExtendedGCD(long a, long b)
+        {
+            if (b == 0) return (a, 1, 0);
+            var (gcd0, x0, y0) = ExtendedGCD(b, b % a);
+            return (gcd0, y0, x0 - (a / b) * y0);
+        }
+
+        public static int Mod(int x, int m)
+        {
+            int r = x % m;
+            return r < 0 ? r + m : r;
+        }
+
+        public static long Mod(long x, long m)
+        {
+            long r = x % m;
+            return r < 0 ? r + m : r;
+        }
+
+        //Fermat was a Genius
+        public static long ModInverse(long a, long n)
+        {
+            return ModPower(a, n-2, n);
+        }
+
+        public static long ModPower(long x, long y, long p)
+        {
+            return (long)BigInteger.ModPow(x, y, p);
+        }
+
         // https://github.com/tslater2006/AdventOfCode2019
         public static IEnumerable<IEnumerable<T>> Permutations<T>(this IEnumerable<T> values)
         {
@@ -265,6 +296,24 @@ namespace AdventOfCode.Solutions
             for (int i = 0; i < (float)array.Count() / size; i++)
             {
                 yield return array.Skip(i * size).Take(size);
+            }
+        }
+
+        public static IEnumerable<List<T>> SplitAtIndex<T>(this List<T> array, int index)
+        {
+            if (index == 0) throw new ArgumentException($"{nameof(index)} must be a non-zero integer");
+            else if(index > 0)
+            {
+                index %= array.Count();
+                yield return array.Take(index).ToList();
+                yield return array.Skip(index).ToList();
+                
+            } else
+            {
+                index *= -1;
+                index %= array.Count();
+                yield return array.SkipLast(index).ToList();
+                yield return array.TakeLast(index).ToList();
             }
         }
 

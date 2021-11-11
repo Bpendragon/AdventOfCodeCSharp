@@ -10,7 +10,7 @@ namespace AdventOfCode.UserClasses
         public List<long> PreviousRunState;
         int PC;
         int RelativeBase;
-        private readonly Queue<long> Inputs = new();
+        public readonly Queue<long> Inputs = new();
 
         public IntCode2(long[] Program)
         {
@@ -25,7 +25,7 @@ namespace AdventOfCode.UserClasses
         }
 
 
-        public IEnumerable<long> RunProgram()
+        public IEnumerable<long> RunProgram(bool stepWise = false)
         {
             WorkingProgram = new List<long>(Program);
             PC = 0;
@@ -44,12 +44,15 @@ namespace AdventOfCode.UserClasses
                     case Operation.Add:
                         WorkingProgram[(int)operands[2]] = operands[0] + operands[1];
                         PC += 4;
+                        if (stepWise) yield return long.MinValue;
                         break;
                     case Operation.Multiply:
                         WorkingProgram[(int)operands[2]] = operands[0] * operands[1];
                         PC += 4;
+                        if (stepWise) yield return long.MinValue;
                         break;
                     case Operation.ReadInput:
+                        if (stepWise) yield return long.MaxValue;
                         long inVal = NextInput();
                         WorkingProgram[(int)operands[0]] = inVal;
                         PC += 2;
@@ -61,24 +64,29 @@ namespace AdventOfCode.UserClasses
                     case Operation.JumpTrue:
                         if (operands[0] != 0) PC = (int)operands[1];
                         else PC += 3;
+                        if (stepWise) yield return long.MinValue;
                         break;
                     case Operation.JumpFalse:
                         if (operands[0] == 0) PC = (int)operands[1];
                         else PC += 3;
+                        if (stepWise) yield return long.MinValue;
                         break;
                     case Operation.LessThan:
                         if (operands[0] < operands[1]) WorkingProgram[(int)operands[2]] = 1;
                         else WorkingProgram[(int)operands[2]] = 0;
                         PC += 4;
+                        if (stepWise) yield return long.MinValue;
                         break;
                     case Operation.TestEquals:
                         if (operands[0] == operands[1]) WorkingProgram[(int)operands[2]] = 1;
                         else WorkingProgram[(int)operands[2]] = 0;
                         PC += 4;
+                        if (stepWise) yield return long.MinValue;
                         break;
                     case Operation.RelativeBaseAdjust:
                         RelativeBase += (int)operands[0];
                         PC += 2;
+                        if (stepWise) yield return long.MinValue;
                         break;
                     default: throw new NotImplementedException();
 
