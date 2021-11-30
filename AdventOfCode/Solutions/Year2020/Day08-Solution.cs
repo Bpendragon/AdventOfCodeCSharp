@@ -42,14 +42,12 @@ namespace AdventOfCode.Solutions.Year2020
 
         private static bool TestProgram(List<string> program)
         {
-            List<int> visitedCommands = new();
+            HashSet<int> visitedCommands = new();
             int pc = 0;
             int acc = 0;
 
-            while (pc < program.Count)
+            while (pc < program.Count && visitedCommands.Add(pc))
             {
-                if (visitedCommands.Contains(pc)) return false;
-
                 string[] tokens = program[pc].Split();
                 visitedCommands.Add(pc);
                 switch (tokens[0])
@@ -67,20 +65,18 @@ namespace AdventOfCode.Solutions.Year2020
                 }
             }
 
-            return true;
+            return pc >= program.Count;
         }
 
         private static int RunProgram(List<string> Program)
         {
-            List<int> visitedCommands = new();
+            HashSet<int> visitedCommands = new();
             int pc = 0;
             int acc = 0;
 
-            while (pc < Program.Count)
+            while (pc < Program.Count && visitedCommands.Add(pc))
             {
-                if (visitedCommands.Contains(pc)) break;
                 string[] tokens = Program[pc].Split();
-                visitedCommands.Add(pc);
                 switch (tokens[0])
                 {
                     case "acc":

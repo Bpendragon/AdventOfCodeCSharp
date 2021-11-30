@@ -4,7 +4,6 @@ using System.Linq;
 
 namespace AdventOfCode.Solutions.Year2020
 {
-
     class Day07 : ASolution
     {
         readonly List<string> lines;
@@ -47,7 +46,7 @@ namespace AdventOfCode.Solutions.Year2020
         {
             Queue<string> q = new();
             int containedCount = 0;
-            List<string> visited = new();
+            HashSet<string> visited = new();
             q.Enqueue("shiny gold");
             visited.Add("shiny gold");
             while (q.Count > 0)
@@ -72,7 +71,7 @@ namespace AdventOfCode.Solutions.Year2020
         {
             Queue<string> q = new();
             int bagContains = 0;
-            List<string> visited = new();
+            HashSet<string> visited = new();
             q.Enqueue("shiny gold");
             while (q.Count > 0)
             {
@@ -99,7 +98,7 @@ namespace AdventOfCode.Solutions.Year2020
 
         public Dictionary<string, int> Contents { get; set; } = new Dictionary<string, int>();
 
-        public List<string> ContainedBy { get; set; } = new List<string>();
+        public HashSet<string> ContainedBy { get; set; } = new();
 
         public Bag(string Name)
         {

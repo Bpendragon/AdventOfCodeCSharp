@@ -1,10 +1,13 @@
 using System.Text;
+using System.Threading.Tasks;
 
 namespace AdventOfCode.Solutions.Year2015
 {
 
     class Day04 : ASolution
     {
+        long firstRes = 0;
+        long secondRes = 0;
 
         public Day04() : base(04, 2015, "")
         {
@@ -13,15 +16,15 @@ namespace AdventOfCode.Solutions.Year2015
 
         protected override string SolvePartOne()
         {
-            return null;
+            return firstRes.ToString();
         }
 
         protected override string SolvePartTwo()
         {
-            return null;
+            return secondRes.ToString();
         }
 
-        public static string CreateMD5(string input)
+        public async Task<string> CreateMD5(string input)
         {
             // Use input string to calculate MD5 hash
             using (System.Security.Cryptography.MD5 md5 = System.Security.Cryptography.MD5.Create())
