@@ -10,7 +10,7 @@ namespace AdventOfCode.Solutions.Year2017
         {
             foreach(string line in Input.SplitByNewline())
             {
-                int[] s = line.ToIntArray(": ");
+                int[] s = line.ToIntList(": ").ToArray();
                 Sentries[s[0]] = s[^1];
             }
         }

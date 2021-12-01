@@ -9,7 +9,7 @@ namespace AdventOfCode.Solutions.Year2015
         readonly List<long> Packages;
         public Day24() : base(24, 2015, "")
         {
-            Packages = new List<long>(Input.ToLongArray("\n"));
+            Packages = new List<long>(Input.ToLongList("\n"));
         }
 
         protected override string SolvePartOne()

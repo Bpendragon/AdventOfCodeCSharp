@@ -25,7 +25,7 @@ namespace AdventOfCode.Solutions.Year2019
         long prevY;
         public Day23() : base(23, 2019, "")
         {
-            program = Input.ToLongArray(",");
+            program = Input.ToLongList(",");
 
             for (int i = 0; i < 50; i++)
             {

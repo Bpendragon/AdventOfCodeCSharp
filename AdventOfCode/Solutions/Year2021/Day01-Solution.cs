@@ -17,7 +17,7 @@ namespace AdventOfCode.Solutions.Year2021
         readonly List<int> depths;
         public Day01() : base(01, 2021, "Sonar Sweep")
         {
-            depths = new List<int>(Utilities.ToIntArray(Input, "\n"));
+            depths = Input.SplitByNewline(false, true).Select(int.Parse).ToList();
         }
 
         protected override string SolvePartOne()

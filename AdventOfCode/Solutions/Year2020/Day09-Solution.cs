@@ -11,7 +11,7 @@ namespace AdventOfCode.Solutions.Year2020
 
         public Day09() : base(09, 2020, "Encoding Error")
         {
-            Lines = new List<long>(Input.ToLongArray("\n"));  
+            Lines = new List<long>(Input.ToLongList("\n"));  
         }
 
         protected override string SolvePartOne()

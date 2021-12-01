@@ -16,7 +16,7 @@ namespace AdventOfCode.Solutions.Year2017
             {
                 string[] tokens = line.Split(" <-> ", StringSplitOptions.RemoveEmptyEntries);
 
-                Pipes[int.Parse(tokens[0])] = new List<int>(tokens[^1].ToIntArray(", "));
+                Pipes[int.Parse(tokens[0])] = new List<int>(tokens[^1].ToIntList(", "));
             }
         }
 

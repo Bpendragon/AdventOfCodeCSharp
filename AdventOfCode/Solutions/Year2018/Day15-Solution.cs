@@ -8,7 +8,7 @@ namespace AdventOfCode.Solutions.Year2018
     class Day15 : ASolution
     {
         private readonly Game game;
-        readonly string[] lines;
+        readonly List<string> lines;
         public Day15() : base(15, 2018, "")
         {
             lines = Input.SplitByNewline();
@@ -39,9 +39,9 @@ namespace AdventOfCode.Solutions.Year2018
     {
         private readonly string[] map;
         private List<Unit> units = new();
-        public Game(string[] initialMap, int elfAttackPower = 3)
+        public Game(List<string> initialMap, int elfAttackPower = 3)
         {
-            for (int y = 0; y < initialMap.Length; y++)
+            for (int y = 0; y < initialMap.Count; y++)
             {
                 for (int x = 0; x < initialMap[y].Length; x++)
                 {

@@ -17,7 +17,7 @@ namespace AdventOfCode.Solutions.Year2020
             //UseDebugInput = true;
             Cups = new List<LLNode>(20);
             Cups2 = new List<LLNode>(20);
-            foreach(long i in Input.ToLongArray())
+            foreach(long i in Input.ToLongList())
             {
                 var tmp = new LLNode(i);
                 var tmp2 = new LLNode(i);

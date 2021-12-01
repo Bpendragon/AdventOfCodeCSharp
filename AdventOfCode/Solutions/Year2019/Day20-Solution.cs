@@ -24,7 +24,7 @@ namespace AdventOfCode.Solutions.Year2019
             portals = new();
             var rows = Input.SplitByNewline();
 
-            for (int y = 0; y < rows.Length; y++)
+            for (int y = 0; y < rows.Count; y++)
             {
                 var row = rows[y];
                 for (int x = 0; x < row.Length; x++)
@@ -54,13 +54,13 @@ namespace AdventOfCode.Solutions.Year2019
                                 else if (char.IsLetter(rows[y + 1][x]))
                                 {
                                     name = string.Join("", row[x], rows[y + 1][x]);
-                                    if (y + 2 < rows.Length && rows[y + 2][x] == '.') loc = new Coordinate2D(x, y + 2);
+                                    if (y + 2 < rows.Count && rows[y + 2][x] == '.') loc = new Coordinate2D(x, y + 2);
                                     else loc = new Coordinate2D(x, y - 1);
                                 }
 
                                 if (!string.IsNullOrEmpty(name))
                                 {
-                                    if (loc.x < 5 || loc.x > row.Length - 5 || loc.y < 5 || loc.y > rows.Length - 5) dir = PathDirection.Out;
+                                    if (loc.x < 5 || loc.x > row.Length - 5 || loc.y < 5 || loc.y > rows.Count - 5) dir = PathDirection.Out;
                                     else dir = PathDirection.In;
                                     if (!portals.TryGetValue(name, out Portal portal))
                                     {

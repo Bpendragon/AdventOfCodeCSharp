@@ -10,14 +10,13 @@ namespace AdventOfCode.Solutions.Year2020
 
         public Day01() : base(01, 2020, "Report Repair")
         {
-            costs = new List<int>(Utilities.ToIntArray(Input, "\n"));
+            costs = new List<int>(Utilities.ToIntList(Input, "\n"));
             costs.Sort();
         }
 
         protected override string SolvePartOne()
         {
             int i = 0, j = 1;
-            var x = costs.Where((a,b) => a + b == 2020);
             while(true)
             {
                 int sum = costs[i] + costs[^j];

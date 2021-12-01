@@ -11,7 +11,7 @@ namespace AdventOfCode.Solutions.Year2015
         public Day09() : base(09, 2015, "")
         {
             Cities = new Dictionary<string, City>();
-            string[] lines = Input.SplitByNewline(true);
+            List<string>lines = Input.SplitByNewline(true);
             foreach(string line in lines)
             {
                 string[] a = line.Split();

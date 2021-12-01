@@ -15,7 +15,7 @@ namespace AdventOfCode.Solutions.Year2018
             {
                 var halves = line.Split(", ", splitOpts);
                 var numString = halves[0].Trim("pos=<>".ToCharArray());
-                var nums = numString.ToLongArray(",");
+                var nums = numString.ToLongList(",");
                 long radius = long.Parse(halves[1].Split('=')[1]);
 
                 nanos[(nums[0], nums[1], nums[2])] = radius;

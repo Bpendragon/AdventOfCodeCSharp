@@ -11,7 +11,7 @@ namespace AdventOfCode.Solutions.Year2020
         readonly int[] startNums;
         public Day15() : base(15, 2020, "Rambunctious Recitation")
         {
-            startNums = Input.ToIntArray(",");
+            startNums = Input.ToIntList(",").ToArray();
             NumberString.AddRange(startNums);
             NumberString2 = new List<int>(30_000_000);
             NumberString2.AddRange(NumberString);

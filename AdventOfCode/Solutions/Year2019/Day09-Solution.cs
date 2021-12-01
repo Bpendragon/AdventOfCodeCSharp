@@ -10,7 +10,7 @@ namespace AdventOfCode.Solutions.Year2019
         readonly long[] program;
         public Day09() : base(09, 2019, "")
         {
-            program = Input.ToLongArray(",");
+            program = Input.ToLongList(",");
         }
 
         protected override string SolvePartOne()

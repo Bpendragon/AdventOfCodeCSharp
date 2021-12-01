@@ -7,7 +7,7 @@ namespace AdventOfCode.Solutions.Year2020
 
     class Day13 : ASolution
     {
-        readonly string[] lines;
+        readonly List<string> lines;
         readonly List<(long busID, long offSet)> busses = new();
         public Day13() : base(13, 2020, "")
         {
@@ -27,7 +27,7 @@ namespace AdventOfCode.Solutions.Year2020
         protected override string SolvePartOne()
         {
             int departTime = int.Parse(lines[0]);
-            int[] busses = lines[1].ToIntArray(",");
+            int[] busses = lines[1].ToIntList(",").ToArray();
             int bestBus = int.MaxValue;
             int bestMod = int.MaxValue;
             foreach (int bus in busses)

@@ -11,7 +11,7 @@ namespace AdventOfCode.Solutions.Year2020
         public Day17() : base(17, 2020, "Conway Cubes")
         {
             var lines = Input.SplitByNewline();
-            for (int x = 0; x < lines.Length; x++)
+            for (int x = 0; x < lines.Count; x++)
             {
                 for (int y = 0; y < lines[x].Length; y++)
                 {

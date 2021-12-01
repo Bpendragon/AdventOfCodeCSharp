@@ -12,7 +12,7 @@ namespace AdventOfCode.Solutions.Year2019
         IntCode2 bot;
         public Day21() : base(21, 2019, "")
         {
-            bot = new IntCode2(Input.ToLongArray(","));
+            bot = new IntCode2(Input.ToLongList(","));
         }
 
         protected override string SolvePartOne()

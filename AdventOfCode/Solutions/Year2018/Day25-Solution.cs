@@ -11,7 +11,7 @@ namespace AdventOfCode.Solutions.Year2018
         {
             foreach(var line in Input.SplitByNewline())
             {
-                int[] nums = line.ToIntArray(",");
+                int[] nums = line.ToIntList(",").ToArray();
                 stars.Add(new Coordinate4D(nums[0], nums[1], nums[2], nums[3]));
             }
         }

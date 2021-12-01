@@ -9,7 +9,7 @@ namespace AdventOfCode.Solutions.Year2019
 
         public Day02() : base(02, 2019, "")
         {
-            pc = new IntCode2(Input.ToLongArray(","));
+            pc = new IntCode2(Input.ToLongList(","));
         }
 
         protected override string SolvePartOne()

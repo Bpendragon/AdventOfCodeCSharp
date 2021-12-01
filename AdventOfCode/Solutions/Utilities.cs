@@ -17,13 +17,13 @@ namespace AdventOfCode.Solutions
     public static class Utilities
     {
 
-        public static int[] ToIntArray(this string str, string delimiter = "")
+        public static List<int> ToIntList(this string str, string delimiter = "")
         {
             if (delimiter == "")
             {
                 List<int> result = new();
                 foreach (char c in str) if (int.TryParse(c.ToString(), out int n)) result.Add(n);
-                return result.ToArray();
+                return result.ToList();
             }
             else
             {
@@ -31,11 +31,11 @@ namespace AdventOfCode.Solutions
                     .Split(delimiter)
                     .Where(n => int.TryParse(n, out int v))
                     .Select(n => Convert.ToInt32(n))
-                    .ToArray();
+                    .ToList();
             }
         }
 
-        public static long[] ToLongArray(this string str, string delimiter = "")
+        public static long[] ToLongList(this string str, string delimiter = "")
         {
             if (delimiter == "")
             {
@@ -56,7 +56,7 @@ namespace AdventOfCode.Solutions
 
         public static int[] ToIntArray(this string[] array)
         {
-            return string.Join(",", array).ToIntArray(",");
+            return string.Join(",", array).ToIntList(",").ToArray();
         }
 
         public static void WriteLine(object str)
@@ -117,13 +117,13 @@ namespace AdventOfCode.Solutions
             return string.Join(seperator, items);
         }
 
-        public static string[] SplitByNewline(this string input, bool shouldTrim = false)
+        public static List<string> SplitByNewline(this string input, bool blankLines = true, bool shouldTrim = false)
         {
             return input
-                .Split(new[] { "\r", "\n", "\r\n" }, StringSplitOptions.None)
-                .Where(s => !string.IsNullOrWhiteSpace(s))
-                .Select(s => shouldTrim ? s.Trim() : s)
-                .ToArray();
+               .Split(new[] { "\r", "\n", "\r\n" }, StringSplitOptions.None)
+               .Where(s => blankLines || !string.IsNullOrWhiteSpace(s))
+               .Select(s => shouldTrim ? s.Trim() : s)
+               .ToList();
         }
 
         /// <summary>

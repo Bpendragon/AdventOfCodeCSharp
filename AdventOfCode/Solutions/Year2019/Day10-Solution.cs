@@ -12,10 +12,10 @@ namespace AdventOfCode.Solutions.Year2019
         public Day10() : base(10, 2019, "")
         {
             Asteroids = new List<Asteroid>();
-            string[] lines = Input.SplitByNewline();
+            var lines = Input.SplitByNewline();
             for (int i = 0; i < lines[0].Length; i++)
             {
-                for (int j = 0; j < lines.Length; j++)
+                for (int j = 0; j < lines.Count; j++)
                 {
                     if (lines[i][j] == '#') Asteroids.Add(new Asteroid((i, j)));
                 }

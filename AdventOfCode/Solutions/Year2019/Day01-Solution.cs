@@ -18,7 +18,7 @@ namespace AdventOfCode.Solutions.Year2019
         readonly List<int> modules;
         public Day01() : base(01, 2019, "The Tyranny of the Rocket Equation")
         {
-            modules = new(Input.ToIntArray("\n"));
+            modules = new(Input.ToIntList("\n"));
         }
 
         protected override string SolvePartOne()

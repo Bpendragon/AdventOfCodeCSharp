@@ -14,7 +14,7 @@ namespace AdventOfCode.Solutions.Year2019
         IntCode2 cab;
         public Day13() : base(13, 2019, "")
         {
-            cab = new IntCode2(Input.ToLongArray(","));
+            cab = new IntCode2(Input.ToLongList(","));
             font1 = new Font("fira code", 14);
         }
 
@@ -34,7 +34,7 @@ namespace AdventOfCode.Solutions.Year2019
 
         protected override string SolvePartTwo()
         {
-            cab = new IntCode2(Input.ToLongArray(","));
+            cab = new IntCode2(Input.ToLongList(","));
             cab.Program[0] = 2; //set it up for quarters
             Dictionary<(long x, long y), long> screen = new();
 

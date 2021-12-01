@@ -13,7 +13,7 @@ namespace AdventOfCode.Solutions.Year2020
 
         public Day10() : base(10, 2020, "Adapter Array")
         {
-            Adapters = new List<int>(Input.ToIntArray("\n")) ;
+            Adapters = new List<int>(Input.ToIntList("\n")) ;
             Adapters.Sort();
             yourAdapter = Adapters.Last() + 3;
             Adapters.Insert(0, 0);

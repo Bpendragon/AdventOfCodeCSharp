@@ -11,7 +11,7 @@ namespace AdventOfCode.Solutions.Year2019
         readonly IntCode2 cpu;
         public Day05() : base(05, 2019, "")
         {
-            BaseProgram = Input.ToLongArray(",");
+            BaseProgram = Input.ToLongList(",");
             cpu = new IntCode2(BaseProgram);
         }
 

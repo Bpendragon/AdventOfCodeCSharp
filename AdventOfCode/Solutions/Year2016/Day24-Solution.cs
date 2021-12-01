@@ -13,8 +13,8 @@ namespace AdventOfCode.Solutions.Year2016
         public Day24() : base(24, 2016, "")
         {
             maze = new List<List<bool>>();
-            string[] lines = Input.SplitByNewline();
-            foreach (int i in Enumerable.Range(0, lines.Length))
+            var lines = Input.SplitByNewline();
+            foreach (int i in Enumerable.Range(0, lines.Count))
             {
                 string str = lines[i];
                 maze.Add(new List<bool>());

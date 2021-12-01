@@ -12,7 +12,7 @@ namespace AdventOfCode.Solutions.Year2019
         readonly long[] Program;
         public Day11() : base(11, 2019, "Space Police")
         {
-            Program = Input.ToLongArray(",");
+            Program = Input.ToLongList(",");
         }
 
         protected override string SolvePartOne()

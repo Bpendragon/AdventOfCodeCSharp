@@ -13,7 +13,7 @@ namespace AdventOfCode.Solutions.Year2019
         long[] basePattern = new long[] { 1, 0, -1, 0 };
         public Day16() : base(16, 2019, "")
         {
-            inputNums = new List<long>(Input.ToLongArray());
+            inputNums = new List<long>(Input.ToLongList());
         }
 
         protected override string SolvePartOne()

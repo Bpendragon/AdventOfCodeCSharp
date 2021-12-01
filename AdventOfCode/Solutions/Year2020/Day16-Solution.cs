@@ -47,7 +47,7 @@ namespace AdventOfCode.Solutions.Year2020
             foreach (var ticket in tickets)
             {
 
-                foreach (int field in ticket.ToIntArray(","))
+                foreach (int field in ticket.ToIntList(","))
                 {
                     bool isValid = false;
                     foreach (var v in ValidFields)
@@ -79,7 +79,7 @@ namespace AdventOfCode.Solutions.Year2020
             int t = 0;
             while (t < validTickets.Count) //only go until we we have to
             {
-                int[] tFields = validTickets[t].ToIntArray(",");
+                int[] tFields = validTickets[t].ToIntList(",").ToArray();
 
                 for (int i = 0; i < tFields.Length; i++)
                 {
@@ -117,7 +117,7 @@ namespace AdventOfCode.Solutions.Year2020
                 }
             }
 
-            int[] myTicketFields = myTicket.ToIntArray(",");
+            int[] myTicketFields = myTicket.ToIntList(",").ToArray();
 
             long departureFields = 1;
 

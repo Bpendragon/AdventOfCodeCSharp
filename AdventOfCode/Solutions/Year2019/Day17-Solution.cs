@@ -20,7 +20,7 @@ namespace AdventOfCode.Solutions.Year2019
 
         public Day17() : base(17, 2019, "")
         {
-            bot = new IntCode2(Input.ToLongArray(","));
+            bot = new IntCode2(Input.ToLongList(","));
             bot.ClearInputs();
 
             int x = 0, y = 0;

@@ -28,9 +28,9 @@ namespace AdventOfCode.Solutions.Year2018
                 var init = l[0].Trim("Before: []".ToCharArray());
                 var result = l[2].Trim("After: []".ToCharArray());
 
-                int[] initValues = init.ToIntArray(", ");
-                int[] opValues = l[1].ToIntArray(" ");
-                int[] resultValues = result.ToIntArray(", ");
+                int[] initValues = init.ToIntList(", ").ToArray();
+                int[] opValues = l[1].ToIntList(" ").ToArray();
+                int[] resultValues = result.ToIntList(", ").ToArray();
 
                 testCases.Add(new TestCase()
                 {
@@ -94,7 +94,7 @@ namespace AdventOfCode.Solutions.Year2018
 
             foreach(var line in part2.SplitByNewline())
             {
-                var ops = line.ToIntArray(" ");
+                var ops = line.ToIntList(" ");
                 RunCommand((ops[0], ops[1], ops[2], ops[3]));
 
             }

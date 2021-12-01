@@ -16,17 +16,17 @@ namespace AdventOfCode.Solutions.Year2017
         {
             var lines = Input.SplitByNewline();
             int xOffset = (lines[0].Length / 2);
-            int yOffset = (lines.Length / 2);
+            int yOffset = (lines.Count / 2);
 
             center = (xOffset, yOffset);
 
             StringBuilder sb = new();
-            for (int j = 0; j < lines.Length; j++)
+            for (int j = 0; j < lines.Count; j++)
             {
                 for (int i = 0; i < lines[0].Length; i++)
                 {
                     startMap[(i, j)] = lines[j][i];
-                    if ((i, j) == (lines[0].Length / 2, lines.Length / 2)) sb.Append($"[{lines[j][i]}]");
+                    if ((i, j) == (lines[0].Length / 2, lines.Count / 2)) sb.Append($"[{lines[j][i]}]");
                     else sb.Append($" {lines[j][i]} ");
                 }
                 sb.Append('\n');

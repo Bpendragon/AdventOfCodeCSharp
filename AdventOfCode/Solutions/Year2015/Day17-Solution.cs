@@ -9,7 +9,7 @@ namespace AdventOfCode.Solutions.Year2015
         readonly List<int> containers;
         public Day17() : base(17, 2015, "")
         {
-            containers = new List<int>(Input.ToIntArray("\n"));
+            containers = new List<int>(Input.ToIntList("\n"));
         }
 
         protected override string SolvePartOne()
