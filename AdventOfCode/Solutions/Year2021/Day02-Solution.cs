@@ -14,57 +14,46 @@ namespace AdventOfCode.Solutions.Year2021
 
     class Day02 : ASolution
     {
-        List<string> commands;
+        readonly int x1 = 0;
+        readonly int depth1 = 0;
+        readonly int x2 = 0;
+        readonly int depth2 = 0;
+        readonly int aim = 0;
+
         public Day02() : base(02, 2021, "Dive!")
         {
-            commands = Input.SplitByNewline();
-        }
-
-        protected override string SolvePartOne()
-        {
-            int x = 0;
-            int depth = 0;
-            foreach(var c in commands)
-            {
-                var sp = c.Split();
-                int dis = int.Parse(sp[1]);
-                switch(sp[0])
-                {
-                    case "forward": x += dis;
-                        break;
-                    case "down": depth += dis;
-                        break;
-                    case "up": depth -= dis;
-                        break;
-                }
-            }
-            return (depth * x).ToString();
-        }
-
-        protected override string SolvePartTwo()
-        {
-            int x = 0;
-            int depth = 0;
-            int aim = 0;
-            foreach (var c in commands)
+            foreach (var c in Input.SplitByNewline())
             {
                 var sp = c.Split();
                 int dis = int.Parse(sp[1]);
                 switch (sp[0])
                 {
                     case "forward":
-                        x += dis;
-                        depth += (dis * aim);
+                        x1 += dis;
+                        x2 += dis;
+                        depth2 += (dis * aim);
                         break;
                     case "down":
+                        depth1 += dis;
                         aim += dis;
                         break;
                     case "up":
+                        depth1 -= dis;
                         aim -= dis;
                         break;
                 }
             }
-            return (depth * x).ToString();
+
+        }
+
+        protected override string SolvePartOne()
+        {
+            return (depth1 * x1).ToString();
+        }
+
+        protected override string SolvePartTwo()
+        {
+            return (depth2 * x2).ToString();
         }
     }
 }
