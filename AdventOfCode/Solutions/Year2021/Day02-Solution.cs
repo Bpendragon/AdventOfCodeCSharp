@@ -14,19 +14,57 @@ namespace AdventOfCode.Solutions.Year2021
 
     class Day02 : ASolution
     {
-        public Day02() : base(02, 2021, "")
+        List<string> commands;
+        public Day02() : base(02, 2021, "Dive!")
         {
-
+            commands = Input.SplitByNewline();
         }
 
         protected override string SolvePartOne()
         {
-            return null;
+            int x = 0;
+            int depth = 0;
+            foreach(var c in commands)
+            {
+                var sp = c.Split();
+                int dis = int.Parse(sp[1]);
+                switch(sp[0])
+                {
+                    case "forward": x += dis;
+                        break;
+                    case "down": depth += dis;
+                        break;
+                    case "up": depth -= dis;
+                        break;
+                }
+            }
+            return (depth * x).ToString();
         }
 
         protected override string SolvePartTwo()
         {
-            return null;
+            int x = 0;
+            int depth = 0;
+            int aim = 0;
+            foreach (var c in commands)
+            {
+                var sp = c.Split();
+                int dis = int.Parse(sp[1]);
+                switch (sp[0])
+                {
+                    case "forward":
+                        x += dis;
+                        depth += (dis * aim);
+                        break;
+                    case "down":
+                        aim += dis;
+                        break;
+                    case "up":
+                        aim -= dis;
+                        break;
+                }
+            }
+            return (depth * x).ToString();
         }
     }
 }
