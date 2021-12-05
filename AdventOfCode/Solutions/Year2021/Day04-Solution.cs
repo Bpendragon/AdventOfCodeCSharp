@@ -89,7 +89,6 @@ namespace AdventOfCode.Solutions.Year2021
                     int tmp = compBoard.cells.Values.Where(x => !x.marked).Sum(x => x.val);
                     return (tmp * call).ToString();
                 }
-
             }
             return null;
         }
