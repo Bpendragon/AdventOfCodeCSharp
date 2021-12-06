@@ -11,7 +11,7 @@ namespace AdventOfCode.Solutions.Year2021
         public Day06() : base(06, 2021, "Lanternfish")
         {
             var fishies = Input.ToIntList();
-            Dictionary<int, long> fishCounts = new();
+            long[] fishCounts = new long[9];
 
             for(int i = 0; i <=8; i++) fishCounts[i] = fishies.Count(x => x == i);
 
@@ -23,9 +23,9 @@ namespace AdventOfCode.Solutions.Year2021
                 fishCounts[6] += breeders;
                 fishCounts[8] = breeders;
 
-                if (i == 79) p1Answer = fishCounts.Values.Sum();
+                if (i == 79) p1Answer = fishCounts.Sum();
             }
-            p2Answer = fishCounts.Values.Sum();
+            p2Answer = fishCounts.Sum();
         }
 
         protected override string SolvePartOne() => p1Answer.ToString();
