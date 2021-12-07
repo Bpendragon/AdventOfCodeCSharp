@@ -17,8 +17,8 @@ namespace AdventOfCode.Solutions.Year2021
         List<int> crabs;
         public Day07() : base(07, 2021, "")
         {
-            //UseDebugInput = true;
             crabs = Input.ToIntList(",");
+            crabs.Sort();
         }
 
         protected override string SolvePartOne()
@@ -39,18 +39,13 @@ namespace AdventOfCode.Solutions.Year2021
             var minCrab = crabs.Min();
             var maxCrab = crabs.Max();
             long bestSoFar = long.MaxValue;
-            Dictionary<int, long> costs = new();
-            costs[0] = 0;
-            costs[1] = 1;
-            for(int i = 2; i<=maxCrab;i++)
-            {
-                costs[i] = i + costs[i - 1];
-            }
+
             for (int i = minCrab; i <= maxCrab; i++)
             {
-                var tmp = crabs.Sum(x => costs[Math.Abs(x - i)]);
+                var tmp = crabs.Sum(x => Math.Abs(x - i) * (Math.Abs(x - i) + 1)/2);
                 if (tmp < bestSoFar) bestSoFar = tmp;
             }
+
             return bestSoFar.ToString();
         }
     }
