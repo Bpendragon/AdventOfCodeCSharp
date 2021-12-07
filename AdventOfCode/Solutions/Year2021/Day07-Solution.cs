@@ -15,7 +15,7 @@ namespace AdventOfCode.Solutions.Year2021
     class Day07 : ASolution
     {
         List<int> crabs;
-        public Day07() : base(07, 2021, "")
+        public Day07() : base(07, 2021, "The Treachery of Whales")
         {
             crabs = Input.ToIntList(",");
             crabs.Sort();
@@ -23,10 +23,9 @@ namespace AdventOfCode.Solutions.Year2021
 
         protected override string SolvePartOne()
         {
-            var minCrab = crabs.Min();
-            var maxCrab = crabs.Max();
+            var median = crabs[crabs.Count / 2];
             long bestSoFar = long.MaxValue;
-            for(int i = minCrab; i <= maxCrab; i++)
+            for (int i = median - 1; i <= median + 1; i++)
             {
                 var tmp = crabs.Sum(x => Math.Abs(x-i));
                 if (tmp < bestSoFar) bestSoFar = tmp;
@@ -36,11 +35,11 @@ namespace AdventOfCode.Solutions.Year2021
 
         protected override string SolvePartTwo()
         {
-            var minCrab = crabs.Min();
-            var maxCrab = crabs.Max();
             long bestSoFar = long.MaxValue;
 
-            for (int i = minCrab; i <= maxCrab; i++)
+            var avg = (int)crabs.Average();
+
+            for (int i = avg - 1; i <= avg + 1; i++)
             {
                 var tmp = crabs.Sum(x => Math.Abs(x - i) * (Math.Abs(x - i) + 1)/2);
                 if (tmp < bestSoFar) bestSoFar = tmp;
