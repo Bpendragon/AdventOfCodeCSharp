@@ -9,7 +9,7 @@ namespace AdventOfCode.Solutions.Year2020
         readonly Dictionary<string, (int q, int r)> Moves; //q = 'q'olumn, r = 'r'ow (not c since that's normally for chars)
         List<string> instructions;
         Dictionary<(int q, int r), bool> TileStates = new(); //true = black, false = white
-        public Day24() : base(24, 2020, "")
+        public Day24() : base(24, 2020, "Lobby Layout")
         {
             //UseDebugInput = true;
             Moves = new Dictionary<string, (int q, int r)>()
@@ -76,13 +76,7 @@ namespace AdventOfCode.Solutions.Year2020
                 var tileList2 = TileStates.Keys.ToList();
                 foreach(var t in tileList2)
                 {
-                    int numBlack = 0;
-                    foreach(var m in Moves.Values)
-                    {
-                        var tmp = t.Add(m);
-                        var tState = TileStates.GetValueOrDefault(tmp, false);
-                        if (tState) numBlack++;
-                    }
+                    int numBlack = Moves.Values.Count(m => TileStates.GetValueOrDefault(t.Add(m), false));
 
                     if(TileStates[t])
                     {
