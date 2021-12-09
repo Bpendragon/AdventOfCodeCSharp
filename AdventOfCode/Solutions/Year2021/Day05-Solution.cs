@@ -1,21 +1,17 @@
 using System;
-using System.Text;
 using System.Collections.Generic;
-using AdventOfCode.UserClasses;
-using System.Linq;
 using System.Data;
-using System.Threading;
-using System.Security;
+using System.Linq;
+
 using static AdventOfCode.Solutions.Utilities;
-using System.Runtime.CompilerServices;
 
 namespace AdventOfCode.Solutions.Year2021
 {
 
     class Day05 : ASolution
     {
-        HashSet<VentLine> VentLines = new();
-        Dictionary<Coordinate2D, int> map = new();
+        readonly HashSet<VentLine> VentLines = new();
+        readonly Dictionary<Coordinate2D, int> map = new();
         public Day05() : base(05, 2021, "Hydrothermal Venture")
         {
             var lines = Input.SplitByNewline();
@@ -24,8 +20,8 @@ namespace AdventOfCode.Solutions.Year2021
             {
                 var ends = l.Split(new string[] { " -> ", ","},StringSplitOptions.RemoveEmptyEntries);
                 VentLine nVL = new();
-                nVL.start = new(int.Parse(ends[0]), int.Parse(ends[1]));
-                nVL.end = new(int.Parse(ends[2]), int.Parse(ends[3]));
+                nVL.Start = new(int.Parse(ends[0]), int.Parse(ends[1]));
+                nVL.End = new(int.Parse(ends[2]), int.Parse(ends[3]));
                 VentLines.Add(nVL);
                 nVL.GenerateCoverage();
             }
@@ -33,10 +29,10 @@ namespace AdventOfCode.Solutions.Year2021
 
         protected override string SolvePartOne()
         {
-            var straights = VentLines.Where(a => a.start.x == a.end.x || a.start.y == a.end.y);
+            var straights = VentLines.Where(a => a.Start.x == a.End.x || a.Start.y == a.End.y);
             foreach(var vl in straights)
             {
-                foreach(var p in vl.coverage)
+                foreach(var p in vl.Coverage)
                 {
                     if (!map.ContainsKey(p)) map[p] = 1;
                     else map[p]++;
@@ -47,10 +43,10 @@ namespace AdventOfCode.Solutions.Year2021
 
         protected override string SolvePartTwo()
         {
-            var diags = VentLines.Where(a => a.start.x != a.end.x && a.start.y != a.end.y);
+            var diags = VentLines.Where(a => a.Start.x != a.End.x && a.Start.y != a.End.y);
             foreach(var vl in diags)
             {
-                foreach (var p in vl.coverage)
+                foreach (var p in vl.Coverage)
                 {
                     if (!map.ContainsKey(p)) map[p] = 1;
                     else map[p]++;
@@ -61,70 +57,70 @@ namespace AdventOfCode.Solutions.Year2021
 
         private class VentLine
         {
-            public Coordinate2D start { get; set; }
-            public Coordinate2D end { get; set; }
+            public Coordinate2D Start { get; set; }
+            public Coordinate2D End { get; set; }
 
-            public HashSet<Coordinate2D> coverage { get; private set; } 
+            public HashSet<Coordinate2D> Coverage { get; private set; } 
 
             public void GenerateCoverage()
             {
-                coverage = new();
-                coverage.Add(start);
-                coverage.Add(end);
-                if (start.x == end.x)
+                Coverage = new();
+                Coverage.Add(Start);
+                Coverage.Add(End);
+                if (Start.x == End.x)
                 {
-                    if (start.y < end.y)
+                    if (Start.y < End.y)
                     {
-                        for (int i = start.y; i <= end.y; i++)
+                        for (int i = Start.y; i <= End.y; i++)
                         {
-                            coverage.Add(new Coordinate2D(start.x, i));
+                            Coverage.Add(new Coordinate2D(Start.x, i));
                         }
                     }
                     else
                     {
-                        for (int i = start.y; i >= end.y; i--)
+                        for (int i = Start.y; i >= End.y; i--)
                         {
-                            coverage.Add(new Coordinate2D(start.x, i));
+                            Coverage.Add(new Coordinate2D(Start.x, i));
                         }
                     }
 
                     return;
                 }
 
-                if (start.y == end.y)
+                if (Start.y == End.y)
                 {
-                    if (start.x < end.x)
+                    if (Start.x < End.x)
                     {
-                        for (int i = start.x; i <= end.x; i++)
+                        for (int i = Start.x; i <= End.x; i++)
                         {
-                            coverage.Add(new Coordinate2D(i, start.y));
+                            Coverage.Add(new Coordinate2D(i, Start.y));
                         }
                     }
                     else
                     {
-                        for (int i = start.x; i >= end.x; i--)
+                        for (int i = Start.x; i >= End.x; i--)
                         { 
-                            coverage.Add(new Coordinate2D(i, start.y));
+                            Coverage.Add(new Coordinate2D(i, Start.y));
                         }
                     }
 
                     return;
                 }
 
-                int dX = end.x - start.x;
-                int dY = end.y - start.y;
+                int dX = End.x - Start.x;
+                int dY = End.y - Start.y;
 
                 int gcd = (int)FindGCD(Math.Abs(dX), Math.Abs(dY));
 
                 int xStep = dX / gcd;
                 int yStep = dY / gcd;
 
-                int curX = start.x;
-                int curY = start.y;
+                int curX = Start.x;
+                int curY = Start.y;
 
-                while (curX != end.x)
+                while (curX != End.x)
                 {
-                    coverage.Add(new Coordinate2D(curX, curY));
+                    Coverage.Add(new Coordinate2D(curX, curY));
                     curX += xStep;
                     curY += yStep;
                 }

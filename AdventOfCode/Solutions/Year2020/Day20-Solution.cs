@@ -10,7 +10,6 @@ namespace AdventOfCode.Solutions.Year2020
     {
         readonly Tile[][] tiles;
         readonly Tile BigTile;
-        readonly List<string> Image = new();
         public Day20() : base(20, 2020, "Jurassic Jigsaw")
         {
             tiles = AssemblePuzzle(Input);
@@ -90,23 +89,23 @@ namespace AdventOfCode.Solutions.Year2020
                     //Check horizontal flip
                     bool success = true;
                     //Check normal
-                    foreach (var o in Nessie)
+                    foreach (var (x, y) in Nessie)
                     {
-                        if (map.GetValueOrDefault(kvp.Key.Add((-o.x, o.y)), '.') != '#')
+                        if (map.GetValueOrDefault(kvp.Key.Add((-x, y)), '.') != '#')
                         { success = false; break; }
                     }
 
                     if (success)
                     {
-                        foreach (var o in Nessie) map.Remove(kvp.Key.Add((-o.x, o.y)));
+                        foreach (var (x, y) in Nessie) map.Remove(kvp.Key.Add((-x, y)));
                     }
                 }
 
                 //rotate 90
                 var newNessie = new List<(int x, int y)>();
-                foreach(var n in Nessie)
+                foreach(var (x, y) in Nessie)
                 {
-                    newNessie.Add((-n.y, n.x));
+                    newNessie.Add((-y, x));
                 }
                 Nessie = new List<(int x, int y)>(newNessie);
             }
@@ -114,7 +113,7 @@ namespace AdventOfCode.Solutions.Year2020
             return map.Count(x => x.Value == '#').ToString();
         }
 
-        private Tile[] ParseTiles(string input)
+        private static Tile[] ParseTiles(string input)
         {
             return (
                 from block in input.Split("\n\n")
@@ -125,9 +124,8 @@ namespace AdventOfCode.Solutions.Year2020
             ).ToArray();
         }
 
-
-        bool isEdge(string pattern, Dictionary<string, List<Tile>> pairs) => pairs[pattern].Count == 1;
-        private Tile[][] AssemblePuzzle(string input)
+        static bool IsEdge(string pattern, Dictionary<string, List<Tile>> pairs) => pairs[pattern].Count == 1;
+        private static Tile[][] AssemblePuzzle(string input)
         {
             var tiles = ParseTiles(input);
 
@@ -158,7 +156,7 @@ namespace AdventOfCode.Solutions.Year2020
                     {
                         for (var i = 0; i < 8; i++)
                         {
-                            if (isEdge(tile.Top(), pairs) && isEdge(tile.Left(), pairs))
+                            if (IsEdge(tile.Top(), pairs) && IsEdge(tile.Left(), pairs))
                             {
                                 return tile;
                             }
@@ -172,8 +170,8 @@ namespace AdventOfCode.Solutions.Year2020
                     var tile = above != null ? getNeighbour(above, above.Bottom()) : getNeighbour(left, left.Right());
                     while (true)
                     {
-                        var topMatch = above == null ? isEdge(tile.Top(), pairs) : tile.Top() == above.Bottom();
-                        var leftMatch = left == null ? isEdge(tile.Left(), pairs) : tile.Left() == left.Right();
+                        var topMatch = above == null ? IsEdge(tile.Top(), pairs) : tile.Top() == above.Bottom();
+                        var leftMatch = left == null ? IsEdge(tile.Left(), pairs) : tile.Left() == left.Right();
 
                         if (topMatch && leftMatch)
                         {
@@ -203,7 +201,7 @@ namespace AdventOfCode.Solutions.Year2020
             return puzzle;
         }
 
-        private Tile MergeTiles(Tile[][] tiles)
+        private static Tile MergeTiles(Tile[][] tiles)
         {
             // create a big tile leaving out the borders
             var image = new List<string>();

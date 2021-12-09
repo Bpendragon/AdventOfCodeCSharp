@@ -82,13 +82,11 @@ namespace AdventOfCode.Solutions.Year2020
             Stack<long> nums = new();
             Stack<char> operations = new();
 
-            long opVal = 0;
-
+            long opVal;
             foreach (var c in expression)
             {
-                long val;
                 if (c == ' ') continue;
-                if (long.TryParse(c.ToString(), out val))
+                if (long.TryParse(c.ToString(), out long val))
                 {
                     if (operations.Count > 0 && operations.Peek() != '(')
                     {

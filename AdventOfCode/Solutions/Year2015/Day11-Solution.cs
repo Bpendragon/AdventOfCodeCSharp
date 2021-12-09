@@ -14,7 +14,7 @@ namespace AdventOfCode.Solutions.Year2015
             char[] pass = Input.ToCharArray();
             do
             {
-                pass = increment(pass, 1);
+                pass = Increment(pass, 1);
             } while (!IsValid(pass));
             part1 = pass.JoinAsStrings();
             return part1;
@@ -24,11 +24,11 @@ namespace AdventOfCode.Solutions.Year2015
             char[] pass = part1.ToCharArray();
             do
             {
-                pass = increment(pass, 1);
+                pass = Increment(pass, 1);
             } while (!IsValid(pass));
             return pass.JoinAsStrings();
         }
-        private bool IsValid(char[] pass)
+        private static bool IsValid(char[] pass)
         {
             //check 1
             bool contCheck = false;
@@ -56,14 +56,14 @@ namespace AdventOfCode.Solutions.Year2015
             return pairs >= 2;
         }
 
-        private char[] increment(char[] pass, int index)
+        private char[] Increment(char[] pass, int index)
         {
             if (index > pass.Length) return pass;
             switch(pass[^index])
             {
                 case 'z': 
                     pass[^index] = 'a';
-                    return increment(pass, index + 1);
+                    return Increment(pass, index + 1);
                 case 'h':
                     pass[^index] = 'k';
                     break;

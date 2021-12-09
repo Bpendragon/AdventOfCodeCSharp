@@ -24,13 +24,12 @@ namespace AdventOfCode.Solutions.Year2019
 
         protected override string SolvePartOne()
         {
-            Dictionary<(int x, int y), char> tractorView = new();
             int count = 0;
             for(int x = 0; x < 50; x++)
             {
                 for (int y = 0; y < 50; y++)
                 {
-                    if (scan(x, y)) count++;
+                    if (Scan(x, y)) count++;
                 }
             }
             return count.ToString();
@@ -40,10 +39,10 @@ namespace AdventOfCode.Solutions.Year2019
         {
             int x = 0, y = 0;
 
-            while(!scan(x+99, y))
+            while(!Scan(x+99, y))
             {
                 y++;
-                while(!scan(x, y+99))
+                while(!Scan(x, y+99))
                 {
                     x++;
                 }
@@ -53,7 +52,7 @@ namespace AdventOfCode.Solutions.Year2019
             return val.ToString();
         }
 
-        private bool scan(long x, long y)
+        private bool Scan(long x, long y)
         {
             bot.ClearInputs();
             bot.ReadyInput(x);

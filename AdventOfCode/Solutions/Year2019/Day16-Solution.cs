@@ -9,8 +9,8 @@ namespace AdventOfCode.Solutions.Year2019
 
     class Day16 : ASolution
     {
-        List<long> inputNums;
-        long[] basePattern = new long[] { 1, 0, -1, 0 };
+        readonly List<long> inputNums;
+        readonly long[] basePattern = new long[] { 1, 0, -1, 0 };
         public Day16() : base(16, 2019, "")
         {
             inputNums = new List<long>(Input.ToLongList());
@@ -71,7 +71,7 @@ namespace AdventOfCode.Solutions.Year2019
             return output;
         }
 
-        private List<long> Round2(List<long> input, int offSet = 0)
+        private static List<long> Round2(List<long> input, int offSet = 0)
         {
             List<long> output = new(input);
             long longSum = input.Skip(offSet).Sum();

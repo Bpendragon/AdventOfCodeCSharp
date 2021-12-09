@@ -49,12 +49,12 @@ namespace AdventOfCode.Solutions.Year2020
             long totalPeriod = busses.Aggregate((a, b) => (a.busID * b.busID,1)).busID;
 
 
-            foreach (var bus in busses.Skip(1).SkipLast(1))
+            foreach (var (busID, offSet) in busses.Skip(1).SkipLast(1))
             {
                 long firstHit = 0;
                 long secondHit = 0;
 
-                while((curTime + bus.offSet) % bus.busID != 0)
+                while((curTime + offSet) % busID != 0)
                 {
                     curTime += curDelta;
                 }
@@ -62,7 +62,7 @@ namespace AdventOfCode.Solutions.Year2020
                 firstHit = curTime;
                 curTime += curDelta;
 
-                while ((curTime + bus.offSet) % bus.busID != 0)
+                while ((curTime + offSet) % busID != 0)
                 {
                     curTime += curDelta;
                 }
@@ -103,17 +103,17 @@ namespace AdventOfCode.Solutions.Year2020
         }
 
 
-        public void CombinedPhaseRotations(long periodA, long phaseA, long periodB, long phaseB, out long combinedPeriod, out long combinedPhase)
+        public static void CombinedPhaseRotations(long periodA, long phaseA, long periodB, long phaseB, out long combinedPeriod, out long combinedPhase)
         {
             long phaseDiff = phaseA - phaseB;
-            ExtendedGCD(periodA, periodB, out long gcd, out long s, out long t);
+            ExtendedGCD(periodA, periodB, out long gcd, out long s, out _);
             DivMod(phaseDiff, gcd, out long mult, out long mod);
             if (mod != 0) throw new Exception("Will always be out of phase");
             combinedPeriod = (periodA / gcd) * periodB;
             combinedPhase = (phaseA - (s * mult * periodA)) % combinedPeriod;
         }
 
-        public void ExtendedGCD(long a, long b, out long gcd, out long xn, out long yn)
+        public static void ExtendedGCD(long a, long b, out long gcd, out long xn, out long yn)
         {
             long x0 = 1;
             xn = 1;
@@ -141,7 +141,7 @@ namespace AdventOfCode.Solutions.Year2020
             gcd = b;
         }
 
-        public void DivMod(long a, long b, out long div, out long mod)
+        public static void DivMod(long a, long b, out long div, out long mod)
         {
              div = a / b;
              mod = a % b;

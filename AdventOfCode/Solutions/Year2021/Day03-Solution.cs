@@ -1,22 +1,17 @@
 using System;
-using System.Text;
 using System.Collections.Generic;
-using AdventOfCode.UserClasses;
-using System.Linq;
 using System.Data;
-using System.Threading;
-using System.Security;
-using static AdventOfCode.Solutions.Utilities;
-using System.Runtime.CompilerServices;
+using System.Linq;
+using System.Text;
 
 namespace AdventOfCode.Solutions.Year2021
 {
 
     class Day03 : ASolution
     {
-        List<string> readings = new();
-        List<string> columns = new();
-        Dictionary<int, char> mostCommon = new();
+        readonly List<string> readings = new();
+        readonly List<string> columns = new();
+        readonly Dictionary<int, char> mostCommon = new();
         public Day03() : base(03, 2021, "Binary Diagnostic")
         {
             readings = Input.SplitByNewline();
@@ -36,13 +31,13 @@ namespace AdventOfCode.Solutions.Year2021
             {
                 if (mostCommon[i] == '1')
                 {
-                    gamma.Append("1");
-                    epsilon.Append("0");
+                    gamma.Append('1');
+                    epsilon.Append('0');
                 }
                 else
                 {
-                    gamma.Append("0");
-                    epsilon.Append("1");
+                    gamma.Append('0');
+                    epsilon.Append('1');
                 }
             }
 

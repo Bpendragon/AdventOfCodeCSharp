@@ -14,15 +14,15 @@ namespace AdventOfCode.Solutions.Year2019
 
     class Day23 : ASolution
     {
-        long[] program;
-        Dictionary<int, IntCode2> computers = new();
-        Dictionary<int, IEnumerator<long>> runningPrograms = new();
-        Dictionary<int, int> IdleTime = new();
-        HashSet<long> sentPackets = new();
-        long firstRes;
-        long firstDoubleSend;
-        long prevX;
-        long prevY;
+        readonly long[] program;
+        readonly Dictionary<int, IntCode2> computers = new();
+        readonly Dictionary<int, IEnumerator<long>> runningPrograms = new();
+        readonly Dictionary<int, int> IdleTime = new();
+        readonly HashSet<long> sentPackets = new();
+        readonly long firstRes;
+        readonly long firstDoubleSend;
+        readonly long prevX;
+        readonly long prevY;
         public Day23() : base(23, 2019, "")
         {
             program = Input.ToLongList(",");

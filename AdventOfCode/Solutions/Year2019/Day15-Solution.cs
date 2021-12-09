@@ -40,14 +40,14 @@ namespace AdventOfCode.Solutions.Year2019
 
         protected override string SolvePartOne()
         {        
-          return (AStar((0, 0), oxyGenLocation, map).Count() - 1).ToString(); //-1 to account for the facct the path contains the start node, which is not a step, see also: fencepost problem
+          return (AStar((0, 0), oxyGenLocation, map).Count - 1).ToString(); //-1 to account for the facct the path contains the start node, which is not a step, see also: fencepost problem
         }
 
        
 
         protected override string SolvePartTwo()
         {
-            return map.Where(a => a.Value != 0).Max(a => AStar(oxyGenLocation, a.Key, map).Count() - 1).ToString();
+            return map.Where(a => a.Value != 0).Max(a => AStar(oxyGenLocation, a.Key, map).Count - 1).ToString();
         }
 
         readonly List<(int dX, int dY)> movementDirs = new() { (0, 1), (0, -1), (1, 0), (-1, 0) };
@@ -65,9 +65,8 @@ namespace AdventOfCode.Solutions.Year2019
 
             while(openSet.Count >0)
             {
-                openSet.OrderBy(x => fScore.GetValueOrDefault(x, int.MaxValue));
-                var current = openSet[0];
-                if (current == goal) return reconstructPath(cameFrom, current);
+                var current = openSet.OrderBy(x => fScore.GetValueOrDefault(x, int.MaxValue)).First();
+                if (current == goal) return ReconstructPath(cameFrom, current);
                 openSet.Remove(current);
                 foreach(var dir in movementDirs)
                 {
@@ -90,7 +89,7 @@ namespace AdventOfCode.Solutions.Year2019
             return null;
         }
 
-        private List<(int x, int y)> reconstructPath(Dictionary<(int x, int y), (int x, int y)> cameFrom, (int x, int y) current)
+        private static List<(int x, int y)> ReconstructPath(Dictionary<(int x, int y), (int x, int y)> cameFrom, (int x, int y) current)
         {
             List<(int x, int y)> totalPath = new();
             totalPath.Add(current);

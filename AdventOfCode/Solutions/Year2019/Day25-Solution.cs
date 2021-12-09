@@ -14,7 +14,7 @@ namespace AdventOfCode.Solutions.Year2019
 
     class Day25 : ASolution
     {
-        IntCode2 bot;
+        readonly IntCode2 bot;
         public Day25() : base(25, 2019, "")
         {
             bot = new IntCode2(Input.ToLongList(","));
@@ -23,10 +23,7 @@ namespace AdventOfCode.Solutions.Year2019
         protected override string SolvePartOne()
         {
             bot.ClearInputs();
-
-            StringBuilder sb = new();
-            bool input = false;
-            foreach(var c in bot.RunProgram(true))
+            foreach (var c in bot.RunProgram(true))
             {
                 if (c == long.MinValue) continue;
                 if (c == long.MaxValue)
@@ -45,7 +42,6 @@ namespace AdventOfCode.Solutions.Year2019
                 Write(c2);
                 if(c2 == '?')
                 {
-                    input = true;
                     continue;
                 }
             }

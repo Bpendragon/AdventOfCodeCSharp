@@ -37,7 +37,7 @@ namespace AdventOfCode.Solutions.Year2020
                     }
                     else Bags[newBag].ContainedBy.Add(baseBag);
 
-                    Bags[baseBag].Contents[newBag] = int.Parse(tmp.Substring(0, 1));
+                    Bags[baseBag].Contents[newBag] = int.Parse(tmp[..1]);
                 }
             }
         }

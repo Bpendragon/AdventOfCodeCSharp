@@ -14,9 +14,8 @@ namespace AdventOfCode.Solutions.Year2019
 
     class Day20 : ASolution
     {
-
-        Dictionary<Coordinate2D, Tile> tiles;
-        Dictionary<string, Portal> portals;
+        readonly Dictionary<Coordinate2D, Tile> tiles;
+        readonly Dictionary<string, Portal> portals;
 
         public Day20() : base(20, 2019, "")
         {
@@ -77,7 +76,7 @@ namespace AdventOfCode.Solutions.Year2019
                                     tiles[loc] = Tile.Portal;
                                 }
                             }
-                            catch (IndexOutOfRangeException e) { }
+                            catch (IndexOutOfRangeException) { }
 
                             break;
                     }
@@ -101,7 +100,7 @@ namespace AdventOfCode.Solutions.Year2019
             return RecursiveAStar(portals["AA"].Start, portals["ZZ"].Start).Count.ToString();
         }
 
-        private List<Coordinate2D> ReconstructPath(Dictionary<Coordinate2D, Coordinate2D> cameFrom, Coordinate2D current)
+        private static List<Coordinate2D> ReconstructPath(Dictionary<Coordinate2D, Coordinate2D> cameFrom, Coordinate2D current)
         {
             var path = new List<Coordinate2D>();
             while (cameFrom.TryGetValue(current, out var parent))
@@ -224,7 +223,7 @@ namespace AdventOfCode.Solutions.Year2019
             return ReconstructRecursivePath(cameFrom, (goal, 0));
         }
 
-        private List<(Coordinate2D, int)> ReconstructRecursivePath(Dictionary<(Coordinate2D loc, int depth), (Coordinate2D loc, int depth)> cameFrom, (Coordinate2D, int) current)
+        private static List<(Coordinate2D, int)> ReconstructRecursivePath(Dictionary<(Coordinate2D loc, int depth), (Coordinate2D loc, int depth)> cameFrom, (Coordinate2D, int) current)
         {
             var path = new List<(Coordinate2D, int)>();
 
@@ -269,6 +268,16 @@ namespace AdventOfCode.Solutions.Year2019
             public bool Equals(Portal other)
             {
                 return this.Name == other.Name;
+            }
+
+            public override bool Equals(object obj)
+            {
+                return Equals(obj as Portal);
+            }
+
+            public override int GetHashCode()
+            {
+                return Start.GetHashCode() * 1000 + End.GetHashCode();
             }
         }
     }

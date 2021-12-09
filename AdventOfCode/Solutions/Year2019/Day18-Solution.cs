@@ -14,15 +14,16 @@ namespace AdventOfCode.Solutions.Year2019
 
     class Day18 : ASolution
     {
-        Dictionary<Coordinate2D, Tile> map;
-        Dictionary<Coordinate2D, Tile> map2;
-        Dictionary<Coordinate2D, char> nodes;
-        Dictionary<Coordinate2D, char> nodes2;
+        readonly Dictionary<Coordinate2D, Tile> map;
+        readonly Dictionary<Coordinate2D, Tile> map2;
+        readonly Dictionary<Coordinate2D, char> nodes;
+        readonly Dictionary<Coordinate2D, char> nodes2;
+
         //Key is the Key or Door we are at, value is other directly reachable keys and doors and distance to them.
-        Dictionary<char, Node> graph;
-        Dictionary<char, Node> graph2;
-        HashSet<char> allKeys;
-        string allKeysString;
+        readonly Dictionary<char, Node> graph;
+        readonly Dictionary<char, Node> graph2;
+        readonly HashSet<char> allKeys;
+        readonly string allKeysString;
         public Day18() : base(18, 2019, "")
         {
             map = new();
@@ -125,7 +126,7 @@ namespace AdventOfCode.Solutions.Year2019
         }
 
         //BFS to find other reachable nodes, Stops at first set of reachable.
-        private void FindNeighbors(Coordinate2D coord, Node node, Dictionary<Coordinate2D, Tile> map, Dictionary<Coordinate2D, char> nodes)
+        private static void FindNeighbors(Coordinate2D coord, Node node, Dictionary<Coordinate2D, Tile> map, Dictionary<Coordinate2D, char> nodes)
         {
             var visited = new HashSet<Coordinate2D>();
             var q = new Queue<(Coordinate2D loc, int steps)>();
@@ -134,8 +135,8 @@ namespace AdventOfCode.Solutions.Year2019
             q.Enqueue((coord, 0));
             while (q.Count > 0)
             {
-                var cur = q.Dequeue();
-                foreach (var neighbor in cur.loc.Neighbors())
+                var (loc, steps) = q.Dequeue();
+                foreach (var neighbor in loc.Neighbors())
                 {
                     if (map.TryGetValue(neighbor, out Tile tile))
                     {
@@ -144,8 +145,8 @@ namespace AdventOfCode.Solutions.Year2019
                             visited.Add(neighbor);
                             switch (tile)
                             {
-                                case Tile.Node: node.distances[nodes[neighbor]] = cur.steps + 1; break;
-                                case Tile.Empty: q.Enqueue((neighbor, cur.steps + 1)); break;
+                                case Tile.Node: node.Distances[nodes[neighbor]] = steps + 1; break;
+                                case Tile.Empty: q.Enqueue((neighbor, steps + 1)); break;
                                 default: break;
                             }
                         }
@@ -173,7 +174,7 @@ namespace AdventOfCode.Solutions.Year2019
                 visited.Add((pos, keys));
                 foreach (char c in pos)
                 {
-                    foreach (var neighbor in graph[c].distances)
+                    foreach (var neighbor in graph[c].Distances)
                     {
                         HashSet<char> nextKeys = new(keys);
                         if (char.IsUpper(neighbor.Key) && !keys.Contains(char.ToLower(neighbor.Key))) continue;
@@ -195,76 +196,6 @@ namespace AdventOfCode.Solutions.Year2019
             return int.MaxValue;
         }
 
-        int SearchWithoutDoors(char[] StartNodes, Dictionary<char, Node> graph)
-        {
-            HashSet<(char pos, string keys)> visited = new();
-            PriorityQueue<(int steps, char pos, string keys), int> pq = new();
-
-            List<string> keySubsets = new();
-            foreach (char c in StartNodes)
-            {
-                List<char> segmentKeys = new();
-                HashSet<char> quickVisited = new();
-                Queue<char> queue = new Queue<char>();
-
-                queue.Enqueue(c);
-                while (queue.Count > 0)
-                {
-                    char c2 = queue.Dequeue();
-                    quickVisited.Add(c2);
-                    if (char.IsLower(c2)) segmentKeys.Add(c2);
-                    foreach (var neighbor in graph[c2].distances)
-                    {
-                        if (!quickVisited.Contains(neighbor.Key))
-                        {
-                            quickVisited.Add(neighbor.Key);
-                            queue.Enqueue(neighbor.Key);
-                        }
-                    }
-                }
-
-                segmentKeys.Sort();
-                keySubsets.Add(segmentKeys.JoinAsStrings());
-            }
-
-
-            int total = 0;
-            foreach (char c in StartNodes)
-            {
-                var startTuple = (0, c, string.Empty);
-
-                pq.Enqueue(startTuple, 0);
-
-
-                while (pq.Count > 0)
-                {
-                    var (steps, pos, keys) = pq.Dequeue();
-                    if (keySubsets.Any(a => a == keys))
-                    {
-                        total += steps;
-                        break;
-                    }
-                    if (visited.Contains((pos, keys))) continue;
-                    visited.Add((pos, keys));
-                    foreach (var neighbor in graph[pos].distances)
-                    {
-                        HashSet<char> nextKeys = new(keys);
-                        var nextPos = neighbor.Key;
-                        if (char.IsLower(nextPos)) nextKeys.Add(nextPos);
-
-                        var keyList = nextKeys.ToList();
-                        keyList.Sort();
-                        string nextKeyString = keyList.JoinAsStrings();
-                        var nextTuple = (steps + neighbor.Value, nextPos, nextKeyString);
-                        int priority = (nextTuple.Item1);
-                        pq.Enqueue(nextTuple, priority);
-                    }
-                }
-            }
-
-            return total;
-        }
-
         enum Tile
         {
             Wall,
@@ -275,7 +206,7 @@ namespace AdventOfCode.Solutions.Year2019
         private class Node
         {
             public char Name { get; }
-            public Dictionary<char, int> distances { get; set; } = new();
+            public Dictionary<char, int> Distances { get; set; } = new();
             public Node(char Name)
             {
                 this.Name = Name;

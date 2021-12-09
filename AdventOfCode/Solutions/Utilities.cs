@@ -148,7 +148,7 @@ namespace AdventOfCode.Solutions
                     {
                         sb.Append(row[i]);
                     }
-                    catch (IndexOutOfRangeException e)
+                    catch (IndexOutOfRangeException)
                     {
                         sb.Append(' ');
                     }
@@ -304,14 +304,14 @@ namespace AdventOfCode.Solutions
             if (index == 0) throw new ArgumentException($"{nameof(index)} must be a non-zero integer");
             else if(index > 0)
             {
-                index %= array.Count();
+                index %= array.Count;
                 yield return array.Take(index).ToList();
                 yield return array.Skip(index).ToList();
                 
             } else
             {
                 index *= -1;
-                index %= array.Count();
+                index %= array.Count;
                 yield return array.SkipLast(index).ToList();
                 yield return array.TakeLast(index).ToList();
             }

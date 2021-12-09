@@ -40,7 +40,7 @@ namespace AdventOfCode.Solutions.Year2015
 
         long GetSum(JArray arr, string avoid) => arr.Sum((dynamic a) => (long)GetSum(a, avoid));
 
-        long GetSum(JValue val, string avoid)
+        static long GetSum(JValue val)
         {
             return val.Type == JTokenType.Integer ? (long)val.Value : 0;
         }

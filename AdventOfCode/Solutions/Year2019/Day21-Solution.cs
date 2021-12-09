@@ -9,7 +9,7 @@ namespace AdventOfCode.Solutions.Year2019
 
     class Day21 : ASolution
     {
-        IntCode2 bot;
+        readonly IntCode2 bot;
         public Day21() : base(21, 2019, "")
         {
             bot = new IntCode2(Input.ToLongList(","));

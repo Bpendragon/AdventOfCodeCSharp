@@ -1,21 +1,13 @@
-using System;
-using System.Text;
 using System.Collections.Generic;
-using AdventOfCode.UserClasses;
 using System.Linq;
-using System.Data;
-using System.Threading;
-using System.Security;
-using static AdventOfCode.Solutions.Utilities;
-using System.Runtime.CompilerServices;
 
 namespace AdventOfCode.Solutions.Year2021
 {
 
     class Day09 : ASolution
     {
-        Dictionary<Coordinate2D, int> heightMap = new();
-        List<Coordinate2D> lowPoints = new();
+        readonly Dictionary<Coordinate2D, int> heightMap = new();
+        readonly List<Coordinate2D> lowPoints = new();
         public Day09() : base(09, 2021, "Smoke Basin")
         {
             var lines = Input.SplitByNewline();
@@ -45,7 +37,7 @@ namespace AdventOfCode.Solutions.Year2021
 
         protected override string SolvePartTwo()
         {
-            List<HashSet<Coordinate2D>> basins = new();
+            SortedSet<int> sortedSizes = new();
 
             //BFS from each low point to height 9 or edge of map.
             foreach (var lp in lowPoints)
@@ -70,17 +62,9 @@ namespace AdventOfCode.Solutions.Year2021
                         }
                     }
                 }
-
-                basins.Add(basinMembers);
+                sortedSizes.Add(basinMembers.Count);
             }
-
-            //Sort by basin size
-            basins.Sort((a, b) => a.Count.CompareTo(b.Count));
-            
-            //multiply largest 3 sizes together.
-            int res = 1;
-            foreach (var n in basins.TakeLast(3)) res *= n.Count;
-            return res.ToString();
+            return sortedSizes.TakeLast(3).Aggregate(1, (accum, x) => accum * x).ToString();
         }
     }
 }

@@ -1,21 +1,14 @@
-using System;
-using System.Text;
 using System.Collections.Generic;
-using AdventOfCode.UserClasses;
-using System.Linq;
 using System.Data;
-using System.Threading;
-using System.Security;
-using static AdventOfCode.Solutions.Utilities;
-using System.Runtime.CompilerServices;
+using System.Linq;
 
 namespace AdventOfCode.Solutions.Year2021
 {
 
     class Day04 : ASolution
     {
-        List<int> calls;
-        HashSet<Board> Boards = new();
+        readonly List<int> calls;
+        readonly HashSet<Board> Boards = new();
 
         public Day04() : base(04, 2021, "Giant Squid")
         {
@@ -31,7 +24,7 @@ namespace AdventOfCode.Solutions.Year2021
                     for (int x = 0; x < 5; x++)
                     {
                         Cell curCell = new();
-                        curCell.val = line[x];
+                        curCell.Value = line[x];
                         nextBoard.cells[(x, y)] = curCell;
                         nextBoard.inv[line[x]] = (x, y);
                     }
@@ -49,15 +42,15 @@ namespace AdventOfCode.Solutions.Year2021
                 {
                     if(b.inv.TryGetValue(call, out (int x, int y) pos)) 
                     {
-                        b.cells[pos].marked = true;
+                        b.cells[pos].Marked = true;
                     }
                 }
 
-                var compBoard = p1Boards.FirstOrDefault(x => x.isComplete);
+                var compBoard = p1Boards.FirstOrDefault(x => x.IsComplete);
 
                 if(compBoard != null)
                 {
-                    int tmp = compBoard.cells.Values.Where(x => !x.marked).Sum(x => x.val);
+                    int tmp = compBoard.cells.Values.Where(x => !x.Marked).Sum(x => x.Value);
                     return (tmp * call).ToString();
                 }
 
@@ -74,19 +67,19 @@ namespace AdventOfCode.Solutions.Year2021
                 {
                     if (b.inv.TryGetValue(call, out (int x, int y) pos))
                     {
-                        b.cells[pos].marked = true;
+                        b.cells[pos].Marked = true;
                     }
                 }
 
                 if (p2Boards.Count > 1)
                 {
-                    p2Boards.RemoveWhere(x => x.isComplete);
+                    p2Boards.RemoveWhere(x => x.IsComplete);
                 }
 
-                var compBoard = p2Boards.FirstOrDefault(x => x.isComplete);
+                var compBoard = p2Boards.FirstOrDefault(x => x.IsComplete);
                 if (compBoard != null)
                 {
-                    int tmp = compBoard.cells.Values.Where(x => !x.marked).Sum(x => x.val);
+                    int tmp = compBoard.cells.Values.Where(x => !x.Marked).Sum(x => x.Value);
                     return (tmp * call).ToString();
                 }
             }
@@ -97,23 +90,23 @@ namespace AdventOfCode.Solutions.Year2021
         {
             public Dictionary<(int x, int y), Cell> cells = new();
             public Dictionary<int, (int x, int y)> inv = new();
-            public bool isComplete => completeCheck();
+            public bool IsComplete => CompleteCheck();
 
-            private bool completeCheck()
+            private bool CompleteCheck()
             {
-                if (cells.Values.Count(x => x.marked) < 5) return false;
+                if (cells.Values.Count(x => x.Marked) < 5) return false;
 
-                if (cells.Count(a => a.Key.x == 0 && a.Value.marked) == 5) return true;
-                if (cells.Count(a => a.Key.x == 1 && a.Value.marked) == 5) return true;
-                if (cells.Count(a => a.Key.x == 2 && a.Value.marked) == 5) return true;
-                if (cells.Count(a => a.Key.x == 3 && a.Value.marked) == 5) return true;
-                if (cells.Count(a => a.Key.x == 4 && a.Value.marked) == 5) return true;
+                if (cells.Count(a => a.Key.x == 0 && a.Value.Marked) == 5) return true;
+                if (cells.Count(a => a.Key.x == 1 && a.Value.Marked) == 5) return true;
+                if (cells.Count(a => a.Key.x == 2 && a.Value.Marked) == 5) return true;
+                if (cells.Count(a => a.Key.x == 3 && a.Value.Marked) == 5) return true;
+                if (cells.Count(a => a.Key.x == 4 && a.Value.Marked) == 5) return true;
 
-                if (cells.Count(a => a.Key.y == 0 && a.Value.marked) == 5) return true;
-                if (cells.Count(a => a.Key.y == 1 && a.Value.marked) == 5) return true;
-                if (cells.Count(a => a.Key.y == 2 && a.Value.marked) == 5) return true;
-                if (cells.Count(a => a.Key.y == 3 && a.Value.marked) == 5) return true;
-                if (cells.Count(a => a.Key.y == 4 && a.Value.marked) == 5) return true;
+                if (cells.Count(a => a.Key.y == 0 && a.Value.Marked) == 5) return true;
+                if (cells.Count(a => a.Key.y == 1 && a.Value.Marked) == 5) return true;
+                if (cells.Count(a => a.Key.y == 2 && a.Value.Marked) == 5) return true;
+                if (cells.Count(a => a.Key.y == 3 && a.Value.Marked) == 5) return true;
+                if (cells.Count(a => a.Key.y == 4 && a.Value.Marked) == 5) return true;
 
                 return false;
             }
@@ -121,8 +114,8 @@ namespace AdventOfCode.Solutions.Year2021
 
         private class Cell
         {
-            public int val { get; set; }
-            public bool marked { get; set; } = false;
+            public int Value { get; set; }
+            public bool Marked { get; set; } = false;
         }
     }
 }

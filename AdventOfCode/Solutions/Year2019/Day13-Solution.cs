@@ -41,7 +41,7 @@ namespace AdventOfCode.Solutions.Year2019
             long? nextX = null, nextY = null;
             long score = 0;
             (long x, long y) paddle = (-1, -1);
-            (long x, long y) ball  = (-1,-1);
+            (long x, long y) ball;
             bool firstMove = true;
             long step = 0;
             foreach (long output in cab.RunProgram())

@@ -28,7 +28,7 @@ namespace AdventOfCode.Solutions.Year2015
             return s.Length.ToString();
         }
 
-        private string SpeakAndSay(string value)
+        private static string SpeakAndSay(string value)
         {
             StringBuilder sb = new();
             Queue<char> q = new(value);

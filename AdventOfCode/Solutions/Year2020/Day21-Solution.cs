@@ -20,7 +20,7 @@ namespace AdventOfCode.Solutions.Year2020
                 
                 foreach(var ing in ings)
                 {
-                    if(ingredientCounts.TryGetValue(ing, out int currentCount))
+                    if (ingredientCounts.TryGetValue(ing, out _))
                     {
                         ingredientCounts[ing]++;
                     } else

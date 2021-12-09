@@ -17,8 +17,8 @@ namespace AdventOfCode.Solutions.Year2019
         readonly Dictionary<(int x, int y), int> startingMap = new();
         readonly Dictionary<int, Level> Levels = new();
         private static readonly List<Cell> AllCells = new();
-        HashSet<string> seenMapsPart1 = new();
-        string seedString;
+        readonly HashSet<string> seenMapsPart1 = new();
+        readonly string seedString;
         public Day24() : base(24, 2019, "")
         {
             var rows = Input.SplitByNewline();
@@ -101,23 +101,23 @@ namespace AdventOfCode.Solutions.Year2019
             //Populate level 0
             for (int i = 0; i < 24; i++)
             {
-                Levels[0].Members[i].state = int.Parse($"{seedString[i]}");
+                Levels[0].Members[i].State = int.Parse($"{seedString[i]}");
             }
 
             for (int i = 0; i < 200; i++)
             {
                 foreach (var c in AllCells)
                 {
-                    int living = c.Neighbours.Sum(a => a.state);
+                    int living = c.Neighbours.Sum(a => a.State);
 
-                    if (c.state == 0 && (living == 1 || living == 2)) c.nextState = 1;
-                    else if (c.state == 1 && living == 1) c.nextState = 1;
-                    else c.nextState = 0;
+                    if (c.State == 0 && (living == 1 || living == 2)) c.NextState = 1;
+                    else if (c.State == 1 && living == 1) c.NextState = 1;
+                    else c.NextState = 0;
                 }
                 foreach (var c in AllCells) c.Update();
             }
 
-            return AllCells.Sum(a => a.state).ToString();
+            return AllCells.Sum(a => a.State).ToString();
         }
 
         private void GenerateInterconnects()
@@ -303,13 +303,13 @@ namespace AdventOfCode.Solutions.Year2019
 
         private class Cell
         {
-            public int state { get; set; } = 0;
-            public int nextState { get; set; } = 0;
+            public int State { get; set; } = 0;
+            public int NextState { get; set; } = 0;
             public readonly List<Cell> Neighbours = new();
 
             public void Update()
             {
-                state = nextState;
+                State = NextState;
             }
         }
 

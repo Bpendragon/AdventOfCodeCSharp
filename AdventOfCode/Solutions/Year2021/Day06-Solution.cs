@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using System.Linq;
 
 namespace AdventOfCode.Solutions.Year2021
@@ -6,8 +5,8 @@ namespace AdventOfCode.Solutions.Year2021
 
     class Day06 : ASolution
     {
-        long p1Answer;
-        long p2Answer;
+        readonly long p1Answer;
+        readonly long p2Answer;
         public Day06() : base(06, 2021, "Lanternfish")
         {
             var fishies = Input.ToIntList();

@@ -73,7 +73,7 @@ namespace AdventOfCode.Solutions.Year2019
 
             var intersections = map.KeyList().Where(a => map.GetValueOrDefault(a, '.') != '.' && !map.Get2dNeighborVals(a, '.').Any(b => b == '.'));
 
-            foreach (var loc in intersections) AlignParamsSum += loc.x * loc.y;
+            foreach (var (x, y) in intersections) AlignParamsSum += x * y;
 
 
             return AlignParamsSum.ToString();
@@ -82,7 +82,7 @@ namespace AdventOfCode.Solutions.Year2019
         protected override string SolvePartTwo()
         {
             //Leaving this in here for proper timings
-            var fullPath = GreedySolve(botLocation, map);
+            _ = GreedySolve(botLocation, map);
 
             /*
             Full Path: R,10,R,10,R,6,R,4,R,10,R,10,L,4,R,10,R,10,R,6,R,4,R,4,L,4,L,10,L,10,R,10,R,10,R,6,R,4,R,10,R,10,L,4,R,4,L,4,L,10,L,10,R,10,R,10,L,4,R,4,L,4,L,10,L,10,R,10,R,10,L,4
@@ -103,10 +103,9 @@ namespace AdventOfCode.Solutions.Year2019
 
             foreach(var output in bot.RunProgram())
             {
-                if (output < 256) ; //Write((char)output);
-                else return output.ToString();
+                if (output >= 256) return output.ToString();
 
-                if(output == 10)
+                if (output == 10)
                 {
                     switch (inputsGiven)
                     {
@@ -153,7 +152,7 @@ namespace AdventOfCode.Solutions.Year2019
                 '>' => CompassDirection.E,
                 'v' => CompassDirection.S,
                 '<' => CompassDirection.W,
-                _ => throw new ArgumentException(),
+                _ => throw new ArgumentException($"{map[startingPoint]} is not a valid arrow"),
             };
 
             int distanceTraveled = 0;

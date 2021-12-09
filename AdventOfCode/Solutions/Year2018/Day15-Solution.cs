@@ -162,7 +162,7 @@ namespace AdventOfCode.Solutions.Year2018
         }
 
         private bool IsOpen((int x, int y) loc) => map[loc.y][loc.x] == '.' && units.All(u => u.Position != loc);
-        private bool IsAdjacent(Unit u1, Unit u2) => Math.Abs(u1.X - u2.X) + Math.Abs(u1.Y - u2.Y) == 1;
+        private static bool IsAdjacent(Unit u1, Unit u2) => Math.Abs(u1.X - u2.X) + Math.Abs(u1.Y - u2.Y) == 1;
 
         private class Unit
         {

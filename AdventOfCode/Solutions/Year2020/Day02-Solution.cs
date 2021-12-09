@@ -15,13 +15,13 @@ namespace AdventOfCode.Solutions.Year2020
 
         protected override string SolvePartOne()
         {
-            return passwords.Count(x => x.part1).ToString();
+            return passwords.Count(x => x.Part1).ToString();
 
         }
 
         protected override string SolvePartTwo()
         {
-            return passwords.Count(x => x.part2).ToString();
+            return passwords.Count(x => x.Part2).ToString();
         }
 
         internal class Password
@@ -30,10 +30,10 @@ namespace AdventOfCode.Solutions.Year2020
             public int minCount;
             public int maxCount;
             public char checkChar;
-            private int charCount => pass.Count(x => x == checkChar);
+            private int CharCount => pass.Count(x => x == checkChar);
 
-            public bool part1 => (minCount <= charCount && charCount <= maxCount);
-            public bool part2 => (checkChar == pass[minCount - 1] ^ checkChar == pass[maxCount - 1]);
+            public bool Part1 => (minCount <= CharCount && CharCount <= maxCount);
+            public bool Part2 => (checkChar == pass[minCount - 1] ^ checkChar == pass[maxCount - 1]);
 
             public Password(string password)
             {

@@ -8,7 +8,7 @@ namespace AdventOfCode.Solutions.Year2021
 
     class Day08 : ASolution
     {
-        List<string> entries;
+        readonly List<string> entries;
         public Day08() : base(08, 2021, "Seven Segment Search")
         {
             entries = Input.SplitByNewline();
