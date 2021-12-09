@@ -433,6 +433,41 @@ namespace AdventOfCode.Solutions
             }
         }
 
+        public static (int x, int y) MoveDirection(this Coordinate2D start, CompassDirection Direction, bool flipY = false, int distance = 1)
+        {
+            if (flipY)
+            {
+                return (Direction) switch
+                {
+                    CompassDirection.N => start + (0, -distance),
+                    CompassDirection.NE => start + (distance, -distance),
+                    CompassDirection.E => start + (distance, 0),
+                    CompassDirection.SE => start+(distance, distance),
+                    CompassDirection.S => start+(0, distance),
+                    CompassDirection.SW => start+(-distance, distance),
+                    CompassDirection.W =>  start + (-distance, 0),
+                    CompassDirection.NW => start + (-distance, -distance),
+                    _ => throw new ArgumentException("Direction is not valid", nameof(Direction))
+                };
+            }
+            else
+            {
+                return (Direction) switch
+                {
+                    CompassDirection.N => start + (0, distance),
+                    CompassDirection.NE => start + (distance, distance),
+                    CompassDirection.E => start + (distance, 0),
+                    CompassDirection.SE => start + (distance, -distance),
+                    CompassDirection.S => start + (0, -distance),
+                    CompassDirection.SW => start + (-distance, -distance),
+                    CompassDirection.W => start + (-distance, 0),
+                    CompassDirection.NW => start + (-distance, distance),
+                    _ => throw new ArgumentException("Direction is not valid", nameof(Direction))
+                };
+            }
+        }
+
+
         public static CompassDirection Turn(this CompassDirection value, string turnDir, int degrees = 90)
         {
             return (turnDir.ToLower()) switch
@@ -450,7 +485,24 @@ namespace AdventOfCode.Solutions
             return values.GetValueOrDefault(n, defaultVal);
         }
 
+        public static T GetDirection<T>(this Dictionary<Coordinate2D, T> values, Coordinate2D location, CompassDirection Direction, T defaultVal)
+        {
+            var n = location.MoveDirection(Direction);
+            return values.GetValueOrDefault(n, defaultVal);
+        }
+
         public static List<T> Get2dNeighborVals<T>(this Dictionary<(int, int), T> values, (int, int) location, T defaultVal)
+        {
+            List<T> res = new();
+            res.Add(values.GetDirection(location, CompassDirection.N, defaultVal));
+            res.Add(values.GetDirection(location, CompassDirection.E, defaultVal));
+            res.Add(values.GetDirection(location, CompassDirection.S, defaultVal));
+            res.Add(values.GetDirection(location, CompassDirection.W, defaultVal));
+
+            return res;
+        }
+
+        public static List<T> Get2dNeighborVals<T>(this Dictionary<Coordinate2D, T> values, Coordinate2D location, T defaultVal)
         {
             List<T> res = new();
             res.Add(values.GetDirection(location, CompassDirection.N, defaultVal));
