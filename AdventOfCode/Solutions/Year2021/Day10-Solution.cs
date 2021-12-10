@@ -1,32 +1,83 @@
-using System;
-using System.Text;
 using System.Collections.Generic;
-using AdventOfCode.UserClasses;
 using System.Linq;
-using System.Data;
-using System.Threading;
-using System.Security;
-using static AdventOfCode.Solutions.Utilities;
-using System.Runtime.CompilerServices;
 
 namespace AdventOfCode.Solutions.Year2021
 {
 
     class Day10 : ASolution
     {
-        public Day10() : base(10, 2021, "")
+        List<string> lines = new();
+        long part1 = 0;
+        SortedSet<long> part2 = new();
+        public Day10() : base(10, 2021, "Syntax Scoring")
         {
+            lines = Input.SplitByNewline();
 
+            foreach (var l in lines) { 
+                Stack<char> stack = new();
+                bool badFound = false;
+                for (int i = 0; i < l.Length; i++)
+                {
+                    char cur = l[i];
+
+                    switch (cur)
+                    {
+                        case '(':
+                        case '[':
+                        case '<':
+                        case '{':
+                            stack.Push(cur);
+                            break;
+                        case ')':
+                            if (stack.Peek() == '(') stack.Pop();
+                            else part1 += 3;
+                            break;
+                        case ']':
+                            if (stack.Peek() == '[') stack.Pop();
+                            else part1 += 57;
+                            break;
+                        case '}':
+                            if (stack.Peek() == '{') stack.Pop();
+                            else part1 += 1197;
+                            break;
+                        case '>':
+                            if (stack.Peek() == '<') stack.Pop();
+                            else part1 += 25137;
+                            break;
+                       
+                    }
+                    if (badFound) break;
+                }
+
+                //Was just incomplete, complete it
+                if (!badFound)
+                {
+                    long tmpScore = 0;
+                    while (stack.Count > 0)
+                    {
+                        tmpScore *= 5;
+                        tmpScore += (stack.Pop()) switch
+                        {
+                            '(' => 1,
+                            '[' => 2,
+                            '{' => 3,
+                            '<' => 4,
+                            _ => 0
+                        };
+                    }
+                    part2.Add(tmpScore);
+                }
+            }
         }
 
         protected override string SolvePartOne()
-        {
-            return null;
+        { 
+            return part1.ToString();
         }
 
         protected override string SolvePartTwo()
         {
-            return null;
+            return part2.Skip(part2.Count/2).Take(1).First().ToString();
         }
     }
 }
