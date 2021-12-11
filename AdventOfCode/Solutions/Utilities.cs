@@ -120,7 +120,7 @@ namespace AdventOfCode.Solutions
         public static List<string> SplitByNewline(this string input, bool blankLines = true, bool shouldTrim = false)
         {
             return input
-               .Split(new[] { "\r", "\n", "\r\n" }, StringSplitOptions.None)
+               .Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None)
                .Where(s => blankLines || !string.IsNullOrWhiteSpace(s))
                .Select(s => shouldTrim ? s.Trim() : s)
                .ToList();
@@ -491,24 +491,41 @@ namespace AdventOfCode.Solutions
             return values.GetValueOrDefault(n, defaultVal);
         }
 
-        public static List<T> Get2dNeighborVals<T>(this Dictionary<(int, int), T> values, (int, int) location, T defaultVal)
+        public static List<T> Get2dNeighborVals<T>(this Dictionary<(int, int), T> values, (int, int) location, T defaultVal, bool includeDiagonals = false)
         {
             List<T> res = new();
             res.Add(values.GetDirection(location, CompassDirection.N, defaultVal));
             res.Add(values.GetDirection(location, CompassDirection.E, defaultVal));
             res.Add(values.GetDirection(location, CompassDirection.S, defaultVal));
             res.Add(values.GetDirection(location, CompassDirection.W, defaultVal));
+
+            if (includeDiagonals)
+            {
+                res.Add(values.GetDirection(location, CompassDirection.NW, defaultVal));
+                res.Add(values.GetDirection(location, CompassDirection.NE, defaultVal));
+                res.Add(values.GetDirection(location, CompassDirection.SE, defaultVal));
+                res.Add(values.GetDirection(location, CompassDirection.SW, defaultVal));
+            }
+
 
             return res;
         }
 
-        public static List<T> Get2dNeighborVals<T>(this Dictionary<Coordinate2D, T> values, Coordinate2D location, T defaultVal)
+        public static List<T> Get2dNeighborVals<T>(this Dictionary<Coordinate2D, T> values, Coordinate2D location, T defaultVal, bool includeDiagonals = false)
         {
             List<T> res = new();
             res.Add(values.GetDirection(location, CompassDirection.N, defaultVal));
             res.Add(values.GetDirection(location, CompassDirection.E, defaultVal));
             res.Add(values.GetDirection(location, CompassDirection.S, defaultVal));
             res.Add(values.GetDirection(location, CompassDirection.W, defaultVal));
+
+            if(includeDiagonals)
+            {
+                res.Add(values.GetDirection(location, CompassDirection.NW, defaultVal));
+                res.Add(values.GetDirection(location, CompassDirection.NE, defaultVal));
+                res.Add(values.GetDirection(location, CompassDirection.SE, defaultVal));
+                res.Add(values.GetDirection(location, CompassDirection.SW, defaultVal));
+            }
 
             return res;
         }
@@ -527,15 +544,26 @@ namespace AdventOfCode.Solutions
             return keyList;
         }
 
-        public static List<Coordinate2D> Neighbors(this Coordinate2D val)
+        public static List<Coordinate2D> Neighbors(this Coordinate2D val, bool includeDiagonals = false)
         {
-            return new List<Coordinate2D>()
-        {
-            new Coordinate2D(val.x - 1, val.y),
-            new Coordinate2D(val.x + 1, val.y),
-            new Coordinate2D(val.x, val.y - 1),
-            new Coordinate2D(val.x, val.y + 1),
-        };
+            var tmp = new List<Coordinate2D>()
+            {
+                new Coordinate2D(val.x - 1, val.y),
+                new Coordinate2D(val.x + 1, val.y),
+                new Coordinate2D(val.x, val.y - 1),
+                new Coordinate2D(val.x, val.y + 1),
+            };
+            if(includeDiagonals)
+            {
+                tmp.AddRange(new List<Coordinate2D>()
+                {
+                    new Coordinate2D(val.x - 1, val.y - 1),
+                    new Coordinate2D(val.x + 1, val.y - 1),
+                    new Coordinate2D(val.x - 1, val.y + 1),
+                    new Coordinate2D(val.x + 1, val.y + 1),
+                });
+            }
+            return tmp;
         }
 
     }
@@ -632,6 +660,11 @@ namespace AdventOfCode.Solutions
         public override int GetHashCode()
         {
             return (100 * x + y).GetHashCode();
+        }
+
+        public override string ToString()
+        {
+            return $"({x}, {y})";
         }
 
     }
