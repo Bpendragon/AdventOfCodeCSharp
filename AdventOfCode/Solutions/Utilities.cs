@@ -664,7 +664,7 @@ namespace AdventOfCode.Solutions
 
         public override string ToString()
         {
-            return $"({x}, {y})";
+            return string.Concat("(", x, ", ", y, ")");
         }
 
     }
