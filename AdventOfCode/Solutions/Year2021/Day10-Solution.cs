@@ -6,9 +6,9 @@ namespace AdventOfCode.Solutions.Year2021
 
     class Day10 : ASolution
     {
-        List<string> lines = new();
-        long part1 = 0;
-        SortedSet<long> part2 = new();
+        readonly List<string> lines = new();
+        readonly long part1 = 0;
+        readonly SortedSet<long> part2 = new();
         public Day10() : base(10, 2021, "Syntax Scoring")
         {
             lines = Input.SplitByNewline();

@@ -14,10 +14,9 @@ namespace AdventOfCode.Solutions.Year2021
 
     class Day11 : ASolution
     {
-        long part1;
-        long counter = 0;
-
-        Dictionary<Coordinate2D, int> octopodes = new();
+        readonly long part1;
+        readonly long counter = 0;
+        readonly Dictionary<Coordinate2D, int> octopodes = new();
         public Day11() : base(11, 2021, "Dumbo Octopus")
         {
             var lines = Input.SplitByNewline();
