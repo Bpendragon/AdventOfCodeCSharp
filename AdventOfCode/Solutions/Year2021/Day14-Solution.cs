@@ -37,7 +37,7 @@ namespace AdventOfCode.Solutions.Year2021
         protected override string SolvePartOne()
         {
 
-            for (int i = 0; i < originalPolymer.Length - 1; i++)
+            foreach (int i in Enumerable.Range(0, originalPolymer.Length - 1))
             {
                 var cur = originalPolymer.Substring(i, 2);
                 Drill(cur, 0, 10);
@@ -48,7 +48,7 @@ namespace AdventOfCode.Solutions.Year2021
 
         protected override string SolvePartTwo()
         {
-            for (int i = 0; i < originalPolymer.Length - 1; i++)
+            foreach (int i in Enumerable.Range(0, originalPolymer.Length - 1))
             {
                 var pair = originalPolymer.Substring(i, 2);
                 counts2[pair] = counts2.GetValueOrDefault(pair, 0) + 1;
