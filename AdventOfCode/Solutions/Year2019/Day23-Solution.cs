@@ -14,7 +14,7 @@ namespace AdventOfCode.Solutions.Year2019
 
     class Day23 : ASolution
     {
-        readonly long[] program;
+        readonly List<long> program;
         readonly Dictionary<int, IntCode2> computers = new();
         readonly Dictionary<int, IEnumerator<long>> runningPrograms = new();
         readonly Dictionary<int, int> IdleTime = new();

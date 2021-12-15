@@ -12,7 +12,7 @@ namespace AdventOfCode.UserClasses
         int RelativeBase;
         public readonly Queue<long> Inputs = new();
 
-        public IntCode2(long[] Program)
+        public IntCode2(IEnumerable<long> Program)
         {
             this.Program = new List<long>(Program);
             long[] padding = new long[10000];

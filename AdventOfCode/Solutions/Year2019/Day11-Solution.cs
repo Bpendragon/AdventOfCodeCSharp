@@ -9,7 +9,7 @@ namespace AdventOfCode.Solutions.Year2019
 
     class Day11 : ASolution
     {
-        readonly long[] Program;
+        readonly List<long> Program;
         public Day11() : base(11, 2019, "Space Police")
         {
             Program = Input.ToLongList(",");
@@ -46,7 +46,7 @@ namespace AdventOfCode.Solutions.Year2019
         public Queue<int> outPutStream = new();
         public int numWhite = 0;
 
-        public PainterBot(long[] program)
+        public PainterBot(IEnumerable<long> program)
         {
             cpu = new IntCode2(program);
 

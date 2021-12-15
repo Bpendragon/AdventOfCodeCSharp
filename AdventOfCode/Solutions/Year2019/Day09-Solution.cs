@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 using AdventOfCode.UserClasses;
 
@@ -7,7 +8,7 @@ namespace AdventOfCode.Solutions.Year2019
 
     class Day09 : ASolution
     {
-        readonly long[] program;
+        readonly List<long> program;
         public Day09() : base(09, 2019, "")
         {
             program = Input.ToLongList(",");

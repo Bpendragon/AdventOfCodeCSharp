@@ -35,13 +35,13 @@ namespace AdventOfCode.Solutions
             }
         }
 
-        public static long[] ToLongList(this string str, string delimiter = "")
+        public static List<long> ToLongList(this string str, string delimiter = "")
         {
             if (delimiter == "")
             {
                 List<long> result = new();
                 foreach (char c in str) if (long.TryParse(c.ToString(), out long n)) result.Add(n);
-                return result.ToArray();
+                return result.ToList();
             }
             else
             {
@@ -49,7 +49,7 @@ namespace AdventOfCode.Solutions
                     .Split(delimiter)
                     .Where(n => long.TryParse(n, out long v))
                     .Select(n => Convert.ToInt64(n))
-                    .ToArray();
+                    .ToList();
             }
 
         }
@@ -566,6 +566,53 @@ namespace AdventOfCode.Solutions
             return tmp;
         }
 
+        public static List<Coordinate2D> AStar(Coordinate2D start, Coordinate2D goal, Dictionary<Coordinate2D, long> map) 
+        {
+            PriorityQueue<Coordinate2D, long> openSet = new();
+            Dictionary<Coordinate2D, Coordinate2D> cameFrom = new();
+
+            Dictionary<Coordinate2D, long> gScore = new();
+            gScore[start] = 0;
+
+            openSet.Enqueue(start, 0);
+
+            while (openSet.TryDequeue(out Coordinate2D cur, out long _))
+            {
+                if (cur.Equals(goal))
+                {
+                    return ReconstructPath(cameFrom, cur);
+                }
+
+                foreach (var n in cur.Neighbors())
+                {
+                    //Not using long.max to avoid overflow
+                    var tentGScore = gScore[cur] + map.GetValueOrDefault(n, 10_000_000);
+                    if (tentGScore < gScore.GetValueOrDefault(n, int.MaxValue) && map.ContainsKey(n))
+                    {
+                        cameFrom[n] = cur;
+                        gScore[n] = tentGScore;
+                        openSet.Enqueue(n, tentGScore + cur.ManDistance(goal));
+                    }
+                }
+            }
+
+            return null;
+
+        }
+
+        private static List<Coordinate2D> ReconstructPath(Dictionary<Coordinate2D, Coordinate2D> cameFrom, Coordinate2D current)
+        {
+            List<Coordinate2D> res = new();
+            res.Add(current);
+            while (cameFrom.ContainsKey(current))
+            {
+                current = cameFrom[current];
+                res.Add(current);
+            }
+            res.Reverse();
+            return res;
+        }
+
     }
 
     public class Coordinate2D
@@ -790,6 +837,8 @@ namespace AdventOfCode.Solutions
 
         private static Coordinate4D[] neighbors;
     }
+
+
 }
 
     
