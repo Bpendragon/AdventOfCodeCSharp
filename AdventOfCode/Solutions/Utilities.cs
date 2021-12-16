@@ -566,7 +566,7 @@ namespace AdventOfCode.Solutions
             return tmp;
         }
 
-        public static List<Coordinate2D> AStar(Coordinate2D start, Coordinate2D goal, Dictionary<Coordinate2D, long> map) 
+        public static List<Coordinate2D> AStar(Coordinate2D start, Coordinate2D goal, Dictionary<Coordinate2D, long> map, bool IncludeDiagonals = false) 
         {
             PriorityQueue<Coordinate2D, long> openSet = new();
             Dictionary<Coordinate2D, Coordinate2D> cameFrom = new();
@@ -583,11 +583,10 @@ namespace AdventOfCode.Solutions
                     return ReconstructPath(cameFrom, cur);
                 }
 
-                foreach (var n in cur.Neighbors())
+                foreach (var n in cur.Neighbors(IncludeDiagonals).Where(a => map.ContainsKey(a)))
                 {
-                    //Not using long.max to avoid overflow
-                    var tentGScore = gScore[cur] + map.GetValueOrDefault(n, 10_000_000);
-                    if (tentGScore < gScore.GetValueOrDefault(n, int.MaxValue) && map.ContainsKey(n))
+                    var tentGScore = gScore[cur] + map[n];
+                    if (tentGScore < gScore.GetValueOrDefault(n, int.MaxValue))
                     {
                         cameFrom[n] = cur;
                         gScore[n] = tentGScore;
@@ -597,7 +596,6 @@ namespace AdventOfCode.Solutions
             }
 
             return null;
-
         }
 
         private static List<Coordinate2D> ReconstructPath(Dictionary<Coordinate2D, Coordinate2D> cameFrom, Coordinate2D current)

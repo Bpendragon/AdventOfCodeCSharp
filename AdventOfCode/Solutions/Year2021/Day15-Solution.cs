@@ -8,7 +8,8 @@ namespace AdventOfCode.Solutions.Year2021
     class Day15 : ASolution
     {
         readonly Dictionary<Coordinate2D, long> map = new();
-        int max_dim;
+        readonly int smolMapDimensions;
+        readonly int largeMapDimensions;
         public Day15() : base(15, 2021, "Chiton")
         {
             var lines = Input.SplitByNewline();
@@ -20,32 +21,21 @@ namespace AdventOfCode.Solutions.Year2021
                     map[(x, y)] = asInts[x];
                 }
             }
-            //Off by one errors
-            max_dim = lines.Count - 1;
-        }
 
-        protected override string SolvePartOne()
-        {
-            var Path = AStar((0, 0), (max_dim, max_dim), map);
-            return Path.Skip(1).Sum(x => map[x]).ToString();
-        }
-
-        protected override string SolvePartTwo()
-        {
-            int old_dim = max_dim + 1;
-            max_dim = (old_dim * 5) - 1;
+            smolMapDimensions = lines.Count;
+            largeMapDimensions = smolMapDimensions * 5;
 
             //Generate first row across
             var curKeys = map.KeyList();
 
-            foreach(var key in curKeys)
+            foreach (var key in curKeys)
             {
                 var newVal = map[key];
-                foreach(int i in Enumerable.Range(1,4))
+                foreach (int i in Enumerable.Range(1, 4))
                 {
                     newVal++;
                     if (newVal > 9) newVal = 1;
-                    map[(key.x + (i * old_dim), key.y)] = newVal;
+                    map[(key.x + (i * smolMapDimensions), key.y)] = newVal;
 
                 }
             }
@@ -60,12 +50,21 @@ namespace AdventOfCode.Solutions.Year2021
                 {
                     newVal++;
                     if (newVal > 9) newVal = 1;
-                    map[(key.x, key.y + (i * old_dim))] = newVal;
+                    map[(key.x, key.y + (i * smolMapDimensions))] = newVal;
 
                 }
             }
+        }
 
-            var Path = AStar((0, 0), (max_dim, max_dim), map);
+        protected override string SolvePartOne()
+        {
+            var Path = AStar((0, 0), (smolMapDimensions - 1, smolMapDimensions - 1), map);
+            return Path.Skip(1).Sum(x => map[x]).ToString();
+        }
+
+        protected override string SolvePartTwo()
+        {
+            var Path = AStar((0, 0), (largeMapDimensions - 1, largeMapDimensions - 1), map);
             return Path.Skip(1).Sum(x => map[x]).ToString();
         }
     }
