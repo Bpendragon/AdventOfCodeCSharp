@@ -9,49 +9,40 @@ namespace AdventOfCode.Solutions.Year2021
         //Direct from input
         readonly int minX = 137, maxX = 171, minY = -98, maxY = -73;
         int smallestPossibleXVelo;
-        int largestPossibleYVelo = 0;
         public Day17() : base(17, 2021, "Trick Shot")
         {
-            smallestPossibleXVelo = (int)(Math.Sqrt(1 + (8.0 * minX)) / 2) + 1;
+            smallestPossibleXVelo = (int)Math.Ceiling(Math.Sqrt(1 + (8.0 * minX)) / 2);
         }
 
         protected override string SolvePartOne()
         {
-            int bestY = 0;
-            foreach (int y in Enumerable.Range(0, 100))
-            {
-                if (SimulateShot((0, 0), smallestPossibleXVelo, y, out int bY))
-                {
-                    if(bY > bestY) bestY = bY;
-                    if (y > largestPossibleYVelo) largestPossibleYVelo = y;
-                }
-            }
-            return bestY.ToString();
+            var tmp = Math.Abs(minY);
+            var res = tmp * (tmp - 1) / 2;
+            return res.ToString();
         }
 
         protected override string SolvePartTwo()
         {
             int succesfulShots = 0;
-            for(int x = smallestPossibleXVelo; x <= maxX; x++)
+            for(int x = smallestPossibleXVelo; x < minX; x++)
             {
-                for(int y = minY; y <= largestPossibleYVelo; y++)
+                for(int y = maxY; y < Math.Abs(minY); y++)
                 {
-                    if (SimulateShot((0, 0), x, y, out int _)) succesfulShots++;
+                    if (SimulateShot((0, 0), x, y)) succesfulShots++;
                 }
             }
+            succesfulShots += (maxX - minX + 1) * (maxY - minY + 1);
             return succesfulShots.ToString();
         }
 
-        private bool SimulateShot(Coordinate2D initialPos, int initX, int initY, out int maxYAchieved)
+        private bool SimulateShot(Coordinate2D initialPos, int initX, int initY)
         {
             var curPos = initialPos;
             var velX = initX;
             var velY = initY;
-            maxYAchieved = 0;
             while(true)
             {
                 curPos += (velX, velY);
-                if (curPos.y > maxYAchieved) maxYAchieved = curPos.y;
                 if (minX <= curPos.x && curPos.x <= maxX && minY <= curPos.y && curPos.y <= maxY) return true;
                 if (curPos.y < minY || curPos.x > maxX) return false;
 
