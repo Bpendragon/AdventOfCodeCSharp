@@ -8,6 +8,7 @@ namespace AdventOfCode.Solutions.Year2021
     class Day15 : ASolution
     {
         readonly Dictionary<Coordinate2D, long> map = new();
+        readonly Dictionary<Coordinate2D, long> smolMap;
         readonly int smolMapDimensions;
         readonly int largeMapDimensions;
         public Day15() : base(15, 2021, "Chiton")
@@ -24,7 +25,7 @@ namespace AdventOfCode.Solutions.Year2021
 
             smolMapDimensions = lines.Count;
             largeMapDimensions = smolMapDimensions * 5;
-
+            smolMap = new(map);
             //Generate first row across
             var curKeys = map.KeyList();
 
@@ -58,14 +59,14 @@ namespace AdventOfCode.Solutions.Year2021
 
         protected override string SolvePartOne()
         {
-            var Path = AStar((0, 0), (smolMapDimensions - 1, smolMapDimensions - 1), map);
-            return Path.Skip(1).Sum(x => map[x]).ToString();
+            AStar((0, 0), (smolMapDimensions - 1, smolMapDimensions - 1), smolMap, out long cost, IncludePath: false);
+            return (cost).ToString();
         }
 
         protected override string SolvePartTwo()
         {
-            var Path = AStar((0, 0), (largeMapDimensions - 1, largeMapDimensions - 1), map);
-            return Path.Skip(1).Sum(x => map[x]).ToString();
+            AStar((0, 0), (largeMapDimensions - 1, largeMapDimensions - 1), map, out long cost, IncludePath: false);
+            return (cost).ToString();
         }
     }
 }
