@@ -117,7 +117,7 @@ namespace AdventOfCode.Solutions
             return string.Join(seperator, items);
         }
 
-        public static List<string> SplitByNewline(this string input, bool blankLines = true, bool shouldTrim = false)
+        public static List<string> SplitByNewline(this string input, bool blankLines = false, bool shouldTrim = true)
         {
             return input
                .Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None)
@@ -241,13 +241,13 @@ namespace AdventOfCode.Solutions
         // https://github.com/tslater2006/AdventOfCode2019
         public static IEnumerable<IEnumerable<T>> Permutations<T>(this IEnumerable<T> values)
         {
-            return (values.Count() == 1) ? new[] { values } : values.SelectMany(v => Permutations(values.Where(x => x.Equals(v) == false)), (v, p) => p.Prepend(v));
+            return (values.Count() == 1) ? new[] { values } : values.SelectMany(v => Permutations(values.Where(x => x.Equals(v) == false)), (v, p) => p.Prepend(v)).ToList();
         }
 
         public static IEnumerable<IEnumerable<T>> Permutations<T>(this IEnumerable<T> values, int subcount)
         {
-
-            foreach (IEnumerable<T> combination in Combinations(values, subcount))
+            var comboList = Combinations(values, subcount).ToList();
+            foreach (IEnumerable<T> combination in comboList)
             {
                 IEnumerable<IEnumerable<T>> perms = Permutations(combination);
                 foreach (int i in Enumerable.Range(0, perms.Count())) yield return perms.ElementAt(i);

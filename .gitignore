@@ -341,6 +341,6 @@ ASALocalRun/
 
 # Local configuration
 config.json
-AdventOfCode/Solutions/Year*/*input
-AdventOfCode/Solutions/Year*/*Input
+AdventOfCode/Solutions/Year*/*input*
+AdventOfCode/Solutions/Year*/*Input*
 .editorconfig

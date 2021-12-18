@@ -8,10 +8,10 @@ namespace AdventOfCode.Solutions.Year2021
     {
         //Direct from input
         readonly int minX = 137, maxX = 171, minY = -98, maxY = -73;
-        int smallestPossibleXVelo;
+        readonly int smallestPossibleXVelo;
         public Day17() : base(17, 2021, "Trick Shot")
         {
-            smallestPossibleXVelo = (int)Math.Ceiling(Math.Sqrt(1 + (8.0 * minX)) / 2);
+            smallestPossibleXVelo = (int)Math.Ceiling(-1 + Math.Sqrt(1 + (8.0 * minX)) / 2);
         }
 
         protected override string SolvePartOne()
