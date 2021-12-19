@@ -1,7 +1,9 @@
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Net;
+using System.Net.Http;
 using System.Text;
 
 namespace AdventOfCode.Solutions
@@ -23,11 +25,22 @@ namespace AdventOfCode.Solutions
         public long Part2Ticks => _part2Time;
         public long ContructionTime { get; set; }
         protected bool UseDebugInput { get; set; }
+        private static HttpClient Client;
+        private static HttpClientHandler Handler;
 
         private protected ASolution(int day, int year, string title) {
             Day = day;
             Year = year;
             Title = title;
+            if (Handler is null)
+            {
+                Handler = new HttpClientHandler { UseCookies = false };
+            }
+            if (Client is null)
+            {
+                Client = new(Handler);
+            }
+            
             _input = new Lazy<string>(LoadInput);
             _part1 = new Lazy<string>(() => SafelySolve(SolvePartOne, out _part1Time));
             _part2 = new Lazy<string>(() => SafelySolve(SolvePartTwo, out _part2Time));
@@ -96,26 +109,36 @@ namespace AdventOfCode.Solutions
                 try {
                     DateTime CURRENT_EST = TimeZoneInfo.ConvertTime(DateTime.Now, TimeZoneInfo.Utc).AddHours(-5);
                     if( CURRENT_EST < new DateTime(Year, 12, Day) ) throw new InvalidOperationException();
+                   
+                    
+                    var request = new HttpRequestMessage(HttpMethod.Get, INPUT_URL);
+                    request.Headers.Add("Cookie", Program.Config.Cookie);
 
-                    using WebClient client = new();
-                    client.Headers.Add(HttpRequestHeader.Cookie, Program.Config.Cookie);
-                    input = client.DownloadString(INPUT_URL).TrimEnd();
-                    File.WriteAllText(INPUT_FILEPATH, input);
-                }
-                catch( WebException e ) {
-                    HttpStatusCode statusCode = ((HttpWebResponse)e.Response).StatusCode;
-                    if( statusCode == HttpStatusCode.BadRequest ) {
+                    var response = Client.SendAsync(request, HttpCompletionOption.ResponseHeadersRead).GetAwaiter().GetResult();
+                    HttpStatusCode statusCode = response.StatusCode;
+
+                    if (statusCode == HttpStatusCode.BadRequest)
+                    {
                         Console.WriteLine($"Day {Day}: Error code 400 when attempting to retrieve puzzle input through the web client. Your session cookie is probably not recognized.");
                     }
-                    else if( statusCode == HttpStatusCode.NotFound ) {
+                    else if (statusCode == HttpStatusCode.NotFound)
+                    {
                         Console.WriteLine($"Day {Day}: Error code 404 when attempting to retrieve puzzle input through the web client. The puzzle is probably not available yet.");
                     }
-                    else {
-                        Console.WriteLine(e.ToString());
+                    else
+                    {
+
+                        input = response.Content.ReadAsStringAsync().GetAwaiter().GetResult().TrimEnd();
+                        File.WriteAllText(INPUT_FILEPATH, input);
+                        request.Dispose();
                     }
                 }
                 catch( InvalidOperationException ) {
                     Console.WriteLine($"Day {Day}: Cannot fetch puzzle input before given date (Eastern Standard Time).");
+                }
+                catch
+                {
+                    throw;
                 }
             }
             return input;
