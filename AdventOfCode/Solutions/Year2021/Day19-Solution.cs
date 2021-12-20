@@ -14,182 +14,124 @@ namespace AdventOfCode.Solutions.Year2021
 
     class Day19 : ASolution
     {
-        Dictionary<int, Scanner> scannersold = new();
-        Dictionary<Coordinate3D, string> fullMap = new();
+        private readonly Dictionary<int, HashSet<Coordinate3D>> readings = new();
+        private readonly HashSet<Coordinate3D> beaconMap;
+        private readonly Dictionary<int, Coordinate3D> scanners = new();
         public Day19() : base(19, 2021, "Beacon Scanner")
         {
             //UseDebugInput = true;
             var scannerSegs = Input.Split("\n\n");
             for (int i = 0; i < scannerSegs.Length; i++)
             {
-                Scanner newScan = new();
-                foreach (var line in scannerSegs[i].SplitByNewline().Skip(1)) newScan.Beacons.Add(new(line.ToIntList(",")));
-
-                var pairs = newScan.Beacons.Combinations(2);
-                foreach (var pair in pairs)
+                readings[i] = new();
+                foreach (var line in scannerSegs[i].SplitByNewline().Skip(1))
                 {
-                    var pairList = pair.ToList();
-                    pairList[0].RelativeDisDirToOtherBeacons[pairList[1]] = pairList[0].RelativeLocation - pairList[1].RelativeLocation;
-                    pairList[1].RelativeDisDirToOtherBeacons[pairList[0]] = pairList[1].RelativeLocation - pairList[0].RelativeLocation;
-                    newScan.DistancesBetweenBeacons.Add(pairList[0].RelativeLocation - pairList[1].RelativeLocation, (pairList[0], pairList[1]));
-                    newScan.DistancesBetweenBeacons.Add(pairList[1].RelativeLocation - pairList[0].RelativeLocation, (pairList[1], pairList[0]));
+                    var asList = line.ToIntList(",");
+                    readings[i].Add((asList[0], asList[1], asList[2]));
                 }
-                
-                scannersold[i] = newScan;
-                
             }
-            scannersold[0].AbsoluteLocation = (0, 0, 0);
-            scannersold[0].Rotation = 0;
-            foreach (var b in scannersold[0].Beacons) fullMap[b.RelativeLocation] = "beacon";
-            WriteLine("Placed Scanner 0");
+            //Pre-load scanner 0 beacons into the map.
+            beaconMap = new(readings[0]);
+            scanners[0] = (0, 0, 0);
         }
 
         protected override string SolvePartOne()
         {
-            while (scannersold.Values.Count(a => a.Rotation == -1) > 1)
-            {
+            BuildMap();
 
-                foreach (var unset in scannersold.Where(a => a.Value.Rotation == -1))
-                {
-                    bool doesIntersect = false;
-                    foreach (var set in scannersold.Where(a => a.Value.Rotation != -1))
-                    { 
-                        int i;
-                        List<Coordinate3D> intersection = new();
-                        Dictionary<Coordinate3D, (Beacon set, Beacon unset)> knownIntersections = new();
-                        for (i = 0; i < 24; i++)
-                        {
-                            var curRotation = unset.Value.DistancesBetweenBeacons.ToDictionary(a => a.Key.Rotations[i], a => a.Key);
-                            intersection = set.Value.DistancesBetweenBeacons.Keys.Select(a => a.Rotations[set.Value.Rotation]).Intersect(curRotation.Keys).ToList();
-                            if (intersection.Count >= 70)
-                            {
-                                doesIntersect = true;
-                                var Rotated = intersection.ToDictionary(a => a, a => unset.Value.DistancesBetweenBeacons[curRotation[a]]);
-                                var setHalf = set.Value.Beacons.FirstOrDefault(b => b.RelativeDisDirToOtherBeacons.ContainsValue(intersection[0]));
-                                var unsetHalf = Rotated[intersection[0]].Item1;
-
-                                unset.Value.Rotation = i;
-                                unset.Value.AbsoluteLocation = set.Value.AbsoluteLocation + setHalf.RelativeLocation - (unsetHalf.RelativeLocation.Rotations[i]);
-                                foreach (var b in unset.Value.Beacons)
-                                {
-                                    b.RelativeLocation = b.RelativeLocation.Rotations[i];
-                                    foreach (var k in b.RelativeDisDirToOtherBeacons.Keys) b.RelativeDisDirToOtherBeacons[k] = b.RelativeDisDirToOtherBeacons[k].Rotations[i];
-                                    fullMap[unset.Value.AbsoluteLocation + b.RelativeLocation] = "beacon";
-                                }
-                                //unset.Value.DistancesBetweenBeacons = unset.Value.DistancesBetweenBeacons.ToDictionary(a => a.Key.Rotations[i], a => a.Value);
-                                WriteLine($"Placed Scanner {unset.Key}");
-                                break;
-                            }
-                        }
-
-                        if (doesIntersect) break;
-                    }
-
-                    if (doesIntersect) break;
-                }
-            }
-            return fullMap.Values.Count(a => a == "beacon").ToString();
+            return beaconMap.Count.ToString();
         }
 
         protected override string SolvePartTwo()
         {
-            return null;
+            return scanners.Values.Combinations(2).Max(a => a.First().ManhattanDistance(a.Last())).ToString();
         }
 
-        private class Scanner
+        private void BuildMap()
         {
-            public Coordinate3D AbsoluteLocation { get; set; } = (int.MaxValue, int.MaxValue, int.MaxValue);
+            Dictionary<Coordinate3D, Coordinate3D> knownDists = CalcDists(beaconMap);
+            Queue<int> scannersToCheck = new();
+            foreach (var s in readings.Keys.Where(a => a != 0)) scannersToCheck.Enqueue(s);
 
-            public List<Beacon> Beacons { get; set; } = new();
+            int RotationIndex = -1;
+            Coordinate3D translationVec = null;
 
-            public int Rotation { get; set; } = -1; //This is the index into the rotation list.
-
-            public Dictionary<Coordinate3D, (Beacon, Beacon)> DistancesBetweenBeacons { get; set; } = new();
-        }
-
-        private class Beacon
-        {
-            public Coordinate3D RelativeLocation { get; set; }
-            public Coordinate3D AbsoluteLocation { get; set; }
-
-            readonly public Dictionary<Beacon, Coordinate3D> RelativeDisDirToOtherBeacons = new();
-
-            public Beacon()
+            while(scannersToCheck.TryDequeue(out int scanner))
             {
+                var curReadings = readings[scanner];
 
-            }
-
-            public Beacon(IEnumerable<int> coords)
-            {
-                if (coords.Count() != 3) throw new ArgumentException($"{nameof(coords)} must have exactly 3 items.");
-                var asList = coords.ToList();
-                RelativeLocation = new(asList[0], asList[1], asList[2]);
-            }
-        }
-
-        (HashSet<Coordinate3D> alignedBeacons, Coordinate3D translation, int rotation)? Align(HashSet<Coordinate3D> beacons1, HashSet<Coordinate3D> beacons2)
-        {
-            // Fix beacons1, rotate beacons2
-            for(int i = 0; i < 24; i++)
-            {
-                
-                    var rotatedBeacons2 = new HashSet<Coordinate3D>(beacons2.Select(b => b.Rotations[i]));
-
-                    foreach (var b1 in beacons1)
-                    {
-                        // Assume b1 matches some b2
-                        foreach (var matchingB1InB2 in rotatedBeacons2)
-                        {
-                            // Move all b2 so matchingB1InB2 matches b1, in scanner 1 coordinates
-                            var delta = b1 - matchingB1InB2;
-                            var transformedBeacons2 = new HashSet<Coordinate3D>(rotatedBeacons2.Select(b => b + delta));
-
-                            // How many overlaps did we get?
-                            var intersection = new HashSet<Coordinate3D>();
-                            intersection.UnionWith(transformedBeacons2);
-                            intersection.IntersectWith(beacons1);
-                            if (intersection.Count >= 12)
-                            {
-                                // Found the right orientation
-                                return (transformedBeacons2, delta, i);
-                            }
-                        }
-                    }
-                
-            }
-            return null;
-        }
-
-        (List<HashSet<Coordinate3D>> scans, List<HashSet<Coordinate3D>> scanners) Reduce(List<HashSet<Coordinate3D>> scans, List<HashSet<Coordinate3D>> scanners)
-        {
-            var toRemove = new HashSet<int>();
-            for (int i = 0; i < scans.Count - 1; i++)
-            {
-                for (int j = i + 1; j < scans.Count; j++)
+                for(int i = 0; i < 24; i++)
                 {
-                    if (toRemove.Contains(j))
+                    if(TestRotation(knownDists, curReadings, i, out translationVec))
                     {
-                        // Already merged
-                        continue;
+                        RotationIndex = i;
+                        break;
                     }
+                }
 
-                    var alignment = Align(scans[i], scans[j]);
-                    if (alignment != null)
+                if(translationVec is not null)
+                {
+                    var rotatedReadings = curReadings.Select(a => a.Rotations[RotationIndex]);
+                    var translatedReadings = rotatedReadings.Select(a => translationVec + a);
+
+                    foreach(var beacon in translatedReadings)
                     {
-                        // Convert all scanners from j coordinates to i coordinates
-                        foreach (var s in scanners[j])
+                        beaconMap.Add(beacon);
+                    }
+                    knownDists = CalcDists(beaconMap);
+                    scanners[scanner] = translationVec;
+                } else
+                {
+                    scannersToCheck.Enqueue(scanner);
+                }
+            }
+        }
+
+
+        private static bool TestRotation(Dictionary<Coordinate3D, Coordinate3D> masterDistList, HashSet<Coordinate3D> beacons, int RotationIndex, out Coordinate3D TranslationVector)
+        {
+            int matches = 0;
+            foreach(var b in beacons)
+            {
+                var bRotated = b.Rotations[RotationIndex];
+                foreach(var b2 in beacons)
+                {
+                    if (b == b2) continue;
+                    var b2Rotated = b2.Rotations[RotationIndex];
+                    var dist = b2Rotated - bRotated;
+
+                    if(masterDistList.ContainsKey(dist))
+                    {
+                        matches++;
+                        if(matches == 12)
                         {
-                            var scanner = alignment.Value.translation - s.Rotations[alignment.Value.rotation];
-                            scanners[i].Add(scanner);
+                            var x = masterDistList[dist];
+                            TranslationVector = x - bRotated;
+                            return true;
                         }
-                        // Merge the scan sets
-                        scans[i].UnionWith(alignment.Value.alignedBeacons);
-                        toRemove.Add(j);
                     }
                 }
             }
-            // Skip all scans and scanners that were merged
-            return (scans.Where((el, i) => !toRemove.Contains(i)).ToList(), scanners.Where((el, i) => !toRemove.Contains(i)).ToList());
+
+            TranslationVector = null;
+            return false;
         }
+
+        private static Dictionary<Coordinate3D, Coordinate3D> CalcDists(HashSet<Coordinate3D> map)
+        {
+            Dictionary<Coordinate3D, Coordinate3D> res = new();
+            foreach(var a in map)
+            {
+                foreach(var b in map)
+                {
+                    if (a == b) continue;
+                    var tmp = a-b;
+                    if (!res.ContainsKey(tmp)) res[tmp] = b;
+                }
+            }
+
+            return res;
+        }
+
     }
 }

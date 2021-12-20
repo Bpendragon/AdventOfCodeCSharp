@@ -773,33 +773,33 @@ namespace AdventOfCode.Solutions
         };
 
         public List<Coordinate3D> Rotations => new()
-            {
-                (x,y,z),
-                (x,-z,y),
-                (x,-y,-z),
-                (x,z,-y),
-                (-y,x,z),
-                (z,x,y),
-                (y,x,-z),
-                (-z,x,-y),
-                (-x,-y,z),
-                (-x,-z,-y),
-                (-x,y,-z),
-                (-x,z,y),
-                (y,-x,z),
-                (z,-x,-y),
-                (-y,-x,-z),
-                (-z,-y,x),
-                (-z,y,x),
-                (y,z,x),
-                (z,-y,x),
-                (-y,-z,x),
-                (-z,-y,-x),
-                (-y,z,-x),
-                (z,y,-x),
-                (y,-z,-x),
-            };
-        }
+        {
+            (+x, +y, +z),
+            (+x, +z, -y),
+            (+x, -y, -z),
+            (+x, -z, +y),
+            (+y, +x, -z),
+            (+y, +z, +x),
+            (+y, -x, +z),
+            (+y, -z, -x),
+            (+z, +x, +y),
+            (+z, +y, -x),
+            (+z, -x, -y),
+            (+z, -y, +x),
+            (-x, +y, -z),
+            (-x, +z, +y),
+            (-x, -y, +z),
+            (-x, -z, -y),
+            (-y, +x, +z),
+            (-y, +z, -x),
+            (-y, -x, -z),
+            (-y, -z, +x),
+            (-z, +x, -y),
+            (-z, +y, +x),
+            (-z, -x, +y),
+            (-z, -y, -x)
+        };
+    }
     
 
     public class Coordinate4D
