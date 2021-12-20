@@ -193,7 +193,7 @@ namespace AdventOfCode.Solutions.Year2021
                             newNode.Next.Prev = newNode;
                         }
                         hasCollapsedThisPass = true;
-                        break;
+                        cur = newNode;
                     }
                     cur = cur.Next;
                 }

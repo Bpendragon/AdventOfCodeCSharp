@@ -254,40 +254,42 @@ namespace AdventOfCode.Solutions
             }
         }
 
-        private static IEnumerable<int[]> Combinations(int subcount, int length)
+        // Enumerate all possible m-size combinations of [0, 1, ..., n-1] array
+        // in lexicographic order (first [0, 1, 2, ..., m-1]).
+        private static IEnumerable<int[]> Combinations(int m, int n)
         {
-            int[] res = new int[subcount];
-            Stack<int> stack = new(subcount);
+            int[] result = new int[m];
+            Stack<int> stack = new Stack<int>(m);
             stack.Push(0);
             while (stack.Count > 0)
             {
                 int index = stack.Count - 1;
                 int value = stack.Pop();
-                while (value < length)
+                while (value < n)
                 {
-                    res[index++] = value++;
+                    result[index++] = value++;
                     stack.Push(value);
-                    if (index != subcount) continue;
-                    yield return (int[])res.Clone();
+                    if (index != m) continue;
+                    yield return (int[])result.Clone();
                     break;
                 }
             }
         }
 
-        public static IEnumerable<T[]> Combinations<T>(this IEnumerable<T> values, int subcount)
+        public static IEnumerable<IEnumerable<T>> Combinations<T>(this IEnumerable<T> array, int m)
         {
-            if (values.Count() < subcount) throw new ArgumentException("Array Length can't be less than sub-array length");
-            if (subcount < 1) throw new ArgumentException("Subarrays must be at least length 1 long");
-            T[] res = new T[subcount];
-            var c = Combinations(subcount, values.Count()).ToArray();
-            foreach (int[] combination in c)
+            if (array.Count() < m)
+                throw new ArgumentException("Array length can't be less than number of selected elements");
+            if (m < 1)
+                throw new ArgumentException("Number of selected elements can't be less than 1");
+            T[] result = new T[m];
+            foreach (int[] j in Combinations(m, array.Count()))
             {
-                foreach (int i in Enumerable.Range(0, subcount))
+                for (int i = 0; i < m; i++)
                 {
-                    res[i] = values.ElementAt(combination[i]);
+                    result[i] = array.ElementAt(j[i]);
                 }
-
-                yield return res;
+                yield return result;
             }
         }
 
@@ -753,6 +755,10 @@ namespace AdventOfCode.Solutions
             //Primes times coordinates for fewer collisions
             return (137 * x + 149 * y + 163 * z);
         }
+        public override string ToString()
+        {
+            return $"{x}, {y}, {z}";
+        }
 
         public static Coordinate3D[] GetNeighbors()
         {
@@ -761,11 +767,40 @@ namespace AdventOfCode.Solutions
 
         private static readonly Coordinate3D[] neighbors3D =
         {
-                (-1,-1,-1),(-1,-1,0),(-1,-1,1),(-1,0,-1),(-1,0,0),(-1,0,1),(-1,1,-1),(-1,1,0),(-1,1,1),
-                (0,-1,-1), (0,-1,0), (0,-1,1), (0,0,-1),          (0,0,1), (0,1,-1), (0,1,0), (0,1,1),
-                (1,-1,-1), (1,-1,0), (1,-1,1), (1,0,-1), (1,0,0), (1,0,1), (1,1,-1), (1,1,0), (1,1,1)
+            (-1,-1,-1),(-1,-1,0),(-1,-1,1),(-1,0,-1),(-1,0,0),(-1,0,1),(-1,1,-1),(-1,1,0),(-1,1,1),
+            (0,-1,-1), (0,-1,0), (0,-1,1), (0,0,-1),          (0,0,1), (0,1,-1), (0,1,0), (0,1,1),
+            (1,-1,-1), (1,-1,0), (1,-1,1), (1,0,-1), (1,0,0), (1,0,1), (1,1,-1), (1,1,0), (1,1,1)
+        };
+
+        public List<Coordinate3D> Rotations => new()
+            {
+                (x,y,z),
+                (x,-z,y),
+                (x,-y,-z),
+                (x,z,-y),
+                (-y,x,z),
+                (z,x,y),
+                (y,x,-z),
+                (-z,x,-y),
+                (-x,-y,z),
+                (-x,-z,-y),
+                (-x,y,-z),
+                (-x,z,y),
+                (y,-x,z),
+                (z,-x,-y),
+                (-y,-x,-z),
+                (-z,-y,x),
+                (-z,y,x),
+                (y,z,x),
+                (z,-y,x),
+                (-y,-z,x),
+                (-z,-y,-x),
+                (-y,z,-x),
+                (z,y,-x),
+                (y,-z,-x),
             };
-    }
+        }
+    
 
     public class Coordinate4D
     {
@@ -837,9 +872,4 @@ namespace AdventOfCode.Solutions
 
         private static Coordinate4D[] neighbors;
     }
-
-
 }
-
-    
-
