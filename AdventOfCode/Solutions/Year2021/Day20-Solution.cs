@@ -1,13 +1,7 @@
 using System;
-using System.Text;
 using System.Collections.Generic;
-using AdventOfCode.UserClasses;
 using System.Linq;
-using System.Data;
-using System.Threading;
-using System.Security;
-using static AdventOfCode.Solutions.Utilities;
-using System.Runtime.CompilerServices;
+using System.Text;
 
 namespace AdventOfCode.Solutions.Year2021
 {
@@ -16,6 +10,8 @@ namespace AdventOfCode.Solutions.Year2021
     {
         private readonly string enhancementString;
         private readonly Dictionary<Coordinate2D, string> initialImage;
+        private readonly int part1;
+
         public Day20() : base(20, 2021, "Trench Map")
         {
             //UseDebugInput = true;
@@ -32,27 +28,23 @@ namespace AdventOfCode.Solutions.Year2021
                     initialImage[(x, y)] = val;
                 }
             }
-            
+
+            foreach (int i in Enumerable.Range(1, 50))
+            {
+                initialImage = NextImage(initialImage, enhancementString, i);
+                if (i == 2) part1 = initialImage.Values.Count(a => a == "1");
+            }
+
         }
 
         protected override string SolvePartOne()
         {
-            Dictionary<Coordinate2D, string> working = new(initialImage);
-            foreach(int i in Enumerable.Range(1,2))
-            {
-                working = NextImage(working, enhancementString, i);
-            }
-            return working.Values.Count(a => a == "1").ToString();
+            return part1.ToString(); ;
         }
 
         protected override string SolvePartTwo()
-        {
-            Dictionary<Coordinate2D, string> working = new(initialImage);
-            foreach (int i in Enumerable.Range(1, 50))
-            {
-                working = NextImage(working, enhancementString, i);
-            }
-            return working.Values.Count(a => a == "1").ToString();
+        { 
+            return initialImage.Values.Count(a => a == "1").ToString();
         }
 
         private Dictionary<Coordinate2D, string> NextImage(Dictionary<Coordinate2D, string> CurrentImage, string EnhancementString, int passNum)

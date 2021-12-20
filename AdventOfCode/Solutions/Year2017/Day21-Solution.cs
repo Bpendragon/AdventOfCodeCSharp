@@ -122,7 +122,7 @@ namespace AdventOfCode.Solutions.Year2017
             return string.Join('/', section);
         }
 
-        public static void CopyTo(string[] grid, string section, int size, int startRow, int startColumn)
+        public static void CopyTo(string[] grid, string section, int size, int startRow)
         {
             string[] rows = section.Split('/', StringSplitOptions.RemoveEmptyEntries);
             for (int i = 0; i < size; i++)
@@ -145,7 +145,7 @@ namespace AdventOfCode.Solutions.Year2017
                 for (int k = 0; k * size < grid.Length; k++)
                 {
                     string section = CopyFrom(grid, j * size, k * size, size);
-                    CopyTo(newGrid, rulesMap[section], newSize, j * newSize, k * newSize);
+                    CopyTo(newGrid, rulesMap[section], newSize, j * newSize);
                 }
             }
 

@@ -69,7 +69,7 @@ namespace AdventOfCode
         {
             JsonSerializerOptions options = new()
             {
-                IgnoreNullValues = true,
+                DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
                 PropertyNameCaseInsensitive = true,
                 WriteIndented = true
             };

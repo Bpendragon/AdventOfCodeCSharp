@@ -46,7 +46,7 @@ namespace AdventOfCode.Solutions.Year2019
             return res.JoinAsStrings();
         }
 
-        private List<long> Round(List<long> input, long from = 0)
+        private List<long> Round(List<long> input)
         {
             List<long> output = new();
             for (int j = 0; j < input.Count; j++)

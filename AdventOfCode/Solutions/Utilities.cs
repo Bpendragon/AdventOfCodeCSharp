@@ -259,7 +259,7 @@ namespace AdventOfCode.Solutions
         private static IEnumerable<int[]> Combinations(int m, int n)
         {
             int[] result = new int[m];
-            Stack<int> stack = new Stack<int>(m);
+            Stack<int> stack = new(m);
             stack.Push(0);
             while (stack.Count > 0)
             {
