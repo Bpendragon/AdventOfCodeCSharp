@@ -10,7 +10,7 @@ namespace AdventOfCode.Solutions.Year2021
         readonly int Player2Start = 8;
 
         //Key is current game state, Value is how many win from that point on.
-        readonly Dictionary<(int p1Score, int p2Score, int p1Pos, int p2Pos, int nextDice, int diceRolls, int toMove), (long p1Wins, long p2Wins)> gameStates = new();
+        readonly Dictionary<(int p1Score, int p2Score, int p1Pos, int p2Pos, int nextDice, int diceRolls, int toMove), Coordinate2DL> gameStates = new();
 
 
         public Day21() : base(21, 2021, "Dirac Dice")
@@ -61,7 +61,7 @@ namespace AdventOfCode.Solutions.Year2021
         {
             // Next Dice at 0 means p1 won't actually move, but it will kick off the three universes.
             // diceRolls at -1 means that p1 gets their entire turn once the universe starts fragmenting.
-            var (p1Wins, p2Wins) = DiracGame((0, 0, Player1Start, Player2Start, 0, -1, 1));
+            (long p1Wins, long p2Wins) = DiracGame((0, 0, Player1Start, Player2Start, 0, -1, 1));
 
             return (p1Wins > p2Wins ? p1Wins : p2Wins).ToString();
         }
@@ -69,7 +69,7 @@ namespace AdventOfCode.Solutions.Year2021
         // For Clarity:
         // nextDice is just that. The next value the dice will show.
         // diceRolls is the number of time the current player has rolled the dice.
-        private (long p1Wins, long p2Wins) DiracGame((int p1Score, int p2Score, int p1Pos, int p2Pos, int nextDice, int diceRolls, int toMove) curState)
+        private Coordinate2DL DiracGame((int p1Score, int p2Score, int p1Pos, int p2Pos, int nextDice, int diceRolls, int toMove) curState)
         {
             if (gameStates.ContainsKey(curState)) return gameStates[curState];
             (int p1Score, int p2Score, int p1Pos, int p2Pos, int nextDice, int diceRolls, int toMove) = curState;
@@ -111,24 +111,22 @@ namespace AdventOfCode.Solutions.Year2021
             }
 
             //No one won, we need to simulate all three lower games. 
-            (long p1Wins, long p2Wins) tmp1;
-            (long p1Wins, long p2Wins) tmp2;
-            (long p1Wins, long p2Wins) tmp3;
+            Coordinate2DL res = (0,0);
             if (diceRolls == 2) //Time to swap player
             {
                 //Could toMove be a bool? Absolutely, for my sanity while writing this though I went with the int.
                 toMove = toMove == 1 ? 2 : 1;
-                tmp1 =  DiracGame((p1Score, p2Score, p1Pos, p2Pos, 1, 0, toMove));
-                tmp2 =  DiracGame((p1Score, p2Score, p1Pos, p2Pos, 2, 0, toMove));
-                tmp3 =  DiracGame((p1Score, p2Score, p1Pos, p2Pos, 3, 0, toMove));
+                res+=  DiracGame((p1Score, p2Score, p1Pos, p2Pos, 1, 0, toMove));
+                res+=  DiracGame((p1Score, p2Score, p1Pos, p2Pos, 2, 0, toMove));
+                res+=  DiracGame((p1Score, p2Score, p1Pos, p2Pos, 3, 0, toMove));
             }
             else //Same player still
             {
-                tmp1 = DiracGame((p1Score, p2Score, p1Pos, p2Pos, 1, diceRolls + 1, toMove));
-                tmp2 = DiracGame((p1Score, p2Score, p1Pos, p2Pos, 2, diceRolls + 1, toMove));
-                tmp3 = DiracGame((p1Score, p2Score, p1Pos, p2Pos, 3, diceRolls + 1, toMove));
+                res+= DiracGame((p1Score, p2Score, p1Pos, p2Pos, 1, diceRolls + 1, toMove));
+                res+= DiracGame((p1Score, p2Score, p1Pos, p2Pos, 2, diceRolls + 1, toMove));
+                res+= DiracGame((p1Score, p2Score, p1Pos, p2Pos, 3, diceRolls + 1, toMove));
             }
-            var res = (tmp1.p1Wins + tmp2.p1Wins + tmp3.p1Wins, tmp1.p2Wins + tmp2.p2Wins + tmp3.p2Wins);
+
 
             gameStates[curState] = res;
 
