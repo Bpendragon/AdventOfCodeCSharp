@@ -833,9 +833,9 @@ namespace AdventOfCode.Solutions
 
     public class Coordinate3D
     {
-        readonly int x;
-        readonly int y;
-        readonly int z;
+        public readonly int x;
+        public readonly int y;
+        public readonly int z;
 
         public Coordinate3D(int x, int y, int z)
         {
