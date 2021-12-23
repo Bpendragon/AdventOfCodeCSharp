@@ -25,6 +25,7 @@ namespace AdventOfCode.Solutions
         public long Part2Ticks => _part2Time;
         public long ContructionTime { get; set; }
         protected bool UseDebugInput { get; set; }
+        protected bool SkipInput { get; set; }
         private static HttpClient Client;
         private static HttpClientHandler Handler;
 
@@ -84,6 +85,7 @@ namespace AdventOfCode.Solutions
         }
 
         string LoadInput() {
+            if (SkipInput) return "Empty Input";
             string DEBUGINPUT_FILEPATH = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, $"../../../Solutions/Year{Year}/Day{Day:D2}-debugInput"));
             string DEBUGINPUT_FILEPATH_ALT = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, $"../../../Solutions/Year{Year}/Day{Day:D2}-debugInput.txt"));
             string INPUT_FILEPATH = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, $"../../../Solutions/Year{Year}/Day{Day:D2}-input"));

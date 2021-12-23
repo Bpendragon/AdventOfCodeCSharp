@@ -27,17 +27,10 @@ namespace AdventOfCode.Solutions.Year2021
                 var newCuboid = (minX, maxX, minY, maxY, minZ, maxZ);
 
                 Dictionary<(int minX, int maxX, int minY, int maxY, int minZ, int maxZ), long> newCuboids = new();
-
-                foreach (var kvp in cubes.ToList())
+                foreach (var kvp in cubes)
                 {
                     (int minX2, int maxX2, int minY2, int maxY2, int minZ2, int maxZ2) = kvp.Key;
                     var curSign = kvp.Value;
-
-                    if (curSign == 0)
-                    {
-                        cubes.Remove(kvp.Key);
-                        continue;
-                    }
 
                     //These determine the overlapping region, it even grabs complete interior bits.
                     int tmpMinX = Math.Max(minX, minX2);
