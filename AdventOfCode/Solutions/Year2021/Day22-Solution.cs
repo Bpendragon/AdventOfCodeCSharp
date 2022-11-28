@@ -9,8 +9,8 @@ namespace AdventOfCode.Solutions.Year2021
 
     class Day22 : ASolution
     {
-        string part1 = string.Empty;
-        string part2 = string.Empty;
+        readonly string part1 = string.Empty;
+        readonly string part2 = string.Empty;
         public Day22() : base(22, 2021, "Reactor Reboot")
         {
             Dictionary<(int minX, int maxX, int minY, int maxY, int minZ, int maxZ), long> cubes = new();

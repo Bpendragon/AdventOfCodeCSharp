@@ -16,7 +16,7 @@ namespace AdventOfCode.Solutions.Year2021
     {    
         readonly int maxX;
         readonly int maxY;
-        Dictionary<Coordinate2D, char> Cucumbers = new();
+        readonly Dictionary<Coordinate2D, char> Cucumbers = new();
         public Day25() : base(25, 2021, "Sea Cucumber")
         {
             var lines = Input.SplitByNewline();

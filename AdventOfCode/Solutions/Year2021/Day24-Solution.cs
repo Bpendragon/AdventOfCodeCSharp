@@ -8,13 +8,13 @@ namespace AdventOfCode.Solutions.Year2021
 
     class Day24 : ASolution
     {
-        List<(string operand, string target, string other)> originalSteps = new();
-        List<long> addX = new();
-        List<long> divZ = new();
-        List<long> addY = new();
-        List<long> MaxZAtStep = new();
-        Dictionary<(int groupNum, long prevZ), List<string>> cacheDic = new();
-        List<string> ValidModelNumbers;
+        readonly List<(string operand, string target, string other)> originalSteps = new();
+        readonly List<long> addX = new();
+        readonly List<long> divZ = new();
+        readonly List<long> addY = new();
+        readonly List<long> MaxZAtStep = new();
+        readonly Dictionary<(int groupNum, long prevZ), List<string>> cacheDic = new();
+        readonly List<string> ValidModelNumbers;
         public Day24() : base(24, 2021, "Arithmetic Logic Unit")
         {
             var lines = Input.SplitByNewline();
