@@ -15,12 +15,12 @@ namespace AdventOfCode.Solutions.Year2022
 
             foreach(var cal in asStrings)
             {
-                if (string.IsNullOrEmpty(cal))
+                if (long.TryParse(cal, out long t)) curSum += t;
+                else
                 {
                     Elves.Add(curSum);
                     curSum = 0;
                 }
-                else curSum += long.Parse(cal);
             }
             Elves.Add(curSum);
             Elves = Elves.OrderByDescending(i => i).ToList();
