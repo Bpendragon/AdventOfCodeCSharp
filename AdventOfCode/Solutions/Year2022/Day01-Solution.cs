@@ -1,32 +1,39 @@
-using System;
-using System.Text;
 using System.Collections.Generic;
-using AdventOfCode.UserClasses;
 using System.Linq;
 using System.Data;
-using System.Threading;
-using System.Security;
-using static AdventOfCode.Solutions.Utilities;
-using System.Runtime.CompilerServices;
 
 namespace AdventOfCode.Solutions.Year2022
 {
 
     class Day01 : ASolution
     {
-        public Day01() : base(01, 2022, "")
+        List<long> Elves = new();
+        public Day01() : base(01, 2022, "Calorie Counting")
         {
+            var asStrings = Input.SplitByNewline(blankLines:true).ToList();
+            long curSum = 0;
 
+            foreach(var cal in asStrings)
+            {
+                if (string.IsNullOrEmpty(cal))
+                {
+                    Elves.Add(curSum);
+                    curSum = 0;
+                }
+                else curSum += long.Parse(cal);
+            }
+            Elves.Add(curSum);
+            Elves = Elves.OrderByDescending(i => i).ToList();
         }
 
         protected override string SolvePartOne()
         {
-            return null;
+            return Elves.Take(1).Sum().ToString();
         }
 
         protected override string SolvePartTwo()
         {
-            return null;
+            return Elves.Take(3).Sum().ToString();
         }
     }
 }
