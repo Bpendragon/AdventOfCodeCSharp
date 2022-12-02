@@ -15,7 +15,7 @@ namespace AdventOfCode.Solutions.Year2022
     class Day02 : ASolution
     {
         readonly List<string> rounds;
-        public Day02() : base(02, 2022, "")
+        public Day02() : base(02, 2022, "Rock Paper Scissors")
         {
             rounds = Input.SplitByNewline();
         }
