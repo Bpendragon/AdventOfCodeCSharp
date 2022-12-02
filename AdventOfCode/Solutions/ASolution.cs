@@ -118,7 +118,7 @@ namespace AdventOfCode.Solutions
                     var request = new HttpRequestMessage(HttpMethod.Get, INPUT_URL);
                     request.Headers.Add("Cookie", Program.Config.Cookie);
                     var productVal = new ProductInfoHeaderValue(".NET", "6");
-                    var commentVal = new ProductInfoHeaderValue("Bpen's Advent of Code Template; https://github.com/Bpendragon/AdventOfCodeBase; github@bpendragon.horse");
+                    var commentVal = new ProductInfoHeaderValue("(+Bpen's Advent of Code Template; https://github.com/Bpendragon/AdventOfCodeBase; github@bpendragon.horse)");
                     request.Headers.UserAgent.Add(productVal);
                     request.Headers.UserAgent.Add(commentVal);
                     request.Headers.Add("From", "github@bpendragon.horse");
