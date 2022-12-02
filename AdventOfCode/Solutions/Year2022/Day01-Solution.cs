@@ -7,7 +7,7 @@ namespace AdventOfCode.Solutions.Year2022
 
     class Day01 : ASolution
     {
-        List<long> Elves = new();
+        readonly List<long> Elves = new();
         public Day01() : base(01, 2022, "Calorie Counting")
         {
             var asStrings = Input.SplitByNewline(blankLines:true).ToList();

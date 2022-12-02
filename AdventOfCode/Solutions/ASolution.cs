@@ -11,6 +11,7 @@ namespace AdventOfCode.Solutions
 
     abstract class ASolution
     {
+
         long _part1Time, _part2Time;
         readonly Lazy<string> _input, _part1, _part2;
 
@@ -129,7 +130,6 @@ namespace AdventOfCode.Solutions
                     }
                     else
                     {
-
                         input = response.Content.ReadAsStringAsync().GetAwaiter().GetResult().TrimEnd();
                         File.WriteAllText(INPUT_FILEPATH, input);
                         request.Dispose();

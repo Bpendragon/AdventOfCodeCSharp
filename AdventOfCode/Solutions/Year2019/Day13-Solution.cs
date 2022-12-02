@@ -10,12 +10,10 @@ namespace AdventOfCode.Solutions.Year2019
 
     class Day13 : ASolution
     {
-        readonly Font font1;
         IntCode2 cab;
         public Day13() : base(13, 2019, "")
         {
             cab = new IntCode2(Input.ToLongList(","));
-            font1 = new Font("fira code", 14);
         }
 
         protected override string SolvePartOne()

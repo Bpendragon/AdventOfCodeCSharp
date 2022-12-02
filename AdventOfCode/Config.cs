@@ -51,7 +51,8 @@ namespace AdventOfCode
                 }
                 else
                 {
-                    Array.Sort(_d);
+                    Array.Sort(value);
+                    _d = value;
                 }
             }
         }
@@ -62,7 +63,8 @@ namespace AdventOfCode
             DateTime CURRENT_EST = TimeZoneInfo.ConvertTime(DateTime.Now, TimeZoneInfo.Utc).AddHours(-5);
             if (Cookie == default) Cookie = "";
             if(Year == default) Year = CURRENT_EST.Year;
-            if(Days == default(int[])) Days = (CURRENT_EST.Month == 12 && CURRENT_EST.Day <= 25) ? new int[] { CURRENT_EST.Day } : new int[] { 0 };
+            if (Days == default(int[])) Days = (CURRENT_EST.Month == 12 && CURRENT_EST.Day <= 25) ? new int[] { CURRENT_EST.Day } : new int[] { 0 };
+            else if (Days[0] == -1) Days = new int[] { CURRENT_EST.Day };
         }
 
         public static Config Get(string path)
@@ -93,7 +95,7 @@ namespace AdventOfCode
     {
         public override int[] Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
-            if(reader.TokenType == JsonTokenType.Number) return new int[] { reader.GetInt16() };
+            if (reader.TokenType == JsonTokenType.Number) return new int[] { reader.GetInt16() };
             var tokens = reader.TokenType == JsonTokenType.String
                 ? new string[] { reader.GetString() }
                 : JsonSerializer.Deserialize<object[]>(ref reader).Select<object, string>(o => o.ToString());
