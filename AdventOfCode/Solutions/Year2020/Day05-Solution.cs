@@ -20,16 +20,16 @@ namespace AdventOfCode.Solutions.Year2020
             }
         }
 
-        protected override string SolvePartOne()
+        protected override object SolvePartOne()
         {
-            return passIDs.Max().ToString();
+            return passIDs.Max();
         }
 
-        protected override string SolvePartTwo()
+        protected override object SolvePartTwo()
         {
             foreach (int i in Enumerable.Range(passIDs[0], passIDs.Count + 1))
             {
-                if (!passIDs.Contains(i)) return i.ToString();
+                if (!passIDs.Contains(i)) return i;
             }
             return null;
         }

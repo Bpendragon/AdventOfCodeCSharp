@@ -16,7 +16,7 @@ namespace AdventOfCode.Solutions.Year2018
             }
         }
 
-        protected override string SolvePartOne()
+        protected override object SolvePartOne()
         {
             HashSet<Coordinate4D> visited = new();
 
@@ -40,10 +40,10 @@ namespace AdventOfCode.Solutions.Year2018
 
             }
 
-            return groups.ToString();
+            return groups;
         }
 
-        protected override string SolvePartTwo()
+        protected override object SolvePartTwo()
         {
             return "❄️🎄Happy Advent of Code🎄❄️";
         }

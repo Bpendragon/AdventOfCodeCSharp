@@ -39,14 +39,14 @@ namespace AdventOfCode.Solutions.Year2018
             }
         }
 
-        protected override string SolvePartOne()
+        protected override object SolvePartOne()
         { 
-            return cave.Where(kvp => kvp.Key.x <= TargetLocation.x && kvp.Key.y <= TargetLocation.y).Sum(a=> a.Value % 3).ToString();
+            return cave.Where(kvp => kvp.Key.x <= TargetLocation.x && kvp.Key.y <= TargetLocation.y).Sum(a=> a.Value % 3);
         }
 
-        protected override string SolvePartTwo()
+        protected override object SolvePartTwo()
         {
-            return TraversalTime((0,0), TargetLocation).ToString();
+            return TraversalTime((0,0), TargetLocation);
         }
 
         //A*, Hueristic is Manhattan + cost of gear change, this is why the sets also include an item for gear

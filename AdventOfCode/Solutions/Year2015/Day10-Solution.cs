@@ -12,7 +12,7 @@ namespace AdventOfCode.Solutions.Year2015
 
         }
 
-        protected override string SolvePartOne()
+        protected override object SolvePartOne()
         {
             string s = Input.Clone().ToString();
 
@@ -20,12 +20,12 @@ namespace AdventOfCode.Solutions.Year2015
             return s.Length.ToString() ;
         }
 
-        protected override string SolvePartTwo()
+        protected override object SolvePartTwo()
         {
             string s = Input.Clone().ToString();
 
             foreach (int i in Enumerable.Range(0, 50)) s = SpeakAndSay(s);
-            return s.Length.ToString();
+            return s.Length;
         }
 
         private static string SpeakAndSay(string value)
@@ -44,7 +44,7 @@ namespace AdventOfCode.Solutions.Year2015
                 sb.Append(count + cur.ToString());
             }
 
-            return sb.ToString(); ;    
+            return sb.ToString();    
         }
     }
 }

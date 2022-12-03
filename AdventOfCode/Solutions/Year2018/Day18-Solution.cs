@@ -23,22 +23,22 @@ namespace AdventOfCode.Solutions.Year2018
             }
         }
 
-        protected override string SolvePartOne()
+        protected override object SolvePartOne()
         {
             var p1 = new Dictionary<(int x, int y), char>(baseMap);
 
             string res = LoggingSteps(p1, 10);
 
-            return (res.Count(x => x == '|') * res.Count(x => x == '#')).ToString();
+            return (res.Count(x => x == '|') * res.Count(x => x == '#'));
         }
 
-        protected override string SolvePartTwo()
+        protected override object SolvePartTwo()
         {
             var p1 = new Dictionary<(int x, int y), char>(baseMap);
 
             string res = LoggingSteps(p1, 1000000000);
 
-            return (res.Count(x => x == '|') * res.Count(x => x == '#')).ToString();
+            return (res.Count(x => x == '|') * res.Count(x => x == '#'));
         }
 
         private string LoggingSteps(Dictionary<(int x, int y), char> p1, int numIterations)
@@ -87,15 +87,15 @@ namespace AdventOfCode.Solutions.Year2018
                         sb.Append(p1[(x, y)]);
                     }
                 }
-                var tmp = sb.ToString();
+                var tmp = sb;
 
-                if(SeenLayouts.Contains(tmp))
+                if(SeenLayouts.Contains(tmp.ToString()))
                 {
-                    SeenLayouts.RemoveRange(0, SeenLayouts.IndexOf(tmp));
+                    SeenLayouts.RemoveRange(0, SeenLayouts.IndexOf(tmp.ToString()));
                     return SeenLayouts[(numIterations - i) % SeenLayouts.Count];
                 } else
                 {
-                    SeenLayouts.Add(tmp);
+                    SeenLayouts.Add(tmp.ToString());
                 }
             }
 

@@ -11,14 +11,14 @@ namespace AdventOfCode.Solutions.Year2015
 
         }
 
-        protected override string SolvePartOne()
+        protected override object SolvePartOne()
         {
             int up = Input.Count(x => x == '(');
             int down = Input.Count(x => x == ')');
-            return (up - down).ToString();
+            return (up - down);
         }
 
-        protected override string SolvePartTwo()
+        protected override object SolvePartTwo()
         {
             int curFloor = 0;
             foreach(int i in Enumerable.Range(0, Input.Length))
@@ -32,7 +32,7 @@ namespace AdventOfCode.Solutions.Year2015
                     curFloor--;
                 }
 
-                if (curFloor < 0) return (i + 1).ToString();
+                if (curFloor < 0) return (i + 1);
             }
 
             return "-1";

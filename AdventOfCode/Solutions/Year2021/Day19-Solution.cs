@@ -28,16 +28,16 @@ namespace AdventOfCode.Solutions.Year2021
             scanners[0] = (0, 0, 0);
         }
 
-        protected override string SolvePartOne()
+        protected override object SolvePartOne()
         {
             BuildMap();
 
-            return beaconMap.Count.ToString();
+            return beaconMap.Count;
         }
 
-        protected override string SolvePartTwo()
+        protected override object SolvePartTwo()
         {
-            return scanners.Values.Combinations(2).Max(a => a.First().ManhattanDistance(a.Last())).ToString();
+            return scanners.Values.Combinations(2).Max(a => a.First().ManhattanDistance(a.Last()));
         }
 
         private void BuildMap()

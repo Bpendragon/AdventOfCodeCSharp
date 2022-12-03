@@ -14,7 +14,7 @@ namespace AdventOfCode.Solutions.Year2020
 
         }
 
-        protected override string SolvePartOne()
+        protected override object SolvePartOne()
         {
             long subjectNumber = 7;
             long cardPKey = 10441485; //Direct from input
@@ -37,10 +37,10 @@ namespace AdventOfCode.Solutions.Year2020
                 encryptionKey %= 20201227;
             }
 
-            return encryptionKey.ToString();
+            return encryptionKey;
         }
 
-        protected override string SolvePartTwo()
+        protected override object SolvePartTwo()
         {
             return "❄️🎄Happy Advent of Code🎄❄️";
         }

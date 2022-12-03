@@ -20,7 +20,7 @@ namespace AdventOfCode.Solutions.Year2019
             bot = new IntCode2(Input.ToLongList(",").ToArray());
         }
 
-        protected override string SolvePartOne()
+        protected override object SolvePartOne()
         {
             bot.ClearInputs();
             foreach (var c in bot.RunProgram(true))
@@ -50,7 +50,7 @@ namespace AdventOfCode.Solutions.Year2019
             return "Check your console";
         }
 
-        protected override string SolvePartTwo()
+        protected override object SolvePartTwo()
         {
             return "❄️🎄Happy Advent of Code🎄❄️";
         }

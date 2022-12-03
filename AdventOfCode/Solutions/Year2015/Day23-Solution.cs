@@ -18,18 +18,18 @@ namespace AdventOfCode.Solutions.Year2015
             Program = new List<string>(Input.SplitByNewline());
         }
 
-        protected override string SolvePartOne()
+        protected override object SolvePartOne()
         {
             RunProgram();
-            return Regs["b"].ToString();
+            return Regs["b"];
         }
 
-        protected override string SolvePartTwo()
+        protected override object SolvePartTwo()
         {
             Regs["a"] = 1;
             Regs["b"] = 0;
             RunProgram();
-            return Regs["b"].ToString();
+            return Regs["b"];
         }
 
         public void RunProgram()

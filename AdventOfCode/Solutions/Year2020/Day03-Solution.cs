@@ -13,12 +13,12 @@ namespace AdventOfCode.Solutions.Year2020
 
 
 
-        protected override string SolvePartOne()
+        protected override object SolvePartOne()
         {
-            return SlopeTrees(3, 1).ToString();
+            return SlopeTrees(3, 1);
         }
 
-        protected override string SolvePartTwo()
+        protected override object SolvePartTwo()
         {
             long res = 1;
             foreach ((int, int) slope in new List<(int, int)> {
@@ -27,7 +27,7 @@ namespace AdventOfCode.Solutions.Year2020
             {
                 res *= SlopeTrees(slope);
             }
-            return res.ToString();
+            return res;
         }
 
         private long SlopeTrees(int x, int y)
@@ -49,7 +49,7 @@ namespace AdventOfCode.Solutions.Year2020
         }
 
         //Original Solution, kept for posterity
-        //protected override string SolvePartOne()
+        //protected override object SolvePartOne()
         //{
         //    int x =0;
         //    int trees = 0;
@@ -61,10 +61,10 @@ namespace AdventOfCode.Solutions.Year2020
         //    }
 
 
-        //    return trees.ToString();
+        //    return trees;
         //}
 
-        //protected override string SolvePartTwo()
+        //protected override object SolvePartTwo()
         //{
         //    int x = 0;
         //    int trees = 0;

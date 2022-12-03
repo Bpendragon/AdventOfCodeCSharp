@@ -113,16 +113,16 @@ namespace AdventOfCode.Solutions.Year2019
 
         }
 
-        protected override string SolvePartOne()
+        protected override object SolvePartOne()
         {
             var val = Search(new List<char> { '@' }, graph);
-            return val.ToString();
+            return val;
         }
 
-        protected override string SolvePartTwo()
+        protected override object SolvePartTwo()
         {
             var val = Search(new List<char> { '=', '+', '-', '%' }, graph2);
-            return val.ToString();
+            return val;
         }
 
         //BFS to find other reachable nodes, Stops at first set of reachable.

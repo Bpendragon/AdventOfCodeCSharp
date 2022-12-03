@@ -40,7 +40,7 @@ namespace AdventOfCode.Solutions.Year2015
             }
         }
 
-        protected override string SolvePartOne()
+        protected override object SolvePartOne()
         {
             List<AuntSue> shrunkList = new(Sues);
 
@@ -48,10 +48,10 @@ namespace AdventOfCode.Solutions.Year2015
             {
                 shrunkList = shrunkList.Where(x => !(x.Attributes.ContainsKey(p.Key)) || x.Attributes[p.Key] == p.Value).ToList();
             }
-            return shrunkList[0].ID.ToString();
+            return shrunkList[0].ID;
         }
 
-        protected override string SolvePartTwo()
+        protected override object SolvePartTwo()
         {
             List<AuntSue> shrunkList = new(Sues);
 
@@ -70,7 +70,7 @@ namespace AdventOfCode.Solutions.Year2015
                 
             }
 
-            return shrunkList[0].ID.ToString();
+            return shrunkList[0].ID;
         }
 
 

@@ -13,15 +13,15 @@ namespace AdventOfCode.Solutions.Year2020
             foreach (var l in Input.SplitByNewline()) passwords.Add(new Password(l));
         }
 
-        protected override string SolvePartOne()
+        protected override object SolvePartOne()
         {
-            return passwords.Count(x => x.Part1).ToString();
+            return passwords.Count(x => x.Part1);
 
         }
 
-        protected override string SolvePartTwo()
+        protected override object SolvePartTwo()
         {
-            return passwords.Count(x => x.Part2).ToString();
+            return passwords.Count(x => x.Part2);
         }
 
         internal class Password

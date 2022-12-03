@@ -54,7 +54,7 @@ namespace AdventOfCode.Solutions.Year2019
             }
         }
 
-        protected override string SolvePartOne()
+        protected override object SolvePartOne()
         {
             int maxX = map.KeyList().Max(a => a.x);
             int maxY = map.KeyList().Max(a => a.y);
@@ -76,10 +76,10 @@ namespace AdventOfCode.Solutions.Year2019
             foreach (var (x, y) in intersections) AlignParamsSum += x * y;
 
 
-            return AlignParamsSum.ToString();
+            return AlignParamsSum;
         }
 
-        protected override string SolvePartTwo()
+        protected override object SolvePartTwo()
         {
             //Leaving this in here for proper timings
             _ = GreedySolve(botLocation, map);
@@ -103,7 +103,7 @@ namespace AdventOfCode.Solutions.Year2019
 
             foreach(var output in bot.RunProgram())
             {
-                if (output >= 256) return output.ToString();
+                if (output >= 256) return output;
 
                 if (output == 10)
                 {

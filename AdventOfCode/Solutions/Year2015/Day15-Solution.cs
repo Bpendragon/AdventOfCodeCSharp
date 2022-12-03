@@ -30,7 +30,7 @@ namespace AdventOfCode.Solutions.Year2015
 
         }
 
-        protected override string SolvePartOne()
+        protected override object SolvePartOne()
         {
             List<int> recipeScores = new();
             for (int i = 0; i < 100; i++)
@@ -46,12 +46,12 @@ namespace AdventOfCode.Solutions.Year2015
                 }
             }
             recipeScores = recipeScores.Distinct().ToList();
-            return recipeScores.Max().ToString();
+            return recipeScores.Max();
         }
 
        
 
-        protected override string SolvePartTwo()
+        protected override object SolvePartTwo()
         {
             List<int> recipeScores = new();
             for (int i = 0; i < 100; i++)
@@ -67,7 +67,7 @@ namespace AdventOfCode.Solutions.Year2015
                 }
             }
             recipeScores = recipeScores.Distinct().ToList();
-            return recipeScores.Max().ToString();
+            return recipeScores.Max();
         }
 
         private int GetScore(int i, int j, int k, int l, bool part2 = false)

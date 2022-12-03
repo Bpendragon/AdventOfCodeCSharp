@@ -42,15 +42,15 @@ namespace AdventOfCode.Solutions.Year2015
             }
         }
 
-        protected override string SolvePartOne()
+        protected override object SolvePartOne()
         {
             
-            return routeLengths.Min().ToString();
+            return routeLengths.Min();
         }
 
-        protected override string SolvePartTwo()
+        protected override object SolvePartTwo()
         {
-            return routeLengths.Max().ToString();
+            return routeLengths.Max();
         }
 
         internal class City

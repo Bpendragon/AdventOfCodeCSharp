@@ -27,7 +27,7 @@ namespace AdventOfCode.Solutions.Year2019
             }
         }
 
-        protected override string SolvePartOne()
+        protected override object SolvePartOne()
         {
             List<int> deck = new();
             if (UseDebugInput)
@@ -79,10 +79,10 @@ namespace AdventOfCode.Solutions.Year2019
             }
 
             if (UseDebugInput) return deck.JoinAsStrings(" ");
-            return deck.IndexOf(2019).ToString();
+            return deck.IndexOf(2019);
         }
 
-        protected override string SolvePartTwo()
+        protected override object SolvePartTwo()
         {
             long deckSize = 119_315_717_514_047;
             long iterations = 101_741_582_076_661;
@@ -118,7 +118,7 @@ namespace AdventOfCode.Solutions.Year2019
             long iterB2 = 2020 - iterB;
             BigInteger tmp2 = BigInteger.Multiply(iterB2, ModInverse(iterA, deckSize));
 
-            return ((long)(tmp2 % deckSize) + deckSize).ToString();
+            return ((long)(tmp2 % deckSize) + deckSize);
         }
 
 

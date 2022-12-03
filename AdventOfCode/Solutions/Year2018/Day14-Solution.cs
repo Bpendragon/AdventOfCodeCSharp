@@ -32,12 +32,12 @@ namespace AdventOfCode.Solutions.Year2018
 
         }
 
-        protected override string SolvePartOne()
+        protected override object SolvePartOne()
         {
             return recipes.GetRange(day1tgt, 10).JoinAsStrings();
         }
 
-        protected override string SolvePartTwo()
+        protected override object SolvePartTwo()
         {
             int[] numbersToCheck = new int[] { 6,3,3,6,0,1 };
             int index = 0;
@@ -93,7 +93,7 @@ namespace AdventOfCode.Solutions.Year2018
                     }
                 }
             }
-            return index.ToString();
+            return index;
 
         }
     }

@@ -14,7 +14,7 @@ namespace AdventOfCode.Solutions.Year2019
             program = Input.ToLongList(",");
         }
 
-        protected override string SolvePartOne()
+        protected override object SolvePartOne()
         {
             IntCode2 cpu = new(program);
             long lastItem = long.MinValue;
@@ -24,10 +24,10 @@ namespace AdventOfCode.Solutions.Year2019
                 Console.WriteLine(item);
                 lastItem = item;
             }
-            return lastItem.ToString();
+            return lastItem;
         }
 
-        protected override string SolvePartTwo()
+        protected override object SolvePartTwo()
         {
 
 
@@ -39,7 +39,7 @@ namespace AdventOfCode.Solutions.Year2019
                 Console.WriteLine(item);
                 lastItem = item;
             }
-            return lastItem.ToString();
+            return lastItem;
         }
 
     }

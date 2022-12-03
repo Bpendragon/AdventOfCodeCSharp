@@ -18,13 +18,13 @@ namespace AdventOfCode.Solutions.Year2017
             }
         }
 
-        protected override string SolvePartOne()
+        protected override object SolvePartOne()
         {
             RunProgram();
-            return multUses.ToString();
+            return multUses;
         }
 
-        protected override string SolvePartTwo()
+        protected override object SolvePartTwo()
         {
             int composites = 0;
             Utilities.WriteLine("The program outside of debug mode is a brute force primality check. See more info here: https://www.reddit.com/r/adventofcode/comments/7lms6p/2017_day_23_solutions/");
@@ -40,7 +40,7 @@ namespace AdventOfCode.Solutions.Year2017
                 }
             }
             
-            return composites.ToString();
+            return composites;
         }
 
         public void RunProgram()

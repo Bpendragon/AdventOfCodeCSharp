@@ -22,12 +22,12 @@ namespace AdventOfCode.Solutions.Year2018
             }
         }
 
-        protected override string SolvePartOne()
+        protected override object SolvePartOne()
         {
             var strongestNano = nanos.Aggregate((a, b) => a.Value > b.Value ? a : b).Key;
             long radius = nanos[strongestNano];
 
-            return nanos.Where(x => strongestNano.ManhattanDistance(x.Key) <= radius).Count().ToString();
+            return nanos.Where(x => strongestNano.ManhattanDistance(x.Key) <= radius).Count();
         }
 
 
@@ -36,7 +36,7 @@ namespace AdventOfCode.Solutions.Year2018
          * THIS DOES NOT WORK FOR ALL INPUTS
          * 
          */
-        protected override string SolvePartTwo()
+        protected override object SolvePartTwo()
         {
             long minX = nanos.Min(x => x.Key.x);
             long maxX = nanos.Max(x => x.Key.x);
@@ -84,7 +84,7 @@ namespace AdventOfCode.Solutions.Year2018
 
             }
 
-            return bestDist.ToString();
+            return bestDist;
         }
     }
 }

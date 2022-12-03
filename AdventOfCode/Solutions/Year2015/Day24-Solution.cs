@@ -12,7 +12,7 @@ namespace AdventOfCode.Solutions.Year2015
             Packages = new List<long>(Input.ToLongList("\n"));
         }
 
-        protected override string SolvePartOne()
+        protected override object SolvePartOne()
         {
             long tgt = Packages.Sum() / 3;
             List<long> QEs = new();
@@ -30,10 +30,10 @@ namespace AdventOfCode.Solutions.Year2015
                 if (setFound) break;
             }
 
-            return QEs.Min().ToString();
+            return QEs.Min();
         }
 
-        protected override string SolvePartTwo()
+        protected override object SolvePartTwo()
         {
             long tgt = Packages.Sum() / 4;
             List<long> QEs = new();
@@ -51,7 +51,7 @@ namespace AdventOfCode.Solutions.Year2015
                 if (setFound) break;
             }
 
-            return QEs.Min().ToString();
+            return QEs.Min();
         }
     }
 }

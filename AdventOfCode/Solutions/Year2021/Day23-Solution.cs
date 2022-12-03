@@ -11,12 +11,12 @@ namespace AdventOfCode.Solutions.Year2021
             WriteLine("I solved this one by hand ok?\nThis is just here for completeness");
         }
 
-        protected override string SolvePartOne()
+        protected override object SolvePartOne()
         {
             return "10411";
         }
 
-        protected override string SolvePartTwo()
+        protected override object SolvePartTwo()
         {
             return "46721";
         }

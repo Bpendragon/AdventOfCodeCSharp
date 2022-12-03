@@ -16,16 +16,16 @@ namespace AdventOfCode.Solutions.Year2015
             root = JsonConvert.DeserializeObject(Input);
         }
 
-        protected override string SolvePartOne()
+        protected override object SolvePartOne()
         {
             string I2 = Input;
             long sum = Regex.Replace(I2, @"[^-\d+]", " ").Split(' ', StringSplitOptions.RemoveEmptyEntries).Select(int.Parse).Sum();
-            return sum.ToString();
+            return sum;
         }
 
-        protected override string SolvePartTwo()
+        protected override object SolvePartTwo()
         {
-            return GetSum(root, "red").ToString();
+            return GetSum(root, "red");
         }
 
         long GetSum(JObject o, string avoid = null)

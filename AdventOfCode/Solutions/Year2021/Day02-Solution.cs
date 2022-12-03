@@ -35,14 +35,14 @@ namespace AdventOfCode.Solutions.Year2021
 
         }
 
-        protected override string SolvePartOne()
+        protected override object SolvePartOne()
         {
-            return (depth1 * x1).ToString();
+            return (depth1 * x1);
         }
 
-        protected override string SolvePartTwo()
+        protected override object SolvePartTwo()
         {
-            return (depth2 * x2).ToString();
+            return (depth2 * x2);
         }
     }
 }

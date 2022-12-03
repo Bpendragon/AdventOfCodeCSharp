@@ -12,7 +12,7 @@ namespace AdventOfCode.Solutions.Year2015
             containers = new List<int>(Input.ToIntList("\n"));
         }
 
-        protected override string SolvePartOne()
+        protected override object SolvePartOne()
         {
             int combos = 0;
             for (int i = 1; i <= containers.Count; i++)
@@ -22,10 +22,10 @@ namespace AdventOfCode.Solutions.Year2015
                     if (c.Sum() == 150) combos++;
                 }
             }
-            return combos.ToString();
+            return combos;
         }
 
-        protected override string SolvePartTwo()
+        protected override object SolvePartTwo()
         {
             int combos = 0;
             bool sizeFound = false;
@@ -41,7 +41,7 @@ namespace AdventOfCode.Solutions.Year2015
                 }
                 if (sizeFound) break;
             }
-            return combos.ToString();
+            return combos;
         }
     }
 }

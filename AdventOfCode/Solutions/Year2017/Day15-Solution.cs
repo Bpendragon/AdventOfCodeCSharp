@@ -17,7 +17,7 @@ namespace AdventOfCode.Solutions.Year2017
 
         }
 
-        protected override string SolvePartOne()
+        protected override object SolvePartOne()
         {
             int judge = 0;
 
@@ -27,10 +27,10 @@ namespace AdventOfCode.Solutions.Year2017
                 if ((botA & mask) == (botB & mask)) judge++;
             }
 
-            return judge.ToString();
+            return judge;
         }
 
-        protected override string SolvePartTwo()
+        protected override object SolvePartTwo()
         {
             ulong a = botA2;
             ulong b = botB2;
@@ -42,7 +42,7 @@ namespace AdventOfCode.Solutions.Year2017
                 b = CalculateB(b);
                 if ((a & mask) == (b & mask)) judge++;
             }
-            return judge.ToString();
+            return judge;
         }
 
         private void CalculateNext()

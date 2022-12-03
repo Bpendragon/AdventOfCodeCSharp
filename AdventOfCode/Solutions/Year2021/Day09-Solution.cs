@@ -21,7 +21,7 @@ namespace AdventOfCode.Solutions.Year2021
             }
         }
 
-        protected override string SolvePartOne()
+        protected override object SolvePartOne()
         {
             long sum = 0; 
             foreach(var kvp in heightMap)
@@ -32,10 +32,10 @@ namespace AdventOfCode.Solutions.Year2021
                     sum += 1 + kvp.Value;
                 }
             }
-            return sum.ToString();
+            return sum;
         }
 
-        protected override string SolvePartTwo()
+        protected override object SolvePartTwo()
         {
             SortedSet<int> sortedSizes = new();
 
@@ -64,7 +64,7 @@ namespace AdventOfCode.Solutions.Year2021
                 }
                 sortedSizes.Add(basinMembers.Count);
             }
-            return sortedSizes.TakeLast(3).Aggregate(1, (accum, x) => accum * x).ToString();
+            return sortedSizes.TakeLast(3).Aggregate(1, (accum, x) => accum * x);
         }
     }
 }

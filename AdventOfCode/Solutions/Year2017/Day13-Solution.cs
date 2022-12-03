@@ -15,14 +15,14 @@ namespace AdventOfCode.Solutions.Year2017
             }
         }
 
-        protected override string SolvePartOne()
+        protected override object SolvePartOne()
         {
 
             int sev = CalculateSeverity(0, out bool _);
-            return sev.ToString();
+            return sev;
         }
 
-        protected override string SolvePartTwo()
+        protected override object SolvePartTwo()
         {
             int offset = 0;
             bool caught = true;
@@ -32,7 +32,7 @@ namespace AdventOfCode.Solutions.Year2017
                 CalculateSeverity(offset, out caught);
                 
             }
-            return offset.ToString();
+            return offset;
         }
 
         private int CalculateSeverity(int offset, out bool caught)

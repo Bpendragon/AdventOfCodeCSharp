@@ -90,14 +90,14 @@ namespace AdventOfCode.Solutions.Year2019
             foreach (var t in voidTiles) tiles.Remove(t.Key);
         }
 
-        protected override string SolvePartOne()
+        protected override object SolvePartOne()
         {
-            return AStar(portals["AA"].Start, portals["ZZ"].Start).Count.ToString();
+            return AStar(portals["AA"].Start, portals["ZZ"].Start).Count;
         }
 
-        protected override string SolvePartTwo()
+        protected override object SolvePartTwo()
         {
-            return RecursiveAStar(portals["AA"].Start, portals["ZZ"].Start).Count.ToString();
+            return RecursiveAStar(portals["AA"].Start, portals["ZZ"].Start).Count;
         }
 
         private static List<Coordinate2D> ReconstructPath(Dictionary<Coordinate2D, Coordinate2D> cameFrom, Coordinate2D current)

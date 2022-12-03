@@ -12,17 +12,17 @@ namespace AdventOfCode.Solutions.Year2017
 
         }
 
-        protected override string SolvePartOne()
+        protected override object SolvePartOne()
         {
             List<int> lengths = new(Input.ToIntList(","));
             KnotHash kn = new(lengths);
             List<int> knot = new(256);
             foreach (int i in Enumerable.Range(0, 256)) knot.Add(i);
             List<int> res = kn.Round(knot);
-            return (res[0]*res[1]).ToString();
+            return (res[0]*res[1]);
         }
 
-        protected override string SolvePartTwo()
+        protected override object SolvePartTwo()
         {
             KnotHash kn = new();
             return kn.CalculateHash(Input);

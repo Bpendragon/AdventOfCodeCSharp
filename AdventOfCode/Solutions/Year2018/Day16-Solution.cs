@@ -46,7 +46,7 @@ namespace AdventOfCode.Solutions.Year2018
             }
         }
 
-        protected override string SolvePartOne()
+        protected override object SolvePartOne()
         {
             int threeOrMore = 0;
             foreach(var _case in testCases)
@@ -67,10 +67,10 @@ namespace AdventOfCode.Solutions.Year2018
                 
                 if (workingValues.Count >= 3) threeOrMore++;
             }
-            return threeOrMore.ToString();
+            return threeOrMore;
         }
 
-        protected override string SolvePartTwo()
+        protected override object SolvePartTwo()
         {
             Registers[0] = 0;
             Registers[1] = 0;
@@ -99,7 +99,7 @@ namespace AdventOfCode.Solutions.Year2018
 
             }
 
-            return Registers[0].ToString();
+            return Registers[0];
         }
 
         private (int a, int b, int c, int d) RunCommand((int i, int a, int b, int c) ops, string overRide = null) {

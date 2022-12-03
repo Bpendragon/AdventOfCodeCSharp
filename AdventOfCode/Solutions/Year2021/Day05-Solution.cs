@@ -27,7 +27,7 @@ namespace AdventOfCode.Solutions.Year2021
             }
         }
 
-        protected override string SolvePartOne()
+        protected override object SolvePartOne()
         {
             var straights = VentLines.Where(a => a.Start.x == a.End.x || a.Start.y == a.End.y);
             foreach(var vl in straights)
@@ -38,10 +38,10 @@ namespace AdventOfCode.Solutions.Year2021
                     else map[p]++;
                 }
             }
-            return map.Values.Count(x => x > 1).ToString();
+            return map.Values.Count(x => x > 1);
         }
 
-        protected override string SolvePartTwo()
+        protected override object SolvePartTwo()
         {
             var diags = VentLines.Where(a => a.Start.x != a.End.x && a.Start.y != a.End.y);
             foreach(var vl in diags)
@@ -52,7 +52,7 @@ namespace AdventOfCode.Solutions.Year2021
                     else map[p]++;
                 }
             }
-            return map.Values.Count(x => x > 1).ToString();
+            return map.Values.Count(x => x > 1);
         }
 
         private class VentLine

@@ -24,7 +24,7 @@ namespace AdventOfCode.Solutions.Year2017
             }
         }
 
-        protected override string SolvePartOne()
+        protected override object SolvePartOne()
         {
             var curPos = (Lines[0].IndexOf('|'), 0);
             var curDir = CompassDirection.N; //because north is down in my world.
@@ -86,9 +86,9 @@ namespace AdventOfCode.Solutions.Year2017
             return lettersSeen.JoinAsStrings();
         }
 
-        protected override string SolvePartTwo()
+        protected override object SolvePartTwo()
         {
-            return steps.ToString();
+            return steps;
         }
     }
 }

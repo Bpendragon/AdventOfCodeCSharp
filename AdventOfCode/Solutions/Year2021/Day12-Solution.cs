@@ -52,20 +52,20 @@ namespace AdventOfCode.Solutions.Year2021
             }
         }
 
-        protected override string SolvePartOne()
+        protected override object SolvePartOne()
         {
             FindAllPaths(nodes["start"]);
             currentPath.Clear();
             visited.Clear();
-            return part1Paths.Count.ToString();
+            return part1Paths.Count;
         }
 
-        protected override string SolvePartTwo()
+        protected override object SolvePartTwo()
         {
             FindAllPaths(nodes["start"], true, true);
             currentPath.Clear();
             visited.Clear();
-            return part2Paths.Count.ToString();
+            return part2Paths.Count;
         }
 
         private class Node

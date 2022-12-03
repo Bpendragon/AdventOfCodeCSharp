@@ -19,14 +19,14 @@ namespace AdventOfCode.Solutions.Year2021
             Outer = GetNextPacket(binaryString, 0, ref increment);
         }
 
-        protected override string SolvePartOne()
+        protected override object SolvePartOne()
         {
-            return Outer.VersionSum.ToString();
+            return Outer.VersionSum;
         }
 
-        protected override string SolvePartTwo()
+        protected override object SolvePartTwo()
         {
-            return Outer.Value.ToString();
+            return Outer.Value;
         }
 
         private Packet GetNextPacket(string binaryString, int startPoint, ref int incrementBy)

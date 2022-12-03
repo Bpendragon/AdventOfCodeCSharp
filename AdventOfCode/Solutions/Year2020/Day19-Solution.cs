@@ -31,16 +31,16 @@ namespace AdventOfCode.Solutions.Year2020
             reg = new Regex("^" + BuildRegex("0") + "$");
         }
 
-        protected override string SolvePartOne()
+        protected override object SolvePartOne()
         {
-            return messages.Count(x => reg.IsMatch(x)).ToString();
+            return messages.Count(x => reg.IsMatch(x));
         }
 
-        protected override string SolvePartTwo()
+        protected override object SolvePartTwo()
         {
             //Based Microsoft extending regex beyond the POSIX standard https://docs.microsoft.com/en-us/dotnet/standard/base-types/grouping-constructs-in-regular-expressions#balancing_group_definition
             reg = new Regex($"^({BuildRegex("42")})+(?<g42>{BuildRegex("42")})+(?<g31-g42>{BuildRegex("31")})+(?(g42)(?!))$");
-            return messages.Count(x => reg.IsMatch(x)).ToString();
+            return messages.Count(x => reg.IsMatch(x));
         }
 
         

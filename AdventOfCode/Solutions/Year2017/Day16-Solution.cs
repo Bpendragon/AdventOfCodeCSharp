@@ -18,14 +18,14 @@ namespace AdventOfCode.Solutions.Year2017
             completedDances.Add(original);
         }
 
-        protected override string SolvePartOne()
+        protected override object SolvePartOne()
         {
             foreach (string move in danceMoves) Dance(move);
             completedDances.Add(dancers.JoinAsStrings());
             return dancers.JoinAsStrings();
         }
 
-        protected override string SolvePartTwo()
+        protected override object SolvePartTwo()
         {
 
             foreach (long _ in Enumerable.Range(0, 1000000000))

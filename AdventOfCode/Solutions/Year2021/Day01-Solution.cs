@@ -13,7 +13,7 @@ namespace AdventOfCode.Solutions.Year2021
             depths = Input.SplitByNewline(false, true).Select(int.Parse).ToList();
         }
 
-        protected override string SolvePartOne()
+        protected override object SolvePartOne()
         {
             int increaseCount = 0;
             int prevRes = int.MaxValue;
@@ -23,17 +23,17 @@ namespace AdventOfCode.Solutions.Year2021
                 if (d > prevRes) increaseCount++;
                 prevRes = d;
             }
-            return increaseCount.ToString();
+            return increaseCount;
         }
 
-        protected override string SolvePartTwo()
+        protected override object SolvePartTwo()
         {
             int increaseCount = 0;
             for(int i = 0; i < depths.Count - 3; i++)
             {
                 if ((depths[i] + depths[i + 1] + depths[i + 2]) < (depths[i + 1] + depths[i + 2] + depths[i + 3])) increaseCount++;
             }
-            return increaseCount.ToString();
+            return increaseCount;
         }
     }
 }

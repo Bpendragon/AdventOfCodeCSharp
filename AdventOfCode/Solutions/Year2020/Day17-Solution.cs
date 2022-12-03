@@ -43,7 +43,7 @@ namespace AdventOfCode.Solutions.Year2020
 
         }
 
-        protected override string SolvePartOne()
+        protected override object SolvePartOne()
         {
             Dictionary<(int x, int y, int z), bool> nextCyoob;
             for (int i = 0; i < 6; i++)
@@ -87,10 +87,10 @@ namespace AdventOfCode.Solutions.Year2020
 
             }
 
-            return cyoob.Count(a => a.Value == true).ToString();
+            return cyoob.Count(a => a.Value == true);
         }
 
-        protected override string SolvePartTwo()
+        protected override object SolvePartTwo()
         {
             Dictionary<(int x, int y, int z, int w), bool> nextCyoob4D;
             for (int i = 0; i < 6; i++)
@@ -131,7 +131,7 @@ namespace AdventOfCode.Solutions.Year2020
                 cyoob4D = new Dictionary<(int x, int y, int z, int w), bool>(nextCyoob4D);
             }
 
-            return cyoob4D.Count(a => a.Value == true).ToString();
+            return cyoob4D.Count(a => a.Value == true);
         }
 
 

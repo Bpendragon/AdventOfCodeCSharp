@@ -39,7 +39,7 @@ namespace AdventOfCode.Solutions.Year2020
             Seats2 = new Dictionary<(int, int), bool>(Seats);
         }
 
-        protected override string SolvePartOne()
+        protected override object SolvePartOne()
         {
             int seatsChanged = int.MaxValue;
             do
@@ -56,10 +56,10 @@ namespace AdventOfCode.Solutions.Year2020
                 Seats = new Dictionary<(int, int), bool>(nextSeats);
             } while (seatsChanged != 0);
 
-            return Seats.Count(x => x.Value).ToString();
+            return Seats.Count(x => x.Value);
         }
 
-        protected override string SolvePartTwo()
+        protected override object SolvePartTwo()
         {
             Seats = new Dictionary<(int, int), bool>(Seats2);
             int seatsChanged = int.MaxValue;
@@ -77,7 +77,7 @@ namespace AdventOfCode.Solutions.Year2020
                 Seats = new Dictionary<(int, int), bool>(nextSeats);
             } while (seatsChanged != 0);
 
-            return Seats.Count(x => x.Value).ToString();
+            return Seats.Count(x => x.Value);
         }
 
         private bool AliveNext((int x, int y) c, bool part2 = false)

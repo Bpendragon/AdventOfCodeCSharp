@@ -9,12 +9,12 @@ namespace AdventOfCode.Solutions.Year2019
 
         }
 
-        protected override string SolvePartOne()
+        protected override object SolvePartOne()
         {
             return null;
         }
 
-        protected override string SolvePartTwo()
+        protected override object SolvePartTwo()
         {
             return null;
         }

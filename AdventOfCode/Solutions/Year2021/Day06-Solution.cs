@@ -27,7 +27,7 @@ namespace AdventOfCode.Solutions.Year2021
             p2Answer = fishCounts.Sum();
         }
 
-        protected override string SolvePartOne() => p1Answer.ToString();
-        protected override string SolvePartTwo() => p2Answer.ToString();
+        protected override object SolvePartOne() => p1Answer;
+        protected override object SolvePartTwo() => p2Answer;
     }
 }

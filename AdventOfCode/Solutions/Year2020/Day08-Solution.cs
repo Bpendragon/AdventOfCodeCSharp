@@ -11,12 +11,12 @@ namespace AdventOfCode.Solutions.Year2020
             Lines = new List<string>(Input.SplitByNewline());
         }
 
-        protected override string SolvePartOne()
+        protected override object SolvePartOne()
         {
-            return RunProgram(Lines).ToString();
+            return RunProgram(Lines);
         }
 
-        protected override string SolvePartTwo()
+        protected override object SolvePartTwo()
         {
             for(int i = 0; i < Lines.Count; i++)
             {

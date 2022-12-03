@@ -33,7 +33,7 @@ namespace AdventOfCode.Solutions.Year2021
             maxY = lines.Count;
         }
 
-        protected override string SolvePartOne()
+        protected override object SolvePartOne()
         {
             int eastMovers = 1;
             int southMovers = 1;
@@ -80,10 +80,10 @@ namespace AdventOfCode.Solutions.Year2021
 
                 stepCount++;
             }
-            return (stepCount).ToString();
+            return (stepCount);
         }
 
-        protected override string SolvePartTwo()
+        protected override object SolvePartTwo()
         {
             return "❄️🎄Happy Advent of Code🎄❄️";
         }

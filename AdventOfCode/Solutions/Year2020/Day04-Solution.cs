@@ -15,7 +15,7 @@ namespace AdventOfCode.Solutions.Year2020
             semiValid = new List<string>();
         }
 
-        protected override string SolvePartOne()
+        protected override object SolvePartOne()
         {
             int valid = 0;
             string[] requiredItems = new string[] { "byr", "iyr", "eyr", "hgt", "hcl", "ecl", "pid"};
@@ -34,10 +34,10 @@ namespace AdventOfCode.Solutions.Year2020
                 }
 
             }
-            return valid.ToString();
+            return valid;
         }
 
-        protected override string SolvePartTwo()
+        protected override object SolvePartTwo()
         {
             int valid = 0;
             foreach(string passport in semiValid)
@@ -99,7 +99,7 @@ namespace AdventOfCode.Solutions.Year2020
                 if (isValid) valid++;
             }
 
-            return valid.ToString();
+            return valid;
         }
     }
 }

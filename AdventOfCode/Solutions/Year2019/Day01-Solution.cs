@@ -21,12 +21,12 @@ namespace AdventOfCode.Solutions.Year2019
             modules = new(Input.ToIntList("\n"));
         }
 
-        protected override string SolvePartOne()
+        protected override object SolvePartOne()
         {
-            return modules.Sum(a => (a / 3) - 2).ToString();
+            return modules.Sum(a => (a / 3) - 2);
         }
 
-        protected override string SolvePartTwo()
+        protected override object SolvePartTwo()
         {
             int sum = 0;
             foreach(int n in modules)
@@ -38,7 +38,7 @@ namespace AdventOfCode.Solutions.Year2019
                     f = (f / 3) - 2;
                 }
             }
-            return sum.ToString();
+            return sum;
         }
     }
 }

@@ -20,10 +20,8 @@ namespace AdventOfCode
             string output = $"Total time taken: {TimeSpan.FromTicks(total).TotalMilliseconds}ms | {total} ticks | {TimeSpan.FromTicks(total)}";
             Trace.WriteLine(output);
             Console.WriteLine(output);
-#if ! DEBUG
             Console.Write("Press Enter to close...");
             Console.ReadLine();
-#endif
         }
     }
 }

@@ -9,7 +9,7 @@ namespace AdventOfCode.Solutions.Year2015
 
         }
 
-        protected override string SolvePartOne()
+        protected override object SolvePartOne()
         {
             char[] pass = Input.ToCharArray();
             do
@@ -19,7 +19,7 @@ namespace AdventOfCode.Solutions.Year2015
             part1 = pass.JoinAsStrings();
             return part1;
         }
-        protected override string SolvePartTwo()
+        protected override object SolvePartTwo()
         {
             char[] pass = part1.ToCharArray();
             do

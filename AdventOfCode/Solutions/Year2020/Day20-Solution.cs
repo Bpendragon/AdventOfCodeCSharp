@@ -18,19 +18,19 @@ namespace AdventOfCode.Solutions.Year2020
 
 
 
-        protected override string SolvePartOne()
+        protected override object SolvePartOne()
         {
 
             return
                 (tiles[0][0].id *
                 tiles[0][^1].id *
                 tiles[^1][0].id *
-                tiles[^1][^1].id).ToString();
+                tiles[^1][^1].id);
         }
 
 
 
-        protected override string SolvePartTwo()
+        protected override object SolvePartTwo()
         {
             List<(int x, int y)> Nessie = new() //these are *just* the offsets from the tip off the tail
             {
@@ -110,7 +110,7 @@ namespace AdventOfCode.Solutions.Year2020
                 Nessie = new List<(int x, int y)>(newNessie);
             }
 
-            return map.Count(x => x.Value == '#').ToString();
+            return map.Count(x => x.Value == '#');
         }
 
         private static Tile[] ParseTiles(string input)

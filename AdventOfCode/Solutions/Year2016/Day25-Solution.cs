@@ -15,7 +15,7 @@ namespace AdventOfCode.Solutions.Year2016
             tgt = a * b;
         }
 
-        protected override string SolvePartOne()
+        protected override object SolvePartOne()
         {
             int n = 1;
             while (n < tgt)
@@ -29,10 +29,10 @@ namespace AdventOfCode.Solutions.Year2016
                 }
             }
 
-            return (n - tgt).ToString();
+            return (n - tgt);
         }
 
-        protected override string SolvePartTwo()
+        protected override object SolvePartTwo()
         {
             return null;
         }

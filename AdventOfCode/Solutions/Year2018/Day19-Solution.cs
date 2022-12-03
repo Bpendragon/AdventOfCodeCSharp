@@ -29,7 +29,7 @@ namespace AdventOfCode.Solutions.Year2018
             
         }
 
-        protected override string SolvePartOne()
+        protected override object SolvePartOne()
         {
             while(0 <= Registers[boundRegister] && Registers[boundRegister] < instructions.Count)
             {
@@ -37,10 +37,10 @@ namespace AdventOfCode.Solutions.Year2018
                 Registers[boundRegister]++;
             }
 
-            return Registers[0].ToString();
+            return Registers[0];
         }
 
-        protected override string SolvePartTwo()
+        protected override object SolvePartTwo()
         {//Tl;DR part 2 saves a really big number into C, and then brute-force checks ever single value from 1 to C to see if it's a divisor, it it is, add it to a running sum. 
         //Returns the running sum.
             for (int i = 0; i <= 5; i++)
@@ -74,7 +74,7 @@ namespace AdventOfCode.Solutions.Year2018
             if (sqrt == (int)Math.Floor(Math.Sqrt(C))) divisorSum += sqrt;
 
 
-                return divisorSum.ToString();
+                return divisorSum;
         }
 
 

@@ -17,7 +17,7 @@ namespace AdventOfCode.Solutions.Year2020
             }
         }
 
-        protected override string SolvePartOne()
+        protected override object SolvePartOne()
         {
             long totalSum = 0;
             foreach (var e in Expressions)
@@ -25,10 +25,10 @@ namespace AdventOfCode.Solutions.Year2020
                 totalSum += EvaluateExpression(e);
             }
 
-            return totalSum.ToString();
+            return totalSum;
         }
 
-        protected override string SolvePartTwo()
+        protected override object SolvePartTwo()
         {
             long totalSum = 0;
             foreach (var e in PartTwoExpressions)
@@ -36,7 +36,7 @@ namespace AdventOfCode.Solutions.Year2020
                 totalSum += EvaluateExpression(e);
             }
 
-            return totalSum.ToString();
+            return totalSum;
         }
 
 

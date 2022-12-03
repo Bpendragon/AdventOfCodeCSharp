@@ -42,7 +42,7 @@ namespace AdventOfCode.Solutions.Year2020
             }
         }
 
-        protected override string SolvePartOne()
+        protected override object SolvePartOne()
         {
             Queue<string> q = new();
             int containedCount = 0;
@@ -64,10 +64,10 @@ namespace AdventOfCode.Solutions.Year2020
                 }
             }
 
-            return containedCount.ToString();
+            return containedCount;
         }
 
-        protected override string SolvePartTwo()
+        protected override object SolvePartTwo()
         {
             Queue<string> q = new();
             int bagContains = 0;
@@ -88,7 +88,7 @@ namespace AdventOfCode.Solutions.Year2020
                 }
             }
 
-            return bagContains.ToString();
+            return bagContains;
         }
     }
 

@@ -15,15 +15,15 @@ namespace AdventOfCode.Solutions.Year2019
             Program = Input.ToLongList(",");
         }
 
-        protected override string SolvePartOne()
+        protected override object SolvePartOne()
         {
             PainterBot bot1 = new(Program);
             bot1.cpu.ClearInputs();
             bot1.RunBot(0);
-            return (bot1.Visited.Count - 1).ToString();
+            return (bot1.Visited.Count - 1);
         }
 
-        protected override string SolvePartTwo()
+        protected override object SolvePartTwo()
         {
             PainterBot bot2 = new(Program);
             bot2.cpu.ClearInputs();

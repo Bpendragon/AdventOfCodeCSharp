@@ -44,7 +44,7 @@ namespace AdventOfCode.Solutions.Year2020
             cur.next = Cups2[0];
         }
 
-        protected override string SolvePartOne()
+        protected override object SolvePartOne()
         {
             LLNode cur = Cups[0];
             for(long i = 0; i < 100; i++)
@@ -86,10 +86,10 @@ namespace AdventOfCode.Solutions.Year2020
                 cur = cur.next;
             }
 
-            return sb.ToString();
+            return sb;
         }
 
-        protected override string SolvePartTwo()
+        protected override object SolvePartTwo()
         {
             LLNode cur = Cups2[0];
             for (long i = 0; i < 10_000_000; i++)
@@ -118,7 +118,7 @@ namespace AdventOfCode.Solutions.Year2020
 
             }
 
-            return (BigCupsDict[1].next.val * BigCupsDict[1].next.next.val).ToString();
+            return (BigCupsDict[1].next.val * BigCupsDict[1].next.next.val);
         }
 
         private class LLNode

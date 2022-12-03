@@ -12,16 +12,16 @@ namespace AdventOfCode.Solutions.Year2018
         {
         }
 
-        protected override string SolvePartOne()
+        protected override object SolvePartOne()
         {
             List<Unit> Units = new(GetUnits());
             var res = SimulateCombat(Units, out bool _);
-            return res.ToString();
+            return res;
         }
 
 
 
-        protected override string SolvePartTwo()
+        protected override object SolvePartTwo()
         {
             int curBoost = 0;
             long res;
@@ -32,7 +32,7 @@ namespace AdventOfCode.Solutions.Year2018
                 curBoost++;
                 res = SimulateCombat(new List<Unit>(GetUnits(boost: curBoost)), out lastWasWin);
             } while (!lastWasWin);
-            return res.ToString();
+            return res;
         }
 
 

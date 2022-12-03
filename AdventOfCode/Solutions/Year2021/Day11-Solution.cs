@@ -65,14 +65,14 @@ namespace AdventOfCode.Solutions.Year2021
             }
         }
 
-        protected override string SolvePartOne()
+        protected override object SolvePartOne()
         {
-            return part1.ToString();
+            return part1;
         }
 
-        protected override string SolvePartTwo()
+        protected override object SolvePartTwo()
         {
-            return counter.ToString();
+            return counter;
         }
     }
 }

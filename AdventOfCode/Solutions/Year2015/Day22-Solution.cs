@@ -36,7 +36,7 @@ namespace AdventOfCode.Solutions.Year2015
 
         }
 
-        protected override string SolvePartOne()
+        protected override object SolvePartOne()
         {
             int bestRun = int.MaxValue;
 
@@ -48,10 +48,10 @@ namespace AdventOfCode.Solutions.Year2015
                 }
             }
 
-            return bestRun.ToString();
+            return bestRun;
         }
 
-        protected override string SolvePartTwo()
+        protected override object SolvePartTwo()
         {
             int bestRun = int.MaxValue;
 
@@ -63,7 +63,7 @@ namespace AdventOfCode.Solutions.Year2015
                 }
             }
 
-            return bestRun.ToString();
+            return bestRun;
         }
 
         private ActionType ChooseAction(bool poisonValid, bool rechargeValid, bool shieldValid)

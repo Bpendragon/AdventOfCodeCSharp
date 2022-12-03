@@ -14,19 +14,19 @@ namespace AdventOfCode.Solutions.Year2016
             ab = new AssembunnyComputer(new List<string>(Input.SplitByNewline()));
         }
 
-        protected override string SolvePartOne()
+        protected override object SolvePartOne()
         {
             ab.Execute();
 
-            return ab.registers["a"].ToString();
+            return ab.registers["a"];
         }
 
-        protected override string SolvePartTwo()
+        protected override object SolvePartTwo()
         {
             ab.Reset();
             ab.registers["c"] = 1;
             ab.Execute();
-            return ab.registers["a"].ToString();
+            return ab.registers["a"];
         }
     }
 }

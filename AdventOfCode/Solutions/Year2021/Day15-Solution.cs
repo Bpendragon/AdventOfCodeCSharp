@@ -57,16 +57,16 @@ namespace AdventOfCode.Solutions.Year2021
             }
         }
 
-        protected override string SolvePartOne()
+        protected override object SolvePartOne()
         {
             AStar((0, 0), (smolMapDimensions - 1, smolMapDimensions - 1), smolMap, out long cost, IncludePath: false);
-            return (cost).ToString();
+            return (cost);
         }
 
-        protected override string SolvePartTwo()
+        protected override object SolvePartTwo()
         {
             AStar((0, 0), (largeMapDimensions - 1, largeMapDimensions - 1), map, out long cost, IncludePath: false);
-            return (cost).ToString();
+            return (cost);
         }
     }
 }

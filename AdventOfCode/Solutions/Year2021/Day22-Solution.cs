@@ -6,8 +6,7 @@ using System.Text.RegularExpressions;
 
 namespace AdventOfCode.Solutions.Year2021
 {
-
-    class Day22 : ASolution
+    partial class Day22 : ASolution
     {
         readonly string part1 = string.Empty;
         readonly string part2 = string.Empty;
@@ -19,7 +18,7 @@ namespace AdventOfCode.Solutions.Year2021
             foreach(var line in Input.SplitByNewline())
             {
                 bool turnOn = line[..2] == "on";
-                var rawList = Regex.Split(line, @"[^\d-]+");
+                var rawList = ListRegex().Split(line);
                 var intList = rawList.Where(s => !string.IsNullOrWhiteSpace(s)).ToList();
 
                 (int minX, int maxX, int minY, int maxY, int minZ, int maxZ) = (int.Parse(intList[0]), int.Parse(intList[1]), int.Parse(intList[2]), int.Parse(intList[3]), int.Parse(intList[4]), int.Parse(intList[5]));
@@ -64,15 +63,18 @@ namespace AdventOfCode.Solutions.Year2021
             part2 = cubes.Sum(a => (a.Key.maxX - a.Key.minX + 1L) * (a.Key.maxY - a.Key.minY + 1) * (a.Key.maxZ - a.Key.minZ + 1) * a.Value).ToString();
         }
 
-        protected override string SolvePartOne()
+        protected override object SolvePartOne()
         {
             return part1;
         }
 
-        protected override string SolvePartTwo()
+        protected override object SolvePartTwo()
         {
 
             return part2;
         }
+
+        [GeneratedRegex("[^\\d-]+")]
+        private static partial Regex ListRegex();
     }
 }

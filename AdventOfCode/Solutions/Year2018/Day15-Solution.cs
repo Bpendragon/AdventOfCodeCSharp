@@ -15,12 +15,12 @@ namespace AdventOfCode.Solutions.Year2018
             game = new Game(lines);
         }
 
-        protected override string SolvePartOne()
+        protected override object SolvePartOne()
         {
-            return game.RunGame().ToString();
+            return game.RunGame();
         }
 
-        protected override string SolvePartTwo()
+        protected override object SolvePartTwo()
         {
             for(int elfAttackPower = 4; ; elfAttackPower++)
             {
@@ -28,7 +28,7 @@ namespace AdventOfCode.Solutions.Year2018
 
                 int? res = game.RunGame(true);
 
-                if (res != null) return res.ToString();
+                if (res != null) return res;
             }
         }
 

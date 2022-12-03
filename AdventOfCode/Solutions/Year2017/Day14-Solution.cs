@@ -37,14 +37,14 @@ namespace AdventOfCode.Solutions.Year2017
             }
         }
 
-        protected override string SolvePartOne()
+        protected override object SolvePartOne()
         {
-            return onNodes.Count.ToString();
+            return onNodes.Count;
         }
 
-        protected override string SolvePartTwo()
+        protected override object SolvePartTwo()
         {
-            return FindRegions().ToString();
+            return FindRegions();
         }
 
         private int FindRegions()

@@ -55,14 +55,14 @@ namespace AdventOfCode.Solutions.Year2018
             }
         }
 
-        protected override string SolvePartOne()
+        protected override object SolvePartOne()
         {
-            return map.Values.Max().ToString();
+            return map.Values.Max();
         }
 
-        protected override string SolvePartTwo()
+        protected override object SolvePartTwo()
         {
-            return map.Values.Where(x => x >= 1000).Count().ToString();
+            return map.Values.Where(x => x >= 1000).Count();
         }
     }
 }

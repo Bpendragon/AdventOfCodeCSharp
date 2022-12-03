@@ -26,14 +26,14 @@ namespace AdventOfCode.Solutions.Year2022
             Elves = Elves.OrderByDescending(i => i).ToList();
         }
 
-        protected override string SolvePartOne()
+        protected override object SolvePartOne()
         {
-            return Elves.Take(1).Sum().ToString();
+            return Elves.Take(1).Sum();
         }
 
-        protected override string SolvePartTwo()
+        protected override object SolvePartTwo()
         {
-            return Elves.Take(3).Sum().ToString();
+            return Elves.Take(3).Sum();
         }
     }
 }

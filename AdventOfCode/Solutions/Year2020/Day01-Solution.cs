@@ -14,27 +14,27 @@ namespace AdventOfCode.Solutions.Year2020
             costs.Sort();
         }
 
-        protected override string SolvePartOne()
+        protected override object SolvePartOne()
         {
             int i = 0, j = 1;
             while(true)
             {
                 int sum = costs[i] + costs[^j];
-                if (sum == 2020) return (costs[i] * costs[^j]).ToString();
+                if (sum == 2020) return (costs[i] * costs[^j]);
                 else if (sum < 2020) i++;
                 else j++;
             }
 
         }
 
-        protected override string SolvePartTwo()
+        protected override object SolvePartTwo()
         {
             int i = 0, j = 1, k = 1;
 
             while(true)
             {
                 int sum = costs[i] + costs[j] + costs[^k];
-                if (sum == 2020) return (costs[i] * costs[j] * costs[^k]).ToString();
+                if (sum == 2020) return (costs[i] * costs[j] * costs[^k]);
                 else if (sum < 2020)
                 {
                     if (j < costs.Count - k) j++;

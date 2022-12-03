@@ -101,14 +101,14 @@ namespace AdventOfCode.Solutions.Year2019
             }
         }
 
-        protected override string SolvePartOne()
+        protected override object SolvePartOne()
         {
-            return firstRes.ToString();
+            return firstRes;
         }
 
-        protected override string SolvePartTwo()
+        protected override object SolvePartTwo()
         {
-            return firstDoubleSend.ToString();
+            return firstDoubleSend;
         }
     }
 }
