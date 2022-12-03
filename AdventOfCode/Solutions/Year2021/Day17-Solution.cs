@@ -14,14 +14,14 @@ namespace AdventOfCode.Solutions.Year2021
             smallestPossibleXVelo = (int)Math.Ceiling(-1 + Math.Sqrt(1 + (8.0 * minX)) / 2);
         }
 
-        protected override string SolvePartOne()
+        protected override object SolvePartOne()
         {
             var tmp = Math.Abs(minY);
             var res = tmp * (tmp - 1) / 2;
-            return res.ToString();
+            return res;
         }
 
-        protected override string SolvePartTwo()
+        protected override object SolvePartTwo()
         {
             int succesfulShots = 0;
             for(int x = smallestPossibleXVelo; x < minX; x++)
@@ -32,7 +32,7 @@ namespace AdventOfCode.Solutions.Year2021
                 }
             }
             succesfulShots += (maxX - minX + 1) * (maxY - minY + 1);
-            return succesfulShots.ToString();
+            return succesfulShots;
         }
 
         private bool SimulateShot(Coordinate2D initialPos, int initX, int initY)

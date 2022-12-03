@@ -22,7 +22,7 @@ namespace AdventOfCode.Solutions.Year2019
             bot.ClearInputs();
         }
 
-        protected override string SolvePartOne()
+        protected override object SolvePartOne()
         {
             int count = 0;
             for(int x = 0; x < 50; x++)
@@ -32,10 +32,10 @@ namespace AdventOfCode.Solutions.Year2019
                     if (Scan(x, y)) count++;
                 }
             }
-            return count.ToString();
+            return count;
         }
 
-        protected override string SolvePartTwo()
+        protected override object SolvePartTwo()
         {
             int x = 0, y = 0;
 
@@ -49,7 +49,7 @@ namespace AdventOfCode.Solutions.Year2019
             }
 
             int val = (x * 10_000) + y;
-            return val.ToString();
+            return val;
         }
 
         private bool Scan(long x, long y)

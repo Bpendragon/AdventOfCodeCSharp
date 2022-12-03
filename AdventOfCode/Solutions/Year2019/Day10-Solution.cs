@@ -62,13 +62,13 @@ namespace AdventOfCode.Solutions.Year2019
             baseLoc = Asteroids.Last();
         }
 
-        protected override string SolvePartOne()
+        protected override object SolvePartOne()
         {
 
-            return baseLoc.InView.Count.ToString();
+            return baseLoc.InView.Count;
         }
 
-        protected override string SolvePartTwo()
+        protected override object SolvePartTwo()
         {
             //I tried to do something fancy, then I decided I'd just do it using excel and sorting. 
             using (System.IO.StreamWriter file =
@@ -89,7 +89,7 @@ namespace AdventOfCode.Solutions.Year2019
 
             var finaltgt = baseLoc.InView[targets[(index + 200) % targets.Count]];
 
-            return ((finaltgt.Coords.x * 100) + finaltgt.Coords.y).ToString();
+            return ((finaltgt.Coords.x * 100) + finaltgt.Coords.y);
             */
             return null;
         }

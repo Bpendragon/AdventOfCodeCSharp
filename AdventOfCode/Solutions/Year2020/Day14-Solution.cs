@@ -13,7 +13,7 @@ namespace AdventOfCode.Solutions.Year2020
 
         }
 
-        protected override string SolvePartOne()
+        protected override object SolvePartOne()
         {
             long[] memory = new long[100000];
             long curForcedMask = 0;
@@ -45,10 +45,10 @@ namespace AdventOfCode.Solutions.Year2020
                     memory[int.Parse(tokens[1])] = curForcedMask + (long.Parse(tokens[2]) & curMask);
                 }
             }
-            return memory.Sum().ToString();
+            return memory.Sum();
         }
 
-        protected override string SolvePartTwo()
+        protected override object SolvePartTwo()
         {
             Dictionary<long, long> memory = new();
             string curVariableString = null ;
@@ -68,7 +68,7 @@ namespace AdventOfCode.Solutions.Year2020
                     }
                 }
             }
-            return memory.Values.Sum().ToString();
+            return memory.Values.Sum();
         }
 
         private static long[] GetMemLocations(long baseAddress, string v)

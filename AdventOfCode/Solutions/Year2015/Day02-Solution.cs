@@ -12,7 +12,7 @@ namespace AdventOfCode.Solutions.Year2015
             packages = new List<int[]>(Input.SplitByNewline().Select(x => x.ToIntList("x").ToArray()));
         }
 
-        protected override string SolvePartOne()
+        protected override object SolvePartOne()
         {
             long sum = 0;
             foreach(int[] package in packages)
@@ -23,10 +23,10 @@ namespace AdventOfCode.Solutions.Year2015
 
                 sum += 2 * (f1 + f2 + f3) + Utilities.MinOfMany(f1, f2, f3);
             }
-            return sum.ToString();
+            return sum;
         }
 
-        protected override string SolvePartTwo()
+        protected override object SolvePartTwo()
         {
             long sum = 0;
 
@@ -39,7 +39,7 @@ namespace AdventOfCode.Solutions.Year2015
                 sum += package.Aggregate((a,b) => a*b) + Utilities.MinOfMany(f1, f2, f3);
             }
 
-            return sum.ToString();
+            return sum;
         }
     }
 }

@@ -19,7 +19,7 @@ namespace AdventOfCode.Solutions.Year2020
 
         }
 
-        protected override string SolvePartOne()
+        protected override object SolvePartOne()
         {
             NumberString.Capacity = 5000;
             for (int i = 1; i <= 2020 - startNums.Length; i++)
@@ -30,10 +30,10 @@ namespace AdventOfCode.Solutions.Year2020
                 NumberString.Insert(0, lastTimeSpoken);
             }
 
-            return NumberString[0].ToString();
+            return NumberString[0];
         }
 
-        protected override string SolvePartTwo()
+        protected override object SolvePartTwo()
         {
             for (int i = 0; i < startNums.Length - 1; i++)
             {
@@ -53,7 +53,7 @@ namespace AdventOfCode.Solutions.Year2020
                 NumberString2.Add(lastTimeSpoken);
             }
 
-            return NumberString2[^1].ToString();
+            return NumberString2[^1];
         }
     }
 }

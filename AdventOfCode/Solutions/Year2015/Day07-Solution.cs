@@ -191,18 +191,18 @@ namespace AdventOfCode.Solutions.Year2015
             }
         }
 
-        protected override string SolvePartOne()
+        protected override object SolvePartOne()
         {
-            return circuit["a"].Output.ToString();
+            return circuit["a"].Output;
         }
 
-        protected override string SolvePartTwo()
+        protected override object SolvePartTwo()
         {
             ushort? tmp = circuit["a"].Output;
             ResetCircuit();
             circuit["b"].Output = tmp;
             UpdateCircuit();
-            return circuit["a"].Output.ToString();
+            return circuit["a"].Output;
         }
     }
 

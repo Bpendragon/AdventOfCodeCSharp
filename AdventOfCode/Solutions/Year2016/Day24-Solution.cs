@@ -86,7 +86,7 @@ namespace AdventOfCode.Solutions.Year2016
             throw new ArgumentException("cannot find path between nodes");
         }
 
-        protected override string SolvePartOne()
+        protected override object SolvePartOne()
         {
             List<int> routeLengths = new();
             List<string> nodesToVisit = Wires.Keys.Where(x => x != "0").ToList();
@@ -103,10 +103,10 @@ namespace AdventOfCode.Solutions.Year2016
                 routeLengths.Add(r);
             }
 
-            return routeLengths.Min().ToString();
+            return routeLengths.Min();
         }
 
-        protected override string SolvePartTwo()
+        protected override object SolvePartTwo()
         {
             List<int> routeLengths = new();
             List<string> nodesToVisit = Wires.Keys.Where(x => x != "0").ToList();
@@ -124,7 +124,7 @@ namespace AdventOfCode.Solutions.Year2016
                 routeLengths.Add(r);
             }
 
-            return routeLengths.Min().ToString();
+            return routeLengths.Min();
         }
 
         internal class Wire

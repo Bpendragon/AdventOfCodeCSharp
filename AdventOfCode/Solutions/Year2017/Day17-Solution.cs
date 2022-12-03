@@ -12,7 +12,7 @@ namespace AdventOfCode.Solutions.Year2017
 
         }
 
-        protected override string SolvePartOne()
+        protected override object SolvePartOne()
         {
             List<int> buffer = new() { 0 };
             int curPos = 0;
@@ -25,10 +25,10 @@ namespace AdventOfCode.Solutions.Year2017
 
             int index = buffer.IndexOf(2017);
 
-            return buffer[(index + 1) % buffer.Count].ToString();
+            return buffer[(index + 1) % buffer.Count];
         }
 
-        protected override string SolvePartTwo()
+        protected override object SolvePartTwo()
         {
             long total = 50_000_000;
 
@@ -42,7 +42,7 @@ namespace AdventOfCode.Solutions.Year2017
                     target = i;
                 }
             }
-            return target.ToString();
+            return target;
 
             //Don't Actually run this please, it took 22 minutes and almost 5GB of RAM
 
@@ -61,7 +61,7 @@ namespace AdventOfCode.Solutions.Year2017
             current = buffer.Find(0);
             current = current.Next ?? current.List.First;
 
-            return current.Value.ToString();
+            return current.Value;
             */
         }
     }

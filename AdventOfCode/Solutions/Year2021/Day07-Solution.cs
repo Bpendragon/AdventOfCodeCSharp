@@ -14,7 +14,7 @@ namespace AdventOfCode.Solutions.Year2021
             crabs.Sort();
         }
 
-        protected override string SolvePartOne()
+        protected override object SolvePartOne()
         {
             var median = crabs[crabs.Count / 2];
             long bestSoFar = long.MaxValue;
@@ -23,10 +23,10 @@ namespace AdventOfCode.Solutions.Year2021
                 var tmp = crabs.Sum(x => Math.Abs(x-i));
                 if (tmp < bestSoFar) bestSoFar = tmp;
             }
-            return bestSoFar.ToString();
+            return bestSoFar;
         }
 
-        protected override string SolvePartTwo()
+        protected override object SolvePartTwo()
         {
             long bestSoFar = long.MaxValue;
 
@@ -38,7 +38,7 @@ namespace AdventOfCode.Solutions.Year2021
                 if (tmp < bestSoFar) bestSoFar = tmp;
             }
 
-            return bestSoFar.ToString();
+            return bestSoFar;
         }
     }
 }

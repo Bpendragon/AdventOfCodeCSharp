@@ -39,7 +39,7 @@ namespace AdventOfCode.Solutions.Year2019
             seedString = GenerateStateString(startingMap, true).Reverse();
         }
 
-        protected override string SolvePartOne()
+        protected override object SolvePartOne()
         {
             Dictionary<(int x, int y), int> map = new(startingMap);
             string state = GenerateStateString(map);
@@ -67,7 +67,7 @@ namespace AdventOfCode.Solutions.Year2019
                 map = new(nextMap);
                 state = GenerateStateString(map);
             }
-            return Convert.ToInt64(state, 2).ToString();
+            return Convert.ToInt64(state, 2);
         }
 
         private static string GenerateStateString(Dictionary<(int x, int y), int> map, bool skipCenter = false)
@@ -84,7 +84,7 @@ namespace AdventOfCode.Solutions.Year2019
             return sb.ToString().Reverse();
         }
 
-        protected override string SolvePartTwo()
+        protected override object SolvePartTwo()
         {
             //Generate all cells from level -101 to 101
             //Only -100 to 100 will get populated
@@ -117,7 +117,7 @@ namespace AdventOfCode.Solutions.Year2019
                 foreach (var c in AllCells) c.Update();
             }
 
-            return AllCells.Sum(a => a.State).ToString();
+            return AllCells.Sum(a => a.State);
         }
 
         private void GenerateInterconnects()

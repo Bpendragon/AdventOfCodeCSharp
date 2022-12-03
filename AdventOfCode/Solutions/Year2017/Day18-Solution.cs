@@ -19,16 +19,16 @@ namespace AdventOfCode.Solutions.Year2017
 
         }
 
-        protected override string SolvePartOne()
+        protected override object SolvePartOne()
         {
             foreach(var rcv in RunProgram())
             {
-                return rcv.ToString();
+                return rcv;
             }
             return null;
         }
 
-        protected override string SolvePartTwo()
+        protected override object SolvePartTwo()
         {
             var zero = new DuetProgram(0, Commands);
             var one = new DuetProgram(1, Commands);
@@ -41,7 +41,7 @@ namespace AdventOfCode.Solutions.Year2017
                 if (!one.RunTillNext()) break;
                 if (zero.SendQueue.Count == 0 && one.SendQueue.Count == 0) break;
             }
-            return one.SendCount.ToString();
+            return one.SendCount;
         }
 
         private IEnumerable<long> RunProgram() //only kept for part 1

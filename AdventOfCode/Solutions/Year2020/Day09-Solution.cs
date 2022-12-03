@@ -14,7 +14,7 @@ namespace AdventOfCode.Solutions.Year2020
             Lines = new List<long>(Input.ToLongList("\n"));  
         }
 
-        protected override string SolvePartOne()
+        protected override object SolvePartOne()
         {
             int i = 25;
             for(; i < Lines.Count; i++)
@@ -32,13 +32,13 @@ namespace AdventOfCode.Solutions.Year2020
                 if (!found)
                 {
                     problemChild = Lines[i];
-                    return problemChild.ToString();
+                    return problemChild;
                 }
             }
             return null;
         }
 
-        protected override string SolvePartTwo()
+        protected override object SolvePartTwo()
         {
             int lower = 0;
             int upper = 1;
@@ -47,7 +47,7 @@ namespace AdventOfCode.Solutions.Year2020
             {
                 List<long> r = Lines.GetRange(lower, (upper - lower) + 1);
                 long rSum = r.Sum();
-                if (rSum == problemChild) return (r.Min() + r.Max()).ToString();
+                if (rSum == problemChild) return (r.Min() + r.Max());
                 else if (rSum < problemChild) upper++;
                 else
                 {

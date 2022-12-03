@@ -30,7 +30,7 @@ namespace AdventOfCode.Solutions.Year2018
             }
         }
 
-        protected override string SolvePartOne()
+        protected override object SolvePartOne()
         {
             while (true)
             {
@@ -46,7 +46,7 @@ namespace AdventOfCode.Solutions.Year2018
                     Registers[boundRegister]++;
                 }
                 Utilities.WriteLine(Registers[4]);
-                return Registers[4].ToString(); //Change this register based on the EQRR instruction at index 28.
+                return Registers[4]; //Change this register based on the EQRR instruction at index 28.
                 /*
                  * The Processor only exits if the value supplied to register 0 == the value of Register[n] when line 28 is reached. (n seems to vary by input) 
                  * Register 0 is never otherwise manipulated. Thus the fastest exit condition is the one that exits the first time instruction 28 is hit.
@@ -55,7 +55,7 @@ namespace AdventOfCode.Solutions.Year2018
 
         }
 
-        protected override string SolvePartTwo()
+        protected override object SolvePartTwo()
         {
             OrderedHashSet<int> seen = new();
             while (true)
@@ -71,7 +71,7 @@ namespace AdventOfCode.Solutions.Year2018
                     {
                         if (seen.Contains(Registers[4]))
                         {
-                            return seen.Last().ToString();
+                            return seen.Last();
                         }
                         else seen.Add(Registers[4]); // Same as above
                     }

@@ -15,7 +15,7 @@ namespace AdventOfCode.Solutions.Year2019
             bot = new IntCode2(Input.ToLongList(","));
         }
 
-        protected override string SolvePartOne()
+        protected override object SolvePartOne()
         {
             bot.ClearInputs();
             foreach (char c in "NOT A J\nNOT C T\nOR T J\nAND D J\nWALK\n")
@@ -32,10 +32,10 @@ namespace AdventOfCode.Solutions.Year2019
                     if (n < 255) Write((char)n);
                 }
             }
-            return output.Last().ToString();
+            return output.Last();
         }
 
-        protected override string SolvePartTwo()
+        protected override object SolvePartTwo()
         {
 
             bot.ClearInputs();
@@ -53,7 +53,7 @@ namespace AdventOfCode.Solutions.Year2019
                     if (n < 255) Write((char)n);
                 }
             }
-            return output.Last().ToString();
+            return output.Last();
         }
     }
 }

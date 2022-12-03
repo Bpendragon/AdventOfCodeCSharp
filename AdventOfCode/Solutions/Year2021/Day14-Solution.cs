@@ -34,7 +34,7 @@ namespace AdventOfCode.Solutions.Year2021
             }
         }
 
-        protected override string SolvePartOne()
+        protected override object SolvePartOne()
         {
 
             foreach (int i in Enumerable.Range(0, originalPolymer.Length - 1))
@@ -43,10 +43,10 @@ namespace AdventOfCode.Solutions.Year2021
                 Drill(cur, 0, 10);
             }
 
-            return (counts1.Values.Max() - counts1.Values.Min()).ToString();
+            return (counts1.Values.Max() - counts1.Values.Min());
         }
 
-        protected override string SolvePartTwo()
+        protected override object SolvePartTwo()
         {
             foreach (int i in Enumerable.Range(0, originalPolymer.Length - 1))
             {
@@ -76,7 +76,7 @@ namespace AdventOfCode.Solutions.Year2021
             finalCounts[originalPolymer[^1]]++;
             long max = finalCounts.Values.Max();
             long min = finalCounts.Values.Min();
-            return (max - min).ToString();
+            return (max - min);
         }
 
         private void Drill(string curPair, int curDepth, int maxDepth)

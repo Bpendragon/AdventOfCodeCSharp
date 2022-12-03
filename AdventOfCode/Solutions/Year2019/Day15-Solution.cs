@@ -38,16 +38,16 @@ namespace AdventOfCode.Solutions.Year2019
         }
 
 
-        protected override string SolvePartOne()
+        protected override object SolvePartOne()
         {        
-          return (AStar((0, 0), oxyGenLocation, map).Count - 1).ToString(); //-1 to account for the facct the path contains the start node, which is not a step, see also: fencepost problem
+          return (AStar((0, 0), oxyGenLocation, map).Count - 1); //-1 to account for the facct the path contains the start node, which is not a step, see also: fencepost problem
         }
 
        
 
-        protected override string SolvePartTwo()
+        protected override object SolvePartTwo()
         {
-            return map.Where(a => a.Value != 0).Max(a => AStar(oxyGenLocation, a.Key, map).Count - 1).ToString();
+            return map.Where(a => a.Value != 0).Max(a => AStar(oxyGenLocation, a.Key, map).Count - 1);
         }
 
         readonly List<(int dX, int dY)> movementDirs = new() { (0, 1), (0, -1), (1, 0), (-1, 0) };

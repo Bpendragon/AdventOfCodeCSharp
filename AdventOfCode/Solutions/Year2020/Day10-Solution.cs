@@ -21,7 +21,7 @@ namespace AdventOfCode.Solutions.Year2020
 
         }
 
-        protected override string SolvePartOne()
+        protected override object SolvePartOne()
         {
             List<int> p1Adapters = new(Adapters);
 
@@ -32,10 +32,10 @@ namespace AdventOfCode.Solutions.Year2020
                 if (p1Adapters[i + 1] - p1Adapters[i] == 3) threes++;
                 else if (p1Adapters[i + 1] - p1Adapters[i] == 1) ones++;
             }
-            return (threes * ones).ToString();
+            return (threes * ones);
         }
 
-        protected override string SolvePartTwo()
+        protected override object SolvePartTwo()
         {
             KnownCounts[Adapters.Count - 1] = 0; //The Laptop has only paths to itself. 
             KnownCounts[Adapters.Count - 2] = 1; //We know there is only one path from the final adapter to the laptop.
@@ -47,7 +47,7 @@ namespace AdventOfCode.Solutions.Year2020
                     Utilities.WriteLine($"Adapter '{i:D3}' has this many valid combinations below: {KnownCounts[i]}");
                 }
             }
-            return KnownCounts[0].ToString();
+            return KnownCounts[0];
         }
 
         long FindValid(int start)

@@ -45,7 +45,7 @@ namespace AdventOfCode.Solutions.Year2015
             };
         }
 
-        protected override string SolvePartOne()
+        protected override object SolvePartOne()
         {
             Dictionary<(int, int), char> modLights = new(Lights);
 
@@ -67,10 +67,10 @@ namespace AdventOfCode.Solutions.Year2015
             }
 
             Draw(modLights);
-            return modLights.Values.Count(x => x == '#').ToString();
+            return modLights.Values.Count(x => x == '#');
         }
 
-        protected override string SolvePartTwo()
+        protected override object SolvePartTwo()
         {
             Dictionary<(int, int), char> modLights = new(Lights);
 
@@ -92,7 +92,7 @@ namespace AdventOfCode.Solutions.Year2015
             }
 
             Draw(modLights);
-            return modLights.Values.Count(x => x == '#').ToString();
+            return modLights.Values.Count(x => x == '#');
         }
 
 

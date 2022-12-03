@@ -14,7 +14,7 @@ namespace AdventOfCode.Solutions.Year2015
 
         }
 
-        protected override string SolvePartOne()
+        protected override object SolvePartOne()
         {
             (int x, int y) elf1 = (0, 0);
             HousesVisted1.Add(elf1);
@@ -31,10 +31,10 @@ namespace AdventOfCode.Solutions.Year2015
 
                 HousesVisted1.Add(elf1);
             }
-            return HousesVisted1.Distinct().Count().ToString();
+            return HousesVisted1.Distinct().Count();
         }
 
-        protected override string SolvePartTwo()
+        protected override object SolvePartTwo()
         {
             (int x, int y) elf1 = (0, 0);
             (int x, int y) elf2 = (0, 0);
@@ -61,7 +61,7 @@ namespace AdventOfCode.Solutions.Year2015
                 HousesVisted2.Add(elf1);
                 HousesVisted2.Add(elf2);
             }
-            return HousesVisted2.Distinct().Count().ToString();
+            return HousesVisted2.Distinct().Count();
         }
     }
 }

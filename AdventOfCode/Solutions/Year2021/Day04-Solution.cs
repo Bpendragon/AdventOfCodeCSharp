@@ -33,7 +33,7 @@ namespace AdventOfCode.Solutions.Year2021
             }
         }
 
-        protected override string SolvePartOne()
+        protected override object SolvePartOne()
         {
             HashSet<Board> p1Boards = new(Boards);
             foreach(int call in calls)
@@ -51,14 +51,14 @@ namespace AdventOfCode.Solutions.Year2021
                 if(compBoard != null)
                 {
                     int tmp = compBoard.cells.Values.Where(x => !x.Marked).Sum(x => x.Value);
-                    return (tmp * call).ToString();
+                    return (tmp * call);
                 }
 
             }
             return null;
         }
 
-        protected override string SolvePartTwo()
+        protected override object SolvePartTwo()
         {
             HashSet<Board> p2Boards = new(Boards);
             foreach (int call in calls)
@@ -80,7 +80,7 @@ namespace AdventOfCode.Solutions.Year2021
                 if (compBoard != null)
                 {
                     int tmp = compBoard.cells.Values.Where(x => !x.Marked).Sum(x => x.Value);
-                    return (tmp * call).ToString();
+                    return (tmp * call);
                 }
             }
             return null;

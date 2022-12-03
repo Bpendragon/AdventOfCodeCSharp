@@ -71,14 +71,14 @@ namespace AdventOfCode.Solutions.Year2015
         }
 
 
-        protected override string SolvePartOne()
+        protected override object SolvePartOne()
         {
-            return CostsOfVictory.Min().ToString();
+            return CostsOfVictory.Min();
         }
 
-        protected override string SolvePartTwo()
+        protected override object SolvePartTwo()
         {
-            return CostsOfFailure.Max().ToString();
+            return CostsOfFailure.Max();
         }
 
 

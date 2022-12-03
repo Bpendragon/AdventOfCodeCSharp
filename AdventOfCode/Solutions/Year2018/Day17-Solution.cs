@@ -52,7 +52,7 @@ namespace AdventOfCode.Solutions.Year2018
             DropWater(springX, springY);
         }
 
-        protected override string SolvePartOne()
+        protected override object SolvePartOne()
         {
             var waterCount = 0;
             for (y = minY; y < grid.GetLength(1); y++)
@@ -65,10 +65,10 @@ namespace AdventOfCode.Solutions.Year2018
                     }
                 }
             }
-            return waterCount.ToString();
+            return waterCount;
         }
 
-        protected override string SolvePartTwo()
+        protected override object SolvePartTwo()
         {
             var waterCount = 0;
             for (y = minY; y < grid.GetLength(1); y++)
@@ -81,7 +81,7 @@ namespace AdventOfCode.Solutions.Year2018
                     }
                 }
             }
-            return waterCount.ToString();
+            return waterCount;
         }
 
         private void DropWater(int x, int y)

@@ -16,7 +16,7 @@ namespace AdventOfCode.Solutions.Year2019
             inputNums = new List<long>(Input.ToLongList());
         }
 
-        protected override string SolvePartOne()
+        protected override object SolvePartOne()
         {
             List<long> values = new(inputNums);
 
@@ -27,7 +27,7 @@ namespace AdventOfCode.Solutions.Year2019
             return values.Take(8).JoinAsStrings();
         }
 
-        protected override string SolvePartTwo()
+        protected override object SolvePartTwo()
         {
             int offSet = int.Parse(inputNums.Take(7).JoinAsStrings());
             List<long> adjusted = new();

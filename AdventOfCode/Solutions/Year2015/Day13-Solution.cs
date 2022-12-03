@@ -36,7 +36,7 @@ namespace AdventOfCode.Solutions.Year2015
             }
         }
 
-        protected override string SolvePartOne()
+        protected override object SolvePartOne()
         {
             List<int> orderScores = new();
             foreach(var o in GuestList.Keys.Permutations())
@@ -50,10 +50,10 @@ namespace AdventOfCode.Solutions.Year2015
                 }
                 orderScores.Add(score);
             }
-            return orderScores.Max().ToString();
+            return orderScores.Max();
         }
 
-        protected override string SolvePartTwo()
+        protected override object SolvePartTwo()
         {
             Guest myself = new();
             Dictionary<string, Guest> secondGuestList = new(GuestList);
@@ -77,7 +77,7 @@ namespace AdventOfCode.Solutions.Year2015
                 }
                 orderScores.Add(score);
             }
-            return orderScores.Max().ToString();
+            return orderScores.Max();
         }
     }
 

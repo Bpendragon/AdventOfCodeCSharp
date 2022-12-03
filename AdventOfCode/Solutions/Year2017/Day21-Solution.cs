@@ -37,22 +37,22 @@ namespace AdventOfCode.Solutions.Year2017
 
 
 
-        protected override string SolvePartOne()
+        protected override object SolvePartOne()
         {
             string start = ".#./..#/###";
 
             var res = Enhance(5, start);
 
-            return res.Count(x => x == '#').ToString();
+            return res.Count(x => x == '#');
         }
 
-        protected override string SolvePartTwo()
+        protected override object SolvePartTwo()
         {
             string start = ".#./..#/###";
 
             var res = Enhance(18, start);
 
-            return res.Count(x => x == '#').ToString();
+            return res.Count(x => x == '#');
         }
 
         public static string FlipHorizontal(string grid)

@@ -24,7 +24,7 @@ namespace AdventOfCode.Solutions.Year2020
             }
         }
 
-        protected override string SolvePartOne()
+        protected override object SolvePartOne()
         {
             int departTime = int.Parse(lines[0]);
             int[] busses = lines[1].ToIntList(",").ToArray();
@@ -39,10 +39,10 @@ namespace AdventOfCode.Solutions.Year2020
                     bestBus = bus;
                 }
             }
-            return (bestBus * (bestMod)).ToString();
+            return (bestBus * (bestMod));
         }
 
-        protected override string SolvePartTwo()
+        protected override object SolvePartTwo()
         {
             long curTime = 0;
             long curDelta = busses[0].busID;
@@ -77,7 +77,7 @@ namespace AdventOfCode.Solutions.Year2020
                 curTime += curDelta;
             }
 
-            return curTime.ToString();
+            return curTime;
             
             
             
@@ -98,7 +98,7 @@ namespace AdventOfCode.Solutions.Year2020
 
             long firstHit2 = (-prevPhase % prevPeriod);
 
-            return firstHit.ToString();
+            return firstHit;
             */
         }
 

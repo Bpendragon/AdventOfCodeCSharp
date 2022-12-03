@@ -14,7 +14,7 @@ namespace AdventOfCode.Solutions.Year2022
             asLines = Input.SplitByNewline();
         }
 
-        protected override string SolvePartOne()
+        protected override object SolvePartOne()
         {
             long total = 0;
             foreach(var l in asLines)
@@ -32,18 +32,18 @@ namespace AdventOfCode.Solutions.Year2022
                     }
                 }
             }
-            return total.ToString();
+            return total;
         }
 
-        protected override string SolvePartTwo()
+        protected override object SolvePartTwo()
         {
             long total = 0;
-            for (int i = 0; i < asLines.Count; i += 3)
+
+            foreach(var group in asLines.Chunk(3))
             {
-                var items = asLines.Skip(i).Take(3).ToList();
-                foreach (char c in items[0])
+                foreach (char c in group[0])
                 {
-                    if (items[1].Contains(c) && items[2].Contains(c))
+                    if (group[1].Contains(c) && group[2].Contains(c))
                     {
                         if (char.IsUpper(c)) total += c - 38;
                         if (char.IsLower(c)) total += c - 96;
@@ -51,7 +51,8 @@ namespace AdventOfCode.Solutions.Year2022
                     }
                 }
             }
-            return total.ToString();
+
+            return total;
         }
     }
 }

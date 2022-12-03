@@ -12,15 +12,15 @@ namespace AdventOfCode.Solutions.Year2019
             pc = new IntCode2(Input.ToLongList(","));
         }
 
-        protected override string SolvePartOne()
+        protected override object SolvePartOne()
         {
             pc.Program[1] = 12;
             pc.Program[2] = 2;
             foreach (long _ in pc.RunProgram()) { }
-            return pc.PreviousRunState[0].ToString();
+            return pc.PreviousRunState[0];
         }
 
-        protected override string SolvePartTwo()
+        protected override object SolvePartTwo()
         {
             for(long i = 0; i < 100; i++)
             {
@@ -30,7 +30,7 @@ namespace AdventOfCode.Solutions.Year2019
                     pc.Program[2] = j;
                     foreach (long _ in pc.RunProgram()){ };
 
-                    if (pc.PreviousRunState[0] == 19690720) return ((100 * i) + j).ToString();
+                    if (pc.PreviousRunState[0] == 19690720) return ((100 * i) + j);
                 }
             }
 

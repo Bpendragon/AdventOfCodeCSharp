@@ -16,7 +16,7 @@ namespace AdventOfCode.Solutions.Year2019
             cab = new IntCode2(Input.ToLongList(","));
         }
 
-        protected override string SolvePartOne()
+        protected override object SolvePartOne()
         {
             Dictionary<(long x, long y), long> screen = new();
             var outputStream = cab.RunProgram().ToList();
@@ -27,10 +27,10 @@ namespace AdventOfCode.Solutions.Year2019
             }
 
             DrawScreen(screen);
-            return screen.Values.Count(x => x==2).ToString();
+            return screen.Values.Count(x => x==2);
         }
 
-        protected override string SolvePartTwo()
+        protected override object SolvePartTwo()
         {
             cab = new IntCode2(Input.ToLongList(","));
             cab.Program[0] = 2; //set it up for quarters
@@ -102,7 +102,7 @@ namespace AdventOfCode.Solutions.Year2019
 
             }
 
-            return score.ToString();
+            return score;
         }
 
         public void DrawScreen(Dictionary<(long x, long y), long> screen)

@@ -20,14 +20,14 @@ namespace AdventOfCode.Solutions.Year2017
             }
         }
 
-        protected override string SolvePartOne()
+        protected override object SolvePartOne()
         {
             BFS(0);
             NumGroups++;
-            return Visited.Count.ToString();
+            return Visited.Count;
         }
 
-        protected override string SolvePartTwo()
+        protected override object SolvePartTwo()
         {
             while(Visited.Count < Pipes.Count)
             {
@@ -35,7 +35,7 @@ namespace AdventOfCode.Solutions.Year2017
                 BFS(n);
                 NumGroups++;
             }
-            return NumGroups.ToString();
+            return NumGroups;
         }
 
         private void BFS(int start)

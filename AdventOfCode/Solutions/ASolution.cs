@@ -13,15 +13,16 @@ namespace AdventOfCode.Solutions
     {
 
         long _part1Time, _part2Time;
-        readonly Lazy<string> _input, _part1, _part2;
+        readonly Lazy<object> _part1, _part2;
+        readonly Lazy<string> _input;
 
         public int Day { get; }
         public int Year { get; }
         public string Title { get; }
         public string DebugInput { get; set; }
         public string Input => string.IsNullOrEmpty(_input.Value) ? null : _input.Value;
-        public string Part1 => string.IsNullOrEmpty(_part1.Value) ? "" : _part1.Value;
-        public string Part2 => string.IsNullOrEmpty(_part2.Value) ? "" : _part2.Value;
+        public string Part1 => string.IsNullOrEmpty(_part1.Value.ToString()) ? "" : _part1.Value.ToString();
+        public string Part2 => string.IsNullOrEmpty(_part2.Value.ToString()) ? "" : _part2.Value.ToString();
         public long Part1Ticks => _part1Time;
         public long Part2Ticks => _part2Time;
         public long ContructionTime { get; set; }
@@ -44,8 +45,8 @@ namespace AdventOfCode.Solutions
             }
             
             _input = new Lazy<string>(LoadInput);
-            _part1 = new Lazy<string>(() => SafelySolve(SolvePartOne, out _part1Time));
-            _part2 = new Lazy<string>(() => SafelySolve(SolvePartTwo, out _part2Time));
+            _part1 = new Lazy<object>(() => SafelySolve(SolvePartOne, out _part1Time));
+            _part2 = new Lazy<object>(() => SafelySolve(SolvePartTwo, out _part2Time));
         }
 
         public void Solve(int part = 0) {
@@ -151,14 +152,14 @@ namespace AdventOfCode.Solutions
             return input;
         }
 
-        protected abstract string SolvePartOne();
-        protected abstract string SolvePartTwo();
+        protected abstract object SolvePartOne();
+        protected abstract object SolvePartTwo();
 
-        private static string SafelySolve(Func<string> partSolver, out long timeTaken) {
+        private static string SafelySolve(Func<object> partSolver, out long timeTaken) {
             Stopwatch clock = new(); clock.Start();
             string solution = string.Empty;
             try {
-                solution = partSolver();
+                solution = partSolver().ToString();
             }
             catch( Exception ex ) {
                 Trace.TraceError($"Caught Exception:\r\n{ex}");

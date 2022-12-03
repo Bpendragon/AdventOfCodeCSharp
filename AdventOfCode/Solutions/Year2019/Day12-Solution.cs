@@ -51,14 +51,14 @@ namespace AdventOfCode.Solutions.Year2019
             }
         }
 
-        protected override string SolvePartOne()
+        protected override object SolvePartOne()
         {
-            return part1Energy.ToString();
+            return part1Energy;
         }
 
-        protected override string SolvePartTwo()
+        protected override object SolvePartTwo()
         {
-            return (Utilities.FindLCM(Utilities.FindLCM((long)xCycle, (long)yCycle), (long)zCycle)).ToString();
+            return (Utilities.FindLCM(Utilities.FindLCM((long)xCycle, (long)yCycle), (long)zCycle));
         }
 
         private class Moon

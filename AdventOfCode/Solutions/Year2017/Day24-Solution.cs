@@ -25,19 +25,19 @@ namespace AdventOfCode.Solutions.Year2017
             }
         }
 
-        protected override string SolvePartOne()
+        protected override object SolvePartOne()
         {
             BuildBridge(0, pieces, 0, 0);
-            return BridgeScores.Max().ToString();
+            return BridgeScores.Max();
         }
 
        
 
-        protected override string SolvePartTwo()
+        protected override object SolvePartTwo()
         {
             BridgeLengths.Sort((a, b) => a.Item1.CompareTo(b.Item1));
 
-            return BridgeLengths.Where(x => x.Item1 == BridgeLengths.Last().Item1).Max(c => c.Item2).ToString();
+            return BridgeLengths.Where(x => x.Item1 == BridgeLengths.Last().Item1).Max(c => c.Item2);
         }
 
         private void BuildBridge(int lookingFor, List<BridgeComponent> availPieces, int currentScore, int depth)

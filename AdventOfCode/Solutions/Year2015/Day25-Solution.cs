@@ -14,7 +14,7 @@
 
         }
 
-        protected override string SolvePartOne()
+        protected override object SolvePartOne()
         {
             ulong curVal = 20151125;
             int curRow = 1;
@@ -31,11 +31,11 @@
                 }
 
                 curVal = (curVal * multiplier) % divisor;
-                if (curRow == targetRow && curCol == targetColumn) return curVal.ToString();
+                if (curRow == targetRow && curCol == targetColumn) return curVal;
             }
         }
 
-        protected override string SolvePartTwo()
+        protected override object SolvePartTwo()
         {
             return "❄️🎄Happy Advent of Code🎄❄️";
         }

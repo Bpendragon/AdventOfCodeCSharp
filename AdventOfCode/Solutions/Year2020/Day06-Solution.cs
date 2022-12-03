@@ -12,7 +12,7 @@ namespace AdventOfCode.Solutions.Year2020
             answers = new List<string>(Input.Split("\n\n"));
         }
 
-        protected override string SolvePartOne()
+        protected override object SolvePartOne()
         {
             int running = 0;
             foreach (string answer in answers)
@@ -23,7 +23,7 @@ namespace AdventOfCode.Solutions.Year2020
             return running.ToString() ;
         }
 
-        protected override string SolvePartTwo()
+        protected override object SolvePartTwo()
         {
             int running = 0;
            foreach(string group in answers)
@@ -45,7 +45,7 @@ namespace AdventOfCode.Solutions.Year2020
                 running += res.Values.Where(x => x == members.Count).Count();
             }
 
-            return running.ToString();
+            return running;
         }
     }
 }

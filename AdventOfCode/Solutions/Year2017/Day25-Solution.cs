@@ -11,16 +11,16 @@ namespace AdventOfCode.Solutions.Year2017
 
         }
 
-        protected override string SolvePartOne()
+        protected override object SolvePartOne()
         {
             TuringMachine tm = new();
 
             foreach (int _ in Enumerable.Range(0, 12629077)) tm.Step();
 
-            return tm.Tape.Where(x => x.Value == 1).Count().ToString();
+            return tm.Tape.Where(x => x.Value == 1).Count();
         }
 
-        protected override string SolvePartTwo()
+        protected override object SolvePartTwo()
         {
             return "❄️🎄Happy Advent of Code🎄❄️";
         }

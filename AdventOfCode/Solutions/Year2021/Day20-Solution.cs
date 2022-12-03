@@ -37,14 +37,14 @@ namespace AdventOfCode.Solutions.Year2021
 
         }
 
-        protected override string SolvePartOne()
+        protected override object SolvePartOne()
         {
-            return part1.ToString(); ;
+            return part1; ;
         }
 
-        protected override string SolvePartTwo()
+        protected override object SolvePartTwo()
         { 
-            return initialImage.Values.Count(a => a == "1").ToString();
+            return initialImage.Values.Count(a => a == "1");
         }
 
         private Dictionary<Coordinate2D, string> NextImage(Dictionary<Coordinate2D, string> CurrentImage, string EnhancementString, int passNum)

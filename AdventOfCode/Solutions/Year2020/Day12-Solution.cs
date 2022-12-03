@@ -14,7 +14,7 @@ namespace AdventOfCode.Solutions.Year2020
 
         }
 
-        protected override string SolvePartOne()
+        protected override object SolvePartOne()
         {
             (int x, int y) curPos = (0, 0);
             CompassDirection curDirection = CompassDirection.E;
@@ -34,10 +34,10 @@ namespace AdventOfCode.Solutions.Year2020
                     case 'R': curDirection = (CompassDirection)(((int)curDirection + val) % 360); break;
                 }
             }
-            return Utilities.ManhattanDistance((0,0), curPos).ToString();
+            return Utilities.ManhattanDistance((0,0), curPos);
         }
 
-        protected override string SolvePartTwo()
+        protected override object SolvePartTwo()
         {
             (int x, int y) shipPos = (0, 0);
             (int x, int y) wayPoint = (10, 1);
@@ -73,7 +73,7 @@ namespace AdventOfCode.Solutions.Year2020
                         break;
                 }
             }
-            return Utilities.ManhattanDistance((0, 0), shipPos).ToString();
+            return Utilities.ManhattanDistance((0, 0), shipPos);
         }
     }
 }

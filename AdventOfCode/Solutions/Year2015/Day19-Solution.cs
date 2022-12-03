@@ -27,7 +27,7 @@ namespace AdventOfCode.Solutions.Year2015
             }
         }
 
-        protected override string SolvePartOne()
+        protected override object SolvePartOne()
         {
             foreach (KeyValuePair<string, List<string>> sub in Substitutions)
             {
@@ -40,14 +40,14 @@ namespace AdventOfCode.Solutions.Year2015
                     }
                 }
             }
-            return subbedChems.Distinct().Count().ToString();
+            return subbedChems.Distinct().Count();
         }
 
-        protected override string SolvePartTwo()
+        protected override object SolvePartTwo()
         {
             Utilities.WriteLine("See the Discussions on the Subreddit to see why this works: https://www.reddit.com/r/adventofcode/comments/3xflz8/day_19_solutions/");
 
-            return (baseChem.Count(x => char.IsUpper(x)) - baseChem.AllIndexesOf("Rn").Count() - baseChem.AllIndexesOf("Ar").Count() - (2 * baseChem.AllIndexesOf("Y").Count()) - 1).ToString();
+            return (baseChem.Count(x => char.IsUpper(x)) - baseChem.AllIndexesOf("Rn").Count() - baseChem.AllIndexesOf("Ar").Count() - (2 * baseChem.AllIndexesOf("Y").Count()) - 1);
         }
     }
 }

@@ -44,14 +44,14 @@ namespace AdventOfCode.Solutions.Year2020
             }
         }
 
-        protected override string SolvePartOne()
+        protected override object SolvePartOne()
         {
             List<string> knownAllergens = AllergenPossibilities.Values.Aggregate((a, b) => a.Union(b).ToList());
 
-            return ingredientCounts.Where(x => !knownAllergens.Contains(x.Key)).Sum(x => x.Value).ToString();
+            return ingredientCounts.Where(x => !knownAllergens.Contains(x.Key)).Sum(x => x.Value);
         }
 
-        protected override string SolvePartTwo()
+        protected override object SolvePartTwo()
         {
             Dictionary<string, string> knownAllergens = new();
 

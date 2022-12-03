@@ -20,7 +20,7 @@ namespace AdventOfCode.Solutions.Year2022
             rounds = Input.SplitByNewline();
         }
 
-        protected override string SolvePartOne()
+        protected override object SolvePartOne()
         {
             long score = 0;
             foreach(var round in rounds)
@@ -44,10 +44,10 @@ namespace AdventOfCode.Solutions.Year2022
                         break;
                 }
             }
-            return score.ToString();
+            return score;
         }
 
-        protected override string SolvePartTwo()
+        protected override object SolvePartTwo()
         {
             long score = 0;
             foreach (var round in rounds)
@@ -71,7 +71,7 @@ namespace AdventOfCode.Solutions.Year2022
                         break;
                 }
             }
-            return score.ToString();
+            return score;
         }
     }
 }

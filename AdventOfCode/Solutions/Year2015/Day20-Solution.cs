@@ -12,7 +12,7 @@ namespace AdventOfCode.Solutions.Year2015
             target = long.Parse(Input);
         }
 
-        protected override string SolvePartOne()
+        protected override object SolvePartOne()
         {
             Houses = new List<long>(new long[target / 10]);
             for (int i = 1; i < target / 10; i++)
@@ -26,12 +26,12 @@ namespace AdventOfCode.Solutions.Year2015
             int k = 0;
             while(true)
             {
-                if (Houses[k] >= target) return (k).ToString();
+                if (Houses[k] >= target) return (k);
                 k++;
             }
         }
 
-        protected override string SolvePartTwo()
+        protected override object SolvePartTwo()
         {
             Houses = new List<long>(new long[target / 10]);
             for (int i = 1; i < target / 10; i++)
@@ -47,7 +47,7 @@ namespace AdventOfCode.Solutions.Year2015
             int k = 0;
             while (true)
             {
-                if (Houses[k] >= target) return (k).ToString();
+                if (Houses[k] >= target) return (k);
                 k++;
             }
         }

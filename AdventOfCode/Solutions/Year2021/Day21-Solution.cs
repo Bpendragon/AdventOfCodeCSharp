@@ -19,7 +19,7 @@ namespace AdventOfCode.Solutions.Year2021
             if (UseDebugInput) Player1Start = 4;
         }
 
-        protected override string SolvePartOne()
+        protected override object SolvePartOne()
         {
             var curDice = 1;
             long p1Score = 0;
@@ -54,16 +54,16 @@ namespace AdventOfCode.Solutions.Year2021
 
             long finalScore = p1Score > p2Score ? p2Score * moves * 3 : p1Score * moves * 3;
 
-            return finalScore.ToString();
+            return finalScore;
         }
 
-        protected override string SolvePartTwo()
+        protected override object SolvePartTwo()
         {
             // Next Dice at 0 means p1 won't actually move, but it will kick off the three universes.
             // diceRolls at -1 means that p1 gets their entire turn once the universe starts fragmenting.
             (long p1Wins, long p2Wins) = DiracGame((0, 0, Player1Start, Player2Start, 0, -1, 1));
 
-            return (p1Wins > p2Wins ? p1Wins : p2Wins).ToString();
+            return (p1Wins > p2Wins ? p1Wins : p2Wins);
         }
 
         // For Clarity:

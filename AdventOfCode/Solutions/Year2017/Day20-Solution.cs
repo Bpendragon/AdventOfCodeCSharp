@@ -45,7 +45,7 @@ namespace AdventOfCode.Solutions.Year2017
             }
         }
 
-        protected override string SolvePartOne()
+        protected override object SolvePartOne()
         {
             while(Particles.Where(x => x.MovingAway).Count() < Particles.Count)
             {
@@ -85,13 +85,13 @@ namespace AdventOfCode.Solutions.Year2017
 
             Particles.Sort((a,b) => a.Distance.CompareTo(b.Distance));
 
-            return Particles[0].ID.ToString();
+            return Particles[0].ID;
         }
 
-        protected override string SolvePartTwo()
+        protected override object SolvePartTwo()
         {
 
-            return Particles.Where(p => !p.Destroyed).Count().ToString();
+            return Particles.Where(p => !p.Destroyed).Count();
         }
     }
 

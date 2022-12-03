@@ -14,7 +14,7 @@ namespace AdventOfCode.Solutions.Year2020
             
         }
 
-        protected override string SolvePartOne()
+        protected override object SolvePartOne()
         {
             SetDecks();
             while(playerCards.Count > 0 && crabCards.Count > 0)
@@ -44,13 +44,13 @@ namespace AdventOfCode.Solutions.Year2020
             return sum.ToString() ;
         }
 
-        protected override string SolvePartTwo()
+        protected override object SolvePartTwo()
         {
             SetDecks();
 
             RecursiveCombat(playerCards, crabCards, out long WinnerScore);
 
-            return WinnerScore.ToString();
+            return WinnerScore;
         }
 
         public static bool RecursiveCombat(Queue<long> p1Deck, Queue<long> p2Deck, out long WinnerScore)

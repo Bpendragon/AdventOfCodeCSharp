@@ -24,12 +24,12 @@ namespace AdventOfCode.Solutions.Year<YEAR>
 
         }
 
-        protected override string SolvePartOne()
+        protected override object SolvePartOne()
         {
             return null;
         }
 
-        protected override string SolvePartTwo()
+        protected override object SolvePartTwo()
         {
             return null;
         }

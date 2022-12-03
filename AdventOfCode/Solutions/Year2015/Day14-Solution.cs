@@ -30,15 +30,15 @@ namespace AdventOfCode.Solutions.Year2015
             }
         }
 
-        protected override string SolvePartOne()
+        protected override object SolvePartOne()
         {
             
-            return Racers.Select(x => x.distanceCovered).Max().ToString();
+            return Racers.Select(x => x.distanceCovered).Max();
         }
 
-        protected override string SolvePartTwo()
+        protected override object SolvePartTwo()
         {
-            return Racers.Select(x => x.points).Max().ToString();
+            return Racers.Select(x => x.points).Max();
         }
     }
 

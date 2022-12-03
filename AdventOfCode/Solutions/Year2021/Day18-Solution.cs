@@ -16,15 +16,15 @@ namespace AdventOfCode.Solutions.Year2021
             }
         }
 
-        protected override string SolvePartOne()
+        protected override object SolvePartOne()
         {
             List<SnailFishNode> freshFish = new(SnailFish);
             var cur = freshFish.Aggregate((a, b) => AddAndCollapse(a, b));
 
-            return Magnitude(cur).ToString();
+            return Magnitude(cur);
         }
 
-        protected override string SolvePartTwo()
+        protected override object SolvePartTwo()
         {
             int bestSum = 0;
             for (int i = 0; i < SnailFish.Count - 1; i++)
@@ -40,7 +40,7 @@ namespace AdventOfCode.Solutions.Year2021
                     if (tmpMag > bestSum) bestSum = tmpMag;
                 }
             }
-            return bestSum.ToString();
+            return bestSum;
         }
 
         private class SnailFishNode

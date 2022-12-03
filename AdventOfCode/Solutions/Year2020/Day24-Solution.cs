@@ -25,7 +25,7 @@ namespace AdventOfCode.Solutions.Year2020
 
         }
 
-        protected override string SolvePartOne()
+        protected override object SolvePartOne()
         {
             foreach(var l in instructions)
             {
@@ -55,10 +55,10 @@ namespace AdventOfCode.Solutions.Year2020
                     TileStates[curPos] = true;
                 }
             }
-            return TileStates.Count(x => x.Value).ToString();
+            return TileStates.Count(x => x.Value);
         }
 
-        protected override string SolvePartTwo()
+        protected override object SolvePartTwo()
         {
             foreach (var s in TileStates.Where(kvp => !kvp.Value).ToList()) TileStates.Remove(s.Key);
             for(int i = 0; i < 100; i++)
@@ -92,7 +92,7 @@ namespace AdventOfCode.Solutions.Year2020
                 foreach (var s in TileStates.Where(kvp => !kvp.Value).ToList()) TileStates.Remove(s.Key);
             }
 
-            return TileStates.Count(x => x.Value).ToString();
+            return TileStates.Count(x => x.Value);
         }
     }
 }

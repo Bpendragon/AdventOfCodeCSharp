@@ -18,7 +18,7 @@ namespace AdventOfCode.Solutions.Year2021
             columns = new(Input.SplitIntoColumns());
         }
 
-        protected override string SolvePartOne()
+        protected override object SolvePartOne()
         {
             for(int i = 0; i < columns.Count; i++)
             {
@@ -44,10 +44,10 @@ namespace AdventOfCode.Solutions.Year2021
             int g = Convert.ToInt32(gamma.ToString(), 2);
             int e = Convert.ToInt32(epsilon.ToString(), 2);
 
-            return (g*e).ToString();
+            return (g*e);
         }
 
-        protected override string SolvePartTwo()
+        protected override object SolvePartTwo()
         {
             List<string> oxCandidates = readings.Where(x => x[0] == mostCommon[0]).ToList();
             List<string> coCandidates = readings.Where(x => x[0] != mostCommon[0]).ToList();
@@ -92,7 +92,7 @@ namespace AdventOfCode.Solutions.Year2021
                 }
                 if (coCandidates.Count < 2) break;
             }
-            return (Convert.ToInt32(oxCandidates[0],2) * Convert.ToInt32(coCandidates[0],2)).ToString();
+            return (Convert.ToInt32(oxCandidates[0],2) * Convert.ToInt32(coCandidates[0],2));
         }
     }
 }

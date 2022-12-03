@@ -36,7 +36,7 @@ namespace AdventOfCode.Solutions.Year2017
             WriteLine(sb);
         }
 
-        protected override string SolvePartOne()
+        protected override object SolvePartOne()
         {
             (int x, int y) curPosition = center;
             CompassDirection curDirection = CompassDirection.N;
@@ -63,10 +63,10 @@ namespace AdventOfCode.Solutions.Year2017
                 if (!newMap.ContainsKey(curPosition)) newMap[curPosition] = '.';
             }
 
-            return numInfected.ToString();
+            return numInfected;
         }
 
-        protected override string SolvePartTwo()
+        protected override object SolvePartTwo()
         {
             (int x, int y) curPosition = center;
             CompassDirection curDirection = CompassDirection.N;
@@ -100,7 +100,7 @@ namespace AdventOfCode.Solutions.Year2017
                 if (!newMap.ContainsKey(curPosition)) newMap[curPosition] = '.';
             }
 
-            return numInfected.ToString();
+            return numInfected;
         }
     }
 }

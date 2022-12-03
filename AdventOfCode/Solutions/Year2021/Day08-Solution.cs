@@ -14,13 +14,13 @@ namespace AdventOfCode.Solutions.Year2021
             entries = Input.SplitByNewline();
         }
 
-        protected override string SolvePartOne()
+        protected override object SolvePartOne()
         {
             int[] uniques = {2,3,4,7};
-            return entries.Sum(x =>x.Split(new char []{ '|', ' ' },StringSplitOptions.RemoveEmptyEntries)[10..].Count(a => uniques.Contains(a.Length))).ToString();
+            return entries.Sum(x =>x.Split(new char []{ '|', ' ' },StringSplitOptions.RemoveEmptyEntries)[10..].Count(a => uniques.Contains(a.Length)));
         }
 
-        protected override string SolvePartTwo()
+        protected override object SolvePartTwo()
         {
             long sum = 0;
 
@@ -110,7 +110,7 @@ namespace AdventOfCode.Solutions.Year2021
                 sum += int.Parse(sb.ToString());
             }
 
-            return sum.ToString();
+            return sum;
         }
     }
 }

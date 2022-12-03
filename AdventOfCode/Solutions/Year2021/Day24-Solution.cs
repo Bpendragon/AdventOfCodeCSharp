@@ -35,13 +35,13 @@ namespace AdventOfCode.Solutions.Year2021
             ValidModelNumbers.Sort();
         }
 
-        protected override string SolvePartOne()
+        protected override object SolvePartOne()
         {
             WriteLine($"Total Valid IDs: {ValidModelNumbers.Count}");
             return ValidModelNumbers.Last();
         }
 
-        protected override string SolvePartTwo()
+        protected override object SolvePartTwo()
         {
             return ValidModelNumbers.First();
         }

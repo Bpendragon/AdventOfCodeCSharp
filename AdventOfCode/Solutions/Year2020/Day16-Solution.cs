@@ -40,7 +40,7 @@ namespace AdventOfCode.Solutions.Year2020
             validTickets = new List<string>(tickets);
         }
 
-        protected override string SolvePartOne()
+        protected override object SolvePartOne()
         {
             int ticketScanningErrorRate = 0;
 
@@ -66,12 +66,12 @@ namespace AdventOfCode.Solutions.Year2020
                 }
             }
 
-            return ticketScanningErrorRate.ToString();
+            return ticketScanningErrorRate;
         }
 
 
 
-        protected override string SolvePartTwo()
+        protected override object SolvePartTwo()
         {
             Dictionary<int, string> KnownFields = new();
             Dictionary<(int ticketPosition, string name), int> TicketsThatMatch = new();
@@ -126,7 +126,7 @@ namespace AdventOfCode.Solutions.Year2020
                 if (f.Value.Contains("departure")) departureFields *= myTicketFields[f.Key];
             }
 
-            return departureFields.ToString();
+            return departureFields;
         }
 
 
