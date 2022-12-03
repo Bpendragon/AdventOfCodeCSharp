@@ -26,9 +26,9 @@ namespace AdventOfCode.Solutions.Year2015
                 }
                 if (tokens[0].Equals("NOT"))
                 {
-                    if (circuit.ContainsKey(tokens[1]))
+                    if (circuit.TryGetValue(tokens[1], out Gate val))
                     {
-                        _gate.Inputs.Add(circuit[tokens[1]]);
+                        _gate.Inputs.Add(val);
                     }
                     else
                     {
@@ -52,9 +52,9 @@ namespace AdventOfCode.Solutions.Year2015
                     }
                     else
                     {
-                        if (circuit.ContainsKey(tokens[0]))
+                        if (circuit.TryGetValue(tokens[0], out Gate val2))
                         {
-                            _gate.Inputs.Add(circuit[tokens[0]]);
+                            _gate.Inputs.Add(val2);
                         }
                         else
                         {
@@ -82,9 +82,9 @@ namespace AdventOfCode.Solutions.Year2015
                             break;
                     }
 
-                    if (circuit.ContainsKey(tokens[0]))
+                    if (circuit.TryGetValue(tokens[0], out Gate value))
                     {
-                        _gate.Inputs.Add(circuit[tokens[0]]);
+                        _gate.Inputs.Add(value);
                     }
                     else
                     {
@@ -116,9 +116,9 @@ namespace AdventOfCode.Solutions.Year2015
                     }
                     else
                     {
-                        if (circuit.ContainsKey(tokens[2]))
+                        if (circuit.TryGetValue(tokens[2], out Gate value2))
                         {
-                            _gate.Inputs.Add(circuit[tokens[2]]);
+                            _gate.Inputs.Add(value2);
                         }
                         else
                         {
