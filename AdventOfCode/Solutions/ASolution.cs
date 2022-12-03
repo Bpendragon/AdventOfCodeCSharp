@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Net;
@@ -117,7 +116,7 @@ namespace AdventOfCode.Solutions
                     
                     var request = new HttpRequestMessage(HttpMethod.Get, INPUT_URL);
                     request.Headers.Add("Cookie", Program.Config.Cookie);
-                    var productVal = new ProductInfoHeaderValue(".NET", "6");
+                    var productVal = new ProductInfoHeaderValue(".NET", Environment.Version.ToString());
                     var commentVal = new ProductInfoHeaderValue("(+Bpen's Advent of Code Template; https://github.com/Bpendragon/AdventOfCodeBase; github@bpendragon.horse)");
                     request.Headers.UserAgent.Add(productVal);
                     request.Headers.UserAgent.Add(commentVal);
