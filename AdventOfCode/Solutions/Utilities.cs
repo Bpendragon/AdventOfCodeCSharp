@@ -10,6 +10,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Numerics;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace AdventOfCode.Solutions
 {
@@ -33,6 +34,16 @@ namespace AdventOfCode.Solutions
                     .Select(n => Convert.ToInt32(n))
                     .ToList();
             }
+        }
+
+        public static IEnumerable<int> ExtractPosInts(this string str)
+        {
+            foreach (Match m in Regex.Matches(str, "\\d+")) yield return int.Parse(m.Value);
+        }
+
+        public static IEnumerable<int> ExtractInts(this string str)
+        {
+            foreach (Match m in Regex.Matches(str, "-?\\d+")) yield return int.Parse(m.Value);
         }
 
         public static List<long> ToLongList(this string str, string delimiter = "")
