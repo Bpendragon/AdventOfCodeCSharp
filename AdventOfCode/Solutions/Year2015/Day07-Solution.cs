@@ -7,7 +7,7 @@ namespace AdventOfCode.Solutions.Year2015
     {
         private readonly List<string> Lines;
         private readonly Dictionary<string, Gate> circuit = new();
-        public Day07() : base(07, 2015, "")
+        public Day07() : base(07, 2015, "Some Assembly Required")
         {
             Lines = new List<string>(Input.SplitByNewline());
             foreach (string line in Lines)

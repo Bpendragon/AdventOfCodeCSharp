@@ -159,7 +159,7 @@ namespace AdventOfCode.Solutions
             Stopwatch clock = new(); clock.Start();
             string solution = string.Empty;
             try {
-                solution = partSolver().ToString();
+                solution = (partSolver() ?? string.Empty).ToString();
             }
             catch( Exception ex ) {
                 Trace.TraceError($"Caught Exception:\r\n{ex}");
