@@ -146,7 +146,7 @@ namespace AdventOfCode.Solutions
         /// <returns></returns>
         public static string[] SplitIntoColumns(this string input)
         {
-            var rows = input.SplitByNewline();
+            var rows = input.SplitByNewline(false, false);
             int numColumns = rows.Max(x=> x.Length);
 
             var res = new string[numColumns];
