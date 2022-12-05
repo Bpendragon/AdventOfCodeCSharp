@@ -1,13 +1,7 @@
-using System;
-using System.Text;
 using System.Collections.Generic;
-using AdventOfCode.UserClasses;
-using System.Linq;
 using System.Data;
-using System.Threading;
-using System.Security;
-using static AdventOfCode.Solutions.Utilities;
-using System.Runtime.CompilerServices;
+using System.Linq;
+using System.Text;
 
 namespace AdventOfCode.Solutions.Year2022
 {
@@ -19,7 +13,6 @@ namespace AdventOfCode.Solutions.Year2022
         List<(int cnt, int src, int dest)> instructions = new();
         public Day05() : base(05, 2022, "Supply Stacks")
         {
-            //UseDebugInput = true;
             var parts = Input.Split("\n\n");
 
             var unparsedStacks = parts[0].SplitIntoColumns().ToList();
@@ -50,10 +43,8 @@ namespace AdventOfCode.Solutions.Year2022
 
         protected override object SolvePartOne()
         {
-            foreach(var ins in instructions)
-            {
-                for (int i = 0; i < ins.cnt; i++) stacks[ins.dest - 1].Push(stacks[ins.src - 1].Pop());
-            }
+            foreach(var ins in instructions) for (int i = 0; i < ins.cnt; i++) stacks[ins.dest - 1].Push(stacks[ins.src - 1].Pop());
+            
             StringBuilder sb = new();
             foreach (var s in stacks) sb.Append(s.Peek());
             return sb.ToString();
