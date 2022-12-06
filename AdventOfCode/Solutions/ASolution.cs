@@ -4,6 +4,7 @@ using System.IO;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Reflection;
 using System.Text;
 
 namespace AdventOfCode.Solutions
@@ -28,13 +29,18 @@ namespace AdventOfCode.Solutions
         public long ContructionTime { get; set; }
         protected bool UseDebugInput { get; set; }
         protected bool SkipInput { get; set; }
+        public long ParseTime { get; set; }
         private static HttpClient Client;
         private static HttpClientHandler Handler;
 
-        private protected ASolution(int day, int year, string title) {
-            Day = day;
-            Year = year;
-            Title = title;
+        private protected ASolution(bool useDebugInput = false)
+        {
+            var dayInfo = GetType().GetCustomAttribute<DayInfoAttribute>();
+            if (dayInfo is null) throw new Exception("Solution must have DayInfo!");
+
+            Day = dayInfo.Day;
+            Year = dayInfo.Year;
+            Title = dayInfo.Title;
             if (Handler is null)
             {
                 Handler = new HttpClientHandler { UseCookies = false };
@@ -47,6 +53,7 @@ namespace AdventOfCode.Solutions
             _input = new Lazy<string>(LoadInput);
             _part1 = new Lazy<object>(() => SafelySolve(SolvePartOne, out _part1Time));
             _part2 = new Lazy<object>(() => SafelySolve(SolvePartTwo, out _part2Time));
+            UseDebugInput = useDebugInput;
         }
 
         public void Solve(int part = 0) {
