@@ -8,6 +8,7 @@ using System.Threading;
 using System.Security;
 using static AdventOfCode.Solutions.Utilities;
 using System.Runtime.CompilerServices;
+using System.Drawing.Drawing2D;
 
 namespace AdventOfCode.Solutions.Year2022
 {
@@ -22,7 +23,7 @@ namespace AdventOfCode.Solutions.Year2022
 
         protected override object SolvePartOne()
         {
-            for(int i = 0; i < Input.Length; i++)
+            for (int i = 0; i < Input.Length; i++)
             {
                 if (Input.Skip(i).Take(4).Distinct().Count() == 4) return i + 4;
             }
