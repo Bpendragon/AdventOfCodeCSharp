@@ -7,10 +7,11 @@ using static AdventOfCode.Solutions.Utilities;
 namespace AdventOfCode.Solutions.Year2018
 {
 
+    [DayInfo(18, 2018, "")]
     class Day18 : ASolution
     {
         readonly Dictionary<(int x, int y), char> baseMap = new();
-        public Day18() : base(18, 2018, "")
+        public Day18() : base()
         {
             int y = 0;
             foreach(var line in Input.SplitByNewline())

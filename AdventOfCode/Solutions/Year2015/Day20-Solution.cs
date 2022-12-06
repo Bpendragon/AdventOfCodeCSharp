@@ -3,11 +3,12 @@ using System.Collections.Generic;
 namespace AdventOfCode.Solutions.Year2015
 {
 
+    [DayInfo(20, 2015, "")]
     class Day20 : ASolution
     {
         readonly long target;
         List<long> Houses;
-        public Day20() : base(20, 2015, "")
+        public Day20() : base()
         {
             target = long.Parse(Input);
         }

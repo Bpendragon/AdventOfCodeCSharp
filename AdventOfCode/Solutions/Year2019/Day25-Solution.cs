@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Text;
 using System.Collections.Generic;
 using AdventOfCode.UserClasses;
@@ -12,10 +12,11 @@ using System.Runtime.CompilerServices;
 namespace AdventOfCode.Solutions.Year2019
 {
 
+    [DayInfo(25, 2019, "")]
     class Day25 : ASolution
     {
         readonly IntCode2 bot;
-        public Day25() : base(25, 2019, "")
+        public Day25() : base()
         {
             bot = new IntCode2(Input.ToLongList(",").ToArray());
         }

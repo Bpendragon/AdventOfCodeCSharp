@@ -5,11 +5,12 @@ using System.Text.RegularExpressions;
 namespace AdventOfCode.Solutions.Year2020
 {
 
+    [DayInfo(04, 2020, "Passport Processing")]
     class Day04 : ASolution
     {
         readonly List<string> passports;
         readonly List<string> semiValid;
-        public Day04() : base(04, 2020, "Passport Processing")
+        public Day04() : base()
         {
             passports = new List<String>(Input.Split("\n\n"));
             semiValid = new List<string>();

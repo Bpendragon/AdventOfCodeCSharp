@@ -3,10 +3,11 @@ using System.Collections.Generic;
 namespace AdventOfCode.Solutions.Year2020
 {
 
+    [DayInfo(03, 2020, "Toboggan Trajectory")]
     class Day03 : ASolution
     {
         readonly List<string> lines;
-        public Day03() : base(03, 2020, "Toboggan Trajectory")
+        public Day03() : base()
         {
             lines = new List<string>(Input.SplitByNewline());
         }

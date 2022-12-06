@@ -4,11 +4,12 @@ using System.Linq;
 namespace AdventOfCode.Solutions.Year2018
 {
 
+    [DayInfo(20, 2018, "")]
     class Day20 : ASolution
     {
         readonly Dictionary<(int x, int y), int> map = new();
 
-        public Day20() : base(20, 2018, "")
+        public Day20() : base()
         {
             int dist = 0;
             (int x, int y) curLoc = (0, 0);

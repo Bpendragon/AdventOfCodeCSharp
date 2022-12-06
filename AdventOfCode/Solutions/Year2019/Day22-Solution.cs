@@ -13,11 +13,12 @@ using System.Numerics;
 namespace AdventOfCode.Solutions.Year2019
 {
 
+    [DayInfo(22, 2019, "")]
     class Day22 : ASolution
     {
         readonly List<string[]> Steps = new();
 
-        public Day22() : base(22, 2019, "")
+        public Day22() : base()
         {
             //UseDebugInput = true;
 

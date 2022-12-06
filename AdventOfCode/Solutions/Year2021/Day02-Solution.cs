@@ -1,6 +1,7 @@
 namespace AdventOfCode.Solutions.Year2021
 {
 
+    [DayInfo(02, 2021, "Dive!")]
     class Day02 : ASolution
     {
         readonly int x1 = 0;
@@ -9,7 +10,7 @@ namespace AdventOfCode.Solutions.Year2021
         readonly int depth2 = 0;
         readonly int aim = 0;
 
-        public Day02() : base(02, 2021, "Dive!")
+        public Day02() : base()
         {
             foreach (var c in Input.SplitByNewline())
             {

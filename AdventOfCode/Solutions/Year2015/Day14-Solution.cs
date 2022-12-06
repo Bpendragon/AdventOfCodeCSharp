@@ -4,11 +4,12 @@ using System.Linq;
 namespace AdventOfCode.Solutions.Year2015
 {
 
+    [DayInfo(14, 2015, "")]
     class Day14 : ASolution
     {
         readonly List<string> Lines;
         readonly List<Reindeer> Racers = new();
-        public Day14() : base(14, 2015, "")
+        public Day14() : base()
         {
             Lines = new List<string>(Input.SplitByNewline());
 

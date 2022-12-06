@@ -12,12 +12,13 @@ using System.Runtime.CompilerServices;
 namespace AdventOfCode.Solutions.Year2021
 {
 
+    [DayInfo(11, 2021, "Dumbo Octopus")]
     class Day11 : ASolution
     {
         readonly long part1;
         readonly long counter = 0;
         readonly Dictionary<Coordinate2D, int> octopodes = new();
-        public Day11() : base(11, 2021, "Dumbo Octopus")
+        public Day11() : base()
         {
             var lines = Input.SplitByNewline();
             for(int y = 0; y < lines.Count; y++)

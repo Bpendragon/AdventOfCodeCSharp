@@ -5,11 +5,12 @@ using System.Linq;
 namespace AdventOfCode.Solutions.Year2022
 {
 
+    [DayInfo(03, 2022, "Rucksack Reorganization")]
     class Day03 : ASolution
     {
         
         readonly List<string> asLines;
-        public Day03() : base(03, 2022, "Rucksack Reorganization")
+        public Day03() : base()
         {
             asLines = Input.SplitByNewline();
         }

@@ -3,11 +3,12 @@ using System.Collections.Generic;
 namespace AdventOfCode.Solutions.Year2016
 {
 
+    [DayInfo(25, 2016, "")]
     class Day25 : ASolution
     {
         readonly List<string> program;
         readonly int tgt;
-        public Day25() : base(25, 2016, "")
+        public Day25() : base()
         {
             program = new List<string>(Input.SplitByNewline());
             int a = int.Parse(program[1].Split()[1]);

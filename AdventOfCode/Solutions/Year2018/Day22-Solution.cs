@@ -4,6 +4,7 @@ using System.Linq;
 namespace AdventOfCode.Solutions.Year2018
 {
 
+    [DayInfo(22, 2018, "")]
     class Day22 : ASolution
     {
         private const int SystemDepth = 11739; //Inserted directly from input. 
@@ -11,7 +12,7 @@ namespace AdventOfCode.Solutions.Year2018
         readonly Dictionary<(int x, int y), int> cave = new(); //specifically value is Erosion level
         readonly Dictionary<(int x, int y), SoilType> cave2 = new();
 
-        public Day22() : base(22, 2018, "")
+        public Day22() : base()
         {
             cave[(0, 0)] = SystemDepth % 20183; //By Definition
             cave2[(0, 0)] = SoilType.Rocky; //By Definition

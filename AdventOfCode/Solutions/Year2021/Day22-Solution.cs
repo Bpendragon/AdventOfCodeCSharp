@@ -6,19 +6,21 @@ using System.Text.RegularExpressions;
 
 namespace AdventOfCode.Solutions.Year2021
 {
+    [DayInfo(22, 2021, "Reactor Reboot")]
     partial class Day22 : ASolution
     {
         readonly string part1 = string.Empty;
         readonly string part2 = string.Empty;
-        public Day22() : base(22, 2021, "Reactor Reboot")
+        public Day22() : base()
         {
             Dictionary<(int minX, int maxX, int minY, int maxY, int minZ, int maxZ), long> cubes = new();
 
             int lineNum = 1;
             foreach(var line in Input.SplitByNewline())
             {
+                Regex r = new("[^\\d-]+");
                 bool turnOn = line[..2] == "on";
-                var rawList = ListRegex().Split(line);
+                var rawList = r.Split(line);
                 var intList = rawList.Where(s => !string.IsNullOrWhiteSpace(s)).ToList();
 
                 (int minX, int maxX, int minY, int maxY, int minZ, int maxZ) = (int.Parse(intList[0]), int.Parse(intList[1]), int.Parse(intList[2]), int.Parse(intList[3]), int.Parse(intList[4]), int.Parse(intList[5]));
@@ -73,8 +75,5 @@ namespace AdventOfCode.Solutions.Year2021
 
             return part2;
         }
-
-        [GeneratedRegex("[^\\d-]+")]
-        private static partial Regex ListRegex();
     }
 }

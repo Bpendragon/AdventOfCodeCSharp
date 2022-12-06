@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Text;
 using System.Collections.Generic;
 using AdventOfCode.UserClasses;
@@ -12,12 +12,13 @@ using System.Runtime.CompilerServices;
 namespace AdventOfCode.Solutions.Year2021
 {
 
+    [DayInfo(25, 2021, "Sea Cucumber")]
     class Day25 : ASolution
     {    
         readonly int maxX;
         readonly int maxY;
         readonly Dictionary<Coordinate2D, char> Cucumbers = new();
-        public Day25() : base(25, 2021, "Sea Cucumber")
+        public Day25() : base()
         {
             var lines = Input.SplitByNewline();
             for(int y = 0; y < lines.Count; y++)

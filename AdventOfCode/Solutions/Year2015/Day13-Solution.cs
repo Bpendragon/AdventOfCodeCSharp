@@ -4,10 +4,11 @@ using System.Linq;
 namespace AdventOfCode.Solutions.Year2015
 {
 
+    [DayInfo(13, 2015, "")]
     class Day13 : ASolution
     {
         readonly Dictionary<string, Guest> GuestList = new();
-        public Day13() : base(13, 2015, "")
+        public Day13() : base()
         {
             foreach(string line in Input.SplitByNewline())
             {

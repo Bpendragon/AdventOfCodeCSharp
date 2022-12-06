@@ -12,10 +12,11 @@ using System.Runtime.CompilerServices;
 namespace AdventOfCode.Solutions.Year2022
 {
 
+    [DayInfo(02, 2022, "Rock Paper Scissors")]
     class Day02 : ASolution
     {
         readonly List<string> rounds;
-        public Day02() : base(02, 2022, "Rock Paper Scissors")
+        public Day02() : base()
         {
             rounds = Input.SplitByNewline();
         }

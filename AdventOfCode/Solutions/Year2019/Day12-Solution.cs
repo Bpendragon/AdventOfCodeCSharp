@@ -5,6 +5,7 @@ using System.Linq;
 namespace AdventOfCode.Solutions.Year2019
 {
 
+    [DayInfo(12, 2019, "")]
     class Day12 : ASolution
     {
         readonly List<Moon> Moons = new();
@@ -14,7 +15,7 @@ namespace AdventOfCode.Solutions.Year2019
               curSteps = 0;
         readonly long part1Energy = 0;
         readonly StringSplitOptions splitOps = StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries;
-        public Day12() : base(12, 2019, "")
+        public Day12() : base()
         {
             foreach(var line in Input.SplitByNewline())
             {

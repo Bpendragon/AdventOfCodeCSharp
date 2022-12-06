@@ -3,10 +3,11 @@ using System.Collections.Generic;
 namespace AdventOfCode.Solutions.Year2017
 {
 
+    [DayInfo(13, 2017, "Packet Scanners")]
     class Day13 : ASolution
     {
         readonly Dictionary<int, int> Sentries = new();
-        public Day13() : base(13, 2017, "Packet Scanners")
+        public Day13() : base()
         {
             foreach(string line in Input.SplitByNewline())
             {

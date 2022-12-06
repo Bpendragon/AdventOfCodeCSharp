@@ -5,11 +5,12 @@ using System;
 namespace AdventOfCode.Solutions.Year2015
 {
 
+    [DayInfo(03, 2015, "")]
     class Day03 : ASolution
     {
         readonly HashSet<(int x, int y)> HousesVisted1 = new();
         readonly HashSet<(int x, int y)> HousesVisted2 = new();
-        public Day03() : base(03, 2015, "")
+        public Day03() : base()
         {
 
         }

@@ -8,11 +8,12 @@ using static AdventOfCode.Solutions.Utilities;
 namespace AdventOfCode.Solutions.Year2021
 {
 
+    [DayInfo(05, 2021, "Hydrothermal Venture")]
     class Day05 : ASolution
     {
         readonly HashSet<VentLine> VentLines = new();
         readonly Dictionary<Coordinate2D, int> map = new();
-        public Day05() : base(05, 2021, "Hydrothermal Venture")
+        public Day05() : base()
         {
             var lines = Input.SplitByNewline();
 

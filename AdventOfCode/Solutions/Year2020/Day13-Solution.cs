@@ -5,11 +5,12 @@ using System.Linq;
 namespace AdventOfCode.Solutions.Year2020
 {
 
+    [DayInfo(13, 2020, "")]
     class Day13 : ASolution
     {
         readonly List<string> lines;
         readonly List<(long busID, long offSet)> busses = new();
-        public Day13() : base(13, 2020, "")
+        public Day13() : base()
         {
             lines = Input.SplitByNewline();
             string[] busProblem = lines[1].Split(',');

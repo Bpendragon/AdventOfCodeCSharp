@@ -5,12 +5,13 @@ using System.Linq;
 namespace AdventOfCode.Solutions.Year2017
 {
 
+    [DayInfo(12, 2017, "Digital Plumber")]
     class Day12 : ASolution
     {
         readonly Dictionary<int, List<int>> Pipes = new();
         readonly List<int> Visited = new();
         private int NumGroups = 0;
-        public Day12() : base(12, 2017, "Digital Plumber")
+        public Day12() : base()
         {
             foreach(string line in Input.SplitByNewline())
             {

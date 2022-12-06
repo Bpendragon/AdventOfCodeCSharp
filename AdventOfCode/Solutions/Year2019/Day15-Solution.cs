@@ -7,6 +7,7 @@ using System.Linq;
 namespace AdventOfCode.Solutions.Year2019
 {
 
+    [DayInfo(15, 2019, "")]
     class Day15 : ASolution
     {
         readonly IntCode2 bot;
@@ -14,7 +15,7 @@ namespace AdventOfCode.Solutions.Year2019
         (int x, int y) botLocation;
         (int x, int y) oxyGenLocation;
         readonly Random rand = new(); //gonna just random walk this;
-        public Day15() : base(15, 2019, "")
+        public Day15() : base()
         {
 
             bot = new IntCode2(Input.ToLongList(","));

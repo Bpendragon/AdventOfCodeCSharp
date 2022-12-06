@@ -4,12 +4,13 @@ using System.Linq;
 namespace AdventOfCode.Solutions.Year2020
 {
 
+    [DayInfo(09, 2020, "Encoding Error")]
     class Day09 : ASolution
     {
         readonly List<long> Lines;
         long problemChild = long.MinValue;
 
-        public Day09() : base(09, 2020, "Encoding Error")
+        public Day09() : base()
         {
             Lines = new List<long>(Input.ToLongList("\n"));  
         }

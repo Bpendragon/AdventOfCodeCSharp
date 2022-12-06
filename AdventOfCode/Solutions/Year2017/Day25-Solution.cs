@@ -1,12 +1,13 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace AdventOfCode.Solutions.Year2017
 {
 
+    [DayInfo(25, 2017, "")]
     class Day25 : ASolution
     {
-        public Day25() : base(25, 2017, "")
+        public Day25() : base()
         {
 
         }

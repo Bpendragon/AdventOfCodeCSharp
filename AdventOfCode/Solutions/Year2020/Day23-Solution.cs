@@ -4,6 +4,7 @@ using System.Collections.Generic;
 namespace AdventOfCode.Solutions.Year2020
 {
 
+    [DayInfo(23, 2020, "Crab Cups")]
     class Day23 : ASolution
     {
         readonly List<LLNode> Cups;
@@ -12,7 +13,7 @@ namespace AdventOfCode.Solutions.Year2020
         readonly Dictionary<long, LLNode> SmallCupsDict = new();
 
 
-        public Day23() : base(23, 2020, "Crab Cups")
+        public Day23() : base()
         {
             //UseDebugInput = true;
             Cups = new List<LLNode>(20);

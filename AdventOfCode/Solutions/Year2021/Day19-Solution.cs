@@ -5,12 +5,13 @@ using System.Linq;
 namespace AdventOfCode.Solutions.Year2021
 {
 
+    [DayInfo(19, 2021, "Beacon Scanner")]
     class Day19 : ASolution
     {
         private readonly Dictionary<int, HashSet<Coordinate3D>> readings = new();
         private readonly HashSet<Coordinate3D> beaconMap;
         private readonly Dictionary<int, Coordinate3D> scanners = new();
-        public Day19() : base(19, 2021, "Beacon Scanner")
+        public Day19() : base()
         {
             //UseDebugInput = true;
             var scannerSegs = Input.Split("\n\n");

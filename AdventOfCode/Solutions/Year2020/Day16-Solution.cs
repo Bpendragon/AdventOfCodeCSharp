@@ -5,13 +5,14 @@ using System.Linq;
 namespace AdventOfCode.Solutions.Year2020
 {
 
+    [DayInfo(16, 2020, "Ticket Translation")]
     class Day16 : ASolution
     {
         readonly List<TicketField> ValidFields = new();
         readonly List<string> tickets;
         readonly List<string> validTickets;
         readonly string myTicket;
-        public Day16() : base(16, 2020, "Ticket Translation")
+        public Day16() : base()
         {
             var firstSplit = Input.Split("\n\n");
 

@@ -7,12 +7,13 @@ using System.Text;
 namespace AdventOfCode.Solutions.Year2021
 {
 
+    [DayInfo(03, 2021, "Binary Diagnostic")]
     class Day03 : ASolution
     {
         readonly List<string> readings = new();
         readonly List<string> columns = new();
         readonly Dictionary<int, char> mostCommon = new();
-        public Day03() : base(03, 2021, "Binary Diagnostic")
+        public Day03() : base()
         {
             readings = Input.SplitByNewline();
             columns = new(Input.SplitIntoColumns());

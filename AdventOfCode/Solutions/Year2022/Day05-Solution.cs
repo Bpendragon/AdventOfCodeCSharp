@@ -6,12 +6,13 @@ using System.Text;
 namespace AdventOfCode.Solutions.Year2022
 {
 
+    [DayInfo(05, 2022, "Supply Stacks")]
     class Day05 : ASolution
     {
         List<Stack<char>> stacks = new();
         List<List<char>> p2Stacks = new();
         List<(int cnt, int src, int dest)> instructions = new();
-        public Day05() : base(05, 2022, "Supply Stacks")
+        public Day05() : base()
         {
             var parts = Input.Split("\n\n");
 

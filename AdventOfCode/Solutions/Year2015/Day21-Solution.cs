@@ -5,6 +5,7 @@ using System.Linq;
 namespace AdventOfCode.Solutions.Year2015
 {
 
+    [DayInfo(21, 2015, "")]
     class Day21 : ASolution
     {
         readonly int playerHP = 100;
@@ -15,7 +16,7 @@ namespace AdventOfCode.Solutions.Year2015
         const int bossHP = 103;
         const int bossDmg = 9;
         const int bossDef = 2;
-        public Day21() : base(21, 2015, "")
+        public Day21() : base()
         {
                     var weapons = new[]
             {

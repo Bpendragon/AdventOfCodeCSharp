@@ -6,12 +6,13 @@ using System.Linq;
 namespace AdventOfCode.Solutions.Year2020
 {
 
+    [DayInfo(21, 2020, "Allergen Assessment")]
     class Day21 : ASolution
     {
         readonly Dictionary<string, List<string>> AllergenPossibilities = new();
         readonly Dictionary<string, int> ingredientCounts = new();
         readonly StringSplitOptions splitOpts = StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries;
-        public Day21() : base(21, 2020, "Allergen Assessment")
+        public Day21() : base()
         {
             foreach(var line in Input.SplitByNewline(true))
             {

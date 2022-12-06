@@ -3,12 +3,13 @@ using System.Collections.Generic;
 namespace AdventOfCode.Solutions.Year2017
 {
 
+    [DayInfo(23, 2017, "")]
     class Day23 : ASolution
     {
         readonly Dictionary<string, long> Registers = new();
         readonly List<string> Commands;
         int multUses = 0;
-        public Day23() : base(23, 2017, "")
+        public Day23() : base()
         {
             Commands = new List<string>(Input.SplitByNewline());
             char[] alpha = "abcdefgh".ToCharArray();

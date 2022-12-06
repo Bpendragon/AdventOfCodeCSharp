@@ -6,10 +6,11 @@ using AdventOfCode.UserClasses;
 namespace AdventOfCode.Solutions.Year2016
 {
 
+    [DayInfo(23, 2016, "")]
     class Day23 : ASolution
     {
         readonly AssembunnyComputer ab;
-        public Day23() : base(23, 2016, "")
+        public Day23() : base()
         {
             ab = new AssembunnyComputer(new List<string>(Input.SplitByNewline()));
         }

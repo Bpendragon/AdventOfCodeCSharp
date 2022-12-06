@@ -5,11 +5,12 @@ using System.Linq;
 namespace AdventOfCode.Solutions.Year2015
 {
 
+    [DayInfo(15, 2015, "")]
     class Day15 : ASolution
     {
         readonly List<string> Lines;
         readonly List<Ingredient> ings;
-        public Day15() : base(15, 2015, "")
+        public Day15() : base()
         {
             Lines = new List<string>(Input.SplitByNewline());
             ings = new List<Ingredient>();

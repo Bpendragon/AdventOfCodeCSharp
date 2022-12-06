@@ -5,6 +5,7 @@ using System.Linq;
 namespace AdventOfCode.Solutions.Year2017
 {
 
+    [DayInfo(14, 2017, "Disk Defragmentation")]
     class Day14 : ASolution
     {
         private readonly KnotHash kn = new();
@@ -18,7 +19,7 @@ namespace AdventOfCode.Solutions.Year2017
             (-1, 0)
         };
 
-        public Day14() : base(14, 2017, "Disk Defragmentation")
+        public Day14() : base()
         {
             foreach (int j in Enumerable.Range(0, 128))
             {

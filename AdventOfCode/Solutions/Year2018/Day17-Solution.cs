@@ -1,6 +1,7 @@
 namespace AdventOfCode.Solutions.Year2018
 {
 
+    [DayInfo(17, 2018, "")]
     class Day17 : ASolution
     {
         public char[,] grid;
@@ -11,7 +12,7 @@ namespace AdventOfCode.Solutions.Year2018
 
         readonly int springX = 500;
         readonly int springY = 0;
-        public Day17() : base(17, 2018, "")
+        public Day17() : base()
         {
             grid = new char[x, y];
             foreach (var line in Input.SplitByNewline())

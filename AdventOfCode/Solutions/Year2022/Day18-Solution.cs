@@ -12,9 +12,10 @@ using System.Runtime.CompilerServices;
 namespace AdventOfCode.Solutions.Year2022
 {
 
+    [DayInfo(18, 2022, "")]
     class Day18 : ASolution
     {
-        public Day18() : base(18, 2022, "")
+        public Day18() : base()
         {
 
         }

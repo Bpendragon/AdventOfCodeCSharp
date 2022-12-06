@@ -12,12 +12,13 @@ using System.Runtime.CompilerServices;
 namespace AdventOfCode.Solutions.Year2019
 {
 
+    [DayInfo(20, 2019, "")]
     class Day20 : ASolution
     {
         readonly Dictionary<Coordinate2D, Tile> tiles;
         readonly Dictionary<string, Portal> portals;
 
-        public Day20() : base(20, 2019, "")
+        public Day20() : base()
         {
             tiles = new();
             portals = new();

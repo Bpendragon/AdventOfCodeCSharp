@@ -1,10 +1,11 @@
 namespace AdventOfCode.Solutions.Year2016
 {
 
+    [DayInfo(07, 2016, "")]
     class Day07 : ASolution
     {
 
-        public Day07() : base(07, 2016, "")
+        public Day07() : base()
         {
 
         }

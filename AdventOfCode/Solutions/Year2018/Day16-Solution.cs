@@ -5,6 +5,7 @@ using System.Linq;
 namespace AdventOfCode.Solutions.Year2018
 {
 
+    [DayInfo(16, 2018, "")]
     class Day16 : ASolution
     {
         readonly string part1;
@@ -14,7 +15,7 @@ namespace AdventOfCode.Solutions.Year2018
         readonly List<TestCase> testCases = new();
         static readonly StringSplitOptions splitOpts = StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries;
         readonly List<string> opNames = new(new string[]{ "addr", "addi", "mulr", "muli", "banr", "bani", "borr", "bori", "setr", "seti", "gtir", "gtri", "gtrr", "eqir", "eqri", "eqrr" });
-        public Day16() : base(16, 2018, "")
+        public Day16() : base()
         {
             string[] parts = Input.Split("\n\n\n", splitOpts);
             part1 = parts[0];

@@ -4,11 +4,12 @@ using System.Linq;
 namespace AdventOfCode.Solutions.Year2020
 {
 
+    [DayInfo(18, 2020, "Operation Order")]
     class Day18 : ASolution
     {
         readonly List<string> Expressions = new();
         readonly List<string> PartTwoExpressions = new();
-        public Day18() : base(18, 2020, "Operation Order")
+        public Day18() : base()
         {
             foreach(var l in Input.SplitByNewline())
             {

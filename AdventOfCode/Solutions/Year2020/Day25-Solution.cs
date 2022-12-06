@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Text;
 using System.Collections.Generic;
 using AdventOfCode.UserClasses;
@@ -7,9 +7,10 @@ using System.Linq;
 namespace AdventOfCode.Solutions.Year2020
 {
 
+    [DayInfo(25, 2020, "Combo Breaker")]
     class Day25 : ASolution
     {
-        public Day25() : base(25, 2020, "Combo Breaker")
+        public Day25() : base()
         {
 
         }

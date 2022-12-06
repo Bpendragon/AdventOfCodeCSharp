@@ -6,13 +6,14 @@ using static AdventOfCode.Solutions.Utilities;
 namespace AdventOfCode.Solutions.Year2017
 {
 
+    [DayInfo(19, 2017, "")]
     class Day19 : ASolution
     {
         readonly List<char> lettersSeen = new();
         int steps = 0;
         readonly List<string> Lines;
         readonly Dictionary<(int, int), char> map = new();
-        public Day19() : base(19, 2017, "")
+        public Day19() : base()
         {
             Lines = new List<string>(Input.Split('\n'));
             for(int j = 0; j < Lines.Count; j++)

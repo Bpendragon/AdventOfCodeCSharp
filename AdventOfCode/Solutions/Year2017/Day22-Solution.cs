@@ -6,13 +6,14 @@ using static AdventOfCode.Solutions.Utilities;
 namespace AdventOfCode.Solutions.Year2017
 {
 
+    [DayInfo(22, 2017, "")]
     class Day22 : ASolution
     {
         readonly Dictionary<(int x, int y), char> startMap = new();
         const string L = "L";
         const string R = "R";
         readonly (int x, int y) center;
-        public Day22() : base(22, 2017, "")
+        public Day22() : base()
         {
             var lines = Input.SplitByNewline();
             int xOffset = (lines[0].Length / 2);

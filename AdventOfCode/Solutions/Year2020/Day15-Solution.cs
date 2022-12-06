@@ -3,13 +3,14 @@ using System.Collections.Generic;
 namespace AdventOfCode.Solutions.Year2020
 {
 
+    [DayInfo(15, 2020, "Rambunctious Recitation")]
     class Day15 : ASolution
     {
         public Dictionary<int, int> LastTimesSpoken = new();
         readonly List<int> NumberString = new(); //direct from input.
         readonly List<int> NumberString2;
         readonly int[] startNums;
-        public Day15() : base(15, 2020, "Rambunctious Recitation")
+        public Day15() : base()
         {
             startNums = Input.ToIntList(",").ToArray();
             NumberString.AddRange(startNums);

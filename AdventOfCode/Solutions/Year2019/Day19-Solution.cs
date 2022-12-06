@@ -13,10 +13,11 @@ using System.Runtime.CompilerServices;
 namespace AdventOfCode.Solutions.Year2019
 {
 
+    [DayInfo(19, 2019, "")]
     class Day19 : ASolution
     {
         readonly IntCode2 bot;
-        public Day19() : base(19, 2019, "")
+        public Day19() : base()
         {
             bot = new IntCode2(Input.ToLongList(","));
             bot.ClearInputs();

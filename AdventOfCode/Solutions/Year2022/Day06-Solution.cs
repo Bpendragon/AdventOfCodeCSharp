@@ -13,10 +13,11 @@ using System.Drawing.Drawing2D;
 namespace AdventOfCode.Solutions.Year2022
 {
 
+    [DayInfo(06, 2022, "Tuning Trouble")]
     class Day06 : ASolution
     {
 
-        public Day06() : base(06, 2022, "Tuning Trouble")
+        public Day06() : base()
         {
 
         }
