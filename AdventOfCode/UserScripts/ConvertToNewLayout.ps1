@@ -1,4 +1,4 @@
-$regexString = 'base\((?<info>\s*\d{2},\s*\d{4},\s*".*")\)'
+$regexString = "base\((?<info>\s*\d{2},\s*\d{4},\s*"".*"")\)\r"
 $RegexMatcher = [Regex]::new($regexString)
 
 foreach($year in Get-ChildItem $(Join-Path $PSScriptRoot ".." "Solutions") -Directory) {
