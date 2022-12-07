@@ -16,10 +16,10 @@ using System.Runtime.CompilerServices;
 
 namespace AdventOfCode.Solutions.Year<YEAR>
 {
-
+    [DayInfo(<DAY>, <YEAR>, `"`")]
     class Day<DAY> : ASolution
     {
-        public Day<DAY>() : base(<DAY>, <YEAR>, `"`")
+        public Day<DAY>() : base()
         {
 
         }
