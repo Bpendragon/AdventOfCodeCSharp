@@ -11,10 +11,9 @@ namespace AdventOfCode.Solutions
 
     class SolutionCollector : IEnumerable<ASolution>
     {
+        readonly IEnumerable<ASolution> Solutions;
 
-        IEnumerable<ASolution> Solutions;
-
-        public SolutionCollector(int year, int[] days) => Solutions = LoadSolutions(year, days).ToArray();
+        public SolutionCollector(int year, int[] days) => Solutions = LoadSolutions(year, days);
 
         public ASolution GetSolution(int day)
         {
@@ -44,7 +43,7 @@ namespace AdventOfCode.Solutions
             {
                 days = Enumerable.Range(1, 25).ToArray();
             }
-            Stopwatch clock = new Stopwatch();
+            Stopwatch clock = new();
             return Assembly.GetExecutingAssembly()
                 .GetTypes()
                 .Where(type => type.BaseType == typeof(ASolution))
