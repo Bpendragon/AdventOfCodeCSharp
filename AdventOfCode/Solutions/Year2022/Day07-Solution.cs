@@ -11,7 +11,6 @@ namespace AdventOfCode.Solutions.Year2022
         readonly List<string> cout;
         readonly Dictionary<string, Directory> Directories = new();
         
-        
         public Day07() : base()
         {
             cout = Input.SplitByNewline();
