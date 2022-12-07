@@ -12,13 +12,14 @@ using System.Runtime.CompilerServices;
 namespace AdventOfCode.Solutions.Year2019
 {
 
+    [DayInfo(17, 2019, "")]
     class Day17 : ASolution
     {
         readonly IntCode2 bot;
         readonly Dictionary<(int x, int y), char> map = new();
         (int x, int y) botLocation;
 
-        public Day17() : base(17, 2019, "")
+        public Day17() : base()
         {
             bot = new IntCode2(Input.ToLongList(","));
             bot.ClearInputs();

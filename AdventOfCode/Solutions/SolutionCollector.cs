@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Linq.Expressions;
+using System.Reflection;
 
 namespace AdventOfCode.Solutions
 {
@@ -11,41 +13,67 @@ namespace AdventOfCode.Solutions
     {
         readonly IEnumerable<ASolution> Solutions;
 
-        public SolutionCollector(int year, int[] days) => Solutions = LoadSolutions(year, days).ToArray();
+        public SolutionCollector(int year, int[] days) => Solutions = LoadSolutions(year, days);
 
-        public ASolution GetSolution(int day) {
-            try {
+        public ASolution GetSolution(int day)
+        {
+            try
+            {
                 return Solutions.Single(s => s.Day == day);
             }
-            catch( InvalidOperationException ) {
+            catch (InvalidOperationException)
+            {
                 return null;
             }
         }
 
-        public IEnumerator<ASolution> GetEnumerator() {
+        public IEnumerator<ASolution> GetEnumerator()
+        {
             return Solutions.GetEnumerator();
         }
 
-        IEnumerator IEnumerable.GetEnumerator() {
+        IEnumerator IEnumerable.GetEnumerator()
+        {
             return GetEnumerator();
         }
 
-        static IEnumerable<ASolution> LoadSolutions(int year, int[] days) {
-            if( days.Sum() == 0 ) {
+        IEnumerable<ASolution> LoadSolutions(int year, int[] days)
+        {
+            if (days.Sum() == 0)
+            {
                 days = Enumerable.Range(1, 25).ToArray();
             }
-
-            foreach( int day in days ) {
-                Type solution = Type.GetType($"AdventOfCode.Solutions.Year{year}.Day{day:D2}");
-                if( solution != null ) {
-                    Stopwatch sw = new();
-                    sw.Start();
-                    ASolution val = (ASolution)Activator.CreateInstance(solution);
-                    sw.Stop();
-                    val.ContructionTime = sw.ElapsedTicks;
-                    yield return val;
-                }
-            }
+            Stopwatch clock = new();
+            return Assembly.GetExecutingAssembly()
+                .GetTypes()
+                .Where(type => type.BaseType == typeof(ASolution))
+                .Select(type => (type, info: type.GetCustomAttribute<DayInfoAttribute>()))
+                .Where(solution => {
+                    if (solution.info is null) return false;
+                    return solution.info.Year == year && days.Contains(solution.info.Day);
+                })
+                .OrderBy(solution => solution.info.Year)
+                .ThenBy(solution => solution.info.Day)
+                .ThenBy(solution => solution.type.Name)
+                .Select(solution => {
+                    clock.Reset();
+                    var ctor = Expression.Lambda<Func<ASolution>>(Expression.New(solution.type.GetConstructor(Type.EmptyTypes)))
+                        .Compile();
+                    try
+                    {
+                        clock.Start();
+                        var result = ctor();
+                        clock.Stop();
+                        result.ContructionTime = clock.ElapsedTicks;
+                        return result;
+                    }
+                    catch (Exception ex)
+                    {
+                        Trace.TraceError($"Caught Exception:\r\n{ex}");
+                        throw;
+                    }
+                })
+                .ToArray();
         }
     }
 }

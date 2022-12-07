@@ -13,10 +13,11 @@ using System.Runtime.CompilerServices;
 namespace AdventOfCode.Solutions.Year2019
 {
 
+    [DayInfo(01, 2019, "The Tyranny of the Rocket Equation")]
     class Day01 : ASolution
     {
         readonly List<int> modules;
-        public Day01() : base(01, 2019, "The Tyranny of the Rocket Equation")
+        public Day01() : base()
         {
             modules = new(Input.ToIntList("\n"));
         }

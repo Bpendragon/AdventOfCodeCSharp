@@ -5,12 +5,13 @@ using System.Linq;
 namespace AdventOfCode.Solutions.Year2016
 {
 
+    [DayInfo(24, 2016, "")]
     class Day24 : ASolution
     {
         readonly List<List<bool>> maze;
         readonly Dictionary<string, Wire> Wires = new();
 
-        public Day24() : base(24, 2016, "")
+        public Day24() : base()
         {
             maze = new List<List<bool>>();
             var lines = Input.SplitByNewline();

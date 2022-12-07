@@ -3,6 +3,7 @@ using System;
 namespace AdventOfCode.Solutions.Year2015
 {
 
+    [DayInfo(22, 2015, "")]
     class Day22 : ASolution
     {
         //From Input
@@ -31,7 +32,7 @@ namespace AdventOfCode.Solutions.Year2015
         readonly Random r = new(); //I've got a fast computer, let's just simulate a few hundred thousand runs and be done with it.
 
 
-        public Day22() : base(22, 2015, "")
+        public Day22() : base()
         {
 
         }

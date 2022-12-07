@@ -8,10 +8,11 @@ using Newtonsoft.Json.Linq;
 namespace AdventOfCode.Solutions.Year2015
 {
 
+    [DayInfo(12, 2015, "")]
     class Day12 : ASolution
     {
         readonly dynamic root;
-        public Day12() : base(12, 2015, "")
+        public Day12() : base()
         {
             root = JsonConvert.DeserializeObject(Input);
         }

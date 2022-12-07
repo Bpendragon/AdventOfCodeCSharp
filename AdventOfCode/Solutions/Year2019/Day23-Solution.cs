@@ -12,6 +12,7 @@ using System.Runtime.CompilerServices;
 namespace AdventOfCode.Solutions.Year2019
 {
 
+    [DayInfo(23, 2019, "")]
     class Day23 : ASolution
     {
         readonly List<long> program;
@@ -23,7 +24,7 @@ namespace AdventOfCode.Solutions.Year2019
         readonly long firstDoubleSend;
         readonly long prevX;
         readonly long prevY;
-        public Day23() : base(23, 2019, "")
+        public Day23() : base()
         {
             program = Input.ToLongList(",");
 

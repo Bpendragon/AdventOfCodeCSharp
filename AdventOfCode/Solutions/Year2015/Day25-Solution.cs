@@ -1,6 +1,7 @@
-﻿namespace AdventOfCode.Solutions.Year2015
+namespace AdventOfCode.Solutions.Year2015
 {
 
+    [DayInfo(25, 2015, "")]
     class Day25 : ASolution
     {
         const int targetRow = 2981;
@@ -9,7 +10,7 @@
         const ulong multiplier = 252533;
         const ulong divisor = 33554393;
 
-        public Day25() : base(25, 2015, "")
+        public Day25() : base()
         {
 
         }

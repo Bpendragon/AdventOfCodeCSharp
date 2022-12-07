@@ -8,21 +8,23 @@ using System.Threading;
 using System.Security;
 using static AdventOfCode.Solutions.Utilities;
 using System.Runtime.CompilerServices;
+using System.Drawing.Drawing2D;
 
 namespace AdventOfCode.Solutions.Year2022
 {
 
+    [DayInfo(06, 2022, "Tuning Trouble")]
     class Day06 : ASolution
     {
 
-        public Day06() : base(06, 2022, "Tuning Trouble")
+        public Day06() : base()
         {
 
         }
 
         protected override object SolvePartOne()
         {
-            for(int i = 0; i < Input.Length; i++)
+            for (int i = 0; i < Input.Length; i++)
             {
                 if (Input.Skip(i).Take(4).Distinct().Count() == 4) return i + 4;
             }

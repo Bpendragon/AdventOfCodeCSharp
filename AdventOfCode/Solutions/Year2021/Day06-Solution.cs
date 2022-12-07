@@ -3,11 +3,12 @@ using System.Linq;
 namespace AdventOfCode.Solutions.Year2021
 {
 
+    [DayInfo(06, 2021, "Lanternfish")]
     class Day06 : ASolution
     {
         readonly long p1Answer;
         readonly long p2Answer;
-        public Day06() : base(06, 2021, "Lanternfish")
+        public Day06() : base()
         {
             var fishies = Input.ToIntList();
             long[] fishCounts = new long[9];

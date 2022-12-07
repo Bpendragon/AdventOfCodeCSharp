@@ -5,11 +5,12 @@ using System.Runtime.CompilerServices;
 namespace AdventOfCode.Solutions.Year2020
 {
 
+    [DayInfo(22, 2020, "Crab Combat")]
     class Day22 : ASolution
     {
         readonly Queue<long> playerCards = new();
         readonly Queue<long> crabCards = new();
-        public Day22() : base(22, 2020, "Crab Combat")
+        public Day22() : base()
         {
             
         }

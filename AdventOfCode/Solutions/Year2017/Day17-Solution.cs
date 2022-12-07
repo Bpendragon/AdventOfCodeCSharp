@@ -3,11 +3,12 @@ using System.Collections.Generic;
 namespace AdventOfCode.Solutions.Year2017
 {
 
+    [DayInfo(17, 2017, "")]
     class Day17 : ASolution
     {
         //from input
         const int Steps = 345;
-        public Day17() : base(17, 2017, "")
+        public Day17() : base()
         {
 
         }

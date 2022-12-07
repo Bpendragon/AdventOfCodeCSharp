@@ -4,6 +4,7 @@ using System.Linq;
 namespace AdventOfCode.Solutions.Year2021
 {
 
+    [DayInfo(14, 2021, "Extended Polymerization")]
     class Day14 : ASolution
     {
         readonly Dictionary<string, char> subRules = new();
@@ -11,7 +12,7 @@ namespace AdventOfCode.Solutions.Year2021
         readonly Dictionary<char, long> counts1 = new();
         Dictionary<string, long> counts2 = new();
         readonly string originalPolymer;
-        public Day14() : base(14, 2021, "Extended Polymerization")
+        public Day14() : base()
         {
             var tmp = Input.Split("\n\n");
             originalPolymer = tmp[0];

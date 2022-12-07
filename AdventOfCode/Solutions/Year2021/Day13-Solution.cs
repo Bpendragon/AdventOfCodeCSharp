@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -7,12 +7,13 @@ using System.Text;
 namespace AdventOfCode.Solutions.Year2021
 {
 
+    [DayInfo(13, 2021, "Transparent Origami")]
     class Day13 : ASolution
     {
         readonly Dictionary<Coordinate2D, string> paper = new();
         readonly List<string> folds = new();
         readonly string part1;
-        public Day13() : base(13, 2021, "Transparent Origami")
+        public Day13() : base()
         {
             var halves = Input.Split("\n\n");
             foreach (var p in halves[0].SplitByNewline())

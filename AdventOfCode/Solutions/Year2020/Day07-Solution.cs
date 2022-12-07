@@ -4,12 +4,13 @@ using System.Linq;
 
 namespace AdventOfCode.Solutions.Year2020
 {
+    [DayInfo(07, 2020, "Handy Haversacks")]
     class Day07 : ASolution
     {
         readonly List<string> lines;
         readonly Dictionary<string, Bag> Bags;
 
-        public Day07() : base(07, 2020, "Handy Haversacks")
+        public Day07() : base()
         {
             lines = new List<string>(Input.Replace(".", "").SplitByNewline());
             Bags = new Dictionary<string, Bag>();

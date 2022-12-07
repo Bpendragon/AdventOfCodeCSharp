@@ -4,10 +4,11 @@ using System.Linq;
 namespace AdventOfCode.Solutions.Year2020
 {
 
+    [DayInfo(02, 2020, "Password Philosophy")]
     class Day02 : ASolution
     {
         readonly List<Password> passwords;
-        public Day02() : base(02, 2020, "Password Philosophy")
+        public Day02() : base()
         {
             passwords = new List<Password>();
             foreach (var l in Input.SplitByNewline()) passwords.Add(new Password(l));

@@ -7,11 +7,12 @@ using System.Linq;
 namespace AdventOfCode.Solutions.Year2019
 {
 
+    [DayInfo(16, 2019, "")]
     class Day16 : ASolution
     {
         readonly List<long> inputNums;
         readonly long[] basePattern = new long[] { 1, 0, -1, 0 };
-        public Day16() : base(16, 2019, "")
+        public Day16() : base()
         {
             inputNums = new List<long>(Input.ToLongList());
         }

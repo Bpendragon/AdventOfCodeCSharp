@@ -7,11 +7,12 @@ using System.Text;
 namespace AdventOfCode.Solutions.Year2021
 {
 
+    [DayInfo(16, 2021, "Packet Decoder")]
     class Day16 : ASolution
     {
         readonly string binaryString;
         readonly Packet Outer;
-        public Day16() : base(16, 2021, "Packet Decoder")
+        public Day16() : base()
         {
             //UseDebugInput = true;
             binaryString = string.Join(string.Empty, Input.Select(c => Convert.ToString(Convert.ToInt32(c.ToString(), 16), 2).PadLeft(4, '0')));

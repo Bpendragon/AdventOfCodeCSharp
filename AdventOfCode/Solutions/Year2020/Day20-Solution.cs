@@ -6,11 +6,12 @@ using System.Text.RegularExpressions;
 namespace AdventOfCode.Solutions.Year2020
 {
 
+    [DayInfo(20, 2020, "Jurassic Jigsaw")]
     class Day20 : ASolution
     {
         readonly Tile[][] tiles;
         readonly Tile BigTile;
-        public Day20() : base(20, 2020, "Jurassic Jigsaw")
+        public Day20() : base()
         {
             tiles = AssemblePuzzle(Input);
             BigTile = MergeTiles(tiles);

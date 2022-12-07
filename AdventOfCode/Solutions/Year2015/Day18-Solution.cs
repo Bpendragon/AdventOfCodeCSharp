@@ -6,6 +6,7 @@ using System.Diagnostics;
 
 namespace AdventOfCode.Solutions.Year2015
 {
+    [DayInfo(02, 2015, "")]
     internal class Day18 : ASolution
     {
         private readonly List<string> Lines;
@@ -23,7 +24,7 @@ namespace AdventOfCode.Solutions.Year2015
             (1,-1)
         };
 
-        public Day18() : base(18, 2015, "")
+        public Day18() : base()
         {
             Lines = new List<string>(Input.SplitByNewline());
 

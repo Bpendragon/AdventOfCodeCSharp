@@ -7,13 +7,14 @@ using AdventOfCode.UserClasses.DataStructures;
 namespace AdventOfCode.Solutions.Year2018
 {
 
+    [DayInfo(21, 2018, "")]
     class Day21 : ASolution
     {
         readonly Dictionary<int, int> Registers = new();
         readonly List<(string i, int a, int b, int c)> instructions = new();
         readonly int boundRegister;
 
-        public Day21() : base(21, 2018, "")
+        public Day21() : base()
         {
             for (int i = 0; i <= 5; i++)
             {

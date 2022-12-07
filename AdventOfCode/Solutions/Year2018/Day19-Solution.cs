@@ -5,12 +5,13 @@ using System.Linq;
 namespace AdventOfCode.Solutions.Year2018
 {
 
+    [DayInfo(19, 2018, "")]
     class Day19 : ASolution
     {
         readonly Dictionary<int, int> Registers = new();
         readonly List<(string i, int a, int b, int c)> instructions = new();
         readonly int boundRegister;
-        public Day19() : base(19, 2018, "")
+        public Day19() : base()
         {
             for(int i = 0; i <= 5; i++)
             {

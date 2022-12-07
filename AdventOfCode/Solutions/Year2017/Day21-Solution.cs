@@ -6,10 +6,11 @@ using System.Linq;
 namespace AdventOfCode.Solutions.Year2017
 {
 
+    [DayInfo(21, 2017, "")]
     class Day21 : ASolution
     {
         readonly Dictionary<string, string> rulesMap = new();
-        public Day21() : base(21, 2017, "")
+        public Day21() : base()
         {
             foreach (var line in Input.SplitByNewline())
             {

@@ -4,11 +4,12 @@ using System.Linq;
 namespace AdventOfCode.Solutions.Year2020
 {
 
+    [DayInfo(17, 2020, "Conway Cubes")]
     class Day17 : ASolution
     {
         Dictionary<(int x, int y, int z), bool> cyoob = new();
         Dictionary<(int x, int y, int z, int w), bool> cyoob4D = new();
-        public Day17() : base(17, 2020, "Conway Cubes")
+        public Day17() : base()
         {
             var lines = Input.SplitByNewline();
             for (int x = 0; x < lines.Count; x++)

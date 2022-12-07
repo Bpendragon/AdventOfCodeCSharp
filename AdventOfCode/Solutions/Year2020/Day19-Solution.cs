@@ -7,6 +7,7 @@ using System.Text.RegularExpressions;
 namespace AdventOfCode.Solutions.Year2020
 {
 
+    [DayInfo(19, 2020, "Monster Messages")]
     class Day19 : ASolution
     {
         readonly Dictionary<string, string> rules = new();
@@ -14,7 +15,7 @@ namespace AdventOfCode.Solutions.Year2020
         readonly List<string> messages = new();
         Regex reg;
 
-        public Day19() : base(19, 2020, "Monster Messages")
+        public Day19() : base()
         {
             //UseDebugInput = true;
             string[] halves = Input.Split("\n\n", StringSplitOptions.TrimEntries);

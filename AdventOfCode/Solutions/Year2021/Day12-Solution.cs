@@ -12,6 +12,7 @@ using System.Runtime.CompilerServices;
 namespace AdventOfCode.Solutions.Year2021
 {
 
+    [DayInfo(12, 2021, "Passage Pathing")]
     class Day12 : ASolution
     {
         readonly Dictionary<string, Node> nodes = new();
@@ -21,7 +22,7 @@ namespace AdventOfCode.Solutions.Year2021
         readonly HashSet<string> visited = new();
         bool smolHasBeenVisitedTwice = false;
         string smolCurrentlyVistedTwice = string.Empty;
-        public Day12() : base(12, 2021, "Passage Pathing")
+        public Day12() : base()
         {
             //UseDebugInput = true;
             foreach(var l in Input.SplitByNewline())

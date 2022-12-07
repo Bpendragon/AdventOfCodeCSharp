@@ -5,10 +5,11 @@ using System.Linq;
 namespace AdventOfCode.Solutions.Year2021
 {
 
+    [DayInfo(01, 2021, "Sonar Sweep")]
     class Day01 : ASolution
     {
         readonly List<int> depths;
-        public Day01() : base(01, 2021, "Sonar Sweep")
+        public Day01() : base()
         {
             depths = Input.SplitByNewline(false, true).Select(int.Parse).ToList();
         }

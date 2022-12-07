@@ -8,10 +8,11 @@ using System.Drawing;
 namespace AdventOfCode.Solutions.Year2019
 {
 
+    [DayInfo(13, 2019, "")]
     class Day13 : ASolution
     {
         IntCode2 cab;
-        public Day13() : base(13, 2019, "")
+        public Day13() : base()
         {
             cab = new IntCode2(Input.ToLongList(","));
         }

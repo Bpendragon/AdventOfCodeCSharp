@@ -4,11 +4,12 @@ using System.Linq;
 namespace AdventOfCode.Solutions.Year2020
 {
 
+    [DayInfo(01, 2020, "Report Repair")]
     class Day01 : ASolution
     {
         readonly List<int> costs;
 
-        public Day01() : base(01, 2020, "Report Repair")
+        public Day01() : base()
         {
             costs = new List<int>(Utilities.ToIntList(Input, "\n"));
             costs.Sort();

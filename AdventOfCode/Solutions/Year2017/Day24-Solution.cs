@@ -4,12 +4,13 @@ using System.Linq;
 namespace AdventOfCode.Solutions.Year2017
 {
 
+    [DayInfo(24, 2017, "")]
     class Day24 : ASolution
     {
         readonly List<int> BridgeScores = new();
         readonly List<(int, int)> BridgeLengths = new();
         readonly List<BridgeComponent> pieces = new();
-        public Day24() : base(24, 2017, "")
+        public Day24() : base()
         {
             int i = 0;
             foreach(var line in Input.SplitByNewline())

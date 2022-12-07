@@ -4,6 +4,7 @@ using System.Collections.Generic;
 namespace AdventOfCode.Solutions.Year2015
 {
 
+    [DayInfo(23, 2015, "")]
     class Day23 : ASolution
     {
         readonly List<string> Program;
@@ -13,7 +14,7 @@ namespace AdventOfCode.Solutions.Year2015
             {"b", 0 }
         };
 
-        public Day23() : base(23, 2015, "")
+        public Day23() : base()
         {
             Program = new List<string>(Input.SplitByNewline());
         }

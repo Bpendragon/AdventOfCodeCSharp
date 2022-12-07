@@ -7,10 +7,11 @@ using static AdventOfCode.Solutions.Utilities;
 namespace AdventOfCode.Solutions.Year2019
 {
 
+    [DayInfo(21, 2019, "")]
     class Day21 : ASolution
     {
         readonly IntCode2 bot;
-        public Day21() : base(21, 2019, "")
+        public Day21() : base()
         {
             bot = new IntCode2(Input.ToLongList(","));
         }

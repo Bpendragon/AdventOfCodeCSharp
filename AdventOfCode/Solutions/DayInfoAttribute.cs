@@ -9,7 +9,7 @@ namespace AdventOfCode.Solutions
         public int Year { get; }
         public string Title { get; }
 
-        public DayInfoAttribute(int year, int day, string title)
+        public DayInfoAttribute(int day, int year, string title)
         {
             Day = day;
             Year = year;

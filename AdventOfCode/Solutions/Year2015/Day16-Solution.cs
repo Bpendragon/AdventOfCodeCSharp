@@ -4,12 +4,13 @@ using System.Linq;
 namespace AdventOfCode.Solutions.Year2015
 {
 
+    [DayInfo(16, 2015, "")]
     class Day16 : ASolution
     {
         readonly List<string> Lines;
         readonly List<AuntSue> Sues = new();
         readonly AuntSue tgtSue = new(-1);
-        public Day16() : base(16, 2015, "")
+        public Day16() : base()
         {
             tgtSue.Attributes = new Dictionary<string, int>()
             {

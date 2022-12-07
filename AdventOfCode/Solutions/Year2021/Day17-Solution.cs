@@ -4,12 +4,13 @@ using System.Linq;
 namespace AdventOfCode.Solutions.Year2021
 {
 
+    [DayInfo(17, 2021, "Trick Shot")]
     class Day17 : ASolution
     {
         //Direct from input
         readonly int minX = 137, maxX = 171, minY = -98, maxY = -73;
         readonly int smallestPossibleXVelo;
-        public Day17() : base(17, 2021, "Trick Shot")
+        public Day17() : base()
         {
             smallestPossibleXVelo = (int)Math.Ceiling(-1 + Math.Sqrt(1 + (8.0 * minX)) / 2);
         }

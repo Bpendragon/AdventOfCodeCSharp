@@ -12,6 +12,7 @@ using System.Runtime.CompilerServices;
 namespace AdventOfCode.Solutions.Year2019
 {
 
+    [DayInfo(18, 2019, "")]
     class Day18 : ASolution
     {
         readonly Dictionary<Coordinate2D, Tile> map;
@@ -24,7 +25,7 @@ namespace AdventOfCode.Solutions.Year2019
         readonly Dictionary<char, Node> graph2;
         readonly HashSet<char> allKeys;
         readonly string allKeysString;
-        public Day18() : base(18, 2019, "")
+        public Day18() : base()
         {
             map = new();
             nodes = new();

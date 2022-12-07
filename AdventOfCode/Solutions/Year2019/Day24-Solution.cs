@@ -12,6 +12,7 @@ using System.Runtime.CompilerServices;
 namespace AdventOfCode.Solutions.Year2019
 {
 
+    [DayInfo(24, 2019, "")]
     class Day24 : ASolution
     {
         readonly Dictionary<(int x, int y), int> startingMap = new();
@@ -19,7 +20,7 @@ namespace AdventOfCode.Solutions.Year2019
         private static readonly List<Cell> AllCells = new();
         readonly HashSet<string> seenMapsPart1 = new();
         readonly string seedString;
-        public Day24() : base(24, 2019, "")
+        public Day24() : base()
         {
             var rows = Input.SplitByNewline();
             for (int y = 0; y < 5; y++)

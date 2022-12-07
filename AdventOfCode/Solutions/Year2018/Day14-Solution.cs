@@ -3,13 +3,14 @@ using System.Collections.Generic;
 namespace AdventOfCode.Solutions.Year2018
 {
 
+    [DayInfo(14, 2018, "")]
     class Day14 : ASolution
     {
         readonly List<int> recipes;
         int elf1;
         int elf2;
         readonly int day1tgt;
-        public Day14() : base(14, 2018, "")
+        public Day14() : base()
         {
             day1tgt = int.Parse(Input);
             recipes = new List<int>(new int[] { 3, 7 });

@@ -5,12 +5,13 @@ using System.Linq;
 namespace AdventOfCode.Solutions.Year2021
 {
 
+    [DayInfo(04, 2021, "Giant Squid")]
     class Day04 : ASolution
     {
         readonly List<int> calls;
         readonly HashSet<Board> Boards = new();
 
-        public Day04() : base(04, 2021, "Giant Squid")
+        public Day04() : base()
         {
             List<string> tokens = new(Input.Split("\n\n"));
             calls = tokens[0].ToIntList(",");

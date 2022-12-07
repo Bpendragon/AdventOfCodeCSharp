@@ -4,6 +4,7 @@ using System.Linq;
 namespace AdventOfCode.Solutions.Year2017
 {
 
+    [DayInfo(16, 2017, "")]
     class Day16 : ASolution
     {
         readonly List<string> danceMoves = new();
@@ -12,7 +13,7 @@ namespace AdventOfCode.Solutions.Year2017
         readonly List<string> completedDances = new();
         const string original = "abcdefghijklmnop";
 
-        public Day16() : base(16, 2017, "")
+        public Day16() : base()
         {
             danceMoves.AddRange(Input.Split(','));
             completedDances.Add(original);

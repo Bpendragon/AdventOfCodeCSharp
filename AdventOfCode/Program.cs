@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Net.Http;
+using System.Net.Http.Headers;
+
 using AdventOfCode.Solutions;
 
 namespace AdventOfCode
@@ -7,13 +10,20 @@ namespace AdventOfCode
 
     class Program
     {
-        public static Config Config = Config.Get("config.json");
-        static readonly SolutionCollector Solutions = new(Config.Year, Config.Days);
-        
+        internal static Config Config = Config.Get("config.json");
+        internal static readonly HttpClient Http = new();
 
-        static void Main(string[] _) {
+        static void Main(string[] args) {
+            var productVal = new ProductInfoHeaderValue(".NET", Environment.Version.ToString());
+            var commentVal = new ProductInfoHeaderValue("(+Bpen's Advent of Code Template; https://github.com/Bpendragon/AdventOfCodeBase; github@bpendragon.horse)");
+            Http.DefaultRequestHeaders.UserAgent.Add(productVal);
+            Http.DefaultRequestHeaders.UserAgent.Add(commentVal);
+            Http.DefaultRequestHeaders.Add("Cookie", Config.Cookie);
+            Http.DefaultRequestHeaders.Add("From", "github@bpendragon.horse");
+
             long total = 0;
-            foreach( ASolution solution in Solutions ) {
+            foreach (ASolution solution in new SolutionCollector(Config.Year, Config.Days))
+            {
                 solution.Solve();
                 total += solution.ContructionTime + solution.Part1Ticks + solution.Part2Ticks;
             }

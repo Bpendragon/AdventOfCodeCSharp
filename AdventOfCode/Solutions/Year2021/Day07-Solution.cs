@@ -5,10 +5,11 @@ using System.Linq;
 namespace AdventOfCode.Solutions.Year2021
 {
 
+    [DayInfo(07, 2021, "The Treachery of Whales")]
     class Day07 : ASolution
     {
         readonly List<int> crabs;
-        public Day07() : base(07, 2021, "The Treachery of Whales")
+        public Day07() : base()
         {
             crabs = Input.ToIntList(",");
             crabs.Sort();

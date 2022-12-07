@@ -6,6 +6,7 @@ using static AdventOfCode.Solutions.Utilities;
 namespace AdventOfCode.Solutions.Year2021
 {
 
+    [DayInfo(24, 2021, "Arithmetic Logic Unit")]
     class Day24 : ASolution
     {
         readonly List<(string operand, string target, string other)> originalSteps = new();
@@ -15,7 +16,7 @@ namespace AdventOfCode.Solutions.Year2021
         readonly List<long> MaxZAtStep = new();
         readonly Dictionary<(int groupNum, long prevZ), List<string>> cacheDic = new();
         readonly List<string> ValidModelNumbers;
-        public Day24() : base(24, 2021, "Arithmetic Logic Unit")
+        public Day24() : base()
         {
             var lines = Input.SplitByNewline();
 

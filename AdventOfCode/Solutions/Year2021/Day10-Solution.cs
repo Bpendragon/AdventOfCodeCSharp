@@ -4,12 +4,13 @@ using System.Linq;
 namespace AdventOfCode.Solutions.Year2021
 {
 
+    [DayInfo(10, 2021, "Syntax Scoring")]
     class Day10 : ASolution
     {
         readonly List<string> lines = new();
         readonly long part1 = 0;
         readonly SortedSet<long> part2 = new();
-        public Day10() : base(10, 2021, "Syntax Scoring")
+        public Day10() : base()
         {
             lines = Input.SplitByNewline();
 

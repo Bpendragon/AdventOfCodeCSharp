@@ -6,13 +6,14 @@ using System.Text;
 namespace AdventOfCode.Solutions.Year2021
 {
 
+    [DayInfo(20, 2021, "Trench Map")]
     class Day20 : ASolution
     {
         private readonly string enhancementString;
         private readonly Dictionary<Coordinate2D, string> initialImage;
         private readonly int part1;
 
-        public Day20() : base(20, 2021, "Trench Map")
+        public Day20() : base()
         {
             //UseDebugInput = true;
             initialImage = new();

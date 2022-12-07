@@ -6,10 +6,11 @@ using System.Text;
 namespace AdventOfCode.Solutions.Year2021
 {
 
+    [DayInfo(08, 2021, "Seven Segment Search")]
     class Day08 : ASolution
     {
         readonly List<string> entries;
-        public Day08() : base(08, 2021, "Seven Segment Search")
+        public Day08() : base()
         {
             entries = Input.SplitByNewline();
         }

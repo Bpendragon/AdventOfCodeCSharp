@@ -5,10 +5,11 @@ using static AdventOfCode.Solutions.Utilities;
 namespace AdventOfCode.Solutions.Year2020
 {
 
+    [DayInfo(12, 2020, "Rain Risk")]
     class Day12 : ASolution
     {
         readonly List<string> Lines;
-        public Day12() : base(12, 2020, "Rain Risk")
+        public Day12() : base()
         {
             Lines = new List<string>(Input.SplitByNewline());
 

@@ -3,11 +3,12 @@ using AdventOfCode.UserClasses;
 namespace AdventOfCode.Solutions.Year2019
 {
 
+    [DayInfo(02, 2019, "")]
     class Day02 : ASolution
     {
         private readonly IntCode2 pc;
 
-        public Day02() : base(02, 2019, "")
+        public Day02() : base()
         {
             pc = new IntCode2(Input.ToLongList(","));
         }

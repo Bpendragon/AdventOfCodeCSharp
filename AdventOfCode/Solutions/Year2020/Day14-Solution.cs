@@ -6,9 +6,10 @@ using System.Linq;
 namespace AdventOfCode.Solutions.Year2020
 {
 
+    [DayInfo(14, 2020, "Docking Data")]
     class Day14 : ASolution
     {
-         public Day14() : base(14, 2020, "Docking Data")
+         public Day14() : base()
         {
 
         }

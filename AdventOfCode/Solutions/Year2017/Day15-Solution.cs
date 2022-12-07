@@ -3,6 +3,7 @@ using System.Linq;
 namespace AdventOfCode.Solutions.Year2017
 {
 
+    [DayInfo(15, 2017, "Dueling Generators")]
     class Day15 : ASolution
     {
         //From Input
@@ -12,7 +13,7 @@ namespace AdventOfCode.Solutions.Year2017
         readonly ulong botB2 = 191;
         const ulong mask = 0b1111111111111111;
 
-        public Day15() : base(15, 2017, "Dueling Generators")
+        public Day15() : base()
         {
 
         }

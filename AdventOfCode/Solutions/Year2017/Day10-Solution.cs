@@ -5,9 +5,10 @@ using System.Linq;
 namespace AdventOfCode.Solutions.Year2017
 {
 
+    [DayInfo(10, 2017, "Knot Hash")]
     class Day10 : ASolution
     {
-        public Day10() : base(10, 2017, "Knot Hash")
+        public Day10() : base()
         {
 
         }

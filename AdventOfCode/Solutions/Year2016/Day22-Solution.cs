@@ -7,11 +7,12 @@ using System.Diagnostics;
 namespace AdventOfCode.Solutions.Year2016
 {
 
+    [DayInfo(22, 2016, "")]
     class Day22 : ASolution
     {
 
         private readonly List<Node> Nodes;
-        public Day22() : base(22, 2016, "")
+        public Day22() : base()
         {
             Nodes = new List<Node>();
             foreach(string line in Input.SplitByNewline().Skip(2))

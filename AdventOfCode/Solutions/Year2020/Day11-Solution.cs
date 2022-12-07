@@ -4,6 +4,7 @@ using System.Linq;
 namespace AdventOfCode.Solutions.Year2020
 {
 
+    [DayInfo(11, 2020, "Seating System")]
     class Day11 : ASolution
     {
         Dictionary<(int, int), bool> Seats = new();
@@ -22,7 +23,7 @@ namespace AdventOfCode.Solutions.Year2020
         readonly int maxX = 0;
         readonly int maxY = 0;
 
-        public Day11() : base(11, 2020, "Seating System")
+        public Day11() : base()
         {
             List<string> lines = Input.SplitByNewline().ToList();
             maxY = lines.Count;

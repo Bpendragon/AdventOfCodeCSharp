@@ -4,11 +4,12 @@ using System.Linq;
 namespace AdventOfCode.Solutions.Year2015
 {
 
+    [DayInfo(09, 2015, "")]
     class Day09 : ASolution
     {
         readonly Dictionary<string, City> Cities;
         readonly List<int> routeLengths;
-        public Day09() : base(09, 2015, "")
+        public Day09() : base()
         {
             Cities = new Dictionary<string, City>();
             List<string>lines = Input.SplitByNewline(true);

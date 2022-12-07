@@ -5,10 +5,11 @@ using System.Linq;
 namespace AdventOfCode.Solutions.Year2021
 {
 
+    [DayInfo(18, 2021, "Snailfish")]
     class Day18 : ASolution
     {
         readonly List<SnailFishNode> SnailFish = new();
-        public Day18() : base(18, 2021, "Snailfish")
+        public Day18() : base()
         {
             foreach (var s in Input.SplitByNewline())
             {

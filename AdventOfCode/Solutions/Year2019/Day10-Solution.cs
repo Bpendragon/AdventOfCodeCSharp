@@ -5,11 +5,12 @@ using System.Linq;
 namespace AdventOfCode.Solutions.Year2019
 {
 
+    [DayInfo(10, 2019, "")]
     class Day10 : ASolution
     {
         readonly List<Asteroid> Asteroids;
         readonly Asteroid baseLoc;
-        public Day10() : base(10, 2019, "")
+        public Day10() : base()
         {
             Asteroids = new List<Asteroid>();
             var lines = Input.SplitByNewline();

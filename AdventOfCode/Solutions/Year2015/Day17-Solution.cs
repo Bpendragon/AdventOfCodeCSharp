@@ -4,10 +4,11 @@ using System.Linq;
 namespace AdventOfCode.Solutions.Year2015
 {
 
+    [DayInfo(17, 2015, "")]
     class Day17 : ASolution
     {
         readonly List<int> containers;
-        public Day17() : base(17, 2015, "")
+        public Day17() : base()
         {
             containers = new List<int>(Input.ToIntList("\n"));
         }

@@ -5,10 +5,11 @@ using System.Data;
 namespace AdventOfCode.Solutions.Year2022
 {
 
+    [DayInfo(01, 2022, "Calorie Counting")]
     class Day01 : ASolution
     {
         readonly List<long> Elves = new();
-        public Day01() : base(01, 2022, "Calorie Counting")
+        public Day01() : base()
         {
             var asStrings = Input.SplitByNewline(blankLines:true).ToList();
             long curSum = 0;

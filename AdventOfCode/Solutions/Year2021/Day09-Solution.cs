@@ -4,11 +4,12 @@ using System.Linq;
 namespace AdventOfCode.Solutions.Year2021
 {
 
+    [DayInfo(09, 2021, "Smoke Basin")]
     class Day09 : ASolution
     {
         readonly Dictionary<Coordinate2D, int> heightMap = new();
         readonly List<Coordinate2D> lowPoints = new();
-        public Day09() : base(09, 2021, "Smoke Basin")
+        public Day09() : base()
         {
             var lines = Input.SplitByNewline();
             for(int y = 0; y < lines.Count; y++)

@@ -4,10 +4,11 @@ using System.Linq;
 namespace AdventOfCode.Solutions.Year2018
 {
 
+    [DayInfo(25, 2018, "")]
     class Day25 : ASolution
     {
         readonly HashSet<Coordinate4D> stars = new();
-        public Day25() : base(25, 2018, "")
+        public Day25() : base()
         {
             foreach(var line in Input.SplitByNewline())
             {

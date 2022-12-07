@@ -4,10 +4,11 @@ using System.Linq;
 namespace AdventOfCode.Solutions.Year2020
 {
 
+    [DayInfo(06, 2020, "Custom Customs")]
     class Day06 : ASolution
     {
         readonly List<string> answers;
-        public Day06() : base(06, 2020, "Custom Customs")
+        public Day06() : base()
         {
             answers = new List<string>(Input.Split("\n\n"));
         }

@@ -5,11 +5,12 @@ using System.Linq;
 namespace AdventOfCode.Solutions.Year2017
 {
 
+    [DayInfo(20, 2017, "")]
     class Day20 : ASolution
     {
         readonly List<Particle> Particles = new();
         readonly List<Particle> Particles2 = new();
-        public Day20() : base(20, 2017, "")
+        public Day20() : base()
         {
             int i = 0;
             foreach (var line in Input.SplitByNewline())

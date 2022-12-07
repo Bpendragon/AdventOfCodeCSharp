@@ -4,6 +4,7 @@ using System.Linq;
 namespace AdventOfCode.Solutions.Year2020
 {
 
+    [DayInfo(10, 2020, "Adapter Array")]
     class Day10 : ASolution
     {
         readonly List<int> Adapters;
@@ -11,7 +12,7 @@ namespace AdventOfCode.Solutions.Year2020
         readonly Dictionary<int, long> KnownCounts = new();
         readonly bool PrintAll = false;
 
-        public Day10() : base(10, 2020, "Adapter Array")
+        public Day10() : base()
         {
             Adapters = new List<int>(Input.ToIntList("\n")) ;
             Adapters.Sort();

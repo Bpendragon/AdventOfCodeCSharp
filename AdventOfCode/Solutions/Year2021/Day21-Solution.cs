@@ -3,6 +3,7 @@ using System.Collections.Generic;
 namespace AdventOfCode.Solutions.Year2021
 {
 
+    [DayInfo(21, 2021, "Dirac Dice")]
     class Day21 : ASolution
     {
         //Pulled from input
@@ -13,7 +14,7 @@ namespace AdventOfCode.Solutions.Year2021
         readonly Dictionary<(int p1Score, int p2Score, int p1Pos, int p2Pos, int nextDice, int diceRolls, int toMove), Coordinate2DL> gameStates = new();
 
 
-        public Day21() : base(21, 2021, "Dirac Dice")
+        public Day21() : base()
         {
             //UseDebugInput = true;
             if (UseDebugInput) Player1Start = 4;

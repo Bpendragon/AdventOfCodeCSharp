@@ -4,10 +4,11 @@ using System.Linq;
 namespace AdventOfCode.Solutions.Year2022
 {
 
+    [DayInfo(04, 2022, "Camp Cleanup")]
     class Day04 : ASolution
     {
         readonly IEnumerable<int> asInts;
-        public Day04() : base(04, 2022, "Camp Cleanup")
+        public Day04() : base()
         {
             asInts = Input.ExtractPosInts();
         }

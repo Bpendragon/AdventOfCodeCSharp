@@ -5,13 +5,14 @@ using static AdventOfCode.Solutions.Utilities;
 namespace AdventOfCode.Solutions.Year2021
 {
 
+    [DayInfo(15, 2021, "Chiton")]
     class Day15 : ASolution
     {
         readonly Dictionary<Coordinate2D, long> map = new();
         readonly Dictionary<Coordinate2D, long> smolMap;
         readonly int smolMapDimensions;
         readonly int largeMapDimensions;
-        public Day15() : base(15, 2021, "Chiton")
+        public Day15() : base()
         {
             var lines = Input.SplitByNewline();
             foreach(var y in Enumerable.Range(0, lines.Count))

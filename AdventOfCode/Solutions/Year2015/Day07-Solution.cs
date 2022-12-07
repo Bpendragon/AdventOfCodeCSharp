@@ -3,11 +3,12 @@ using System.Collections.Generic;
 namespace AdventOfCode.Solutions.Year2015
 {
 
+    [DayInfo(07, 2015, "Some Assembly Required")]
     class Day07 : ASolution
     {
         private readonly List<string> Lines;
         private readonly Dictionary<string, Gate> circuit = new();
-        public Day07() : base(07, 2015, "Some Assembly Required")
+        public Day07() : base()
         {
             Lines = new List<string>(Input.SplitByNewline());
             foreach (string line in Lines)

@@ -6,10 +6,11 @@ using AdventOfCode.UserClasses;
 namespace AdventOfCode.Solutions.Year2019
 {
 
+    [DayInfo(09, 2019, "")]
     class Day09 : ASolution
     {
         readonly List<long> program;
-        public Day09() : base(09, 2019, "")
+        public Day09() : base()
         {
             program = Input.ToLongList(",");
         }

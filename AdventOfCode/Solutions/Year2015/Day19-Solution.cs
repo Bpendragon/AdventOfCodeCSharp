@@ -5,13 +5,14 @@ using System.Linq;
 namespace AdventOfCode.Solutions.Year2015
 {
 
+    [DayInfo(19, 2015, "")]
     class Day19 : ASolution
     {
         readonly Dictionary<string, List<string>> Substitutions = new();
         readonly string baseChem;
         readonly List<string> subbedChems = new();
 
-        public Day19() : base(19, 2015, "")
+        public Day19() : base()
         {
             string[] s = Input.Split("\n\n", StringSplitOptions.RemoveEmptyEntries);
             baseChem = s[1].Trim();
