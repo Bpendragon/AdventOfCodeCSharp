@@ -137,6 +137,15 @@ namespace AdventOfCode.Solutions
                .ToList();
         }
 
+        public static List<string> SplitByDoubleNewline(this string input, bool blankLines = false, bool shouldTrim = true)
+        {
+            return input
+               .Split(new[] { "\r\n\r\n", "\r\r", "\n\n" }, StringSplitOptions.None)
+               .Where(s => blankLines || !string.IsNullOrWhiteSpace(s))
+               .Select(s => shouldTrim ? s.Trim() : s)
+               .ToList();
+        }
+
         /// <summary>
         /// Splits the input into columns, this is sometimes nice for maps drawing. 
         /// Automatically expands to a full rectangle iff needed based on max length and number of rows. 
