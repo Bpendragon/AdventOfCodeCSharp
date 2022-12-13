@@ -127,12 +127,10 @@ namespace AdventOfCode.Solutions.Year2022
                         else return res;
                     } else
                     {
-                        {
-                            tmp.Add(right[i]);
-                            res = ComparePackets(left[i].Parts, tmp, out keepOn);
-                            if (keepOn) continue;
-                            else return res;
-                        }
+                        tmp.Add(right[i]);
+                        res = ComparePackets(left[i].Parts, tmp, out keepOn);
+                        if (keepOn) continue;
+                        else return res;
                     }
                 }
             }

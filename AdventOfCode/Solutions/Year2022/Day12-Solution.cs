@@ -8,6 +8,7 @@ namespace AdventOfCode.Solutions.Year2022
     class Day12 : ASolution
     {
         readonly Dictionary<Coordinate2D, int> Map = new();
+        readonly Dictionary<Coordinate2D, int> Distances = new();
         readonly Coordinate2D start;
         readonly Coordinate2D end;
         public Day12() : base()
@@ -30,77 +31,49 @@ namespace AdventOfCode.Solutions.Year2022
                     else Map[(x, y)] = cols[x][y] - 96;
                 }
             }
+
+            Distances = Dijkstra(Map, end);
         }
 
         protected override object SolvePartOne()
         {
-            return AStar(Map, start, end).Count - 1;
+            return Distances[start];
         }
 
         protected override object SolvePartTwo()
         {
-            List<int> PathLengths = new();
-
-            var lowPoints = Map.Where(b => b.Value == 1).ToList();
-
-            foreach (var a in lowPoints)
-            {
-                var path = AStar(Map, a.Key, end);
-                if (path[0] == a.Key)
-                {
-                    PathLengths.Add(path.Count - 1);
-                }
-            }
-
-            return PathLengths.Min();
+            return Distances.Where(a => Map[a.Key] == 1).Min(a => a.Value);
         }
 
-        static List<Coordinate2D> ReconstructPath(Dictionary<Coordinate2D, Coordinate2D> cameFrom, Coordinate2D current)
+        static Dictionary<Coordinate2D, int> Dijkstra(Dictionary<Coordinate2D, int> Map, Coordinate2D source)
         {
-            List<Coordinate2D> path = new() { current };
-            while(cameFrom.TryGetValue(current, out var next))
+            Dictionary<Coordinate2D, int> distances = new()
             {
-                path.Add(next);
-                current = next;
-            }
-            path.Reverse();
-            return path;
-        }
-
-        static List<Coordinate2D> AStar (Dictionary<Coordinate2D, int> Map, Coordinate2D start, Coordinate2D end)
-        {
-            Dictionary<Coordinate2D, Coordinate2D> cameFrom = new();
+                [source] = 0
+            };
             PriorityQueue<Coordinate2D, int> openSet = new();
-            Dictionary<Coordinate2D, int> gScore = new();
-            Dictionary<Coordinate2D, int> fScore = new();
             HashSet<Coordinate2D> closedSet = new();
 
-            gScore[start] = 0;
-            fScore[start] = start.ManDistance(end);
-            openSet.Enqueue(start, 0);
+            openSet.Enqueue(source, distances[source]);
 
-            while (openSet.Count > 0)
+            while (openSet.TryDequeue(out var cur, out _))
             {
-                var current = openSet.Dequeue();
-                if (!closedSet.Add(current)) continue;
-                if (current == end) break;
-                foreach (var n in current.Neighbors())
+                if (!closedSet.Add(cur)) continue;
+
+                foreach (var n in cur.Neighbors())
                 {
-                    if (Map.TryGetValue(n, out int height) && height <= Map[current] + 1)
+                    if (Map.TryGetValue(n, out int height) && height >= Map[cur] - 1)
                     {
-                        var tGscore = gScore[current] + 1;
-                        if (tGscore < gScore.GetValueOrDefault(n, int.MaxValue))
+                        var tmp = distances[cur] + 1;
+                        if (tmp < distances.GetValueOrDefault(n, int.MaxValue))
                         {
-                            cameFrom[n] = current;
-                            gScore[n] = tGscore;
-                            fScore[n] = tGscore + n.ManDistance(end);
-                            openSet.Enqueue(n, tGscore + n.ManDistance(end));
+                            distances[n] = tmp;
+                            openSet.Enqueue(n, tmp);
                         }
                     }
                 }
             }
-
-            return ReconstructPath(cameFrom, end);
+            return distances;
         }
     }
 }
