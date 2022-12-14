@@ -27,7 +27,7 @@ namespace AdventOfCode.Solutions.Year2022
                 AllPackets.Add(new PacketPart() { Parts = left, StringRepresentation = t[0] });
                 AllPackets.Add(new PacketPart() { Parts = right, StringRepresentation = t[1] });
 
-                if (ComparePackets(left, right, out _)) properOrderIndices.Add(i + 1);
+                if (ComparePackets(left, right) == 1) properOrderIndices.Add(i + 1);
             }
             return properOrderIndices.Sum();
         }
@@ -54,12 +54,7 @@ namespace AdventOfCode.Solutions.Year2022
 
             public int CompareTo(PacketPart other)
             {
-                
-                var t = ComparePackets(this.Parts, other.Parts, out bool keepOn);
-                if (keepOn) return 0;
-                else if (t) return -1;
-                else return 1;
-                throw new NotImplementedException();
+                return ComparePackets(this.Parts, other.Parts);
             }
         }
 
@@ -97,46 +92,43 @@ namespace AdventOfCode.Solutions.Year2022
             return packetParts;
         }
 
-        private static bool ComparePackets(List<PacketPart> left, List<PacketPart> right, out bool keepOn)
+        private static int ComparePackets(List<PacketPart> left, List<PacketPart> right)
         {
            
             for(int i = 0; i < int.Max(left.Count, right.Count); i++)
             {
-                keepOn = false;
-                if (i >= left.Count) return true;
-                if (i >= right.Count) return false;
+                if (i >= left.Count) return 1;
+                if (i >= right.Count) return -1;
                 if (!left[i].IsList && !right[i].IsList) //Both ints
                 {
-                    if (left[i].Value < right[i].Value) return true;
+                    if (left[i].Value < right[i].Value) return 1;
                     else if (left[i].Value == right[i].Value) continue;
-                    else return false;
+                    else return -1;
                 } else if (left[i].IsList && right[i].IsList)
                 {
-                    var t = ComparePackets(left[i].Parts, right[i].Parts, out keepOn);
-                    if (keepOn) continue;
+                    var t = ComparePackets(left[i].Parts, right[i].Parts);
+                    if (t == 0) continue;
                     else return t;
                 } else
                 {
                     List<PacketPart> tmp = new();
-                    bool res;
+                    int res;
                     if(!left[i].IsList)
                     {
                         tmp.Add(left[i]);
-                        res = ComparePackets(tmp, right[i].Parts, out keepOn);
-                        if (keepOn) continue;
+                        res = ComparePackets(tmp, right[i].Parts);
+                        if (res == 0) continue;
                         else return res;
                     } else
                     {
                         tmp.Add(right[i]);
-                        res = ComparePackets(left[i].Parts, tmp, out keepOn);
-                        if (keepOn) continue;
+                        res = ComparePackets(left[i].Parts, tmp);
+                        if (res == 0) continue;
                         else return res;
                     }
                 }
             }
-
-            keepOn = true;
-            return false;
+            return 0;
         }
     }
 }
