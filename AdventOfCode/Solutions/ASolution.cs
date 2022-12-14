@@ -95,10 +95,10 @@ namespace AdventOfCode.Solutions
 
         string LoadInput() {
             if (SkipInput) return "Empty Input";
-            string DEBUGINPUT_FILEPATH = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, $"../../../Solutions/Year{Year}/Day{Day:D2}-debugInput"));
-            string DEBUGINPUT_FILEPATH_ALT = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, $"../../../Solutions/Year{Year}/Day{Day:D2}-debugInput.txt"));
-            string INPUT_FILEPATH = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, $"../../../Solutions/Year{Year}/Day{Day:D2}-input"));
-            string INPUT_FILEPATH_ALT = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, $"../../../Solutions/Year{Year}/Day{Day:D2}-input.txt"));
+            string DEBUGINPUT_FILEPATH = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, $"../../../Solutions/Year{Year}/Inputs/Day{Day:D2}-debugInput"));
+            string DEBUGINPUT_FILEPATH_ALT = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, $"../../../Solutions/Year{Year}/Inputs/Day{Day:D2}-debugInput.txt"));
+            string INPUT_FILEPATH = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, $"../../../Solutions/Year{Year}/Inputs/Day{Day:D2}-input"));
+            string INPUT_FILEPATH_ALT = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, $"../../../Solutions/Year{Year}/Inputs/Day{Day:D2}-input.txt"));
             string INPUT_URL = $"https://adventofcode.com/{Year}/day/{Day}/input";
             string input = "";
 
@@ -124,6 +124,7 @@ namespace AdventOfCode.Solutions
 
                     input = Program.Http.GetStringAsync(INPUT_URL).Result.Trim();
                     File.WriteAllText(INPUT_FILEPATH, input);
+                    File.WriteAllText(DEBUGINPUT_FILEPATH, string.Empty);
 
                 } catch (WebException e) {
 

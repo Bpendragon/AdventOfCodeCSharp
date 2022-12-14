@@ -41,6 +41,7 @@ $newDirectory = Join-Path $PSScriptRoot ".." "Solutions" "Year$Year"
 
 if(!(Test-Path $newDirectory)) {
     New-Item $newDirectory -ItemType Directory | Out-Null
+    New-Item "$newDirectory/Inputs" -ItemType Directory | Out-Null
 }
 
 for($i = 1; $i -le 25; $i++) {
