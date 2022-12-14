@@ -12,6 +12,7 @@ using System.Numerics;
 using System.Text;
 using System.Text.RegularExpressions;
 
+
 namespace AdventOfCode.Solutions
 {
 
@@ -515,11 +516,13 @@ namespace AdventOfCode.Solutions
 
         public static List<T> Get2dNeighborVals<T>(this Dictionary<(int, int), T> values, (int, int) location, T defaultVal, bool includeDiagonals = false)
         {
-            List<T> res = new();
-            res.Add(values.GetDirection(location, CompassDirection.N, defaultVal));
-            res.Add(values.GetDirection(location, CompassDirection.E, defaultVal));
-            res.Add(values.GetDirection(location, CompassDirection.S, defaultVal));
-            res.Add(values.GetDirection(location, CompassDirection.W, defaultVal));
+            List<T> res = new()
+            {
+                values.GetDirection(location, CompassDirection.N, defaultVal),
+                values.GetDirection(location, CompassDirection.E, defaultVal),
+                values.GetDirection(location, CompassDirection.S, defaultVal),
+                values.GetDirection(location, CompassDirection.W, defaultVal)
+            };
 
             if (includeDiagonals)
             {
@@ -535,13 +538,15 @@ namespace AdventOfCode.Solutions
 
         public static List<T> Get2dNeighborVals<T>(this Dictionary<Coordinate2D, T> values, Coordinate2D location, T defaultVal, bool includeDiagonals = false)
         {
-            List<T> res = new();
-            res.Add(values.GetDirection(location, CompassDirection.N, defaultVal));
-            res.Add(values.GetDirection(location, CompassDirection.E, defaultVal));
-            res.Add(values.GetDirection(location, CompassDirection.S, defaultVal));
-            res.Add(values.GetDirection(location, CompassDirection.W, defaultVal));
+            List<T> res = new()
+            {
+                values.GetDirection(location, CompassDirection.N, defaultVal),
+                values.GetDirection(location, CompassDirection.E, defaultVal),
+                values.GetDirection(location, CompassDirection.S, defaultVal),
+                values.GetDirection(location, CompassDirection.W, defaultVal)
+            };
 
-            if(includeDiagonals)
+            if (includeDiagonals)
             {
                 res.Add(values.GetDirection(location, CompassDirection.NW, defaultVal));
                 res.Add(values.GetDirection(location, CompassDirection.NE, defaultVal));
@@ -593,8 +598,10 @@ namespace AdventOfCode.Solutions
             PriorityQueue<Coordinate2D, long> openSet = new();
             Dictionary<Coordinate2D, Coordinate2D> cameFrom = new();
 
-            Dictionary<Coordinate2D, long> gScore = new();
-            gScore[start] = 0;
+            Dictionary<Coordinate2D, long> gScore = new()
+            {
+                [start] = 0
+            };
 
             openSet.Enqueue(start, 0);
 
@@ -624,8 +631,10 @@ namespace AdventOfCode.Solutions
 
         private static List<Coordinate2D> ReconstructPath(Dictionary<Coordinate2D, Coordinate2D> cameFrom, Coordinate2D current)
         {
-            List<Coordinate2D> res = new();
-            res.Add(current);
+            List<Coordinate2D> res = new()
+            {
+                current
+            };
             while (cameFrom.ContainsKey(current))
             {
                 current = cameFrom[current];
@@ -655,6 +664,13 @@ namespace AdventOfCode.Solutions
         {
             this.x = coord.x;
             this.y = coord.y;
+        }
+
+        public Coordinate2D(string StringPair)
+        {
+            var t = StringPair.Split(',');
+            x = int.Parse(t[0]);
+            y = int.Parse(t[1]);
         }
 
         public Coordinate2D RotateCW(int degrees, Coordinate2D center)
@@ -719,6 +735,7 @@ namespace AdventOfCode.Solutions
             int y = Math.Abs(this.y - other.y);
             return x + y;
         }
+
         public override bool Equals(object obj)
         {
             if(obj == null) return false;
