@@ -1,30 +1,24 @@
-using System;
-using System.Text;
 using System.Collections.Generic;
-using AdventOfCode.UserClasses;
-using System.Linq;
 using System.Data;
-using System.Threading;
-using System.Security;
-using static AdventOfCode.Solutions.Utilities;
-using System.Runtime.CompilerServices;
+using System.Linq;
 using System.Text.RegularExpressions;
 
 namespace AdventOfCode.Solutions.Year2022
 {
 
-    [DayInfo(16, 2022, "")]
+    [DayInfo(16, 2022, "Proboscidea Volcanium")]
     class Day16 : ASolution
     {
-        Dictionary<string, Valve> Valves = new();
-        int[,] impDists;
-        readonly List<string> impValves;
+        Dictionary<string, Valve> Valves = new(); // Valves keyed by name.
+        int[,] impDists; //The important distances (that is dists between non-zero flow + AA)
+        readonly List<string> impValves; //Non-zero Flow and AA
+        int[] valveMasks; // Ints with 1 bit turned on
 
-        public Day16() : base(true)
+        public Day16() : base()
         {
             int[,] dists;
             List<string> ValveList;
-            foreach (var l in Input.SplitByNewline())
+            foreach (var l in Input.SplitByNewline()) //Read and parse input
             {
                 var c = Regex.Matches(l, "([A-Z]{2}|\\d+)").ToList();
 
@@ -35,13 +29,9 @@ namespace AdventOfCode.Solutions.Year2022
                     Neighbors = new(c.Skip(2).Select(a => a.Value)),
                 };
                 Valves[c[0].Value] = newValve;
-                foreach (var n in newValve.Neighbors)
-                {
-                    newValve.ValveDists[n] = 1;
-                }
             }
 
-            //Floyd Warshall???? (I think)
+            //Floyd Warshall Algorithm
 
             ValveList = Valves.Values.OrderBy(a => a.Name).Select(a => a.Name).ToList();
 
@@ -88,65 +78,62 @@ namespace AdventOfCode.Solutions.Year2022
                 impDists = impDists.TrimArray(i, i);
             }
 
+            valveMasks = new int[impDists.GetLength(0)];
+            for (int i = 0; i < valveMasks.Length; i++) valveMasks[i] = 1 << i; 
 
         }
 
         protected override object SolvePartOne()
         {
-            Dictionary<(int time, int loc, int valveMask), int> memo= new();
-
-            memo[(30, 0, 1 << impValves.Count)] = 0;
-
-
-
-
-
-            return 0;
+            Dictionary<int, int> cache = new();
+            Visit(0, 30, 0, 0, cache);
+            return cache.Values.Max();
         }
 
         protected override object SolvePartTwo()
         {
-            return null;
+            Dictionary<int, int> cache = new();
+            Visit(0, 26, 0, 0, cache);
+
+            int curMax = 0;
+
+            foreach(var kvp1 in cache)
+            {
+                foreach(var kvp2 in cache)
+                {
+                    if ((kvp1.Key & kvp2.Key) != 0) continue; //Only care if valves for disjoint set
+                    curMax = int.Max(curMax, kvp1.Value + kvp2.Value);
+                }
+            }
+
+            return curMax;
+        }
+
+        /// <summary>
+        /// Recursively check all paths to find all the possible outputs.
+        /// </summary>
+        /// <param name="node">Node you are at, specifically teh index of the name from impNodes</param>
+        /// <param name="time">Time remaining</param>
+        /// <param name="state">int/bitmask of valves that are turned on</param>
+        /// <param name="flow">Total flow (calculated from each valve as its turned on)</param>
+        /// <param name="cache">Key is state (see above) value is max flow achieved in that state</param>
+        private void Visit(int node, int time, int state, int flow, Dictionary<int, int> cache)
+        {
+            cache[state] = int.Max(cache.GetValueOrDefault(state, 0), flow); //Are we at a better point with the current valves turned on than last time we were at this point? if so, update value
+            for(int i = 0; i < impValves.Count; i++) //For all valves
+            {
+                var newTime = time - impDists[node, i] - 1; //time remaining is time minus walking time, minus 1 minute to open valve
+                if ((valveMasks[i] & state) != 0 || newTime <= 0) continue; //Don't go to the same valve twice, don't go to a valve if it means we run out of time.
+                Visit(i, newTime, state | valveMasks[i], flow + (newTime * Valves[impValves[i]].Flowrate), cache);
+                //Go to new valve, update state so it's turned on, add it's flow, repeat everything above.
+            }
         }
 
         class Valve
         {
             public string Name { get; set; }
             public int Flowrate { get; set; }
-            public Dictionary<string, int> ValveDists { get; set; } = new();
             public List<string> Neighbors { get; set; }
-        }
-
-        public int SearchSubtree(string nextValve, string prevValve, HashSet<string> openValves, int curRelief, int TimeRemaining) //prevValve allows us to backtrack from the end of a long branch
-        {
-            if (TimeRemaining < 2) return curRelief;
-            int newRelief = 0;
-            TimeRemaining--; //Walk to next valve
-
-            var curValve = Valves[nextValve];
-
-            if (openValves.Add(nextValve) && curValve.Flowrate != 0)
-            {
-                TimeRemaining--; //open the valve
-                newRelief += TimeRemaining * curValve.Flowrate;
-            }
-
-            if (openValves.Count == Valves.Keys.Count) return newRelief; //We've visited every valve, all we can do is wait.
-
-            if (curValve.Neighbors.Count == 1)
-            {
-                return newRelief + SearchSubtree(curValve.Neighbors.SingleOrDefault(), curValve.Name, new(openValves), newRelief, TimeRemaining);
-            }
-
-            int t = 0;
-            foreach (var v in curValve.Neighbors.Where(a => a != prevValve))
-            {
-                var s = SearchSubtree(v, curValve.Name, new(openValves), newRelief, TimeRemaining);
-                if (s > t) t = s;
-            }
-
-
-            return newRelief + t;
         }
     }
 }
