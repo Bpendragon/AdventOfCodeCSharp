@@ -12,7 +12,7 @@ using System.Runtime.CompilerServices;
 namespace AdventOfCode.Solutions.Year2022
 {
 
-    [DayInfo(17, 2022, "")]
+    [DayInfo(17, 2022, "Pyroclastic Flow")]
     class Day17 : ASolution
     {
         public Day17() : base()
@@ -22,7 +22,8 @@ namespace AdventOfCode.Solutions.Year2022
 
         protected override object SolvePartOne()
         {
-            return null;
+
+            return Input.Count(a => a == '>') - Input.Count(a => a =='<');
         }
 
         protected override object SolvePartTwo()

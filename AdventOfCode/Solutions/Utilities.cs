@@ -9,6 +9,7 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Numerics;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -177,6 +178,30 @@ namespace AdventOfCode.Solutions
                 res[i] = sb.ToString();
             }
             return res;
+        }
+
+        //Removes a specified row AND column from a multidimensional array.
+        public static int[,] TrimArray(this int[,] originalArray, int rowToRemove, int columnToRemove)
+        {
+            int[,] result = new int[originalArray.GetLength(0) - 1, originalArray.GetLength(1) - 1];
+
+            for (int i = 0, j = 0; i < originalArray.GetLength(0); i++)
+            {
+                if (i == rowToRemove)
+                    continue;
+
+                for (int k = 0, u = 0; k < originalArray.GetLength(1); k++)
+                {
+                    if (k == columnToRemove)
+                        continue;
+
+                    result[j, u] = originalArray[i, k];
+                    u++;
+                }
+                j++;
+            }
+
+            return result;
         }
 
         public static string Reverse(this string str)
@@ -593,6 +618,16 @@ namespace AdventOfCode.Solutions
             return tmp;
         }
 
+        public static IEnumerable<Coordinate3D> GetImmediateNeighbors(this Coordinate3D self)
+        {
+            yield return (self.x + 1, self.y, self.z);
+            yield return (self.x - 1, self.y, self.z);
+            yield return (self.x, self.y + 1, self.z);
+            yield return (self.x, self.y - 1, self.z);
+            yield return (self.x, self.y, self.z + 1);
+            yield return (self.x, self.y, self.z - 1);
+        }
+
         public static List<Coordinate2D> AStar(Coordinate2D start, Coordinate2D goal, Dictionary<Coordinate2D, long> map, out long Cost, bool IncludeDiagonals = false, bool IncludePath = true) 
         {
             PriorityQueue<Coordinate2D, long> openSet = new();
@@ -881,6 +916,14 @@ namespace AdventOfCode.Solutions
             this.z = z;
         }
 
+        public Coordinate3D(string stringformat)
+        {
+            var n = stringformat.ExtractInts().ToArray();
+            x = n[0];
+            y = n[1];
+            z = n[2];
+        }
+
         public static implicit operator Coordinate3D((int x, int y, int z) a) => new(a.x, a.y, a.z);
 
         public static implicit operator (int x, int y, int z)(Coordinate3D a) => (a.x, a.y, a.z);
@@ -913,6 +956,13 @@ namespace AdventOfCode.Solutions
         public static Coordinate3D[] GetNeighbors()
         {
             return neighbors3D;
+        }
+
+        internal void Deconstruct(out int x, out int y, out int z)
+        {
+            x = this.x;
+            y = this.y;
+            z = this.z;
         }
 
         private static readonly Coordinate3D[] neighbors3D =
@@ -951,6 +1001,7 @@ namespace AdventOfCode.Solutions
         };
     }
     
+
 
     public class Coordinate4D
     {

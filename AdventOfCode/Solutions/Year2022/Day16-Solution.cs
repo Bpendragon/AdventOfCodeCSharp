@@ -17,11 +17,13 @@ namespace AdventOfCode.Solutions.Year2022
     class Day16 : ASolution
     {
         Dictionary<string, Valve> Valves = new();
-        int[,] dists;
-        readonly List<string> ValveList;
+        int[,] impDists;
+        readonly List<string> impValves;
 
         public Day16() : base(true)
         {
+            int[,] dists;
+            List<string> ValveList;
             foreach (var l in Input.SplitByNewline())
             {
                 var c = Regex.Matches(l, "([A-Z]{2}|\\d+)").ToList();
@@ -72,17 +74,34 @@ namespace AdventOfCode.Solutions.Year2022
                 }
             }
 
+            //Only care about AA and the ones that generate flow.
+
+            impValves = ValveList.Where(a => a == "AA" || Valves[a].Flowrate != 0).ToList();
+            List<int> indices = new();
+
+            for (int i = 0; i < ValveList.Count; i++) if (Valves[ValveList[i]].Flowrate == 0 && ValveList[i] != "AA") indices.Add(i);
+            indices.Reverse();
+
+            impDists = dists;
+            foreach(var i in indices)
+            {
+                impDists = impDists.TrimArray(i, i);
+            }
+
+
         }
 
         protected override object SolvePartOne()
         {
-            string current = "AA";
-            int totalFlow = 0;
-            HashSet<string> openValves = new();
+            Dictionary<(int time, int loc, int valveMask), int> memo= new();
+
+            memo[(30, 0, 1 << impValves.Count)] = 0;
 
 
 
-            return SearchSubtree("AA", null, openValves, 0, 31);
+
+
+            return 0;
         }
 
         protected override object SolvePartTwo()
