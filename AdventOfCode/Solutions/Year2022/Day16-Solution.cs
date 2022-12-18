@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 using System.Text.RegularExpressions;
 
 namespace AdventOfCode.Solutions.Year2022
@@ -9,10 +10,10 @@ namespace AdventOfCode.Solutions.Year2022
     [DayInfo(16, 2022, "Proboscidea Volcanium")]
     class Day16 : ASolution
     {
-        Dictionary<string, Valve> Valves = new(); // Valves keyed by name.
-        int[,] impDists; //The important distances (that is dists between non-zero flow + AA)
+        readonly Dictionary<string, Valve> Valves = new(); // Valves keyed by name.
+        readonly int[,] impDists; //The important distances (that is dists between non-zero flow + AA)
         readonly List<string> impValves; //Non-zero Flow and AA
-        int[] valveMasks; // Ints with 1 bit turned on
+        readonly int[] valveMasks; // Ints with 1 bit turned on
 
         public Day16() : base()
         {
@@ -97,15 +98,16 @@ namespace AdventOfCode.Solutions.Year2022
 
             int curMax = 0;
 
-            foreach(var kvp1 in cache)
+            var KVPs = cache.ToList();
+
+            for(int i = 0; i < KVPs.Count; i++)
             {
-                foreach(var kvp2 in cache)
+                for(int j = i + 1; j < KVPs.Count; j++)
                 {
-                    if ((kvp1.Key & kvp2.Key) != 0) continue; //Only care if valves for disjoint set
-                    curMax = int.Max(curMax, kvp1.Value + kvp2.Value);
+                    if ((KVPs[i].Key & KVPs[j].Key) != 0) continue;
+                    curMax = int.Max(KVPs[i].Value + KVPs[j].Value, curMax);
                 }
             }
-
             return curMax;
         }
 
