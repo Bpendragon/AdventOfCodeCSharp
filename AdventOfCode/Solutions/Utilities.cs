@@ -40,12 +40,12 @@ namespace AdventOfCode.Solutions
 
         public static IEnumerable<int> ExtractPosInts(this string str)
         {
-            foreach (Match m in Regex.Matches(str, "\\d+")) yield return int.Parse(m.Value);
+            return Regex.Matches(str, "\\d+").Select(m => int.Parse(m.Value));
         }
 
         public static IEnumerable<int> ExtractInts(this string str)
         {
-            foreach (Match m in Regex.Matches(str, "-?\\d+")) yield return int.Parse(m.Value);
+            return Regex.Matches(str, "-?\\d+").Select(m => int.Parse(m.Value));
         }
 
         public static List<long> ToLongList(this string str, string delimiter = "")
@@ -481,7 +481,7 @@ namespace AdventOfCode.Solutions
             }
         }
 
-        public static (int x, int y) MoveDirection(this Coordinate2D start, CompassDirection Direction, bool flipY = false, int distance = 1)
+        public static Coordinate2D MoveDirection(this Coordinate2D start, CompassDirection Direction, bool flipY = false, int distance = 1)
         {
             if (flipY)
             {
