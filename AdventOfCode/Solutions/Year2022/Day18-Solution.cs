@@ -1,13 +1,6 @@
-using System;
-using System.Text;
 using System.Collections.Generic;
-using AdventOfCode.UserClasses;
-using System.Linq;
 using System.Data;
-using System.Threading;
-using System.Security;
-using static AdventOfCode.Solutions.Utilities;
-using System.Runtime.CompilerServices;
+using System.Linq;
 
 namespace AdventOfCode.Solutions.Year2022
 {
@@ -16,7 +9,6 @@ namespace AdventOfCode.Solutions.Year2022
     class Day18 : ASolution
     {
         HashSet<Coordinate3D> lavaBlobs;
-        int totalExposedSides = 0;
         public Day18() : base()
         {
             lavaBlobs = new(Input.SplitByNewline().Select(a => new Coordinate3D(a)));
@@ -24,14 +16,14 @@ namespace AdventOfCode.Solutions.Year2022
 
         protected override object SolvePartOne()
         {
-            totalExposedSides = 0;
+            int totalExposedSides = 0;
 
             foreach (var blob in lavaBlobs)
             {
-                totalExposedSides += 6;
+                totalExposedSides += 6; //Assume all sides are exposed to air.
                 foreach (var n in blob.GetImmediateNeighbors())
                 {
-                    if (lavaBlobs.Contains(n)) totalExposedSides--;
+                    if (lavaBlobs.Contains(n)) totalExposedSides--; //Remove sides exposed to neighbors.
                 }
             }
             return totalExposedSides;
@@ -57,8 +49,8 @@ namespace AdventOfCode.Solutions.Year2022
                     }
                 }
 
-                if (newWater.IsSubsetOf(airGap)) break;
-                airGap.UnionWith(newWater);
+                if (newWater.IsSubsetOf(airGap)) break; //No new water was found. which means we've filled the entire cuboid
+                airGap.UnionWith(newWater); //Add new water to existing water
             }
 
             int exposed = 0;
