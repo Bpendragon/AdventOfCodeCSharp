@@ -104,7 +104,7 @@ namespace AdventOfCode.Solutions.Year2022
             return best;
         }
 
-        class Blueprint
+        struct Blueprint
         {
             public int ID { get; }
             public int OreRobot { get; }
