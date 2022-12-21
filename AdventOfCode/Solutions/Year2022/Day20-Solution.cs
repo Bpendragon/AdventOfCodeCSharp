@@ -8,7 +8,7 @@ namespace AdventOfCode.Solutions.Year2022
     [DayInfo(20, 2022, "Grove Positioning System")]
     class Day20 : ASolution
     {
-        List<int> initialList;
+        readonly List<int> initialList;
         public const long DecryptionKey = 811_589_153;
 
         public Day20() : base()
@@ -42,7 +42,7 @@ namespace AdventOfCode.Solutions.Year2022
                 //Allows us to walk along the nodes.
                 Node l = n.Prev, r = n.Next;
 
-                foreach(var _ in Enumerable.Range(0, (int)(Math.Abs(n.Val) % (nodes.Count - 1))))
+                foreach(var _ in Enumerable.Range(0, (int)(Math.Abs(n.Val) % (nodes.Count - 1)))) //Subtract 1 because our node is currently "Outside" the list.
                 {
                     if (n.Val < 0)
                     {
