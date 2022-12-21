@@ -16,7 +16,7 @@ namespace AdventOfCode.Solutions.Year2022
     [DayInfo(09, 2022, "Rope Bridge")]
     class Day09 : ASolution
     {
-        List<string> steps;
+        readonly List<string> steps;
         public Day09() : base()
         {
             steps = Input.SplitByNewline();

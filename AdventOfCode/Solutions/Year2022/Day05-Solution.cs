@@ -9,9 +9,9 @@ namespace AdventOfCode.Solutions.Year2022
     [DayInfo(05, 2022, "Supply Stacks")]
     class Day05 : ASolution
     {
-        List<Stack<char>> stacks = new();
-        List<List<char>> p2Stacks = new();
-        List<(int cnt, int src, int dest)> instructions = new();
+        readonly List<Stack<char>> stacks = new();
+        readonly List<List<char>> p2Stacks = new();
+        readonly List<(int cnt, int src, int dest)> instructions = new();
         public Day05() : base()
         {
             var parts = Input.Split("\n\n");
@@ -44,7 +44,7 @@ namespace AdventOfCode.Solutions.Year2022
 
         protected override object SolvePartOne()
         {
-            foreach(var ins in instructions) for (int i = 0; i < ins.cnt; i++) stacks[ins.dest - 1].Push(stacks[ins.src - 1].Pop());
+            foreach(var (cnt, src, dest) in instructions) for (int i = 0; i < cnt; i++) stacks[dest - 1].Push(stacks[src - 1].Pop());
             
             StringBuilder sb = new();
             foreach (var s in stacks) sb.Append(s.Peek());
@@ -53,10 +53,10 @@ namespace AdventOfCode.Solutions.Year2022
 
         protected override object SolvePartTwo()
         {
-            foreach (var ins in instructions)
+            foreach (var (cnt, src, dest) in instructions)
             {
-                p2Stacks[ins.dest - 1].AddRange(p2Stacks[ins.src - 1].TakeLast(ins.cnt));
-                p2Stacks[ins.src - 1].RemoveRange(p2Stacks[ins.src - 1].Count - ins.cnt, ins.cnt);
+                p2Stacks[dest - 1].AddRange(p2Stacks[src - 1].TakeLast(cnt));
+                p2Stacks[src - 1].RemoveRange(p2Stacks[src - 1].Count - cnt, cnt);
             }
             StringBuilder sb = new();
             foreach (var s in p2Stacks) sb.Append(s.Last());

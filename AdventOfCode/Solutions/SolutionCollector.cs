@@ -37,7 +37,7 @@ namespace AdventOfCode.Solutions
             return GetEnumerator();
         }
 
-        IEnumerable<ASolution> LoadSolutions(int year, int[] days)
+        static IEnumerable<ASolution> LoadSolutions(int year, int[] days)
         {
             if (days.Sum() == 0)
             {

@@ -142,7 +142,7 @@ namespace AdventOfCode.Solutions.Year2019
             return null;
         }
 
-        private string GreedySolve((int x, int y) startingPoint, Dictionary<(int x, int y), char> map)
+        private static string GreedySolve((int x, int y) startingPoint, Dictionary<(int x, int y), char> map)
         {
             StringBuilder sb = new();
             HashSet<(int x, int y)> visited = new();

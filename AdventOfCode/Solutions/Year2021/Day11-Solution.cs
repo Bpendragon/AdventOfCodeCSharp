@@ -51,7 +51,7 @@ namespace AdventOfCode.Solutions.Year2021
 
                         foreach (var n in f.Neighbors(true))
                         {
-                            if (octopodes.ContainsKey(n)) octopodes[n]++;
+                            if (octopodes.TryGetValue(n, out int value)) value++;
                         }
                     }
                 }

@@ -15,9 +15,9 @@ namespace AdventOfCode.Solutions.Year2016
         public Day22() : base()
         {
             Nodes = new List<Node>();
-            foreach(string line in Input.SplitByNewline().Skip(2))
+            foreach (string line in Input.SplitByNewline().Skip(2))
             {
-                int[] tokens = line.Split(new char[] { '-', ' ', 'T', '%' , 'x', 'y'}).ToIntArray();
+                int[] tokens = line.Split(new char[] { '-', ' ', 'T', '%', 'x', 'y' }).ToIntArray();
                 Nodes.Add(new Node()
                 {
                     Coords = (tokens[0], tokens[1]),
@@ -25,7 +25,7 @@ namespace AdventOfCode.Solutions.Year2016
                     Used = tokens[3],
                     Avail = tokens[4],
                     UsedPerc = tokens[5]
-                }) ;
+                });
 
             }
         }
@@ -33,7 +33,7 @@ namespace AdventOfCode.Solutions.Year2016
         protected override object SolvePartOne()
         {
             int validPairs = 0;
-            foreach(Node[] combo in Nodes.Combinations(2))
+            foreach (Node[] combo in Nodes.Combinations(2).Cast<Node[]>())
             {
                 if (combo[0].Avail >= combo[1].Used && combo[1].Used > 0) validPairs++;
                 if (combo[1].Avail >= combo[0].Used && combo[0].Used > 0) validPairs++;
@@ -45,14 +45,14 @@ namespace AdventOfCode.Solutions.Year2016
         {
             StringBuilder sb = new('\n');
             Node[,] map = new Node[33, 30];
-            foreach(Node node in Nodes)
+            foreach (Node node in Nodes)
             {
                 map[node.Coords.x, node.Coords.y] = node;
             }
-            
-            for(int i = 0; i < 30; i++)
+
+            for (int i = 0; i < 30; i++)
             {
-                for(int j = 0; j < 33; j++)
+                for (int j = 0; j < 33; j++)
                 {
                     sb.Append(map[j, i].ToString() + ", ");
                 }

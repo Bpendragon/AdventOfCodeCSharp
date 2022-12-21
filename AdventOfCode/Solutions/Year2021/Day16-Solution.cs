@@ -33,8 +33,10 @@ namespace AdventOfCode.Solutions.Year2021
         private Packet GetNextPacket(string binaryString, int startPoint, ref int incrementBy)
         {
             int tmpInc = 0;
-            Packet res = new();
-            res.Version = Convert.ToInt32(binaryString.Substring(startPoint, 3), 2);
+            Packet res = new()
+            {
+                Version = Convert.ToInt32(binaryString.Substring(startPoint, 3), 2)
+            };
             tmpInc += 3;
             res.TypeID = Convert.ToInt32(binaryString.Substring(startPoint + tmpInc, 3), 2);
             tmpInc += 3;

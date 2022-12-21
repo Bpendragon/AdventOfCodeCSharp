@@ -42,7 +42,7 @@ namespace AdventOfCode.Solutions.Year2018
             return (res.Count(x => x == '|') * res.Count(x => x == '#'));
         }
 
-        private string LoggingSteps(Dictionary<(int x, int y), char> p1, int numIterations)
+        private static string LoggingSteps(Dictionary<(int x, int y), char> p1, int numIterations)
         {
             List<string> SeenLayouts = new();
             Dictionary<(int x, int y), char> next;

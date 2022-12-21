@@ -9,7 +9,6 @@ namespace AdventOfCode.Solutions.Year2017
     {
         readonly List<string> danceMoves = new();
         List<char> dancers = new() { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p' };
-        readonly List<char> dancers2 = new() { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p' };
         readonly List<string> completedDances = new();
         const string original = "abcdefghijklmnop";
 

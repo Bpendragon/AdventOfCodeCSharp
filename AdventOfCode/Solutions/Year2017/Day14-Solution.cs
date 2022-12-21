@@ -66,7 +66,7 @@ namespace AdventOfCode.Solutions.Year2017
                     foreach((int, int) d in dirs)
                     {
                         (int, int) s = v.Add(d);
-                        if(nodes.ContainsKey(s) && nodes[s] && !visited.Contains(s))
+                        if(nodes.TryGetValue(s, out bool value) && value && !visited.Contains(s))
                         {
                             q.Enqueue(s);
                             visited.Add(s);

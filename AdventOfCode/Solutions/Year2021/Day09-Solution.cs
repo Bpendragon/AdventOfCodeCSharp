@@ -50,7 +50,7 @@ namespace AdventOfCode.Solutions.Year2021
                 while(q.Count > 0)
                 {
                     var cur = q.Dequeue();
-                    if (heightMap.ContainsKey(cur) && heightMap[cur] != 9)
+                    if (heightMap.TryGetValue(cur, out int value) && value != 9)
                     {
                         basinMembers.Add(cur);
                         foreach (var n in cur.Neighbors())

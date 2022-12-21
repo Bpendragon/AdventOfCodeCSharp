@@ -8,9 +8,9 @@ namespace AdventOfCode.Solutions.Year2022
     [DayInfo(13, 2022, "Distress Signal")]
     class Day13 : ASolution
     {
-        List<string> PacketPairs;
-        List<int> properOrderIndices = new();
-        List<PacketPart> AllPackets = new();
+        readonly List<string> PacketPairs;
+        readonly List<int> properOrderIndices = new();
+        readonly List<PacketPart> AllPackets = new();
 
         public Day13() : base()
         {

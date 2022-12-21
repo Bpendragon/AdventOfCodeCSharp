@@ -8,7 +8,7 @@ namespace AdventOfCode.Solutions.Year2022
     [DayInfo(18, 2022, "Boiling Boulders")]
     class Day18 : ASolution
     {
-        HashSet<Coordinate3D> lavaBlobs;
+        readonly HashSet<Coordinate3D> lavaBlobs;
         public Day18() : base()
         {
             lavaBlobs = new(Input.SplitByNewline().Select(a => new Coordinate3D(a)));

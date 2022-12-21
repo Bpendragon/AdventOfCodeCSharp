@@ -106,12 +106,12 @@ namespace AdventOfCode.Solutions.Year2019
             return score;
         }
 
-        public void DrawScreen(Dictionary<(long x, long y), long> screen)
+        public static void DrawScreen(Dictionary<(long x, long y), long> screen)
         {
             StringBuilder sb = new();
-            if(screen.ContainsKey((-1,0)))
+            if(screen.TryGetValue((-1,0), out long value))
             {
-                sb.Append($"Score: {screen[(-1, 0)]}\n");
+                sb.Append($"Score: {value}\n");
             }
             for (int y = 0; y <= screen.Keys.Max(x => x.y); y++)
             {

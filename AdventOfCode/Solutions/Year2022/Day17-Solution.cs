@@ -19,15 +19,13 @@ namespace AdventOfCode.Solutions.Year2022
                 new Coordinate2D[] {(0,0), (0,1), (0,2), (0,3)},
                 new Coordinate2D[] {(0,0), (0,1), (1,0), (1,1)},
             };
-
-        Dictionary<(ulong topRows, long shapeIndex, long jetIndex), int> states = new(); //Using a bitmask I can store the top 9 rows of rocks in a base 64 number
-        Dictionary<long, long[]> cache = new();
-        Dictionary<Coordinate2D, int> tower;
-        CompassDirection drop = CompassDirection.S;
-
-        long part1;
-        long part2;
-        long part2Count = 1_000_000_000_000;
+        readonly Dictionary<(ulong topRows, long shapeIndex, long jetIndex), int> states = new(); //Using a bitmask I can store the top 9 rows of rocks in a base 64 number
+        readonly Dictionary<long, long[]> cache = new();
+        readonly Dictionary<Coordinate2D, int> tower;
+        readonly CompassDirection drop = CompassDirection.S;
+        readonly long part1;
+        readonly long part2;
+        readonly long part2Count = 1_000_000_000_000;
 
 
         public Day17() : base()
@@ -71,6 +69,7 @@ namespace AdventOfCode.Solutions.Year2022
 
         protected override object SolvePartOne()
         {
+            DrawTower(20, 20);
             return part1;
         }
 

@@ -118,8 +118,10 @@ namespace AdventOfCode.Solutions.Year2019
         {
             PriorityQueue<Coordinate2D, int> openSet = new();
             Dictionary<Coordinate2D, Coordinate2D> cameFrom = new();
-            Dictionary<Coordinate2D, int> gScore = new();
-            gScore[start] = 0;
+            Dictionary<Coordinate2D, int> gScore = new()
+            {
+                [start] = 0
+            };
 
             openSet.Enqueue(start, 0);
 
@@ -158,8 +160,10 @@ namespace AdventOfCode.Solutions.Year2019
         {
             PriorityQueue<(Coordinate2D pos, int depth), int> openSet = new();
             Dictionary<(Coordinate2D loc, int depth), (Coordinate2D loc, int depth)> cameFrom = new();
-            Dictionary<(Coordinate2D loc, int depth), int> gScore = new();
-            gScore[(start, 0)] = 0;
+            Dictionary<(Coordinate2D loc, int depth), int> gScore = new()
+            {
+                [(start, 0)] = 0
+            };
 
             openSet.Enqueue((start, 0), 0);
 

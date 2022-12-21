@@ -9,7 +9,6 @@ namespace AdventOfCode.Solutions.Year2021
     [DayInfo(24, 2021, "Arithmetic Logic Unit")]
     class Day24 : ASolution
     {
-        readonly List<(string operand, string target, string other)> originalSteps = new();
         readonly List<long> addX = new();
         readonly List<long> divZ = new();
         readonly List<long> addY = new();
@@ -64,7 +63,7 @@ namespace AdventOfCode.Solutions.Year2021
         private List<string> RecursiveSearch(int groupNum, long prevZ)
         {
             //We've Been here before...
-            if (cacheDic.ContainsKey((groupNum, prevZ))) return cacheDic[(groupNum, prevZ)];
+            if (cacheDic.TryGetValue((groupNum, prevZ), out List<string> value)) return value;
             //We've gon past the end
             if(groupNum >= 14)
             {

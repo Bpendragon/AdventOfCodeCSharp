@@ -40,10 +40,10 @@ namespace AdventOfCode.Solutions.Year2020
             {
                 LastTimesSpoken[startNums[i]] = i + 1;
             }
-            int lastNumSpoken = 0;
+
             for (int i = startNums.Length; i < 30_000_000; i++)
             {
-                lastNumSpoken = NumberString2[^1];
+                int lastNumSpoken = NumberString2[^1];
                 var lastTimeSpoken = LastTimesSpoken.GetValueOrDefault(lastNumSpoken, -1);
                 if (lastTimeSpoken == -1) lastTimeSpoken = 0;
                 else

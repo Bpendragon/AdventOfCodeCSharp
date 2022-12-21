@@ -104,10 +104,7 @@ namespace AdventOfCode.Solutions.Year2018
         }
 
         private (int a, int b, int c, int d) RunCommand((int i, int a, int b, int c) ops, string overRide = null) {
-            if (overRide == null)
-            {
-                overRide = knownOpcodes[ops.i][0];
-            }
+            overRide ??= knownOpcodes[ops.i][0];
 
             Registers[ops.c] = (overRide) switch
             {

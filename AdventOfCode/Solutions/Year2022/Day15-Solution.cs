@@ -11,8 +11,8 @@ namespace AdventOfCode.Solutions.Year2022
     [DayInfo(15, 2022, "Beacon Exclusion Zone")]
     class Day15 : ASolution
     {
-        Dictionary<Coordinate2D, char> map = new();
-        Dictionary<Coordinate2D, int> Sensors = new();
+        readonly Dictionary<Coordinate2D, char> map = new();
+        readonly Dictionary<Coordinate2D, int> Sensors = new();
         public Day15() : base()
         {
             foreach(var line in Input.SplitByNewline())

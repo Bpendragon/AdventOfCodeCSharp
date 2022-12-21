@@ -37,18 +37,19 @@ namespace AdventOfCode.Solutions.Year2019
 
 
 
-            map2 = new(map);
+            map2 = new(map)
+            {
+                [new Coordinate2D(40, 40)] = Tile.Wall,
+                [new Coordinate2D(39, 40)] = Tile.Wall,
+                [new Coordinate2D(40, 39)] = Tile.Wall,
+                [new Coordinate2D(41, 40)] = Tile.Wall,
+                [new Coordinate2D(40, 41)] = Tile.Wall,
 
-            map2[new Coordinate2D(40, 40)] = Tile.Wall;
-            map2[new Coordinate2D(39, 40)] = Tile.Wall;
-            map2[new Coordinate2D(40, 39)] = Tile.Wall;
-            map2[new Coordinate2D(41, 40)] = Tile.Wall;
-            map2[new Coordinate2D(40, 41)] = Tile.Wall;
-
-            map2[new Coordinate2D(41, 41)] = Tile.Node;
-            map2[new Coordinate2D(39, 41)] = Tile.Node;
-            map2[new Coordinate2D(39, 39)] = Tile.Node;
-            map2[new Coordinate2D(41, 39)] = Tile.Node;
+                [new Coordinate2D(41, 41)] = Tile.Node,
+                [new Coordinate2D(39, 41)] = Tile.Node,
+                [new Coordinate2D(39, 39)] = Tile.Node,
+                [new Coordinate2D(41, 39)] = Tile.Node
+            };
 
             nodes2 = new(nodes);
 

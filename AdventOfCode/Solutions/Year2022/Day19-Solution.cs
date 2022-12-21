@@ -8,8 +8,8 @@ namespace AdventOfCode.Solutions.Year2022
     [DayInfo(19, 2022, "Not Enough Minerals")]
     class Day19 : ASolution
     {
-        List<Blueprint> Blueprints = new();
-        Dictionary<(int time, int oR, int cR, int obR, int gR, int o, int c, int ob), int> p1cache = new();
+        readonly List<Blueprint> Blueprints = new();
+        readonly Dictionary<(int time, int oR, int cR, int obR, int gR, int o, int c, int ob), int> p1cache = new();
         public Day19() : base()
         {
             foreach(var l  in Input.SplitByNewline())
@@ -43,7 +43,7 @@ namespace AdventOfCode.Solutions.Year2022
         }
 
 
-        private int FindBestResult(Blueprint b, int timeleft)
+        private static int FindBestResult(Blueprint b, int timeleft)
         { 
             //All Hail BFS with aggressive pruning!
             //State is amount owned of: ore, clay, obsidian, geodes (cracked), ore robots, clay robots, obsidian robots, geode crackers, and time remaining 

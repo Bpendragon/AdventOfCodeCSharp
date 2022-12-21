@@ -45,11 +45,7 @@ namespace AdventOfCode.Solutions.Year2021
 
                 foreach(var cuc in Cucumbers.Where(a => a.Value == '>' && a.Key.x >= maxX - 1).Select(a => a.Key).ToList())
                 {
-                    if(!Cucumbers.ContainsKey((0, cuc.y)))
-                    {
-                        Cucumbers.Remove(cuc);
-                        eastMovingLocs.Add((-1, cuc.y));
-                    }
+                    if(Cucumbers.Remove(cuc)) eastMovingLocs.Add((-1, cuc.y));
                 }
 
                 eastMovers = eastMovingLocs.Count;
@@ -64,11 +60,7 @@ namespace AdventOfCode.Solutions.Year2021
 
                 foreach (var cuc in Cucumbers.Where(a => a.Value == 'v' && a.Key.y >= maxY - 1).Select(a => a.Key).ToList())
                 {
-                    if (!Cucumbers.ContainsKey((cuc.x, 0)))
-                    {
-                        Cucumbers.Remove(cuc);
-                        southMovingLocs.Add((cuc.x, -1));
-                    }
+                    if (Cucumbers.Remove(cuc)) southMovingLocs.Add((cuc.x, -1));
                 }
 
                 southMovers = southMovingLocs.Count;

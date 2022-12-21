@@ -92,9 +92,11 @@ namespace AdventOfCode.Solutions.Year2019
 
         private static List<(int x, int y)> ReconstructPath(Dictionary<(int x, int y), (int x, int y)> cameFrom, (int x, int y) current)
         {
-            List<(int x, int y)> totalPath = new();
-            totalPath.Add(current);
-            while(cameFrom.TryGetValue(current, out var next))
+            List<(int x, int y)> totalPath = new()
+            {
+                current
+            };
+            while (cameFrom.TryGetValue(current, out var next))
             {
                 current = next;
                 totalPath.Add(current);

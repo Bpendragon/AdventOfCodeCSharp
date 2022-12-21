@@ -20,9 +20,11 @@ namespace AdventOfCode.Solutions.Year2021
             foreach(var l in lines)
             {
                 var ends = l.Split(new string[] { " -> ", ","},StringSplitOptions.RemoveEmptyEntries);
-                VentLine nVL = new();
-                nVL.Start = new(int.Parse(ends[0]), int.Parse(ends[1]));
-                nVL.End = new(int.Parse(ends[2]), int.Parse(ends[3]));
+                VentLine nVL = new()
+                {
+                    Start = new(int.Parse(ends[0]), int.Parse(ends[1])),
+                    End = new(int.Parse(ends[2]), int.Parse(ends[3]))
+                };
                 VentLines.Add(nVL);
                 nVL.GenerateCoverage();
             }
@@ -65,9 +67,11 @@ namespace AdventOfCode.Solutions.Year2021
 
             public void GenerateCoverage()
             {
-                Coverage = new();
-                Coverage.Add(Start);
-                Coverage.Add(End);
+                Coverage = new()
+                {
+                    Start,
+                    End
+                };
                 if (Start.x == End.x)
                 {
                     if (Start.y < End.y)

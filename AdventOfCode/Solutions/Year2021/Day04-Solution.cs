@@ -24,8 +24,10 @@ namespace AdventOfCode.Solutions.Year2021
                     var line = cur[y].ToIntList(" ");
                     for (int x = 0; x < 5; x++)
                     {
-                        Cell curCell = new();
-                        curCell.Value = line[x];
+                        Cell curCell = new()
+                        {
+                            Value = line[x]
+                        };
                         nextBoard.cells[(x, y)] = curCell;
                         nextBoard.inv[line[x]] = (x, y);
                     }

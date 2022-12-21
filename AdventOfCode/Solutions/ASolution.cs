@@ -30,8 +30,6 @@ namespace AdventOfCode.Solutions
         protected bool UseDebugInput { get; set; }
         protected bool SkipInput { get; set; }
         public long ParseTime { get; set; }
-        private static HttpClient Client;
-        private static HttpClientHandler Handler;
 
         private protected ASolution(bool useDebugInput = false)
         {
@@ -41,15 +39,7 @@ namespace AdventOfCode.Solutions
             Day = dayInfo.Day;
             Year = dayInfo.Year;
             Title = dayInfo.Title;
-            if (Handler is null)
-            {
-                Handler = new HttpClientHandler { UseCookies = false };
-            }
-            if (Client is null)
-            {
-                Client = new(Handler);
-            }
-            
+
             _input = new Lazy<string>(LoadInput);
             _part1 = new Lazy<object>(() => SafelySolve(SolvePartOne, out _part1Time));
             _part2 = new Lazy<object>(() => SafelySolve(SolvePartTwo, out _part2Time));

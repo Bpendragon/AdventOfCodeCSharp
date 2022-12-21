@@ -53,7 +53,7 @@ namespace AdventOfCode.Solutions.Year2020
 
         long FindValid(int start)
         {
-            if (KnownCounts.ContainsKey(start)) return KnownCounts[start];
+            if (KnownCounts.TryGetValue(start, out long value)) return value;
 
             long tmp = 0;
             for(int i = 1; i <= 3; i++)

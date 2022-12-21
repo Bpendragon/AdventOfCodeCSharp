@@ -11,8 +11,8 @@ namespace AdventOfCode.Solutions.Year2015
     [DayInfo(04, 2015, "The Ideal Stocking Stuffer")]
     class Day04 : ASolution
     {
-        long firstRes = 0;
-        long secondRes = 0;
+        readonly long firstRes = 0;
+        readonly long secondRes = 0;
 
         public Day04() : base()
         {

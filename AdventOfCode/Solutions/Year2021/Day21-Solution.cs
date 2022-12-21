@@ -72,7 +72,7 @@ namespace AdventOfCode.Solutions.Year2021
         // diceRolls is the number of time the current player has rolled the dice.
         private Coordinate2DL DiracGame((int p1Score, int p2Score, int p1Pos, int p2Pos, int nextDice, int diceRolls, int toMove) curState)
         {
-            if (gameStates.ContainsKey(curState)) return gameStates[curState];
+            if (gameStates.TryGetValue(curState, out Coordinate2DL value)) return value;
             (int p1Score, int p2Score, int p1Pos, int p2Pos, int nextDice, int diceRolls, int toMove) = curState;
 
             //Make the move described in the game state

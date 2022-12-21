@@ -175,9 +175,11 @@ namespace AdventOfCode.Solutions.Year2021
                     {
                         var left = cur;
                         var right = cur.Next;
-                        SnailFishNode newNode = new();
-                        newNode.Value = 0;
-                        newNode.Depth = cur.Depth - 1;
+                        SnailFishNode newNode = new()
+                        {
+                            Value = 0,
+                            Depth = cur.Depth - 1
+                        };
 
                         if (left.Prev != null)
                         {

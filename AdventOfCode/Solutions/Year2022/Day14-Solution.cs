@@ -14,8 +14,8 @@ namespace AdventOfCode.Solutions.Year2022
     {
         Dictionary<Coordinate2D, char> caves;
         int sandSettled = 0;
-        Coordinate2D spawn = (500, 0);
-        int maxDepth = 0;
+        readonly Coordinate2D spawn = (500, 0);
+        readonly int maxDepth = 0;
 
         public Day14() : base()
         {
@@ -98,7 +98,7 @@ namespace AdventOfCode.Solutions.Year2022
             return caves.Count(a => a.Value == 'o');
         }
 
-        bool DropSand(Coordinate2D spawn, ref Dictionary<Coordinate2D, char> caves, out Coordinate2D restLoc)
+        static bool DropSand(Coordinate2D spawn, ref Dictionary<Coordinate2D, char> caves, out Coordinate2D restLoc)
         {
             var newSand = spawn;
             restLoc = newSand;

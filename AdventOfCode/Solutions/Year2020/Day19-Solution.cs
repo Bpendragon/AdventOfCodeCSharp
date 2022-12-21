@@ -56,7 +56,7 @@ namespace AdventOfCode.Solutions.Year2020
                 return processedRules[ruleIn] = baseRule.Replace("\"", "").Trim();
             }
 
-            if (!baseRule.Contains("|")) //treat each half of a split seperaratly (woo recursion)
+            if (!baseRule.Contains('|')) //treat each half of a split seperaratly (woo recursion)
                 return processedRules[ruleIn] = string.Join("", baseRule.Split().Select(x => BuildRegex(x)));
 
             return processedRules[ruleIn] =
