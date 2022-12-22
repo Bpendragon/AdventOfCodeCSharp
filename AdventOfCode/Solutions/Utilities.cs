@@ -48,6 +48,11 @@ namespace AdventOfCode.Solutions
             return Regex.Matches(str, "-?\\d+").Select(m => int.Parse(m.Value));
         }
 
+        public static IEnumerable<string> ExtractWords(this string str)
+        {
+            return Regex.Matches(str, "[a-zA-z]").Select(a => a.Value);
+        }
+
         public static List<long> ToLongList(this string str, string delimiter = "")
         {
             if (delimiter == "")

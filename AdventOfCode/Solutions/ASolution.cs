@@ -153,7 +153,6 @@ namespace AdventOfCode.Solutions
             }
             catch( Exception ex ) {
                 Trace.TraceError($"Caught Exception:\r\n{ex}");
-                Debugger.Break();
             }
             clock.Stop();
             timeTaken = clock.ElapsedTicks;
