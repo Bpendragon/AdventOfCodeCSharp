@@ -150,6 +150,7 @@ namespace AdventOfCode.Solutions
             string solution = string.Empty;
             try {
                 solution = (partSolver() ?? string.Empty).ToString();
+                if(string.IsNullOrWhiteSpace(solution)) solution = "No Answer Provided";
             }
             catch( Exception ex ) {
                 Trace.TraceError($"Caught Exception:\r\n{ex}");
