@@ -5,11 +5,9 @@
 
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Numerics;
-using System.Runtime.CompilerServices;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -19,6 +17,14 @@ namespace AdventOfCode.Solutions
 
     public static class Utilities
     {
+        public const CompassDirection N  = CompassDirection.N;
+        public const CompassDirection S  = CompassDirection.S;
+        public const CompassDirection E  = CompassDirection.E;
+        public const CompassDirection W  = CompassDirection.W;
+        public const CompassDirection NE = CompassDirection.NE;
+        public const CompassDirection NW = CompassDirection.NW;
+        public const CompassDirection SE = CompassDirection.SE;
+        public const CompassDirection SW = CompassDirection.SW;
 
         public static List<int> ToIntList(this string str, string delimiter = "")
         {

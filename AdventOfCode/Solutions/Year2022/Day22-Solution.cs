@@ -8,7 +8,7 @@ using static AdventOfCode.Solutions.Utilities;
 namespace AdventOfCode.Solutions.Year2022
 {
 
-    [DayInfo(22, 2022, "")]
+    [DayInfo(22, 2022, "Monkey Map")]
     class Day22 : ASolution
     {
         readonly Dictionary<Coordinate2D, (char val, int region)> Map = new();
