@@ -4,12 +4,21 @@ using System.IO;
 using System.Net;
 using System.Reflection;
 using System.Text;
+using static AdventOfCode.Solutions.Utilities;
 
 namespace AdventOfCode.Solutions
 {
 
     abstract class ASolution
     {
+        protected const CompassDirection N = CompassDirection.N;
+        protected const CompassDirection S = CompassDirection.S;
+        protected const CompassDirection E = CompassDirection.E;
+        protected const CompassDirection W = CompassDirection.W;
+        protected const CompassDirection NE = CompassDirection.NE;
+        protected const CompassDirection NW = CompassDirection.NW;
+        protected const CompassDirection SE = CompassDirection.SE;
+        protected const CompassDirection SW = CompassDirection.SW;
 
         long _part1Time, _part2Time;
         readonly Lazy<object> _part1, _part2;
