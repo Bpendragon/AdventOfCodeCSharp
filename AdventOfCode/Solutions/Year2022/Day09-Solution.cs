@@ -33,10 +33,10 @@ namespace AdventOfCode.Solutions.Year2022
             {
                 CompassDirection travelDirection = (step[0]) switch
                 {
-                    'U' => CompassDirection.N,
-                    'D' => CompassDirection.S,
-                    'L' => CompassDirection.W,
-                    'R' => CompassDirection.E,
+                    'U' => N,
+                    'D' => S,
+                    'L' => W,
+                    'R' => E,
                     _ => throw new ArgumentException("Invalid Direction")
                 };
                 int numSteps = int.Parse(step.Split(' ')[^1]);
@@ -71,10 +71,10 @@ namespace AdventOfCode.Solutions.Year2022
             {
                 CompassDirection travelDirection = (step[0]) switch
                 {
-                    'U' => CompassDirection.N,
-                    'D' => CompassDirection.S,
-                    'L' => CompassDirection.W,
-                    'R' => CompassDirection.E,
+                    'U' => N,
+                    'D' => S,
+                    'L' => W,
+                    'R' => E,
                     _ => throw new ArgumentException("Invalid Direction")
                 };
                 int numSteps = int.Parse(step.Split(' ')[^1]);
@@ -95,11 +95,11 @@ namespace AdventOfCode.Solutions.Year2022
                         else if (nextKnot.Value.ManDistance(curKnot.Value) >= 3)
                         {
                             //Dumb Homing, we know that we're at least a diagonal away, so move closer in x, then closer in y
-                            if (curKnot.Value.x > nextKnot.Value.x) nextKnot.Value = nextKnot.Value.MoveDirection(CompassDirection.E);
-                            else nextKnot.Value = nextKnot.Value.MoveDirection(CompassDirection.W);
+                            if (curKnot.Value.x > nextKnot.Value.x) nextKnot.Value = nextKnot.Value.MoveDirection(E);
+                            else nextKnot.Value = nextKnot.Value.MoveDirection(W);
 
-                            if (curKnot.Value.y > nextKnot.Value.y) nextKnot.Value = nextKnot.Value.MoveDirection(CompassDirection.N);
-                            else nextKnot.Value = nextKnot.Value.MoveDirection(CompassDirection.S);
+                            if (curKnot.Value.y > nextKnot.Value.y) nextKnot.Value = nextKnot.Value.MoveDirection(N);
+                            else nextKnot.Value = nextKnot.Value.MoveDirection(S);
                         }
                         curKnot = nextKnot;
                     }

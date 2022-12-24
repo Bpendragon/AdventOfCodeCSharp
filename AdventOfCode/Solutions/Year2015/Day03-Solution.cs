@@ -23,10 +23,10 @@ namespace AdventOfCode.Solutions.Year2015
             {
                 elf1 = c switch
                 {
-                    '^' => elf1.MoveDirection(Utilities.CompassDirection.N),
-                    'v' => elf1.MoveDirection(Utilities.CompassDirection.S),
-                    '>' => elf1.MoveDirection(Utilities.CompassDirection.E),
-                    '<' => elf1.MoveDirection(Utilities.CompassDirection.W),
+                    '^' => elf1.MoveDirection(Utilities.N),
+                    'v' => elf1.MoveDirection(Utilities.S),
+                    '>' => elf1.MoveDirection(Utilities.E),
+                    '<' => elf1.MoveDirection(Utilities.W),
                     _ => throw new Exception()
                 };
 
@@ -44,19 +44,19 @@ namespace AdventOfCode.Solutions.Year2015
             {
                 elf1 = Input[i] switch
                 {
-                    '^' => elf1.MoveDirection(Utilities.CompassDirection.N),
-                    'v' => elf1.MoveDirection(Utilities.CompassDirection.S),
-                    '>' => elf1.MoveDirection(Utilities.CompassDirection.E),
-                    '<' => elf1.MoveDirection(Utilities.CompassDirection.W),
+                    '^' => elf1.MoveDirection(Utilities.N),
+                    'v' => elf1.MoveDirection(Utilities.S),
+                    '>' => elf1.MoveDirection(Utilities.E),
+                    '<' => elf1.MoveDirection(Utilities.W),
                     _ => throw new Exception()
                 };
 
                 elf2 = Input[i + 1] switch
                 {
-                    '^' => elf2.MoveDirection(Utilities.CompassDirection.N),
-                    'v' => elf2.MoveDirection(Utilities.CompassDirection.S),
-                    '>' => elf2.MoveDirection(Utilities.CompassDirection.E),
-                    '<' => elf2.MoveDirection(Utilities.CompassDirection.W),
+                    '^' => elf2.MoveDirection(Utilities.N),
+                    'v' => elf2.MoveDirection(Utilities.S),
+                    '>' => elf2.MoveDirection(Utilities.E),
+                    '<' => elf2.MoveDirection(Utilities.W),
                     _ => throw new Exception()
                 };
                 HousesVisted2.Add(elf1);

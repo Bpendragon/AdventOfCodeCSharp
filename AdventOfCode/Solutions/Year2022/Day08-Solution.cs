@@ -40,7 +40,7 @@ namespace AdventOfCode.Solutions.Year2022
                         tallest = trees[(x, y)];
                         visibleTrees.Add((x, y));
                         //Search North
-                        next = (x, y).MoveDirection(CompassDirection.N);
+                        next = (x, y).MoveDirection(N);
                         while (trees.TryGetValue(next, out int height))
                         {
                             if (height > tallest)
@@ -48,11 +48,11 @@ namespace AdventOfCode.Solutions.Year2022
                                 tallest = height;
                                 visibleTrees.Add(next);
                             }
-                            next = next.MoveDirection(CompassDirection.N);
+                            next = next.MoveDirection(N);
                         }
                         //Search South
                         tallest = trees[(x, y)];
-                        next = (x, y).MoveDirection(CompassDirection.S);
+                        next = (x, y).MoveDirection(S);
                         while (trees.TryGetValue(next, out int height))
                         {
                             if (height > tallest)
@@ -60,7 +60,7 @@ namespace AdventOfCode.Solutions.Year2022
                                 tallest = height;
                                 visibleTrees.Add(next);
                             }
-                            next = next.MoveDirection(CompassDirection.S);
+                            next = next.MoveDirection(S);
                         }
                     }
                 }
@@ -69,7 +69,7 @@ namespace AdventOfCode.Solutions.Year2022
                     //Search East
                     tallest = trees[(0, y)];
                     visibleTrees.Add((0, y));
-                    next = (0, y).MoveDirection(CompassDirection.E);
+                    next = (0, y).MoveDirection(E);
                     while (trees.TryGetValue(next, out int height))
                     {
                         if (height > tallest)
@@ -77,13 +77,13 @@ namespace AdventOfCode.Solutions.Year2022
                             tallest = height;
                             visibleTrees.Add(next);
                         }
-                        next = next.MoveDirection(CompassDirection.E);
+                        next = next.MoveDirection(E);
                     }
 
                     //Search West
                     tallest = trees[(maxX, y)];
                     visibleTrees.Add((maxX, y));
-                    next = (maxX, y).MoveDirection(CompassDirection.W);
+                    next = (maxX, y).MoveDirection(W);
                     while (trees.TryGetValue(next, out int height))
                     {
                         if (height > tallest)
@@ -91,7 +91,7 @@ namespace AdventOfCode.Solutions.Year2022
                             tallest = height;
                             visibleTrees.Add(next);
                         }
-                        next = next.MoveDirection(CompassDirection.W);
+                        next = next.MoveDirection(W);
                     }
                 }
             }
@@ -109,7 +109,7 @@ namespace AdventOfCode.Solutions.Year2022
                     int maxAllowed = trees[(x, y)];
                     int scenicScore = 1;
                     int visTrees = 0;
-                    Coordinate2D next = (x, y).MoveDirection(CompassDirection.N);
+                    Coordinate2D next = (x, y).MoveDirection(N);
                     //North
                     while(trees.TryGetValue(next, out int height))
                     {
@@ -119,13 +119,13 @@ namespace AdventOfCode.Solutions.Year2022
                             visTrees++;
                             break;
                         }
-                        next = next.MoveDirection(CompassDirection.N);
+                        next = next.MoveDirection(N);
                     }
                     scenicScore *= visTrees;
                     if (scenicScore == 0) continue;
                     visTrees = 0;
                     //South
-                    next = (x, y).MoveDirection(CompassDirection.S);
+                    next = (x, y).MoveDirection(S);
                     while (trees.TryGetValue(next, out int height))
                     {
                         if (height < maxAllowed) visTrees++;
@@ -134,14 +134,14 @@ namespace AdventOfCode.Solutions.Year2022
                             visTrees++;
                             break;
                         }
-                        next = next.MoveDirection(CompassDirection.S);
+                        next = next.MoveDirection(S);
                     }
                     scenicScore *= visTrees;
                     if (scenicScore == 0) continue;
                     visTrees = 0;
 
                     //East
-                    next = (x, y).MoveDirection(CompassDirection.E);
+                    next = (x, y).MoveDirection(E);
                     while (trees.TryGetValue(next, out int height))
                     {
                         if (height < maxAllowed) visTrees++;
@@ -150,14 +150,14 @@ namespace AdventOfCode.Solutions.Year2022
                             visTrees++;
                             break;
                         }
-                        next = next.MoveDirection(CompassDirection.E);
+                        next = next.MoveDirection(E);
                     }
                     scenicScore *= visTrees;
                     if (scenicScore == 0) continue;
                     visTrees = 0;
 
                     //West
-                    next = (x, y).MoveDirection(CompassDirection.W);
+                    next = (x, y).MoveDirection(W);
                     while (trees.TryGetValue(next, out int height))
                     {
                         if (height < maxAllowed) visTrees++;
@@ -166,7 +166,7 @@ namespace AdventOfCode.Solutions.Year2022
                             visTrees++;
                             break;
                         }
-                        next = next.MoveDirection(CompassDirection.W);
+                        next = next.MoveDirection(W);
                     }
                     scenicScore *= visTrees;
                     if (scenicScore > maxScore) maxScore = scenicScore;

@@ -20,6 +20,8 @@ namespace AdventOfCode.Solutions
         protected const CompassDirection SE = CompassDirection.SE;
         protected const CompassDirection SW = CompassDirection.SW;
 
+
+
         long _part1Time, _part2Time;
         readonly Lazy<object> _part1, _part2;
         readonly Lazy<string> _input;

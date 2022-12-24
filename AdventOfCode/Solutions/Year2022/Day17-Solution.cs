@@ -22,7 +22,7 @@ namespace AdventOfCode.Solutions.Year2022
         readonly Dictionary<(ulong topRows, long shapeIndex, long jetIndex), int> states = new(); //Using a bitmask I can store the top 9 rows of rocks in a base 64 number
         readonly Dictionary<long, long[]> cache = new();
         readonly Dictionary<Coordinate2D, int> tower;
-        readonly CompassDirection drop = CompassDirection.S;
+        readonly CompassDirection drop = S;
         readonly long part1;
         readonly long part2;
         readonly long part2Count = 1_000_000_000_000;
@@ -86,14 +86,14 @@ namespace AdventOfCode.Solutions.Year2022
             newHeights = heights;
             long jetAtStart = jetIndex;
 
-            shape = shape.Select(a => a.MoveDirection(CompassDirection.E, distance: 2)).Select(a => a.MoveDirection(CompassDirection.N, distance: (int)(maxHeight + 4))).ToList();
+            shape = shape.Select(a => a.MoveDirection(E, distance: 2)).Select(a => a.MoveDirection(N, distance: (int)(maxHeight + 4))).ToList();
 
             while(true)
             {
                 var moveDir = Input[(int)(jetIndex % Input.Length)] switch
                 {
-                    '<' => CompassDirection.W,
-                    '>' => CompassDirection.E,
+                    '<' => W,
+                    '>' => E,
                     _ => throw new ArgumentException("Bad Input"),
                 };
 

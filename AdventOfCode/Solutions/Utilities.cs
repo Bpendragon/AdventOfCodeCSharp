@@ -17,6 +17,15 @@ namespace AdventOfCode.Solutions
 
     public static class Utilities
     {
+        private const CompassDirection N = N;
+        private const CompassDirection S = S;
+        private const CompassDirection E = E;
+        private const CompassDirection W = W;
+        private const CompassDirection NE = NE;
+        private const CompassDirection NW = NW;
+        private const CompassDirection SE = SE;
+        private const CompassDirection SW = SW;
+
         public static List<int> ToIntList(this string str, string delimiter = "")
         {
             if (delimiter == "")
@@ -378,11 +387,11 @@ namespace AdventOfCode.Solutions
         }
 
         /// <summary>
-        /// Rotates an IEnumarable by the requested amount
+        /// Rotates an IEnumerable by the requested amount
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="array"></param>
-        /// <param name="rotations">Number of steps to take, positive numbers move indices up (item at end moves to start), negative numbers move them down (first item moves to end of array)</param>
+        /// <param name="rotations">Number of steps to take, positive numbers move indices down (first item moves to end of array), negative numbers move them up (item at end moves to start)</param>
         /// <returns></returns>
         public static IEnumerable<T> Rotate<T>(this IEnumerable<T> array, int rotations)
         {
@@ -455,14 +464,14 @@ namespace AdventOfCode.Solutions
             {
                 return (Direction) switch
                 {
-                    CompassDirection.N => start.Add((0, -distance)),
-                    CompassDirection.NE => start.Add((distance, -distance)),
-                    CompassDirection.E => start.Add((distance, 0)),
-                    CompassDirection.SE => start.Add((distance, distance)),
-                    CompassDirection.S => start.Add((0, distance)),
-                    CompassDirection.SW => start.Add((-distance, distance)),
-                    CompassDirection.W => start.Add((-distance, 0)),
-                    CompassDirection.NW => start.Add((-distance, -distance)),
+                    N => start.Add((0, -distance)),
+                    NE => start.Add((distance, -distance)),
+                    E => start.Add((distance, 0)),
+                    SE => start.Add((distance, distance)),
+                    S => start.Add((0, distance)),
+                    SW => start.Add((-distance, distance)),
+                    W => start.Add((-distance, 0)),
+                    NW => start.Add((-distance, -distance)),
                     _ => throw new ArgumentException("Direction is not valid", nameof(Direction))
                 };
             }
@@ -470,14 +479,14 @@ namespace AdventOfCode.Solutions
             {
                 return (Direction) switch
                 {
-                    CompassDirection.N => start.Add((0, distance)),
-                    CompassDirection.NE => start.Add((distance, distance)),
-                    CompassDirection.E => start.Add((distance, 0)),
-                    CompassDirection.SE => start.Add((distance, -distance)),
-                    CompassDirection.S => start.Add((0, -distance)),
-                    CompassDirection.SW => start.Add((-distance, -distance)),
-                    CompassDirection.W => start.Add((-distance, 0)),
-                    CompassDirection.NW => start.Add((-distance, distance)),
+                    N => start.Add((0, distance)),
+                    NE => start.Add((distance, distance)),
+                    E => start.Add((distance, 0)),
+                    SE => start.Add((distance, -distance)),
+                    S => start.Add((0, -distance)),
+                    SW => start.Add((-distance, -distance)),
+                    W => start.Add((-distance, 0)),
+                    NW => start.Add((-distance, distance)),
                     _ => throw new ArgumentException("Direction is not valid", nameof(Direction))
                 };
             }
@@ -489,14 +498,14 @@ namespace AdventOfCode.Solutions
             {
                 return (Direction) switch
                 {
-                    CompassDirection.N => start + (0, -distance),
-                    CompassDirection.NE => start + (distance, -distance),
-                    CompassDirection.E => start + (distance, 0),
-                    CompassDirection.SE => start+(distance, distance),
-                    CompassDirection.S => start+(0, distance),
-                    CompassDirection.SW => start+(-distance, distance),
-                    CompassDirection.W =>  start + (-distance, 0),
-                    CompassDirection.NW => start + (-distance, -distance),
+                    N => start + (0, -distance),
+                    NE => start + (distance, -distance),
+                    E => start + (distance, 0),
+                    SE => start+(distance, distance),
+                    S => start+(0, distance),
+                    SW => start+(-distance, distance),
+                    W =>  start + (-distance, 0),
+                    NW => start + (-distance, -distance),
                     _ => throw new ArgumentException("Direction is not valid", nameof(Direction))
                 };
             }
@@ -504,14 +513,14 @@ namespace AdventOfCode.Solutions
             {
                 return (Direction) switch
                 {
-                    CompassDirection.N => start + (0, distance),
-                    CompassDirection.NE => start + (distance, distance),
-                    CompassDirection.E => start + (distance, 0),
-                    CompassDirection.SE => start + (distance, -distance),
-                    CompassDirection.S => start + (0, -distance),
-                    CompassDirection.SW => start + (-distance, -distance),
-                    CompassDirection.W => start + (-distance, 0),
-                    CompassDirection.NW => start + (-distance, distance),
+                    N => start + (0, distance),
+                    NE => start + (distance, distance),
+                    E => start + (distance, 0),
+                    SE => start + (distance, -distance),
+                    S => start + (0, -distance),
+                    SW => start + (-distance, -distance),
+                    W => start + (-distance, 0),
+                    NW => start + (-distance, distance),
                     _ => throw new ArgumentException("Direction is not valid", nameof(Direction))
                 };
             }
@@ -545,18 +554,18 @@ namespace AdventOfCode.Solutions
         {
             List<T> res = new()
             {
-                values.GetDirection(location, CompassDirection.N, defaultVal),
-                values.GetDirection(location, CompassDirection.E, defaultVal),
-                values.GetDirection(location, CompassDirection.S, defaultVal),
-                values.GetDirection(location, CompassDirection.W, defaultVal)
+                values.GetDirection(location, N, defaultVal),
+                values.GetDirection(location, E, defaultVal),
+                values.GetDirection(location, S, defaultVal),
+                values.GetDirection(location, W, defaultVal)
             };
 
             if (includeDiagonals)
             {
-                res.Add(values.GetDirection(location, CompassDirection.NW, defaultVal));
-                res.Add(values.GetDirection(location, CompassDirection.NE, defaultVal));
-                res.Add(values.GetDirection(location, CompassDirection.SE, defaultVal));
-                res.Add(values.GetDirection(location, CompassDirection.SW, defaultVal));
+                res.Add(values.GetDirection(location, NW, defaultVal));
+                res.Add(values.GetDirection(location, NE, defaultVal));
+                res.Add(values.GetDirection(location, SE, defaultVal));
+                res.Add(values.GetDirection(location, SW, defaultVal));
             }
 
 
@@ -567,18 +576,18 @@ namespace AdventOfCode.Solutions
         {
             List<T> res = new()
             {
-                values.GetDirection(location, CompassDirection.N, defaultVal),
-                values.GetDirection(location, CompassDirection.E, defaultVal),
-                values.GetDirection(location, CompassDirection.S, defaultVal),
-                values.GetDirection(location, CompassDirection.W, defaultVal)
+                values.GetDirection(location, N, defaultVal),
+                values.GetDirection(location, E, defaultVal),
+                values.GetDirection(location, S, defaultVal),
+                values.GetDirection(location, W, defaultVal)
             };
 
             if (includeDiagonals)
             {
-                res.Add(values.GetDirection(location, CompassDirection.NW, defaultVal));
-                res.Add(values.GetDirection(location, CompassDirection.NE, defaultVal));
-                res.Add(values.GetDirection(location, CompassDirection.SE, defaultVal));
-                res.Add(values.GetDirection(location, CompassDirection.SW, defaultVal));
+                res.Add(values.GetDirection(location, NW, defaultVal));
+                res.Add(values.GetDirection(location, NE, defaultVal));
+                res.Add(values.GetDirection(location, SE, defaultVal));
+                res.Add(values.GetDirection(location, SW, defaultVal));
             }
 
             return res;

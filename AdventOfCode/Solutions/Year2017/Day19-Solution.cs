@@ -28,7 +28,7 @@ namespace AdventOfCode.Solutions.Year2017
         protected override object SolvePartOne()
         {
             var curPos = (Lines[0].IndexOf('|'), 0);
-            var curDir = CompassDirection.N; //because north is down in my world.
+            var curDir = N; //because north is down in my world.
 
 
             while (true)
@@ -43,28 +43,28 @@ namespace AdventOfCode.Solutions.Year2017
                 {
                     switch(curDir)
                     {
-                        case CompassDirection.N:
-                        case CompassDirection.S:
-                            if(map[curPos.MoveDirection(CompassDirection.E)] == '-')
+                        case N:
+                        case S:
+                            if(map[curPos.MoveDirection(E)] == '-')
                             {
-                                curDir = CompassDirection.E;
-                            } else if(map[curPos.MoveDirection(CompassDirection.W)] == '-')
+                                curDir = E;
+                            } else if(map[curPos.MoveDirection(W)] == '-')
                             {
-                                curDir = CompassDirection.W;
+                                curDir = W;
                             } else
                             {
                                 throw new Exception();
                             }
                             break;
-                        case CompassDirection.E:
-                        case CompassDirection.W:
-                            if (map[curPos.MoveDirection(CompassDirection.N)] == '|')
+                        case E:
+                        case W:
+                            if (map[curPos.MoveDirection(N)] == '|')
                             {
-                                curDir = CompassDirection.N;
+                                curDir = N;
                             }
-                            else if (map[curPos.MoveDirection(CompassDirection.S)] == '|')
+                            else if (map[curPos.MoveDirection(S)] == '|')
                             {
-                                curDir = CompassDirection.S;
+                                curDir = S;
                             }
                             else
                             {

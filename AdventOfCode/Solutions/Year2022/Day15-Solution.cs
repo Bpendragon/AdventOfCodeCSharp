@@ -63,10 +63,10 @@ namespace AdventOfCode.Solutions.Year2022
             for (int i = 0; i < sensorsAsList.Length; i++)
             {
                 var curSens = sensorsAsList[i];
-                if (TestDir(CompassDirection.SE, curSens, out beaconSpot)) break;
-                if (TestDir(CompassDirection.NE, curSens, out beaconSpot)) break;
-                if (TestDir(CompassDirection.SW, curSens, out beaconSpot)) break;
-                if (TestDir(CompassDirection.SE, curSens, out beaconSpot)) break;
+                if (TestDir(SE, curSens, out beaconSpot)) break;
+                if (TestDir(NE, curSens, out beaconSpot)) break;
+                if (TestDir(SW, curSens, out beaconSpot)) break;
+                if (TestDir(SE, curSens, out beaconSpot)) break;
             }
 
             return ((long)beaconSpot.x * 4000000) + beaconSpot.y;
@@ -84,10 +84,10 @@ namespace AdventOfCode.Solutions.Year2022
 
             Coordinate2D curLoc = (dir) switch
             {
-                CompassDirection.SW => sensorLoc.MoveDirection(CompassDirection.N, false, Sensors[sensorLoc] + 1),
-                CompassDirection.SE => sensorLoc.MoveDirection(CompassDirection.N, false, Sensors[sensorLoc] + 1),
-                CompassDirection.NE => sensorLoc.MoveDirection(CompassDirection.S, false, Sensors[sensorLoc] + 1),
-                CompassDirection.NW => sensorLoc.MoveDirection(CompassDirection.S, false, Sensors[sensorLoc] + 1),
+                SW => sensorLoc.MoveDirection(N, false, Sensors[sensorLoc] + 1),
+                SE => sensorLoc.MoveDirection(N, false, Sensors[sensorLoc] + 1),
+                NE => sensorLoc.MoveDirection(S, false, Sensors[sensorLoc] + 1),
+                NW => sensorLoc.MoveDirection(S, false, Sensors[sensorLoc] + 1),
                 _ => throw new ArgumentException("Only diagonals this time bucko")
             };
 

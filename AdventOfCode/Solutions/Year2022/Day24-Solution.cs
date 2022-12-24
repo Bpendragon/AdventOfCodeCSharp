@@ -83,7 +83,7 @@ namespace AdventOfCode.Solutions.Year2022
 
         int TimeToFind(Coordinate2D startPos, Coordinate2D target, int cycleOffset)
         {
-            //State Stored to the stack/cache is (curpos, currentTraversalTime), caches does TraversalTime % sateslength 
+            //State Stored to the stack/cache is (curpos, currentTraversalTime)
             var localBlizz = States.Rotate(cycleOffset).ToList();
             HashSet<(Coordinate2D curLoc, int time)> cache = new();
             Queue<(Coordinate2D curLoc, int time)> Q = new();

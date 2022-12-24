@@ -40,7 +40,7 @@ namespace AdventOfCode.Solutions.Year2017
         protected override object SolvePartOne()
         {
             (int x, int y) curPosition = center;
-            CompassDirection curDirection = CompassDirection.N;
+            CompassDirection curDirection = N;
             var newMap = new Dictionary<(int x, int y), char>(startMap);
 
 
@@ -70,7 +70,7 @@ namespace AdventOfCode.Solutions.Year2017
         protected override object SolvePartTwo()
         {
             (int x, int y) curPosition = center;
-            CompassDirection curDirection = CompassDirection.N;
+            CompassDirection curDirection = N;
             var newMap = new Dictionary<(int x, int y), char>(startMap);
 
 

@@ -149,10 +149,10 @@ namespace AdventOfCode.Solutions.Year2019
             (int x, int y) curLoc = startingPoint;
             var curDirection = map[startingPoint] switch
             {
-                '^' => CompassDirection.N,
-                '>' => CompassDirection.E,
-                'v' => CompassDirection.S,
-                '<' => CompassDirection.W,
+                '^' => N,
+                '>' => E,
+                'v' => S,
+                '<' => W,
                 _ => throw new ArgumentException($"{map[startingPoint]} is not a valid arrow"),
             };
 
@@ -170,52 +170,52 @@ namespace AdventOfCode.Solutions.Year2019
                     if (distanceTraveled != 0) sb.Append($"{distanceTraveled},");
                     switch(curDirection)
                     {
-                        case CompassDirection.N: 
-                            if(map.ContainsKey(curLoc.MoveDirection(CompassDirection.W, true)))
+                        case N: 
+                            if(map.ContainsKey(curLoc.MoveDirection(W, true)))
                             {
                                 sb.Append("L,");
-                                curDirection = CompassDirection.W;
+                                curDirection = W;
                             }
                             else
                             {
                                 sb.Append("R,");
-                                curDirection = CompassDirection.E;
+                                curDirection = E;
                             }
                             break;
-                        case CompassDirection.E:
-                            if (map.ContainsKey(curLoc.MoveDirection(CompassDirection.N, true)))
+                        case E:
+                            if (map.ContainsKey(curLoc.MoveDirection(N, true)))
                             {
                                 sb.Append("L,");
-                                curDirection = CompassDirection.N;
+                                curDirection = N;
                             }
                             else
                             {
                                 sb.Append("R,");
-                                curDirection = CompassDirection.S;
+                                curDirection = S;
                             }
                             break;
-                        case CompassDirection.S:
-                            if (map.ContainsKey(curLoc.MoveDirection(CompassDirection.E, true)))
+                        case S:
+                            if (map.ContainsKey(curLoc.MoveDirection(E, true)))
                             {
                                 sb.Append("L,");
-                                curDirection = CompassDirection.E;
+                                curDirection = E;
                             }
                             else
                             {
                                 sb.Append("R,");
-                                curDirection = CompassDirection.W;
+                                curDirection = W;
                             }
                             break;
-                        case CompassDirection.W:
-                            if (map.ContainsKey(curLoc.MoveDirection(CompassDirection.S, true)))
+                        case W:
+                            if (map.ContainsKey(curLoc.MoveDirection(S, true)))
                             {
                                 sb.Append("L,");
-                                curDirection = CompassDirection.S;
+                                curDirection = S;
                             }
                             else
                             {
                                 sb.Append("R,");
-                                curDirection = CompassDirection.N;
+                                curDirection = N;
                             }
                             break;
                     }

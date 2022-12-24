@@ -51,7 +51,7 @@ namespace AdventOfCode.Solutions.Year2022
         protected override object SolvePartOne()
         {
             Coordinate2D curLoc = Map.Keys.Where(a => a.y == 1).OrderBy(a => a.x).First();
-            CompassDirection curDir = CompassDirection.E;
+            CompassDirection curDir = E;
 
             for(int i = 0; i < Steps.Count; i++)
             {
@@ -84,10 +84,10 @@ namespace AdventOfCode.Solutions.Year2022
 
             int dirSum = (curDir) switch
             {
-                CompassDirection.E => 0,
-                CompassDirection.S => 1,
-                CompassDirection.W => 2,
-                CompassDirection.N => 3,
+                E => 0,
+                S => 1,
+                W => 2,
+                N => 3,
                 _ => throw new ArgumentException($"{nameof(curDir)} Must be a Cardinal Direction")
             };
 
@@ -97,7 +97,7 @@ namespace AdventOfCode.Solutions.Year2022
         protected override object SolvePartTwo()
         {
             Coordinate2D curLoc = Map.Keys.Where(a => a.y == 1).OrderBy(a => a.x).First();
-            CompassDirection curDir = CompassDirection.E;
+            CompassDirection curDir = E;
 
             for (int i = 0; i < Steps.Count; i++)
             {
@@ -120,61 +120,61 @@ namespace AdventOfCode.Solutions.Year2022
                         switch(curRegion)
                         {
                             case 1:
-                                newDir = CompassDirection.E;
-                                if (curDir == CompassDirection.N) nextLoc = (1, curLoc.x + 100);
+                                newDir = E;
+                                if (curDir == N) nextLoc = (1, curLoc.x + 100);
                                 else nextLoc = (1, (50 - curLoc.y) + 101);
                                 break;
                             case 2:
-                                if (curDir == CompassDirection.N)
+                                if (curDir == N)
                                 {
-                                    newDir = CompassDirection.N;
+                                    newDir = N;
                                     nextLoc = (curLoc.x - 100, 200); //Loop full top to bottom, just set it to 200
                                 }
-                                else if (curDir == CompassDirection.E)
+                                else if (curDir == E)
                                 {
-                                    newDir = CompassDirection.W;
+                                    newDir = W;
                                     nextLoc = (100, (50-curLoc.y) + 101);
                                 }
                                 else
                                 {
-                                    newDir = CompassDirection.W;
+                                    newDir = W;
                                     nextLoc = (curLoc.y + 50, curLoc.x - 50);
                                 }
                                 break;
                             case 3:
-                                if(curDir == CompassDirection.E)
+                                if(curDir == E)
                                 {
-                                    newDir = CompassDirection.N;
+                                    newDir = N;
                                     nextLoc = (curLoc.y + 50, 50);
                                 }
                                 else
                                 {
-                                    newDir = CompassDirection.S;
+                                    newDir = S;
                                     nextLoc = (curLoc.y - 50, 101);
                                 }
                                 break;
                             case 4:
-                                newDir = CompassDirection.E;
-                                if (curDir == CompassDirection.N) nextLoc = (51, curLoc.x + 50);
+                                newDir = E;
+                                if (curDir == N) nextLoc = (51, curLoc.x + 50);
                                 else nextLoc = (51, 50 - ((curLoc.y - 51) % 50));
                                 break;
                             case 5:
-                                newDir = CompassDirection.W;
-                                if (curDir == CompassDirection.S) nextLoc = (50, curLoc.x + 100);
+                                newDir = W;
+                                if (curDir == S) nextLoc = (50, curLoc.x + 100);
                                 else nextLoc = (150, 50 - ((curLoc.y - 51) % 50));
                                 break;
                             case 6:
-                                if(curDir == CompassDirection.S)
+                                if(curDir == S)
                                 {
-                                    newDir = CompassDirection.S;
+                                    newDir = S;
                                     nextLoc = (curLoc.x + 100, 1);
-                                } else if (curDir == CompassDirection.W)
+                                } else if (curDir == W)
                                 {
-                                    newDir = CompassDirection.S;
+                                    newDir = S;
                                     nextLoc = (curLoc.y - 100, 1);
                                 } else
                                 {
-                                    newDir = CompassDirection.N;
+                                    newDir = N;
                                     nextLoc = (curLoc.y - 100, curLoc.x + 100);
                                 }
                                 break;
@@ -200,10 +200,10 @@ namespace AdventOfCode.Solutions.Year2022
 
             int dirSum = (curDir) switch
             {
-                CompassDirection.E => 0,
-                CompassDirection.S => 1,
-                CompassDirection.W => 2,
-                CompassDirection.N => 3,
+                E => 0,
+                S => 1,
+                W => 2,
+                N => 3,
                 _ => throw new ArgumentException($"{nameof(curDir)} Must be a Cardinal Direction")
             };
             return (1000 * curLoc.y) + (4 * curLoc.x) + dirSum;

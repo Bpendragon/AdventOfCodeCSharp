@@ -35,10 +35,10 @@ namespace AdventOfCode.Solutions.Year2022
                     if (next.y > maxDepth) maxDepth = next.y;
 
                     CompassDirection travelDir;
-                    if (cur.x == next.x && cur.y > next.y) travelDir = CompassDirection.S;
-                    else if (cur.x == next.x && cur.y < next.y) travelDir = CompassDirection.N;
-                    else if (cur.x < next.x && cur.y == next.y) travelDir = CompassDirection.E;
-                    else travelDir = CompassDirection.W;
+                    if (cur.x == next.x && cur.y > next.y) travelDir = S;
+                    else if (cur.x == next.x && cur.y < next.y) travelDir = N;
+                    else if (cur.x < next.x && cur.y == next.y) travelDir = E;
+                    else travelDir = W;
 
                     while (cur != next)
                     {
@@ -81,9 +81,9 @@ namespace AdventOfCode.Solutions.Year2022
                     if (a == (500, 0)) continue;
                     if (caves[a] == 'o')
                     {
-                        var up = caves.GetValueOrDefault(a.MoveDirection(CompassDirection.N, true), '#');
-                        var upl = caves.GetValueOrDefault(a.MoveDirection(CompassDirection.NW, true), '#');
-                        var upr = caves.GetValueOrDefault(a.MoveDirection(CompassDirection.NE, true), '#');
+                        var up = caves.GetValueOrDefault(a.MoveDirection(N, true), '#');
+                        var upl = caves.GetValueOrDefault(a.MoveDirection(NW, true), '#');
+                        var upr = caves.GetValueOrDefault(a.MoveDirection(NE, true), '#');
                         if (up == '#' && upl == '#' && upr == '#')
                         {
                             toRemove.Add(a);
@@ -106,10 +106,10 @@ namespace AdventOfCode.Solutions.Year2022
             {
                 if (!caves.Any(a => a.Key.x == newSand.x && a.Key.y > newSand.y)) return false; //This piece will fall forever
 
-                newSand = caves.Where(a => a.Key.x == newSand.x && a.Key.y > newSand.y).OrderBy(a => a.Key.y).First().Key.MoveDirection(CompassDirection.N, true); //Fall until contact
+                newSand = caves.Where(a => a.Key.x == newSand.x && a.Key.y > newSand.y).OrderBy(a => a.Key.y).First().Key.MoveDirection(N, true); //Fall until contact
 
-                if (!caves.ContainsKey(newSand.MoveDirection(CompassDirection.SW, true))) newSand = newSand.MoveDirection(CompassDirection.SW, true); //Try move down-left
-                else if (!caves.ContainsKey(newSand.MoveDirection(CompassDirection.SE, true))) newSand = newSand.MoveDirection(CompassDirection.SE, true); //try move down-right
+                if (!caves.ContainsKey(newSand.MoveDirection(SW, true))) newSand = newSand.MoveDirection(SW, true); //Try move down-left
+                else if (!caves.ContainsKey(newSand.MoveDirection(SE, true))) newSand = newSand.MoveDirection(SE, true); //try move down-right
                 else //can't move down-left or down right, we've come to a rest.
                 {
                     caves[newSand] = 'o';
