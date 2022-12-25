@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using static AdventOfCode.Solutions.Utilities;
 
 namespace AdventOfCode.Solutions.Year2022
 {

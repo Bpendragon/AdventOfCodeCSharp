@@ -17,14 +17,14 @@ namespace AdventOfCode.Solutions
 
     public static class Utilities
     {
-        private const CompassDirection N = N;
-        private const CompassDirection S = S;
-        private const CompassDirection E = E;
-        private const CompassDirection W = W;
-        private const CompassDirection NE = NE;
-        private const CompassDirection NW = NW;
-        private const CompassDirection SE = SE;
-        private const CompassDirection SW = SW;
+        private const CompassDirection N = CompassDirection.N;
+        private const CompassDirection S = CompassDirection.S;
+        private const CompassDirection E = CompassDirection.E;
+        private const CompassDirection W = CompassDirection.W;
+        private const CompassDirection NE = CompassDirection.NE;
+        private const CompassDirection NW = CompassDirection.NW;
+        private const CompassDirection SE = CompassDirection.SE;
+        private const CompassDirection SW = CompassDirection.SW;
 
         public static List<int> ToIntList(this string str, string delimiter = "")
         {

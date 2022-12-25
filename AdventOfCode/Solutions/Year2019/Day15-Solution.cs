@@ -109,10 +109,10 @@ namespace AdventOfCode.Solutions.Year2019
         {
             (int x, int y) nextLocation = (lastInput) switch
             {
-                1 => botLocation.MoveDirection(Utilities.N),
-                2 => botLocation.MoveDirection(Utilities.S),
-                3 => botLocation.MoveDirection(Utilities.W),
-                4 => botLocation.MoveDirection(Utilities.E),
+                1 => botLocation.MoveDirection(N),
+                2 => botLocation.MoveDirection(S),
+                3 => botLocation.MoveDirection(W),
+                4 => botLocation.MoveDirection(E),
                 _ => throw new Exception()
             };
 

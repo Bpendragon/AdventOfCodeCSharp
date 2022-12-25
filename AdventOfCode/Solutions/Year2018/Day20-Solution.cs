@@ -32,22 +32,22 @@ namespace AdventOfCode.Solutions.Year2018
                         curLoc = tmp.loc;
                         break;
                     case 'N':
-                        curLoc = curLoc.MoveDirection(Utilities.N);
+                        curLoc = curLoc.MoveDirection(N);
                         dist++;
                         if (!map.ContainsKey(curLoc) || dist < map[curLoc]) map[curLoc] = dist;
                         break;
                     case 'S':
-                        curLoc = curLoc.MoveDirection(Utilities.S);
+                        curLoc = curLoc.MoveDirection(S);
                         dist++;
                         if (!map.ContainsKey(curLoc) || dist < map[curLoc]) map[curLoc] = dist;
                         break;
                     case 'E':
-                        curLoc = curLoc.MoveDirection(Utilities.E);
+                        curLoc = curLoc.MoveDirection(E);
                         dist++;
                         if (!map.ContainsKey(curLoc) || dist < map[curLoc]) map[curLoc] = dist;
                         break;
                     case 'W':
-                        curLoc = curLoc.MoveDirection(Utilities.W);
+                        curLoc = curLoc.MoveDirection(W);
                         dist++;
                         if (!map.ContainsKey(curLoc) || dist < map[curLoc]) map[curLoc] = dist;
                         break;
