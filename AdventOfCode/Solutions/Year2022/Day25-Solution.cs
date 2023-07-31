@@ -33,14 +33,7 @@ namespace AdventOfCode.Solutions.Year2022
                 long pwr = 1;
                 foreach(char c in s)
                 {
-                    tmp += c switch
-                    {
-                        '1' => pwr,
-                        '2' => 2 * pwr,
-                        '0' => 0,
-                        '-' => -pwr,
-                        '=' => -2 * pwr
-                    };
+                    tmp += pwr * SnafuDigits[c];
 
                     pwr *= 5;
                 }
