@@ -1,44 +1,35 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>net7.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <Configurations>Debug;Release;Release2</Configurations>
-	<CheckForOverflowUnderflow>True</CheckForOverflowUnderflow>
-	<StartupObject>AdventOfCode.Program</StartupObject>
+    <CheckForOverflowUnderflow>True</CheckForOverflowUnderflow>
+    <StartupObject>AdventOfCode.Program</StartupObject>
   </PropertyGroup>
-
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
     <WarningLevel>9999</WarningLevel>
   </PropertyGroup>
-
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
     <WarningLevel>9999</WarningLevel>
   </PropertyGroup>
-
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release2|AnyCPU'">
     <Optimize>True</Optimize>
     <WarningLevel>9999</WarningLevel>
   </PropertyGroup>
-
   <ItemGroup>
     <None Remove="Solutions\Year2015\Day01\Solution.cs~RF18d6b49d.TMP" />
   </ItemGroup>
-
   <ItemGroup>
     <None Include="..\.editorconfig" Link=".editorconfig" />
   </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
-  </ItemGroup>
-
   <ItemGroup>
     <None Update="config.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
-
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+  </ItemGroup>
 </Project>
