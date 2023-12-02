@@ -35,7 +35,7 @@ namespace AdventOfCode.Solutions.Year2023
 
         protected override object SolvePartOne()
         {
-            return cubeGames.Sum(g => (g.minRed <= 12 && g.minGreen <= 13 && g.minBlue <= 14) ? g.Id : 0);
+            return cubeGames.Where(g => g.minRed <= 12 && g.minGreen <= 13 && g.minBlue <= 14).Sum(g => g.Id);
         }
 
         protected override object SolvePartTwo()
