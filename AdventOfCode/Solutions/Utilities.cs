@@ -32,7 +32,7 @@ namespace AdventOfCode.Solutions
             {
                 List<int> result = new();
                 foreach (char c in str) if (int.TryParse(c.ToString(), out int n)) result.Add(n);
-                return result.ToList();
+                return result;
             }
             else
             {
@@ -552,13 +552,13 @@ namespace AdventOfCode.Solutions
 
         public static List<T> Get2dNeighborVals<T>(this Dictionary<(int, int), T> values, (int, int) location, T defaultVal, bool includeDiagonals = false)
         {
-            List<T> res = new()
-            {
+            List<T> res =
+            [
                 values.GetDirection(location, N, defaultVal),
                 values.GetDirection(location, E, defaultVal),
                 values.GetDirection(location, S, defaultVal),
                 values.GetDirection(location, W, defaultVal)
-            };
+            ];
 
             if (includeDiagonals)
             {
@@ -606,19 +606,19 @@ namespace AdventOfCode.Solutions
         {
             var tmp = new List<Coordinate2D>()
             {
-                new Coordinate2D(val.x - 1, val.y),
-                new Coordinate2D(val.x + 1, val.y),
-                new Coordinate2D(val.x, val.y - 1),
-                new Coordinate2D(val.x, val.y + 1),
+                new(val.x - 1, val.y),
+                new(val.x + 1, val.y),
+                new(val.x, val.y - 1),
+                new(val.x, val.y + 1),
             };
             if(includeDiagonals)
             {
                 tmp.AddRange(new List<Coordinate2D>()
                 {
-                    new Coordinate2D(val.x - 1, val.y - 1),
-                    new Coordinate2D(val.x + 1, val.y - 1),
-                    new Coordinate2D(val.x - 1, val.y + 1),
-                    new Coordinate2D(val.x + 1, val.y + 1),
+                    new(val.x - 1, val.y - 1),
+                    new(val.x + 1, val.y - 1),
+                    new(val.x - 1, val.y + 1),
+                    new(val.x + 1, val.y + 1),
                 });
             }
             return tmp;
