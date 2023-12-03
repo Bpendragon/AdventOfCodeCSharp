@@ -685,11 +685,11 @@ namespace AdventOfCode.Solutions
             return res;
         }
 
-        public static Dictionary<Coordinate2D, char> GenerateMap(this string self, out int maxX, out int maxY, bool discardDot = true)
+        public static (Dictionary<Coordinate2D, char> map, int maxX, int maxY)  GenerateMap(this string self, bool discardDot = true)
         {
             var lines = self.SplitByNewline();
-            maxX = 0;
-            maxY = lines.Count - 1;
+            int maxX = 0;
+            int maxY = lines.Count - 1;
             Dictionary<Coordinate2D, char> res = new();
 
             for (int i = 0; i < lines.Count; i++)
@@ -704,7 +704,7 @@ namespace AdventOfCode.Solutions
                 }
             }
 
-            return res;
+            return (res, maxX, maxY);
         }
 
     }

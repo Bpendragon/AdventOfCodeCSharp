@@ -12,7 +12,7 @@ namespace AdventOfCode.Solutions.Year2023
 
         public Day03() : base()
         {
-            engineMap = Input.GenerateMap(out maxX, out maxY);
+            (engineMap, maxX, maxY) = Input.GenerateMap();
         }
 
         protected override object SolvePartOne()
