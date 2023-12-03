@@ -595,12 +595,7 @@ namespace AdventOfCode.Solutions
 
         public static List<K> KeyList<K, V>(this Dictionary<K, V> dictionary, bool sorted = false)
         {
-            List<K> keyList = new();
-
-            foreach (K key in dictionary.Keys)
-            {
-                keyList.Add(key);
-            }
+            List<K> keyList = [.. dictionary.Keys];
 
             if (sorted) keyList.Sort();
 
@@ -687,6 +682,28 @@ namespace AdventOfCode.Solutions
                 res.Add(current);
             }
             res.Reverse();
+            return res;
+        }
+
+        public static Dictionary<Coordinate2D, char> GenerateMap(this string self, out int maxX, out int maxY, bool discardDot = true)
+        {
+            var lines = self.SplitByNewline();
+            maxX = 0;
+            maxY = lines.Count - 1;
+            Dictionary<Coordinate2D, char> res = new();
+
+            for (int i = 0; i < lines.Count; i++)
+            {
+                maxX = Math.Max(maxX, lines[i].Length - 1);
+                for (int j = 0; j < lines[i].Length; j++)
+                {
+                    if (!discardDot || lines[i][j] != '.')
+                    {
+                        res[(j, i)] = lines[i][j];
+                    }
+                }
+            }
+
             return res;
         }
 
