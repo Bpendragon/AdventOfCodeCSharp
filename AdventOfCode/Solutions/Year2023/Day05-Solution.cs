@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace AdventOfCode.Solutions.Year2023
 {
-    [DayInfo(05, 2023, "")]
+    [DayInfo(05, 2023, "If You Give A Seed A Fertilizer")]
     class Day05 : ASolution
     {
         List<long> seeds;
