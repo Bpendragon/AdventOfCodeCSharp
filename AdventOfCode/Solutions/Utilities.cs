@@ -26,6 +26,12 @@ namespace AdventOfCode.Solutions
         private const CompassDirection SE = CompassDirection.SE;
         private const CompassDirection SW = CompassDirection.SW;
 
+        /// <summary>
+        /// Turns a string into a list of ints. 
+        /// </summary>
+        /// <param name="str">The string to split up</param>
+        /// <param name="delimiter">How to split. Default is each character becomes an int.</param>
+        /// <returns>A list of integers</returns>
         public static List<int> ToIntList(this string str, string delimiter = "")
         {
             if (delimiter == "")
@@ -44,29 +50,54 @@ namespace AdventOfCode.Solutions
             }
         }
 
+        /// <summary>
+        /// Extract all the positive integers from a string, automatically deliminates on all non numeric chars
+        /// </summary>
+        /// <param name="str">String to search</param>
+        /// <returns>An ordered enumerable of the integers found in the string.</returns>
         public static IEnumerable<int> ExtractPosInts(this string str)
         {
             return Regex.Matches(str, "\\d+").Select(m => int.Parse(m.Value));
         }
 
+        /// <summary>
+        /// Extracts all ints from a string, treats `-` as a negative sign.
+        /// </summary>
+        /// <param name="str">String to search</param>
+        /// <returns>An ordered enumerable of the integers found in the string.</returns>
         public static IEnumerable<int> ExtractInts(this string str)
         {
             return Regex.Matches(str, "-?\\d+").Select(m => int.Parse(m.Value));
         }
 
+        /// <summary>
+        /// Extracts all ints from a string, treats `-` as a negative sign.
+        /// </summary>
+        /// <param name="str">String to search</param>
+        /// <returns>An ordered enumerable of the integers found in the string.</returns>
         public static IEnumerable<long> ExtractLongs(this string str)
         {
             return Regex.Matches(str, "-?\\d+").Select(m => long.Parse(m.Value));
         }
 
+        /// <summary>
+        /// Extract all the positive integers from a string, automatically deliminates on all non numeric chars
+        /// </summary>
+        /// <param name="str">String to search</param>
+        /// <returns>An ordered enumerable of the integers found in the string.</returns>
         public static IEnumerable<long> ExtractPosLongs(this string str)
         {
             return Regex.Matches(str, "\\d+").Select(m => long.Parse(m.Value));
         }
 
+        /// <summary>
+        /// Extracts all "Words" (including xnoppyt) from a string
+        /// </summary>
+        /// <param name="str"></param>
+        /// <returns></returns>
         public static IEnumerable<string> ExtractWords(this string str)
         {
-            return Regex.Matches(str, "[a-zA-z]").Select(a => a.Value);
+            return Regex.Matches(str, "[a-zA-z]+").Select(a => a.Value);
         }
 
         public static List<long> ToLongList(this string str, string delimiter = "")
@@ -1110,5 +1141,48 @@ namespace AdventOfCode.Solutions
 
 
         private static Coordinate4D[] neighbors;
+    }
+
+    public class SemiBinaryTree<T>
+    {
+        public BinaryTreeNode<T> Root;
+
+        public IEnumerable<BinaryTreeNode<T>> BFSTraverse()
+        {
+            Queue<BinaryTreeNode<T>> queue = new();
+            HashSet<BinaryTreeNode<T>> explored = new();
+            queue.Enqueue(this.Root);
+            explored.Add(this.Root);
+            while (queue.TryDequeue(out BinaryTreeNode<T> next))
+            {
+                if(explored.Add(next.Left)) queue.Enqueue(next.Left);
+                if (explored.Add(next.Right)) queue.Enqueue(next.Right);
+                yield return next;
+            }
+        }
+
+        public IEnumerable<BinaryTreeNode<T>> DFSTraverse()
+        {
+            Stack<BinaryTreeNode<T>> stack = new();
+            HashSet<BinaryTreeNode<T>> explored = new();
+            stack.Push(this.Root);
+            explored.Add(this.Root);
+            while (stack.TryPop(out BinaryTreeNode<T> next))
+            {
+                if (explored.Add(next.Left)) stack.Push(next.Right);
+                if (explored.Add(next.Right)) stack.Push(next.Left);
+                yield return next;
+            }
+        }
+
+        int Count => this.BFSTraverse().Count();
+    }
+
+    public class BinaryTreeNode<T>
+    {
+        public T Value;
+        public BinaryTreeNode<T> Left;
+        public BinaryTreeNode<T> Right;
+        public BinaryTreeNode<T> Parent;
     }
 }
