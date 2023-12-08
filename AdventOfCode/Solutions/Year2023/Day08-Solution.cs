@@ -9,72 +9,22 @@ namespace AdventOfCode.Solutions.Year2023
     [DayInfo(08, 2023, "Haunted Wasteland")]
     class Day08 : ASolution
     {
-        SemiBinaryTree<string> tree = new();
-        Dictionary<string, BinaryTreeNode<string>> seenNodes = new();
-        readonly string Instructions;
-
+        string Instructions;
+        Dictionary<string, (string left, string right)> nodes = new();
         public Day08() : base()
         {
             var parts = Input.SplitByDoubleNewline();
             Instructions = parts[0];
 
-            var nodes = parts[1].ExtractWords();
+            var stops = parts[1].ExtractWords().ToArray();
 
-            foreach (var n in nodes.Split(3))
+            for(int i = 0; i < stops.Length; i+=3)
             {
-                string parent = n.First();
-                string left = n.Skip(1).First();
-                string right = n.Last();
+                string parent = stops[i];
+                string left = stops[i + 1];
+                string right = stops[i + 2];
 
-                seenNodes.TryGetValue(parent, out var pNode);
-                seenNodes.TryGetValue(left, out var lNode);
-
-                if (pNode == null)
-                {
-                    pNode = new()
-                    {
-                        Value = parent
-                    };
-                    seenNodes[parent] = pNode;
-                }
-
-                if (lNode is not null)
-                {
-                    pNode.Left = lNode;
-                    lNode.Parent = pNode;
-                }
-                else
-                {
-                    lNode = new()
-                    {
-                        Value = left,
-                        Parent = pNode
-                    };
-                    pNode.Left = lNode;
-                    seenNodes[left] = lNode;
-                }
-
-                seenNodes.TryGetValue(right, out var rNode); //Do this check here in case left and right are teh same node, allows it to be added to the dict
-
-                if (rNode is not null)
-                {
-                    pNode.Right = rNode;
-                    rNode.Parent = pNode;
-                }
-                else
-                {
-                    rNode = new()
-                    {
-                        Value = right,
-                        Parent = pNode
-                    };
-                    pNode.Right = rNode;
-                    seenNodes[right] = rNode;
-                }
-
-
-
-                if (pNode.Value == "AAA") tree.Root = pNode;
+                nodes[parent] = (left, right);
             }
 
         }
@@ -82,13 +32,13 @@ namespace AdventOfCode.Solutions.Year2023
         protected override object SolvePartOne()
         {
             int steps = 0;
-            var curNode = tree.Root;
+            var curNode = "AAA";
             while(true)
             {
-                if (curNode.Value == "ZZZ") break;
+                if (curNode == "ZZZ") break;
 
-                if (Instructions[steps % Instructions.Length] == 'L') curNode = curNode.Left;
-                else curNode = curNode.Right;
+                if (Instructions[steps % Instructions.Length] == 'L') curNode = nodes[curNode].left;
+                else curNode = nodes[curNode].right;
                 steps++;
             }
 
@@ -98,17 +48,17 @@ namespace AdventOfCode.Solutions.Year2023
         protected override object SolvePartTwo()
         {
             List<long> walkLengths = new();
-            foreach(var n in seenNodes.Keys.Where(a => a.EndsWith('A')))
+            foreach(var n in nodes.Keys.Where(a => a.EndsWith('A')))
             {
                 long steps = 0;
-                var curNode = seenNodes[n];
+                var curNode = n;
 
                 while (true)
                 {
-                    if (curNode.Value.EndsWith('Z')) break;
+                    if (curNode.EndsWith('Z')) break;
 
-                    if (Instructions[(int)steps % Instructions.Length] == 'L') curNode = curNode.Left;
-                    else curNode = curNode.Right;
+                    if (Instructions[(int)steps % Instructions.Length] == 'L') curNode = nodes[curNode].left;
+                    else curNode = nodes[curNode].right;
                     steps++;
                 }
                 walkLengths.Add(steps);
