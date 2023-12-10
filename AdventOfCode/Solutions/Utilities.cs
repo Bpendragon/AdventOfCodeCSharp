@@ -26,6 +26,22 @@ namespace AdventOfCode.Solutions
         private const CompassDirection SE = CompassDirection.SE;
         private const CompassDirection SW = CompassDirection.SW;
 
+        public static CompassDirection Flip(this CompassDirection dir)
+        {
+            return (dir) switch
+            {
+                N => S,
+                S => N,
+                E => W,
+                W => E,
+                NE => SW,
+                SW => NE,
+                SE => NW,
+                NW => SE,
+                _ => throw new ArgumentException()
+            } ;
+        }
+
         /// <summary>
         /// Turns a string into a list of ints. 
         /// </summary>
