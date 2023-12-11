@@ -1,13 +1,7 @@
 using System;
-using System.Text;
 using System.Collections.Generic;
-using AdventOfCode.UserClasses;
+using System.ComponentModel.Design.Serialization;
 using System.Linq;
-using System.Data;
-using System.Threading;
-using System.Security;
-using static AdventOfCode.Solutions.Utilities;
-using System.Runtime.CompilerServices;
 
 namespace AdventOfCode.Solutions.Year2023
 {
@@ -54,10 +48,29 @@ namespace AdventOfCode.Solutions.Year2023
                 if (Cols[i].All(x => x == '.')) emptyCols.Add(i);
             }
 
-            foreach(var g in map.Keys)
+            int xFactor = 0;
+            for(int x = 0; x <= maxX; x++)
             {
-                Coordinate2DL newLoc = (g.x + (factor * emptyCols.Count(a => a < g.x)), g.y + (factor * emptyRows.Count(a => a < g.y)));
-                res.Add(newLoc);
+                if(xFactor < emptyCols.Count && x == emptyCols[xFactor])
+                {
+                    x++; //skip the column
+                    xFactor++; //Increase the multiplier  and also the search facor
+                }
+
+                int yFactor = 0;
+                for(int y = 0; y <= maxY; y++)
+                {
+                    if(yFactor < emptyRows.Count && y == emptyRows[yFactor])
+                    {
+                        y++; //skip the row
+                        yFactor++; //increase the multipler
+                    }
+                    if(map.ContainsKey((x,y)))
+                    {
+                        res.Add((x + (factor * xFactor), y + (factor * yFactor)));
+                    }
+                }
+
             }
 
             return res;
