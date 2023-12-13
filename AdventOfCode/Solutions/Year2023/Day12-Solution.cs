@@ -124,9 +124,8 @@ namespace AdventOfCode.Solutions.Year2023
             for(int i = 0; i <= maxLead; i++ )
             {
                 string nextGroup = new string('.', i) + new string('#', nextSpringGroup) + ".";
-                if(nextGroup.Zip(pattern).All(a => a.First == a.Second || a.Second == '?'))
+                if(nextGroup.Zip(pattern).All(a => a.First == a.Second || a.Second == '?') && nextGroup.Length <= pattern.Length)
                 {
-                    if (nextGroup.Length > pattern.Length) continue;
                     count += CountMatches(pattern[nextGroup.Length..], size - nextSpringGroup - i - 1, remainingSpringGroups);
                 }
             }
