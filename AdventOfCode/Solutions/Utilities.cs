@@ -151,6 +151,13 @@ namespace AdventOfCode.Solutions
             Trace.Write(str);
         }
 
+        public static string Repeat(this string text, int n, string seperator = "")
+        {
+            return new StringBuilder((text.Length + seperator.Length) * n)
+              .Insert(0, $"{text}{seperator}", n)
+              .ToString();
+        }
+
         public static int MinOfMany(params int[] items)
         {
             int result = items[0];
