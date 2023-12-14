@@ -771,6 +771,30 @@ namespace AdventOfCode.Solutions
             return (res, maxX, maxY);
         }
 
+        public static string StringFromMap<TValue>(this Dictionary<Coordinate2D, TValue> self, int maxX, int maxY, bool AssumeEmptyIsDot = true)
+        {
+            StringBuilder sb = new();
+            for(int y = 0; y <= maxY; y++)
+            {
+                for(int x = 0; x <= maxX; x++)
+                {
+                    if(self.TryGetValue((x, y), out TValue val))
+                    {
+                        sb.Append(val);
+                    } else if(AssumeEmptyIsDot)
+                    {
+                        sb.Append(".");
+                    } else
+                    {
+                        sb.Append(string.Empty);
+                    }
+                }
+                sb.Append("\n");
+            }
+
+            return sb.ToString();
+        }
+
     }
 
     public class Coordinate2D
