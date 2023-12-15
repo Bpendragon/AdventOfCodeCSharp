@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Linq;
 
 namespace AdventOfCode.Solutions.Year2023
@@ -7,12 +8,16 @@ namespace AdventOfCode.Solutions.Year2023
     [DayInfo(15, 2023, "Lens Library")]
     class Day15 : ASolution
     {
-        Dictionary<int, LinkedList<LensElement>> boxes = new();
+        OrderedDictionary[] boxes = new OrderedDictionary[256];
         IEnumerable<string> steps;
 
         public Day15() : base()
         {
             steps = Input.Split(',');
+            for (int i = 0; i < boxes.Length; i++)
+            {
+                boxes[i] = new(30);
+            }
         }
 
         protected override object SolvePartOne()
@@ -26,50 +31,34 @@ namespace AdventOfCode.Solutions.Year2023
             {
                 string label = l.Split('-', '=')[0];
                 int box = HASH(label);
-                LensElement le;
                 if (l.Contains('='))
                 {
                     int power = int.Parse(l.Split('=')[1]);
-
-                    le = new LensElement() { label = label, power = power };
-
-                    if (boxes.TryGetValue(box, out var val))
+                    if (boxes[box].Contains(label))
                     {
-                        var existing = val.FindLast(le);
-                        if(existing is not null)
-                        {
-                            existing.Value = le;
-                        } else
-                        {
-                            val.AddLast(le);
-                        }
-                    } else
-                    {
-                        boxes[box] = new();
-                        boxes[box].AddLast(le);
+                        boxes[box][label] = power;
                     }
-                } else if (boxes.TryGetValue(box, out var val))
+                    else
+                    {
+                        boxes[box].Add(label, power);
+                    }
+                }
+                else
                 {
-                    le = new LensElement() { label = label, power = -1 };
-                    var existing = val.FindLast(le);
-                    if (existing is not null) val.Remove(existing);
+                    boxes[box].Remove(label);
                 }
             }
 
-            long sum = 0;
-            foreach(var b in boxes)
+            int sum = 0;
+
+            for (int i = 0; i < boxes.Length; i++)
             {
-                var c = b.Value.First;
-                int tmp = 0;
-                int i = 1;
-                while(c != null)
+                for (int j = 0; j < boxes[i].Count; j++)
                 {
-                    tmp += (b.Key + 1) * i * c.Value.power;
-                    i++;
-                    c = c.Next;
+                    sum += (i + 1) * (j + 1) * (int)boxes[i][j];
                 }
-                sum += tmp;
             }
+
             return sum;
         }
 
@@ -83,27 +72,6 @@ namespace AdventOfCode.Solutions.Year2023
                 tmp %= 256;
             }
             return tmp;
-        }
-
-        private class LensElement : IEquatable<LensElement>, IEquatable<string>
-        {
-            public int power;
-            public string label;
-
-            public bool Equals(LensElement other)
-            {
-                return this.label == other.label;
-            }
-
-            public bool Equals(string other)
-            {
-                return this.label == other;
-            }
-
-            public override string ToString()
-            {
-                return $"[{label} {power}]";
-            }
         }
     }
 }
