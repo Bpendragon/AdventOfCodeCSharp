@@ -51,7 +51,7 @@ namespace AdventOfCode.Solutions.Year2023
                 } else if (boxes.TryGetValue(box, out var val))
                 {
                     le = new LensElement() { label = label, power = -1 };
-                    var existing = val.Find(le);
+                    var existing = val.FindLast(le);
                     if (existing is not null) val.Remove(existing);
                 }
             }
