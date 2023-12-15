@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Numerics;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -787,6 +788,51 @@ namespace AdventOfCode.Solutions
                     } else
                     {
                         sb.Append(string.Empty);
+                    }
+                }
+                sb.Append("\n");
+            }
+
+            return sb.ToString();
+        }
+
+        public static HashSet<Coordinate2D> PointCloudFromString(this string self)
+        {
+            HashSet<Coordinate2D> res = new();
+
+            int x = 0;
+            int y = 0; 
+            for(int i = 0; i < self.Length; i++)
+            {
+                switch (self[i])
+                {
+                    case '.': break;
+                    case '\n': x = -1;
+                        y++;
+                        break;
+                    default: res.Add((x, y));
+                        break;
+                }
+                x++;
+            }
+
+            return res;
+        }
+
+        public static string StringFromPointCloud(this HashSet<Coordinate2D> self, int maxX, int maxY, char nonEmpty = '#')
+        {
+            StringBuilder sb = new();
+            for (int y = 0; y <= maxY; y++)
+            {
+                for (int x = 0; x <= maxX; x++)
+                {
+                    if (self.Contains((x,y)))
+                    {
+                        sb.Append(nonEmpty);
+                    }
+                    else
+                    {
+                        sb.Append(".");
                     }
                 }
                 sb.Append("\n");
