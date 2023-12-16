@@ -841,7 +841,17 @@ namespace AdventOfCode.Solutions
             return sb.ToString();
         }
 
+        public static bool BoundsCheck(this Coordinate2D self, int maxX, int maxY, int minX = 0, int minY = 0)
+        {
+            return self.x >= minX
+                && self.x <= maxX
+                && self.y >= minY
+                && self.y <= maxY;
+        }
+
     }
+
+
 
     public class Coordinate2D
     {
