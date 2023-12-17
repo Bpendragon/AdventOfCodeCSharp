@@ -772,6 +772,28 @@ namespace AdventOfCode.Solutions
             return (res, maxX, maxY);
         }
 
+        public static (Dictionary<Coordinate2D, int> map, int maxX, int maxY) GenerateIntMap(this string self, bool discardDot = true)
+        {
+            var lines = self.SplitByNewline();
+            int maxX = 0;
+            int maxY = lines.Count - 1;
+            Dictionary<Coordinate2D, int> res = new();
+
+            for (int i = 0; i < lines.Count; i++)
+            {
+                maxX = Math.Max(maxX, lines[i].Length - 1);
+                for (int j = 0; j < lines[i].Length; j++)
+                {
+                    if (!discardDot || lines[i][j] != '.')
+                    {
+                        res[(j, i)] = int.Parse(lines[i][j].ToString());
+                    }
+                }
+            }
+
+            return (res, maxX, maxY);
+        }
+
         public static string StringFromMap<TValue>(this Dictionary<Coordinate2D, TValue> self, int maxX, int maxY, bool AssumeEmptyIsDot = true)
         {
             StringBuilder sb = new();
