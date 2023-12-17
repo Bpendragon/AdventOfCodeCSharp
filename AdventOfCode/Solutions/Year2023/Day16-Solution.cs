@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using static AdventOfCode.Solutions.Utilities;
@@ -44,20 +45,20 @@ namespace AdventOfCode.Solutions.Year2023
 
         protected override object SolvePartTwo()
         {
-            List<int> counts = new();
+            int ans = int.MinValue;
             for(int i = 0; i <= maxX; i++)
             {
-                counts.Add(getCellCount((i, 0), S));
-                counts.Add(getCellCount((i, maxY), N));
+                ans = Math.Max(getCellCount((i, 0), S), ans);
+                ans = Math.Max(getCellCount((i, maxY), N), ans);
             }
 
             for(int i=0; i <= maxY; i++)
             {
-                counts.Add(getCellCount((0, i), E));
-                counts.Add(getCellCount((maxX, i), W));
+                ans = Math.Max(getCellCount((0, i), E), ans);
+                ans = Math.Max(getCellCount((maxX, i), W), ans);
             }
             
-            return counts.Max();
+            return ans;
         }
 
         private int getCellCount(Coordinate2D startingCell, CompassDirection startingDir)
