@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-
+using System.Drawing;
 using static AdventOfCode.Solutions.Utilities;
 
 namespace AdventOfCode.Solutions.Year2023
@@ -9,16 +9,16 @@ namespace AdventOfCode.Solutions.Year2023
     [DayInfo(18, 2023, "Lavaduct Lagoon")]
     class Day18 : ASolution
     {
-        List<(char dir, int steps, string color)> instructions = new();
-        Dictionary<Coordinate2D, char> map = new();
+        List<(char dir, int steps, int color)> instructions = new();
+        Dictionary<Coordinate2D, int> map = new();
         public Day18() : base()
         {
-            foreach(var l in Input.SplitByNewline())
+            foreach (var l in Input.SplitByNewline())
             {
                 var parts = l.Split();
                 char dir = parts[0][0];
                 int steps = int.Parse(parts[1]);
-                string color = parts[2].TrimStart('#', '(').TrimEnd(')');
+                int color = int.Parse("ff" + parts[2].TrimStart('#', '(').TrimEnd(')'), System.Globalization.NumberStyles.HexNumber);
 
                 instructions.Add((dir, steps, color));
             }
@@ -27,9 +27,9 @@ namespace AdventOfCode.Solutions.Year2023
         protected override object SolvePartOne()
         {
             Coordinate2D curLoc = (0, 0);
-            map[curLoc] = '#'; //default depth
+            map[curLoc] = '1'; //default depth
 
-            foreach(var s in instructions)
+            foreach (var s in instructions)
             {
                 (var dir, var steps, var color) = s;
 
@@ -42,10 +42,10 @@ namespace AdventOfCode.Solutions.Year2023
                     _ => throw new ArgumentException()
                 };
 
-                foreach(var i in Enumerable.Range(0, steps))
+                foreach (var i in Enumerable.Range(0, steps))
                 {
                     curLoc = curLoc.MoveDirection(moveDir, true);
-                    map[curLoc] = '#';
+                    map[curLoc] = color;
                 }
             }
 
@@ -56,7 +56,7 @@ namespace AdventOfCode.Solutions.Year2023
 
             curLoc = (minX, minY);
 
-            while(!map.ContainsKey(curLoc)) curLoc = curLoc.MoveDirection(E, true);
+            while (!map.ContainsKey(curLoc)) curLoc = curLoc.MoveDirection(E, true);
 
             curLoc = curLoc.MoveDirection(SE, true);
 
@@ -67,9 +67,9 @@ namespace AdventOfCode.Solutions.Year2023
             toFill.Enqueue(curLoc);
             visited.Add(curLoc);
 
-            while(toFill.TryDequeue(out var next))
+            while (toFill.TryDequeue(out var next))
             {
-                map[next] = '#';
+                map[next] = 1;
                 var n = next.Neighbors(true);
                 foreach (var a in n)
                 {
@@ -80,46 +80,61 @@ namespace AdventOfCode.Solutions.Year2023
                 }
 
             }
+            //Normalize map to (0,0)
 
+            Dictionary<Coordinate2D, int> normMap = new();
+
+            for (int y = minY; y <= maxY; y++)
+            {
+                for (int x = minX; x <= maxX; x++)
+                {
+                    if (map.ContainsKey((x, y)))
+                    {
+                        normMap[(x - minX, y - minY)] = map[(x, y)];
+                    }
+                }
+            }
+
+            maxX = normMap.Max(a => a.Key.x);
+            maxY = normMap.Max(a => a.Key.y);
+
+            //Voronoi fill.
+            List<CompassDirection> toCheck = [ N, E, S, W ];
+            var keyList = normMap.ToList();
+            foreach(var kvp in keyList.Where(a => a.Value == 1))
+            {
+                var nearestWall = keyList.Where(a => a.Value != 1).MinBy(a => a.Key.ManDistance(kvp.Key));
+                normMap[kvp.Key] = nearestWall.Value;
+            }
+
+            Image image = new Bitmap(maxX * 4, maxY * 4);
+            Graphics drawing = Graphics.FromImage(image);
+            drawing.Clear(Color.Transparent);
+
+            for(int x = 0; x < maxX; x++)
+            {
+                for (int y = 0; y < maxY; y++)
+                {
+                    if (normMap.ContainsKey((x, y)))
+                    {
+                        Color c = Color.FromArgb(normMap[(x, y)]);
+                        System.Drawing.SolidBrush myBrush = new System.Drawing.SolidBrush(c);
+                        var rect = new RectangleF(x * 4, y * 4, 4, 4);
+                        drawing.FillRectangle(myBrush, rect);
+                        myBrush.Dispose();
+                    }
+                }
+            }
+
+            image.Save(@"f:\temp\voronoi.png", System.Drawing.Imaging.ImageFormat.Png);
+            drawing.Dispose();
+            image.Dispose();
             return map.Count();
         }
 
         protected override object SolvePartTwo()
         {
-            List<Coordinate2DL> points = new();
-            Coordinate2DL curLoc = (0, 0);
-
-            long wallSize = 0;
-
-            foreach(var s in instructions)
-            {
-                (_, _, string color) = s;
-
-                int dist = int.Parse(color[..5], System.Globalization.NumberStyles.HexNumber);
-                wallSize += dist;
-
-                CompassDirection moveDir = (color[^1]) switch
-                {
-                    '0' => E,
-                    '1' => S,
-                    '2' => W,
-                    '3' => N,
-                    _ => throw new ArgumentException()
-                };
-
-                curLoc = curLoc.MoveDirection(moveDir, distance: dist);
-                points.Add(curLoc);
-            }
-
-            long res1 = 0;
-            long res2 = 0;
-            for(int i = 0; i < points.Count; i++)
-            {
-                res1 += (points[i].x * points[(i + 1) % points.Count].y);
-                res2 += (points[i].y * points[(i + 1) % points.Count].x);
-            }
-
-            return (wallSize / 2) + Math.Abs((res1 - res2) / 2) + 1;
+            return null;
         }
     }
 }

@@ -40,7 +40,56 @@ namespace AdventOfCode.Solutions
                 SE => NW,
                 NW => SE,
                 _ => throw new ArgumentException()
-            } ;
+            };
+        }
+
+        private static Random rng = new Random();
+
+        public static void Shuffle<T>(this IList<T> list)
+        {
+            int n = list.Count;
+            while (n > 1)
+            {
+                n--;
+                int k = rng.Next(n + 1);
+                T value = list[k];
+                list[k] = list[n];
+                list[n] = value;
+            }
+        }
+
+        public static TSource MinBy<TSource, TKey>(this IEnumerable<TSource> source, Func<TSource, TKey> selector)
+        {
+            return source.MinBy(selector, null);
+        }
+
+        public static TSource MinBy<TSource, TKey>(this IEnumerable<TSource> source,
+            Func<TSource, TKey> selector, IComparer<TKey> comparer)
+        {
+            if (source == null) throw new ArgumentNullException("source");
+            if (selector == null) throw new ArgumentNullException("selector");
+            comparer ??= Comparer<TKey>.Default;
+
+            using (var sourceIterator = source.GetEnumerator())
+            {
+                if (!sourceIterator.MoveNext())
+                {
+                    throw new InvalidOperationException("Sequence contains no elements");
+                }
+                var min = sourceIterator.Current;
+                var minKey = selector(min);
+                while (sourceIterator.MoveNext())
+                {
+                    var candidate = sourceIterator.Current;
+                    var candidateProjected = selector(candidate);
+                    if (comparer.Compare(candidateProjected, minKey) < 0)
+                    {
+                        min = candidate;
+                        minKey = candidateProjected;
+                    }
+                }
+                return min;
+            }
         }
 
         /// <summary>
@@ -234,7 +283,7 @@ namespace AdventOfCode.Solutions
         public static string[] SplitIntoColumns(this string input)
         {
             var rows = input.SplitByNewline(false, false);
-            int numColumns = rows.Max(x=> x.Length);
+            int numColumns = rows.Max(x => x.Length);
 
             var res = new string[numColumns];
             for (int i = 0; i < numColumns; i++)
@@ -294,7 +343,7 @@ namespace AdventOfCode.Solutions
 
         public static int ManhattanDistance(this (int x, int y, int z) a, (int x, int y, int z) b)
         {
-            return Math.Abs(a.x - b.x) + Math.Abs(a.y - b.y) + Math.Abs(a.z-b.z);
+            return Math.Abs(a.x - b.x) + Math.Abs(a.y - b.y) + Math.Abs(a.z - b.z);
         }
 
         public static long ManhattanDistance(this (long x, long y) a, (long x, long y) b)
@@ -352,7 +401,7 @@ namespace AdventOfCode.Solutions
         //Fermat was a Genius
         public static long ModInverse(long a, long n)
         {
-            return ModPower(a, n-2, n);
+            return ModPower(a, n - 2, n);
         }
 
         public static long ModPower(long x, long y, long p)
@@ -426,13 +475,14 @@ namespace AdventOfCode.Solutions
         public static IEnumerable<List<T>> SplitAtIndex<T>(this List<T> array, int index)
         {
             if (index == 0) throw new ArgumentException($"{nameof(index)} must be a non-zero integer");
-            else if(index > 0)
+            else if (index > 0)
             {
                 index %= array.Count;
                 yield return array.Take(index).ToList();
                 yield return array.Skip(index).ToList();
-                
-            } else
+
+            }
+            else
             {
                 index *= -1;
                 index %= array.Count;
@@ -445,7 +495,8 @@ namespace AdventOfCode.Solutions
         {
             var tmp = new string[array.GetLength(0)];
 
-            for(int i = 0; i < tmp.Length; i++) {
+            for (int i = 0; i < tmp.Length; i++)
+            {
                 tmp[i] = array[i].JoinAsStrings();
             }
             return tmp;
@@ -482,7 +533,7 @@ namespace AdventOfCode.Solutions
 
         public static (int x, int y) Add(this (int x, int y) a, (int x, int y) b) => (a.x + b.x, a.y + b.y);
 
-        public static (int x, int y, int z) Add(this (int x, int y, int z) a, (int x, int y, int z) b) => (a.x + b.x, a.y + b.y, a.z +b.z);
+        public static (int x, int y, int z) Add(this (int x, int y, int z) a, (int x, int y, int z) b) => (a.x + b.x, a.y + b.y, a.z + b.z);
 
         public static (int x, int y, int z, int w) Add(this (int x, int y, int z, int w) a, (int x, int y, int z, int w) b) => (a.x + b.x, a.y + b.y, a.z + b.z, a.w + b.w);
 
@@ -508,7 +559,7 @@ namespace AdventOfCode.Solutions
 
         public static string HexStringToBinary(this string Hexstring)
         {
-           return string.Join(string.Empty, Hexstring.Select(c => Convert.ToString(Convert.ToInt32(c.ToString(), 16), 2).PadLeft(4, '0')));
+            return string.Join(string.Empty, Hexstring.Select(c => Convert.ToString(Convert.ToInt32(c.ToString(), 16), 2).PadLeft(4, '0')));
         }
 
         public enum CompassDirection
@@ -560,7 +611,7 @@ namespace AdventOfCode.Solutions
         public static IEnumerable<(CompassDirection dir, Coordinate2D loc)> GetNeighborCoordsWithDirection(this Coordinate2D start, bool flipY = false, bool includeDiagonals = false)
         {
             yield return (N, start + (0, flipY ? 1 : -1));
-            if(includeDiagonals) yield return (NE, start + (1, flipY ? 1 : -1));
+            if (includeDiagonals) yield return (NE, start + (1, flipY ? 1 : -1));
             yield return (E, start + (1, 0));
             if (includeDiagonals) yield return (SE, start + (1, flipY ? -1 : 1));
             yield return (S, start + (0, flipY ? -1 : 1));
@@ -578,10 +629,10 @@ namespace AdventOfCode.Solutions
                     N => start + (0, -distance),
                     NE => start + (distance, -distance),
                     E => start + (distance, 0),
-                    SE => start+(distance, distance),
-                    S => start+(0, distance),
-                    SW => start+(-distance, distance),
-                    W =>  start + (-distance, 0),
+                    SE => start + (distance, distance),
+                    S => start + (0, distance),
+                    SW => start + (-distance, distance),
+                    W => start + (-distance, 0),
                     NW => start + (-distance, -distance),
                     _ => throw new ArgumentException("Direction is not valid", nameof(Direction))
                 };
@@ -722,7 +773,7 @@ namespace AdventOfCode.Solutions
                 new(val.x, val.y - 1),
                 new(val.x, val.y + 1),
             };
-            if(includeDiagonals)
+            if (includeDiagonals)
             {
                 tmp.AddRange(new List<Coordinate2D>()
                 {
@@ -745,7 +796,7 @@ namespace AdventOfCode.Solutions
             yield return (self.x, self.y, self.z - 1);
         }
 
-        public static List<Coordinate2D> AStar(Coordinate2D start, Coordinate2D goal, Dictionary<Coordinate2D, long> map, out long Cost, bool IncludeDiagonals = false, bool IncludePath = true) 
+        public static List<Coordinate2D> AStar(Coordinate2D start, Coordinate2D goal, Dictionary<Coordinate2D, long> map, out long Cost, bool IncludeDiagonals = false, bool IncludePath = true)
         {
             PriorityQueue<Coordinate2D, long> openSet = new();
             Dictionary<Coordinate2D, Coordinate2D> cameFrom = new();
@@ -796,7 +847,7 @@ namespace AdventOfCode.Solutions
             return res;
         }
 
-        public static (Dictionary<Coordinate2D, char> map, int maxX, int maxY)  GenerateMap(this string self, bool discardDot = true)
+        public static (Dictionary<Coordinate2D, char> map, int maxX, int maxY) GenerateMap(this string self, bool discardDot = true)
         {
             var lines = self.SplitByNewline();
             int maxX = 0;
@@ -843,17 +894,19 @@ namespace AdventOfCode.Solutions
         public static string StringFromMap<TValue>(this Dictionary<Coordinate2D, TValue> self, int maxX, int maxY, bool AssumeEmptyIsDot = true)
         {
             StringBuilder sb = new();
-            for(int y = 0; y <= maxY; y++)
+            for (int y = 0; y <= maxY; y++)
             {
-                for(int x = 0; x <= maxX; x++)
+                for (int x = 0; x <= maxX; x++)
                 {
-                    if(self.TryGetValue((x, y), out TValue val))
+                    if (self.TryGetValue((x, y), out TValue val))
                     {
                         sb.Append(val);
-                    } else if(AssumeEmptyIsDot)
+                    }
+                    else if (AssumeEmptyIsDot)
                     {
                         sb.Append(".");
-                    } else
+                    }
+                    else
                     {
                         sb.Append(string.Empty);
                     }
@@ -869,7 +922,7 @@ namespace AdventOfCode.Solutions
             int maxX = self.Max(a => a.Key.x);
             int minX = self.Min(a => a.Key.x);
             int maxY = self.Max(a => a.Key.y);
-            int minY= self.Min(a => a.Key.y);
+            int minY = self.Min(a => a.Key.y);
 
             StringBuilder sb = new();
             for (int y = minY; y <= maxY; y++)
@@ -900,16 +953,18 @@ namespace AdventOfCode.Solutions
             HashSet<Coordinate2D> res = new();
 
             int x = 0;
-            int y = 0; 
-            for(int i = 0; i < self.Length; i++)
+            int y = 0;
+            for (int i = 0; i < self.Length; i++)
             {
                 switch (self[i])
                 {
                     case '.': break;
-                    case '\n': x = -1;
+                    case '\n':
+                        x = -1;
                         y++;
                         break;
-                    default: res.Add((x, y));
+                    default:
+                        res.Add((x, y));
                         break;
                 }
                 x++;
@@ -925,7 +980,7 @@ namespace AdventOfCode.Solutions
             {
                 for (int x = 0; x <= maxX; x++)
                 {
-                    if (self.Contains((x,y)))
+                    if (self.Contains((x, y)))
                     {
                         sb.Append(nonEmpty);
                     }
@@ -1044,7 +1099,7 @@ namespace AdventOfCode.Solutions
 
         public override bool Equals(object obj)
         {
-            if(obj == null) return false;
+            if (obj == null) return false;
             if (obj.GetType() != typeof(Coordinate2D)) return false;
             return this == (Coordinate2D)obj;
         }
@@ -1271,7 +1326,7 @@ namespace AdventOfCode.Solutions
             (-z,-y,-x)
         };
     }
-    
+
 
 
     public class Coordinate4D
@@ -1357,7 +1412,7 @@ namespace AdventOfCode.Solutions
             explored.Add(this.Root);
             while (queue.TryDequeue(out BinaryTreeNode<T> next))
             {
-                if(explored.Add(next.Left)) queue.Enqueue(next.Left);
+                if (explored.Add(next.Left)) queue.Enqueue(next.Left);
                 if (explored.Add(next.Right)) queue.Enqueue(next.Right);
                 yield return next;
             }
