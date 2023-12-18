@@ -557,6 +557,18 @@ namespace AdventOfCode.Solutions
             }
         }
 
+        public static IEnumerable<(CompassDirection dir, Coordinate2D loc)> GetNeighborCoordsWithDirection(this Coordinate2D start, bool flipY = false, bool includeDiagonals = false)
+        {
+            yield return (N, start + (0, flipY ? 1 : -1));
+            if(includeDiagonals) yield return (NE, start + (1, flipY ? 1 : -1));
+            yield return (E, start + (1, 0));
+            if (includeDiagonals) yield return (SE, start + (1, flipY ? -1 : 1));
+            yield return (S, start + (0, flipY ? -1 : 1));
+            if (includeDiagonals) yield return (SW, start + (-1, flipY ? -1 : 1));
+            yield return (W, start + (-1, 0));
+            if (includeDiagonals) yield return (NW, start + (-1, flipY ? 1 : -1));
+        }
+
         public static Coordinate2D MoveDirection(this Coordinate2D start, CompassDirection Direction, bool flipY = false, int distance = 1)
         {
             if (flipY)
@@ -570,6 +582,40 @@ namespace AdventOfCode.Solutions
                     S => start+(0, distance),
                     SW => start+(-distance, distance),
                     W =>  start + (-distance, 0),
+                    NW => start + (-distance, -distance),
+                    _ => throw new ArgumentException("Direction is not valid", nameof(Direction))
+                };
+            }
+            else
+            {
+                return (Direction) switch
+                {
+                    N => start + (0, distance),
+                    NE => start + (distance, distance),
+                    E => start + (distance, 0),
+                    SE => start + (distance, -distance),
+                    S => start + (0, -distance),
+                    SW => start + (-distance, -distance),
+                    W => start + (-distance, 0),
+                    NW => start + (-distance, distance),
+                    _ => throw new ArgumentException("Direction is not valid", nameof(Direction))
+                };
+            }
+        }
+
+        public static Coordinate2DL MoveDirection(this Coordinate2DL start, CompassDirection Direction, bool flipY = false, long distance = 1)
+        {
+            if (flipY)
+            {
+                return (Direction) switch
+                {
+                    N => start + (0, -distance),
+                    NE => start + (distance, -distance),
+                    E => start + (distance, 0),
+                    SE => start + (distance, distance),
+                    S => start + (0, distance),
+                    SW => start + (-distance, distance),
+                    W => start + (-distance, 0),
                     NW => start + (-distance, -distance),
                     _ => throw new ArgumentException("Direction is not valid", nameof(Direction))
                 };
@@ -808,6 +854,37 @@ namespace AdventOfCode.Solutions
                     {
                         sb.Append(".");
                     } else
+                    {
+                        sb.Append(string.Empty);
+                    }
+                }
+                sb.Append("\n");
+            }
+
+            return sb.ToString();
+        }
+
+        public static string StringFromMap<TValue>(this Dictionary<Coordinate2D, TValue> self, bool AssumeEmptyIsDot = true)
+        {
+            int maxX = self.Max(a => a.Key.x);
+            int minX = self.Min(a => a.Key.x);
+            int maxY = self.Max(a => a.Key.y);
+            int minY= self.Min(a => a.Key.y);
+
+            StringBuilder sb = new();
+            for (int y = minY; y <= maxY; y++)
+            {
+                for (int x = minX; x <= maxX; x++)
+                {
+                    if (self.TryGetValue((x, y), out TValue val))
+                    {
+                        sb.Append(val);
+                    }
+                    else if (AssumeEmptyIsDot)
+                    {
+                        sb.Append(".");
+                    }
+                    else
                     {
                         sb.Append(string.Empty);
                     }
