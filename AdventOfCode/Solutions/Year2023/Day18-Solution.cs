@@ -9,8 +9,8 @@ namespace AdventOfCode.Solutions.Year2023
     [DayInfo(18, 2023, "Lavaduct Lagoon")]
     class Day18 : ASolution
     {
-        List<(char dir, int steps, string color)> instructions = new();
-        Dictionary<Coordinate2D, char> map = new();
+        List<(long dist, CompassDirection dir)> p1Steps = new();
+        List<(long dist, CompassDirection dir)> p2Steps = new();
         public Day18() : base()
         {
             foreach(var l in Input.SplitByNewline())
@@ -20,20 +20,7 @@ namespace AdventOfCode.Solutions.Year2023
                 int steps = int.Parse(parts[1]);
                 string color = parts[2].TrimStart('#', '(').TrimEnd(')');
 
-                instructions.Add((dir, steps, color));
-            }
-        }
-
-        protected override object SolvePartOne()
-        {
-            Coordinate2D curLoc = (0, 0);
-            map[curLoc] = '#'; //default depth
-
-            foreach(var s in instructions)
-            {
-                (var dir, var steps, var color) = s;
-
-                CompassDirection moveDir = (dir) switch
+                CompassDirection p1Dir = (dir) switch
                 {
                     'U' => N,
                     'D' => S,
@@ -42,61 +29,9 @@ namespace AdventOfCode.Solutions.Year2023
                     _ => throw new ArgumentException()
                 };
 
-                foreach(var i in Enumerable.Range(0, steps))
-                {
-                    curLoc = curLoc.MoveDirection(moveDir, true);
-                    map[curLoc] = '#';
-                }
-            }
+                p1Steps.Add((steps, p1Dir));
 
-            int maxX = map.Max(a => a.Key.x);
-            int minX = map.Min(a => a.Key.x);
-            int maxY = map.Max(a => a.Key.y);
-            int minY = map.Min(a => a.Key.y);
-
-            curLoc = (minX, minY);
-
-            while(!map.ContainsKey(curLoc)) curLoc = curLoc.MoveDirection(E, true);
-
-            curLoc = curLoc.MoveDirection(SE, true);
-
-
-            Queue<Coordinate2D> toFill = new();
-            HashSet<Coordinate2D> visited = new();
-
-            toFill.Enqueue(curLoc);
-            visited.Add(curLoc);
-
-            while(toFill.TryDequeue(out var next))
-            {
-                map[next] = '#';
-                var n = next.Neighbors(true);
-                foreach (var a in n)
-                {
-                    if (map.ContainsKey(a)) continue;
-                    if (visited.Contains(a)) continue;
-                    toFill.Enqueue(a);
-                    visited.Add(a);
-                }
-
-            }
-
-            return map.Count();
-        }
-
-        protected override object SolvePartTwo()
-        {
-            List<Coordinate2DL> points = new();
-            Coordinate2DL curLoc = (0, 0);
-
-            long wallSize = 0;
-
-            foreach(var s in instructions)
-            {
-                (_, _, string color) = s;
-
-                int dist = int.Parse(color[..5], System.Globalization.NumberStyles.HexNumber);
-                wallSize += dist;
+                long dist = int.Parse(color[..5], System.Globalization.NumberStyles.HexNumber);
 
                 CompassDirection moveDir = (color[^1]) switch
                 {
@@ -107,13 +42,39 @@ namespace AdventOfCode.Solutions.Year2023
                     _ => throw new ArgumentException()
                 };
 
-                curLoc = curLoc.MoveDirection(moveDir, distance: dist);
+                p2Steps.Add((dist, moveDir)); //Look I know my naming is all over the place here. 
+            }
+        }
+
+        protected override object SolvePartOne()
+        {
+            return ShoelaceAlgorithm(p1Steps);
+        }
+
+        protected override object SolvePartTwo()
+        {
+            return ShoelaceAlgorithm(p2Steps);
+        }
+
+        private long ShoelaceAlgorithm(IEnumerable<(long dist, CompassDirection dir)> instructions)
+        {
+            List<Coordinate2DL> points = new();
+            Coordinate2DL curLoc = (0, 0);
+
+            long wallSize = 0;
+
+            foreach (var s in instructions)
+            {
+                (var dist, var dir) = s;
+                wallSize += dist;
+
+                curLoc = curLoc.MoveDirection(dir, distance: dist);
                 points.Add(curLoc);
             }
 
             long res1 = 0;
             long res2 = 0;
-            for(int i = 0; i < points.Count; i++)
+            for (int i = 0; i < points.Count; i++)
             {
                 res1 += (points[i].x * points[(i + 1) % points.Count].y);
                 res2 += (points[i].y * points[(i + 1) % points.Count].x);
