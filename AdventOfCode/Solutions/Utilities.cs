@@ -796,7 +796,7 @@ namespace AdventOfCode.Solutions
             return res;
         }
 
-        public static (Dictionary<Coordinate2D, char> map, int maxX, int maxY)  GenerateMap(this string self, bool discardDot = true)
+        public static (Dictionary<Coordinate2D, char> map, int maxX, int maxY) GenerateMap(this string self, bool discardDot = true, bool startAt1 = false)
         {
             var lines = self.SplitByNewline();
             int maxX = 0;
@@ -810,11 +810,16 @@ namespace AdventOfCode.Solutions
                 {
                     if (!discardDot || lines[i][j] != '.')
                     {
-                        res[(j, i)] = lines[i][j];
+                        if(startAt1) res[(j + 1, i + 1)] = lines[i][j];
+                        else res[(j, i)] = lines[i][j];
                     }
                 }
             }
-
+            if(startAt1)
+            {
+                maxX++;
+                maxY++;
+            }
             return (res, maxX, maxY);
         }
 
