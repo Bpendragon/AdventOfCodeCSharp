@@ -64,7 +64,7 @@ namespace AdventOfCode.Solutions.Year2023
             long lowPulses = 0;
             long highPulses = 0;
 
-            for(int i = 0; i < 1000; i++)
+            for(int i = 1; i <= 1000; i++)
             {
                 modules["button"].incomingPulses.Enqueue(("finger", false));
                 processOrder.Enqueue("button");
@@ -72,7 +72,7 @@ namespace AdventOfCode.Solutions.Year2023
                 while(processOrder.TryDequeue(out string nextPulseTarget))
                 {
                     (long pulsesSent, bool pulseVal) = modules[nextPulseTarget].ProcessPulse();
-
+                    if (rxConjunctions.ContainsKey(nextPulseTarget) && rxConjunctions[nextPulseTarget] == 0 && pulseVal) rxConjunctions[nextPulseTarget] = i;
                     if (pulseVal) highPulses += pulsesSent;
                     else lowPulses += pulsesSent;
                 }
@@ -83,9 +83,7 @@ namespace AdventOfCode.Solutions.Year2023
 
         protected override object SolvePartTwo()
         {
-            foreach (var m in modules.Values) m.Reset();
-
-            for (int i = 1; ; i++)
+            for (int i = 1001; ; i++)
             {
                 modules["button"].incomingPulses.Enqueue(("finger", false));
                 processOrder.Enqueue("button");
