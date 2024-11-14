@@ -121,7 +121,7 @@ namespace AdventOfCode.Solutions
                 {
                     DateTime CURRENT_EST = TimeZoneInfo.ConvertTime(DateTime.Now, TimeZoneInfo.Utc).AddHours(-5);
                     if (CURRENT_EST < new DateTime(Year, 12, Day)) throw new InvalidOperationException();
-
+                    
                     input = Program.Http.GetStringAsync(INPUT_URL).Result.Trim();
                     File.WriteAllText(INPUT_FILEPATH, input);
                     File.WriteAllText(DEBUGINPUT_FILEPATH, string.Empty);
@@ -143,6 +143,9 @@ namespace AdventOfCode.Solutions
                 } 
                 catch( InvalidOperationException ) {
                     Console.WriteLine($"Day {Day}: Cannot fetch puzzle input before given date (Eastern Standard Time).");
+                }
+                catch(ArgumentException e) {
+                    Console.WriteLine(e.Message);
                 }
                 catch
                 {
