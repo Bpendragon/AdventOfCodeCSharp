@@ -256,6 +256,12 @@ namespace AdventOfCode.Solutions
             return res;
         }
 
+        public static List<T> AlongDiagonals<T>(this Dictionary<Coordinate2D, T> input, Coordinate2D start, CompassDirection direction)
+        {
+
+            throw new NotImplementedException();
+        }
+
         //Removes a specified row AND column from a multidimensional array.
         public static int[,] TrimArray(this int[,] originalArray, int rowToRemove, int columnToRemove)
         {
