@@ -33,6 +33,7 @@
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Solutions\Year2017\Inputs\" />
     <Folder Include="Solutions\Year2023\Inputs\" />
   </ItemGroup>
 </Project>

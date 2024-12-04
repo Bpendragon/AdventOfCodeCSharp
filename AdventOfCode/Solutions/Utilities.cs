@@ -1046,6 +1046,8 @@ namespace AdventOfCode.Solutions
 
         public static implicit operator (int x, int y)(Coordinate2D a) => (a.x, a.y);
 
+        public int ManDistance() => Math.Abs(x) + Math.Abs(y);
+
         public int ManDistance(Coordinate2D other)
         {
             int x = Math.Abs(this.x - other.x);

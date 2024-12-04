@@ -60,17 +60,16 @@ namespace AdventOfCode.Solutions.Year2024
 
             foreach(var kvp  in map.Where(a => a.Value == 'A' && a.Key.x > 0 && a.Key.y > 0 && a.Key.x < maxX && a.Key.y < maxY))
             {
-                if (map[kvp.Key.MoveDirection(NE)] == 'M' && map.GetValueOrDefault(kvp.Key.MoveDirection(SW), '.') == 'S'
-                    || map[kvp.Key.MoveDirection(SW)] == 'M' && map.GetValueOrDefault(kvp.Key.MoveDirection(NE), '.') == 'S')
+                if (map[kvp.Key.MoveDirection(NE)] == 'M' && map[kvp.Key.MoveDirection(SW)] == 'S'
+                    || map[kvp.Key.MoveDirection(SW)] == 'M' && map[kvp.Key.MoveDirection(NE)] == 'S')
                 {
-                    if(map[kvp.Key.MoveDirection(NW)] == 'M' && map.GetValueOrDefault(kvp.Key.MoveDirection(SE), '.') == 'S'
-                        || map[kvp.Key.MoveDirection(SE)] == 'M' && map.GetValueOrDefault(kvp.Key.MoveDirection(NW), '.') == 'S')
+                    if(map[kvp.Key.MoveDirection(NW)] == 'M' && map[kvp.Key.MoveDirection(SE)] == 'S'
+                        || map[kvp.Key.MoveDirection(SE)] == 'M' && map[kvp.Key.MoveDirection(NW) ]== 'S')
                     {
                         count++;
                     }
                 }
             }
-
             return count;
         }
     }
