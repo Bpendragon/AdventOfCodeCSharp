@@ -655,15 +655,15 @@ namespace AdventOfCode.Solutions
         }
 
 
-        public static T GetDirection<T>(this Dictionary<(int, int), T> values, (int, int) location, CompassDirection Direction, T defaultVal)
+        public static T GetDirection<T>(this Dictionary<(int, int), T> values, (int, int) location, CompassDirection Direction, T defaultVal = default(T), int distance = 1)
         {
-            var n = location.MoveDirection(Direction);
+            var n = location.MoveDirection(Direction, distance:distance);
             return values.GetValueOrDefault(n, defaultVal);
         }
 
-        public static T GetDirection<T>(this Dictionary<Coordinate2D, T> values, Coordinate2D location, CompassDirection Direction, T defaultVal)
+        public static T GetDirection<T>(this Dictionary<Coordinate2D, T> values, Coordinate2D location, CompassDirection Direction, T defaultVal = default(T), int distance = 1)
         {
-            var n = location.MoveDirection(Direction);
+            var n = location.MoveDirection(Direction, distance:distance);
             return values.GetValueOrDefault(n, defaultVal);
         }
 
@@ -709,6 +709,8 @@ namespace AdventOfCode.Solutions
 
             return res;
         }
+
+
 
         public static List<K> KeyList<K, V>(this Dictionary<K, V> dictionary, bool sorted = false)
         {

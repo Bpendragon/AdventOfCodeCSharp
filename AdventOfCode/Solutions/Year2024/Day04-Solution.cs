@@ -24,29 +24,29 @@ namespace AdventOfCode.Solutions.Year2024
             count += Regex.Matches(Input, "SAMX").Count;
             count += asColumns.Sum(a => Regex.Matches(a, "XMAS").Count);
             count += asColumns.Sum(a => Regex.Matches(a, "SAMX").Count);
-            foreach(var kvp in map.Where(a => a.Value == 'X'))
+            foreach (var kvp in map.Where(a => a.Value == 'X'))
             {
-                if (map.GetValueOrDefault(kvp.Key.MoveDirection(NE), '.') == 'M' 
-                    && map.GetValueOrDefault(kvp.Key.MoveDirection(NE).MoveDirection(NE), '.') == 'A' 
-                    && map.GetValueOrDefault(kvp.Key.MoveDirection(NE).MoveDirection(NE).MoveDirection(NE), '.') == 'S')
+                if (map.GetDirection(kvp.Key, NE) == 'M'
+                    && map.GetDirection(kvp.Key, NE, distance: 2) == 'A'
+                    && map.GetDirection(kvp.Key, NE, distance: 3) == 'S')
                 {
                     count++;
                 }
-                if (map.GetValueOrDefault(kvp.Key.MoveDirection(NW), '.') == 'M' 
-                    && map.GetValueOrDefault(kvp.Key.MoveDirection(NW).MoveDirection(NW), '.') == 'A' 
-                    && map.GetValueOrDefault(kvp.Key.MoveDirection(NW).MoveDirection(NW).MoveDirection(NW), '.') == 'S')
+                if (map.GetDirection(kvp.Key, NW) == 'M'
+                    && map.GetDirection(kvp.Key, NW, distance: 2) == 'A'
+                    && map.GetDirection(kvp.Key, NW, distance: 3) == 'S')
                 {
                     count++;
                 }
-                if (map.GetValueOrDefault(kvp.Key.MoveDirection(SE), '.') == 'M' 
-                    && map.GetValueOrDefault(kvp.Key.MoveDirection(SE).MoveDirection(SE), '.') == 'A' 
-                    && map.GetValueOrDefault(kvp.Key.MoveDirection(SE).MoveDirection(SE).MoveDirection(SE), '.') == 'S')
+                if (map.GetDirection(kvp.Key, SE) == 'M'
+                    && map.GetDirection(kvp.Key, SE, distance: 2) == 'A'
+                    && map.GetDirection(kvp.Key, SE, distance: 3) == 'S')
                 {
                     count++;
                 }
-                if (map.GetValueOrDefault(kvp.Key.MoveDirection(SW), '.') == 'M' 
-                    && map.GetValueOrDefault(kvp.Key.MoveDirection(SW).MoveDirection(SW), '.') == 'A' 
-                    && map.GetValueOrDefault(kvp.Key.MoveDirection(SW).MoveDirection(SW).MoveDirection(SW), '.') == 'S')
+                if (map.GetDirection(kvp.Key, SW) == 'M'
+                    && map.GetDirection(kvp.Key, SW, distance: 2) == 'A'
+                    && map.GetDirection(kvp.Key, SW, distance: 3) == 'S')
                 {
                     count++;
                 }
@@ -58,13 +58,13 @@ namespace AdventOfCode.Solutions.Year2024
         {
             int count = 0;
 
-            foreach(var kvp  in map.Where(a => a.Value == 'A' && a.Key.x > 0 && a.Key.y > 0 && a.Key.x < maxX && a.Key.y < maxY))
+            foreach (var kvp in map.Where(a => a.Value == 'A' && a.Key.x > 0 && a.Key.y > 0 && a.Key.x < maxX && a.Key.y < maxY))
             {
-                if (map[kvp.Key.MoveDirection(NE)] == 'M' && map[kvp.Key.MoveDirection(SW)] == 'S'
-                    || map[kvp.Key.MoveDirection(SW)] == 'M' && map[kvp.Key.MoveDirection(NE)] == 'S')
+                if (map.GetDirection(kvp.Key, NE) == 'M' && map.GetDirection(kvp.Key, SW) == 'S'
+                    || map.GetDirection(kvp.Key, SW, '.') == 'M' && map.GetDirection(kvp.Key, NE) == 'S')
                 {
-                    if(map[kvp.Key.MoveDirection(NW)] == 'M' && map[kvp.Key.MoveDirection(SE)] == 'S'
-                        || map[kvp.Key.MoveDirection(SE)] == 'M' && map[kvp.Key.MoveDirection(NW) ]== 'S')
+                    if (map.GetDirection(kvp.Key, NW) == 'M' && map.GetDirection(kvp.Key, SE) == 'S'
+                        || map.GetDirection(kvp.Key, SE) == 'M' && map.GetDirection(kvp.Key, NW) == 'S')
                     {
                         count++;
                     }
