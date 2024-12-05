@@ -1,15 +1,8 @@
 using System;
-using System.Text;
 using System.Collections.Generic;
-using AdventOfCode.UserClasses;
-using System.Linq;
 using System.Data;
-using System.Threading;
-using System.Security;
-using static AdventOfCode.Solutions.Utilities;
-using System.Runtime.CompilerServices;
+using System.Linq;
 using System.Numerics;
-using System.Net.Http.Headers;
 
 namespace AdventOfCode.Solutions.Year2023
 {
@@ -88,7 +81,7 @@ namespace AdventOfCode.Solutions.Year2023
                     try
                     {
                         if (distanceDiff % (i - hailVelocity) == 0) tmp.Add(i);
-                    } catch (Exception e) { }
+                    } catch { }
                 }
 
 
@@ -114,7 +107,7 @@ namespace AdventOfCode.Solutions.Year2023
                     {
                         if (distanceDiff % (i - hailVelocity) == 0) tmp.Add(i);
                     }
-                    catch (Exception e) { }
+                    catch { }
                 }
 
 
@@ -141,7 +134,7 @@ namespace AdventOfCode.Solutions.Year2023
                     {
                         if (distanceDiff % (i - hailVelocity) == 0) tmp.Add(i);
                     }
-                    catch (Exception e) { }
+                    catch { }
                 }
 
 
