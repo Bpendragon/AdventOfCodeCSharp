@@ -64,12 +64,7 @@ namespace AdventOfCode.Solutions.Year2024
 
         protected override object SolvePartTwo()
         {
-            int sum = 0;
-            foreach (var v in updatesThatNeededFixed)
-            {
-                sum += v[v.Count / 2].Value;
-            }
-            return sum;
+            return updatesThatNeededFixed.Sum(a => a[a.Count / 2].Value);
         }
 
         class RuleNode : IComparable<RuleNode>, IEquatable<RuleNode>
