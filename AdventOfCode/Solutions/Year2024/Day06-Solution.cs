@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics;
 using System.Linq;
 
 using static AdventOfCode.Solutions.Utilities;
@@ -12,7 +13,9 @@ namespace AdventOfCode.Solutions.Year2024
     {
         Dictionary<Coordinate2D, char> map = new();
         int maxX, maxY;
-        HashSet<Coordinate2D> Visited = new();
+        HashSet<Coordinate2D> visited = new();
+        HashSet<(Coordinate2D loc, CompassDirection dir)> visitedWithDir = new();
+        Coordinate2D startingLoc;
 
         public Day06() : base()
         {
@@ -21,40 +24,31 @@ namespace AdventOfCode.Solutions.Year2024
 
         protected override object SolvePartOne()
         {
-            Coordinate2D startingLoc = map.First(a => a.Value == '^').Key;
+            startingLoc = map.First(a => a.Value == '^').Key;
             CompassDirection curDir = N;
             Coordinate2D curLoc = startingLoc;
             Dictionary<Coordinate2D, char> p1map = new(map);
             while (curLoc.BoundsCheck(maxX, maxY))
             {
-
-                p1map[curLoc] = (curDir) switch
-                {
-                    N => '^',
-                    S => 'v',
-                    E => '>',
-                    W => '<',
-                    _ => throw new ArgumentException()
-
-                };
-
                 while (p1map.GetDirection(curLoc, curDir, flipY: true) == '#')
                 {
                     curDir = curDir.Turn("r");
                 }
                 curLoc = curLoc.MoveDirection(curDir, flipY: true);
+                visitedWithDir.Add((curLoc, curDir));
+                visited.Add(curLoc);
             }
-            Visited = p1map.Where(a => a.Value != '#').Select(a => a.Key).ToHashSet();
-            Visited.Remove(startingLoc);
-            return p1map.Count(a => a.Value != '#');
+            visited.Remove(curLoc); //Remove the step out of bounds.
+            return visited.Count;
         }
 
         protected override object SolvePartTwo()
         {
+            visited.Remove(startingLoc);
             int count = 0;
-            Coordinate2D startingLoc = map.First(a => a.Value == '^').Key;
 
-            foreach (var blockLoc in Visited)
+
+            foreach (var blockLoc in visited)
             {
                 CompassDirection curDir = N;
                 Coordinate2D curLoc = startingLoc;
