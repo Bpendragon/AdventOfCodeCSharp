@@ -25,8 +25,8 @@ namespace AdventOfCode.Solutions.Year2024
                 if (!checkedChars.Add(kvp.Value)) continue;
 
                 var sameNodes = map.Where(a => a.Value == kvp.Value);
-                
-                foreach(var c in sameNodes.Combinations(2))
+                if (sameNodes.Count() == 1) continue; //In the off chance it's the only antenna of it's type.
+                foreach (var c in sameNodes.Combinations(2))
                 {
                     var n = c.First().Key;
                     var m = c.Last().Key;
@@ -48,14 +48,12 @@ namespace AdventOfCode.Solutions.Year2024
         protected override object SolvePartTwo()
         {
             HashSet<char> checkedChars = new();
-            antinodes.Clear();
-            foreach (var c in map.Keys) antinodes.Add(c);
             foreach (var kvp in map)
             {
                 if (!checkedChars.Add(kvp.Value)) continue;
 
                 var sameNodes = map.Where(a => a.Value == kvp.Value);
-
+                if (sameNodes.Count() == 1) continue; //In the off chance it's the only antenna of it's type.
                 foreach (var c in sameNodes.Combinations(2))
                 {
                     var n = c.First().Key;
@@ -63,6 +61,9 @@ namespace AdventOfCode.Solutions.Year2024
 
                     var dX = n.x - m.x;
                     var dY = n.y - m.y;
+
+                    antinodes.Add(n);
+                    antinodes.Add(m);
 
                     Coordinate2D p1 = n + (dX, dY);
                     Coordinate2D p2 = m - (dX, dY);
