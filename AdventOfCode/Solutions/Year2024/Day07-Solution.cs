@@ -40,16 +40,16 @@ namespace AdventOfCode.Solutions.Year2024
         private bool DFS (long curVal, long target, IEnumerable<long> remainingVals, bool part2 = false)
         {
             if (remainingVals.Count() == 0) return curVal == target;
-            var resM = 0L;
-            var resA = 0L;
+            if (curVal > target) return false;
+            var resM = curVal * remainingVals.First();
+            var resA = curVal + remainingVals.First();
+            
 
-            resM = curVal * remainingVals.First();
-            resA = curVal + remainingVals.First();
-            long resC = long.Parse($"{curVal}{remainingVals.First()}");
-            if (DFS(resM, target, remainingVals.Skip(1), part2)) return true;
-            if (DFS(resA, target, remainingVals.Skip(1), part2)) return true;
+            if (resM <= target && DFS(resM, target, remainingVals.Skip(1), part2)) return true;
+            if (resA <= target && DFS(resA, target, remainingVals.Skip(1), part2)) return true;
             if (part2)
             {
+                long resC = long.Parse($"{curVal}{remainingVals.First()}");
                 if (DFS(resC, target, remainingVals.Skip(1), true)) return true;
             }
         
