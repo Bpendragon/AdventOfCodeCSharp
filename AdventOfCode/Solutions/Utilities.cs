@@ -191,6 +191,15 @@ namespace AdventOfCode.Solutions
             }
         }
 
+        public static IEnumerable<long> LongRange(long start, long count)
+        {
+            var end = start + count;
+            for (var current = start; current < end; ++current)
+            {
+                yield return current;
+            }
+        }
+
         public static string JoinAsStrings<T>(this IEnumerable<T> items)
         {
             return string.Join("", items);
@@ -1402,6 +1411,7 @@ namespace AdventOfCode.Solutions
         public BinaryTreeNode<T> Right;
         public BinaryTreeNode<T> Parent;
     }
+
 
     public class Range
     {
