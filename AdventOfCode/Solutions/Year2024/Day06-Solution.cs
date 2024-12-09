@@ -13,72 +13,69 @@ namespace AdventOfCode.Solutions.Year2024
     {
         Dictionary<Coordinate2D, char> map = new();
         int maxX, maxY;
-        HashSet<Coordinate2D> visited = new();
-        HashSet<(Coordinate2D loc, CompassDirection dir)> visitedWithDir = new();
+        HashSet<Coordinate2D> visited;
+        HashSet<Coordinate2D> p2LoopSpots = new();
+        HashSet<(Coordinate2D loc, CompassDirection dir)> visitedWithDir;
         Coordinate2D startingLoc;
 
         public Day06() : base()
         {
             (map, maxX, maxY) = Input.GenerateMap();
+            startingLoc = map.First(a => a.Value == '^').Key;
+            CompassDirection curDir = N;
+            Coordinate2D curLoc = startingLoc;
+
+            visited = new(maxX * maxY);
+            visitedWithDir = new(maxX * maxY);
+
+            visited.Add(curLoc);
+            visitedWithDir.Add((curLoc, curDir));
+
+            int stepCount = 0;
+            while (curLoc.BoundsCheck(maxX, maxY))
+            {
+                visitedWithDir.Add((curLoc, curDir));
+                visited.Add(curLoc);
+                while (map.GetDirection(curLoc, curDir, flipY: true) == '#')
+                {
+                    curDir = curDir.Turn("r");
+                }
+                loopTest(curLoc, curDir, startingLoc);
+                curLoc = curLoc.MoveDirection(curDir, flipY: true);
+                stepCount++;
+            }
         }
 
         protected override object SolvePartOne()
         {
-            startingLoc = map.First(a => a.Value == '^').Key;
-            CompassDirection curDir = N;
-            Coordinate2D curLoc = startingLoc;
-            Dictionary<Coordinate2D, char> p1map = new(map);
-            while (curLoc.BoundsCheck(maxX, maxY))
-            {
-                while (p1map.GetDirection(curLoc, curDir, flipY: true) == '#')
-                {
-                    curDir = curDir.Turn("r");
-                }
-                curLoc = curLoc.MoveDirection(curDir, flipY: true);
-                visitedWithDir.Add((curLoc, curDir));
-                visited.Add(curLoc);
-            }
-            visited.Remove(curLoc); //Remove the step out of bounds.
             return visited.Count;
         }
 
         protected override object SolvePartTwo()
         {
-            visited.Remove(startingLoc);
-            int count = 0;
+            return p2LoopSpots.Count;
+        }
 
+        private void loopTest(Coordinate2D curLoc, CompassDirection curDir, Coordinate2D startingLoc)
+        {
+            Coordinate2D newWall = curLoc.MoveDirection(curDir, flipY:true);
+            if (visited.Contains(newWall)) return;
+            HashSet<(Coordinate2D loc, CompassDirection dir)> newVisited = new();
 
-            foreach (var blockLoc in visited)
+            while (curLoc.BoundsCheck(maxX, maxY))
             {
-                CompassDirection curDir = N;
-                Coordinate2D curLoc = startingLoc;
-                Dictionary<Coordinate2D, char> p2map = new(map);
-                p2map[blockLoc] = '0';
-                while (curLoc.BoundsCheck(maxX, maxY))
+                newVisited.Add((curLoc, curDir));
+                while (map.GetDirection(curLoc, curDir, flipY: true) == '#' || curLoc.MoveDirection(curDir, flipY:true) == newWall)
                 {
-                    p2map[curLoc] = (curDir) switch
-                    {
-                        N => '^',
-                        S => 'v',
-                        E => '>',
-                        W => '<',
-                        _ => throw new ArgumentException()
-
-                    };
-
-                    while ("#0".Contains(p2map.GetDirection(curLoc, curDir, flipY: true)))
-                    {
-                        curDir = curDir.Turn("r");
-                    }
-                    curLoc = curLoc.MoveDirection(curDir, flipY: true);
-                    if (curDir == N && p2map.GetValueOrDefault(curLoc, '.') == '^') break;
-                    if (curDir == S && p2map.GetValueOrDefault(curLoc, '.') == 'v') break;
-                    if (curDir == E && p2map.GetValueOrDefault(curLoc, '.') == '>') break;
-                    if (curDir == W && p2map.GetValueOrDefault(curLoc, '.') == '<') break;
+                    curDir = curDir.Turn("r");
                 }
-                if (curLoc.BoundsCheck(maxX, maxY)) count++;
+                curLoc = curLoc.MoveDirection(curDir, flipY: true);
+                if (visitedWithDir.Contains((curLoc, curDir)) || newVisited.Contains((curLoc, curDir)))
+                {
+                    p2LoopSpots.Add(newWall);
+                    return;
+                }
             }
-            return count;
         }
     }
 }

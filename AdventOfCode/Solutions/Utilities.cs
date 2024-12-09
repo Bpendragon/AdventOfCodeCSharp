@@ -1075,7 +1075,7 @@ namespace AdventOfCode.Solutions
 
         public override int GetHashCode()
         {
-            return (100 * x + y).GetHashCode();
+            return (10000 * x + y).GetHashCode();
         }
 
         public override string ToString()
