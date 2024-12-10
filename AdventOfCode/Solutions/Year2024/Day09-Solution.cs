@@ -1,5 +1,8 @@
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 
 using static AdventOfCode.Solutions.Utilities;
 
@@ -13,6 +16,7 @@ namespace AdventOfCode.Solutions.Year2024
         static Queue<long> emptyBlocks = new();
         static Stack<long> fileBlocks = new();
         List<(long start, long length)> emptyRanges = new();
+        Dictionary<long, PriorityQueue<long, long>> emptyRangeQueues = new();
         long maxFileID;
 
         public Day09() : base()
@@ -20,6 +24,7 @@ namespace AdventOfCode.Solutions.Year2024
             var asLongs = Input.ToLongList();
             long pointer = 0;
             long curFileId = 0;
+            foreach (var i in Enumerable.Range(0, 10)) emptyRangeQueues[i] = new();
             for(int i = 0; i < asLongs.Count; i++)
             {
                 if (i % 2 == 0)
@@ -43,6 +48,7 @@ namespace AdventOfCode.Solutions.Year2024
                     if (asLongs[i] > 0)
                     {
                         emptyRanges.Add((pointer, asLongs[i]));
+                        emptyRangeQueues[asLongs[i]].Enqueue(pointer, pointer);
                         for (int j = 0; j < asLongs[i]; j++)
                         {
                             emptyBlocks.Enqueue(pointer);
@@ -71,14 +77,33 @@ namespace AdventOfCode.Solutions.Year2024
         {
             for(long i = maxFileID; i > 0; i--)
             {
-                var reqSpace = filesp2[i].blocks.Count;
-                int bestBlock = emptyRanges.FindIndex(a => a.length >= reqSpace && a.start < filesp2[i].blocks[0]);
-                if(bestBlock >= 0)
+                if (!emptyRangeQueues.Any(a => a.Value.Count > 0)) break;
+                var reqSpace = filesp2[i].size;
+
+                List<(int index, long start)> testPoint = new();
+                for (int j = reqSpace; j <= 9; j++)
                 {
-                    (var start, var length) = emptyRanges[bestBlock];
+                    if (emptyRangeQueues[j].TryPeek(out long start, out _))
+                    {
+
+                        if (start > filesp2[i].start)
+                        {
+                            emptyRangeQueues[j].Clear();
+                            continue;
+                        }
+                        testPoint.Add((j, start));
+                    }
+                }
+
+                if (testPoint.Count > 0)
+                {
+                    (int j, long start) = testPoint.MinBy(a => a.start);
+                    emptyRangeQueues[j].Dequeue();
                     filesp2[i].moveFile(start);
-                    emptyRanges.RemoveAt(bestBlock);
-                    if (length - reqSpace > 0) emptyRanges.Insert(bestBlock, (start + reqSpace, length - reqSpace));
+                    if (j - reqSpace > 0)
+                    {
+                        emptyRangeQueues[j - reqSpace].Enqueue(start + reqSpace, start + reqSpace);
+                    }
                 }
             }
             return filesp2.Values.Sum(a => a.checksum);
@@ -90,6 +115,8 @@ namespace AdventOfCode.Solutions.Year2024
             public List<long> blocks = new();
 
             public long checksum => blocks.Sum(a => a * id);
+            public long start => blocks[0];
+            public int size => blocks.Count;
 
             public AmphiFile() { }
             public AmphiFile(long id) { this.id = id; }
