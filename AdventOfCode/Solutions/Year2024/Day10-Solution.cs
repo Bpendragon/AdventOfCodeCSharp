@@ -8,12 +8,11 @@ namespace AdventOfCode.Solutions.Year2024
     class Day10 : ASolution
     {
         Dictionary<Coordinate2D, int> map;
-        int maxX, maxY;
-        HashSet<Coordinate2D> peakVisited = new();
+        HashSet<Coordinate2D> peaksVisited = new();
 
         public Day10() : base()
         {
-            (map, maxX, maxY) = Input.GenerateIntMap();
+            (map, _, _) = Input.GenerateIntMap();
         }
 
         protected override object SolvePartOne()
@@ -28,10 +27,10 @@ namespace AdventOfCode.Solutions.Year2024
 
         private int TrailScore(Coordinate2D curPos, int curVal, bool part2 = false)
         {
-            if (curVal == 0) peakVisited.Clear();
+            if (curVal == 0) peaksVisited.Clear();
             if (curVal == 9) 
             {
-                peakVisited.Add(curPos);
+                peaksVisited.Add(curPos);
                 return 1; 
             }
 
@@ -40,7 +39,7 @@ namespace AdventOfCode.Solutions.Year2024
             {
                 if(map.GetValueOrDefault(n, -1) == curVal + 1 )
                 {
-                    if (part2 || !peakVisited.Contains(n))
+                    if (part2 || !peaksVisited.Contains(n))
                     {
                         sum += TrailScore(n, curVal + 1, part2);
                     }
