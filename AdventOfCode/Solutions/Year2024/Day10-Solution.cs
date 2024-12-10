@@ -1,32 +1,52 @@
-using System;
-using System.Text;
 using System.Collections.Generic;
-using AdventOfCode.UserClasses;
-using System.Linq;
 using System.Data;
-using System.Threading;
-using System.Security;
-using static AdventOfCode.Solutions.Utilities;
-using System.Runtime.CompilerServices;
+using System.Linq;
 
 namespace AdventOfCode.Solutions.Year2024
 {
-    [DayInfo(10, 2024, "")]
+    [DayInfo(10, 2024, "Hoof It")]
     class Day10 : ASolution
     {
+        Dictionary<Coordinate2D, int> map;
+        int maxX, maxY;
+        HashSet<Coordinate2D> peakVisited = new();
+
         public Day10() : base()
         {
-
+            (map, maxX, maxY) = Input.GenerateIntMap();
         }
 
         protected override object SolvePartOne()
         {
-            return null;
+            return map.Where(a => a.Value == 0).Sum(a => TrailScore(a.Key, 0));
         }
 
         protected override object SolvePartTwo()
         {
-            return null;
+            return map.Where(a => a.Value == 0).Sum(a => TrailScore(a.Key, 0, true));
+        }
+
+        private int TrailScore(Coordinate2D curPos, int curVal, bool part2 = false)
+        {
+            if (curVal == 0) peakVisited.Clear();
+            if (curVal == 9) 
+            {
+                peakVisited.Add(curPos);
+                return 1; 
+            }
+
+            int sum = 0;
+            foreach(var n in curPos.Neighbors())
+            {
+                if(map.GetValueOrDefault(n, -1) == curVal + 1 )
+                {
+                    if (part2 || !peakVisited.Contains(n))
+                    {
+                        sum += TrailScore(n, curVal + 1, part2);
+                    }
+                }
+            }
+            return sum;
         }
     }
 }
