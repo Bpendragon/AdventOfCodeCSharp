@@ -1478,4 +1478,22 @@ namespace AdventOfCode.Solutions
 
         public long len => Ranges.Aggregate(1L, (a, b) => a *= b.Value.Len);
     }
+
+    public class DefaultDictionary<TKey, TValue> : Dictionary<TKey, TValue> where TValue : new()
+    {
+        public new TValue this[TKey key]
+        {
+            get
+            {
+                TValue val;
+                if (!TryGetValue(key, out val))
+                {
+                    val = new TValue();
+                    Add(key, val);
+                }
+                return val;
+            }
+            set { base[key] = value; }
+        }
+    }
 }
