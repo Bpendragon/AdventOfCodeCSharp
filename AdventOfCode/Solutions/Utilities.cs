@@ -1413,20 +1413,20 @@ namespace AdventOfCode.Solutions
     }
 
 
-    public class Range
+    public class Range2023
     {
         public long Start;
         public long End;
         public long Len => End - Start + 1;
 
-        public Range(long Start, long End) 
+        public Range2023(long Start, long End) 
         {
             this.Start = Start;
             this.End = End;
         }
 
         //Forced Deep Copy
-        public Range(Range other)
+        public Range2023(Range2023 other)
         {
             this.Start = other.Start;
             this.End = other.End;
@@ -1440,11 +1440,11 @@ namespace AdventOfCode.Solutions
 
     public class MultiRange
     {
-        public List<Range> Ranges = new();
+        public List<Range2023> Ranges = new();
 
         public MultiRange() { }
 
-        public MultiRange(IEnumerable<Range> Ranges)
+        public MultiRange(IEnumerable<Range2023> Ranges)
         {
             this.Ranges = new(Ranges);
         }
@@ -1453,7 +1453,7 @@ namespace AdventOfCode.Solutions
         {
             foreach (var r in other.Ranges)
             {
-                Range n = new(r);
+                Range2023 n = new(r);
                 Ranges.Add(n);
             }
         }
@@ -1463,7 +1463,7 @@ namespace AdventOfCode.Solutions
 
     public class DictMultiRange<T>
     {
-        public Dictionary<T, Range> Ranges = new();
+        public Dictionary<T, Range2023> Ranges = new();
 
         public DictMultiRange() { }
 
@@ -1471,7 +1471,7 @@ namespace AdventOfCode.Solutions
         {
             foreach (var r in other.Ranges)
             {
-                Range n = new(r.Value);
+                Range2023 n = new(r.Value);
                 Ranges[r.Key] = n;
             }
         }
