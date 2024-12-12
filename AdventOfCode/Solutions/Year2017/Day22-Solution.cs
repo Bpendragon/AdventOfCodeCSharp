@@ -60,7 +60,7 @@ namespace AdventOfCode.Solutions.Year2017
                         numInfected++;
                         break;
                 }
-                curPosition = curPosition.MoveDirection(curDirection, true);
+                curPosition = curPosition.Move(curDirection, true);
                 if (!newMap.ContainsKey(curPosition)) newMap[curPosition] = '.';
             }
 
@@ -97,7 +97,7 @@ namespace AdventOfCode.Solutions.Year2017
                         newMap[curPosition] = '.';
                         break;
                 }
-                curPosition = curPosition.MoveDirection(curDirection, true);
+                curPosition = curPosition.Move(curDirection, true);
                 if (!newMap.ContainsKey(curPosition)) newMap[curPosition] = '.';
             }
 

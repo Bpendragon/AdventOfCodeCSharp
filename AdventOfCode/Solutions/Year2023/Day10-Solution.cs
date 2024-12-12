@@ -116,7 +116,7 @@ namespace AdventOfCode.Solutions.Year2023
 
             HashSet<Coordinate2D> tempVisited = new();
             tempVisited.Add(start);
-            while(map.TryGetValue(cur.MoveDirection(curDir, true), out var nextPipe) && (nextPipe == 'S' || pipeDirChange.ContainsKey((nextPipe, curDir.Flip()))))
+            while(map.TryGetValue(cur.Move(curDir, true), out var nextPipe) && (nextPipe == 'S' || pipeDirChange.ContainsKey((nextPipe, curDir.Flip()))))
             {
                 if(nextPipe == 'S')
                 {
@@ -126,7 +126,7 @@ namespace AdventOfCode.Solutions.Year2023
                 }
 
                 sb.Append(nextPipe);
-                cur = cur.MoveDirection(curDir, true);
+                cur = cur.Move(curDir, true);
                 curDir = pipeDirChange[(nextPipe, curDir.Flip())];
                 tempVisited.Add(cur);
             }

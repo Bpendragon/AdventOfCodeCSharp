@@ -34,7 +34,7 @@ namespace AdventOfCode.Solutions.Year2023
                 {
                     if (n == heading.Flip()) continue; //Disallow 180s
                     if (n == heading && runL == 3) continue; //Disallow long runs
-                    var next = loc.MoveDirection(n);
+                    var next = loc.Move(n);
                     if (!map.ContainsKey(next)) continue; //Bounds check
 
                     (Coordinate2D loc, CompassDirection heading, int runL) nextState = (next, n, n == heading ? runL + 1 : 1);
@@ -73,7 +73,7 @@ namespace AdventOfCode.Solutions.Year2023
                     if (n == heading.Flip()) continue; //Disallow 180s
                     if (n != heading && runL < 4) continue; //Disallow short runs
                     if (n == heading && runL == 10) continue; //Disallow long runs
-                    var next = loc.MoveDirection(n);
+                    var next = loc.Move(n);
                     if (!map.ContainsKey(next)) continue; //Bounds check
 
                     (Coordinate2D loc, CompassDirection heading, int runL) nextState = (next, n, n == heading ? runL + 1 : 1);

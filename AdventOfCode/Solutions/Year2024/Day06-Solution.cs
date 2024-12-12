@@ -41,7 +41,7 @@ namespace AdventOfCode.Solutions.Year2024
                     curDir = curDir.Turn("r");
                 }
                 loopTest(curLoc, curDir, startingLoc);
-                curLoc = curLoc.MoveDirection(curDir, flipY: true);
+                curLoc = curLoc.Move(curDir, flipY: true);
                 stepCount++;
             }
         }
@@ -58,18 +58,18 @@ namespace AdventOfCode.Solutions.Year2024
 
         private void loopTest(Coordinate2D curLoc, CompassDirection curDir, Coordinate2D startingLoc)
         {
-            Coordinate2D newWall = curLoc.MoveDirection(curDir, flipY:true);
+            Coordinate2D newWall = curLoc.Move(curDir, flipY:true);
             if (visited.Contains(newWall)) return;
             HashSet<(Coordinate2D loc, CompassDirection dir)> newVisited = new();
 
             while (curLoc.BoundsCheck(maxX, maxY))
             {
                 newVisited.Add((curLoc, curDir));
-                while (map.GetDirection(curLoc, curDir, flipY: true) == '#' || curLoc.MoveDirection(curDir, flipY:true) == newWall)
+                while (map.GetDirection(curLoc, curDir, flipY: true) == '#' || curLoc.Move(curDir, flipY:true) == newWall)
                 {
                     curDir = curDir.Turn("r");
                 }
-                curLoc = curLoc.MoveDirection(curDir, flipY: true);
+                curLoc = curLoc.Move(curDir, flipY: true);
                 if (visitedWithDir.Contains((curLoc, curDir)) || newVisited.Contains((curLoc, curDir)))
                 {
                     p2LoopSpots.Add(newWall);

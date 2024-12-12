@@ -84,10 +84,10 @@ namespace AdventOfCode.Solutions.Year2022
 
             Coordinate2D curLoc = (dir) switch
             {
-                SW => sensorLoc.MoveDirection(N, false, Sensors[sensorLoc] + 1),
-                SE => sensorLoc.MoveDirection(N, false, Sensors[sensorLoc] + 1),
-                NE => sensorLoc.MoveDirection(S, false, Sensors[sensorLoc] + 1),
-                NW => sensorLoc.MoveDirection(S, false, Sensors[sensorLoc] + 1),
+                SW => sensorLoc.Move(N, false, Sensors[sensorLoc] + 1),
+                SE => sensorLoc.Move(N, false, Sensors[sensorLoc] + 1),
+                NE => sensorLoc.Move(S, false, Sensors[sensorLoc] + 1),
+                NW => sensorLoc.Move(S, false, Sensors[sensorLoc] + 1),
                 _ => throw new ArgumentException("Only diagonals this time bucko")
             };
 
@@ -100,7 +100,7 @@ namespace AdventOfCode.Solutions.Year2022
 
             while (curLoc.y != sensorLoc.y)
             {
-                curLoc = curLoc.MoveDirection(dir);
+                curLoc = curLoc.Move(dir);
 
                 if (curLoc.x <= 0 || curLoc.x >= maxX || curLoc.y <= 0 || curLoc.y >= maxY) continue;
 

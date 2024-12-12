@@ -59,16 +59,16 @@ namespace AdventOfCode.Solutions.Year2022
 
                 for(int j = 0; j < numSteps; j++)
                 {
-                    if(Map.TryGetValue(curLoc.MoveDirection(curDir, true), out var nxt))
+                    if(Map.TryGetValue(curLoc.Move(curDir, true), out var nxt))
                     {
-                        if (nxt.val == '.') curLoc = curLoc.MoveDirection(curDir, true);
+                        if (nxt.val == '.') curLoc = curLoc.Move(curDir, true);
                         else break;
                     } else
                     {
                         var searchDir = curDir.Turn("L", 180);
-                        var tester = curLoc.MoveDirection(searchDir, true, 50);
-                        while (Map.ContainsKey(tester)) tester = tester.MoveDirection(searchDir, true, 50);
-                        tester = tester.MoveDirection(curDir, true);
+                        var tester = curLoc.Move(searchDir, true, 50);
+                        while (Map.ContainsKey(tester)) tester = tester.Move(searchDir, true, 50);
+                        tester = tester.Move(curDir, true);
                         var looped = Map[tester];
                         if (looped.val == '.') curLoc = tester;
                         else break;
@@ -105,9 +105,9 @@ namespace AdventOfCode.Solutions.Year2022
 
                 for (int j = 0; j < numSteps; j++)
                 {
-                    if (Map.TryGetValue(curLoc.MoveDirection(curDir, true), out var nxt))
+                    if (Map.TryGetValue(curLoc.Move(curDir, true), out var nxt))
                     {
-                        if (nxt.val == '.') curLoc = curLoc.MoveDirection(curDir, true);
+                        if (nxt.val == '.') curLoc = curLoc.Move(curDir, true);
                         else break;
                     }
                     else

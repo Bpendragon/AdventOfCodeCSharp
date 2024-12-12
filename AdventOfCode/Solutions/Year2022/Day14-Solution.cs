@@ -43,7 +43,7 @@ namespace AdventOfCode.Solutions.Year2022
                     while (cur != next)
                     {
                         caves[cur] = '#';
-                        cur = cur.MoveDirection(travelDir);
+                        cur = cur.Move(travelDir);
                     }
                     caves[cur] = '#';
                 }
@@ -81,9 +81,9 @@ namespace AdventOfCode.Solutions.Year2022
                     if (a == (500, 0)) continue;
                     if (caves[a] == 'o')
                     {
-                        var up = caves.GetValueOrDefault(a.MoveDirection(N, true), '#');
-                        var upl = caves.GetValueOrDefault(a.MoveDirection(NW, true), '#');
-                        var upr = caves.GetValueOrDefault(a.MoveDirection(NE, true), '#');
+                        var up = caves.GetValueOrDefault(a.Move(N, true), '#');
+                        var upl = caves.GetValueOrDefault(a.Move(NW, true), '#');
+                        var upr = caves.GetValueOrDefault(a.Move(NE, true), '#');
                         if (up == '#' && upl == '#' && upr == '#')
                         {
                             toRemove.Add(a);
@@ -106,10 +106,10 @@ namespace AdventOfCode.Solutions.Year2022
             {
                 if (!caves.Any(a => a.Key.x == newSand.x && a.Key.y > newSand.y)) return false; //This piece will fall forever
 
-                newSand = caves.Where(a => a.Key.x == newSand.x && a.Key.y > newSand.y).OrderBy(a => a.Key.y).First().Key.MoveDirection(N, true); //Fall until contact
+                newSand = caves.Where(a => a.Key.x == newSand.x && a.Key.y > newSand.y).OrderBy(a => a.Key.y).First().Key.Move(N, true); //Fall until contact
 
-                if (!caves.ContainsKey(newSand.MoveDirection(SW, true))) newSand = newSand.MoveDirection(SW, true); //Try move down-left
-                else if (!caves.ContainsKey(newSand.MoveDirection(SE, true))) newSand = newSand.MoveDirection(SE, true); //try move down-right
+                if (!caves.ContainsKey(newSand.Move(SW, true))) newSand = newSand.Move(SW, true); //Try move down-left
+                else if (!caves.ContainsKey(newSand.Move(SE, true))) newSand = newSand.Move(SE, true); //try move down-right
                 else //can't move down-left or down right, we've come to a rest.
                 {
                     caves[newSand] = 'o';

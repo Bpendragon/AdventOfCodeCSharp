@@ -124,11 +124,11 @@ namespace AdventOfCode.Solutions.Year2023
                         {
                             Coordinate2D curLoc = (x, y);
                             //Try to shift rock north.
-                            while (!circles.Contains(curLoc.MoveDirection(tiltDir, true))
-                                && !squares.Contains(curLoc.MoveDirection(tiltDir, true))
+                            while (!circles.Contains(curLoc.Move(tiltDir, true))
+                                && !squares.Contains(curLoc.Move(tiltDir, true))
                                 )
                             {
-                                curLoc = curLoc.MoveDirection(tiltDir, true);
+                                curLoc = curLoc.Move(tiltDir, true);
                             }
 
                             circles.Remove((x, y));
@@ -147,11 +147,11 @@ namespace AdventOfCode.Solutions.Year2023
                         {
                             Coordinate2D curLoc = (x, y);
                             //Try to shift rock north.
-                            while (!circles.Contains(curLoc.MoveDirection(tiltDir, true))
-                                && !squares.Contains(curLoc.MoveDirection(tiltDir, true))
+                            while (!circles.Contains(curLoc.Move(tiltDir, true))
+                                && !squares.Contains(curLoc.Move(tiltDir, true))
                                 )
                             {
-                                curLoc = curLoc.MoveDirection(tiltDir, true);
+                                curLoc = curLoc.Move(tiltDir, true);
                             }
 
                             circles.Remove((x, y));

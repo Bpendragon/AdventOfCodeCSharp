@@ -37,10 +37,10 @@ namespace AdventOfCode.Solutions.Year2022
                 for (int i = 0; i < numSteps; i++)
                 {
                     prevHead = head;
-                    head = head.MoveDirection(travelDirection);
+                    head = head.Move(travelDirection);
                     if (tail.ManDistance(head) == 2 && (tail.x == head.x || tail.y == head.y))
                     {
-                        tail = tail.MoveDirection(travelDirection);
+                        tail = tail.Move(travelDirection);
                     }
                     else if (tail.ManDistance(head) == 3)
                     {
@@ -76,7 +76,7 @@ namespace AdventOfCode.Solutions.Year2022
                 {
                     //Move head of rope
                     var curKnot = rope.First;
-                    curKnot.Value = curKnot.Value.MoveDirection(travelDirection);
+                    curKnot.Value = curKnot.Value.Move(travelDirection);
                     CompassDirection prevKnotDir = travelDirection;
                     //Rest of Rope follows
                     while (curKnot.Next != null)
@@ -89,11 +89,11 @@ namespace AdventOfCode.Solutions.Year2022
                         else if (nextKnot.Value.ManDistance(curKnot.Value) >= 3)
                         {
                             //Dumb Homing, we know that we're at least a diagonal away, so move closer in x, then closer in y
-                            if (curKnot.Value.x > nextKnot.Value.x) nextKnot.Value = nextKnot.Value.MoveDirection(E);
-                            else nextKnot.Value = nextKnot.Value.MoveDirection(W);
+                            if (curKnot.Value.x > nextKnot.Value.x) nextKnot.Value = nextKnot.Value.Move(E);
+                            else nextKnot.Value = nextKnot.Value.Move(W);
 
-                            if (curKnot.Value.y > nextKnot.Value.y) nextKnot.Value = nextKnot.Value.MoveDirection(N);
-                            else nextKnot.Value = nextKnot.Value.MoveDirection(S);
+                            if (curKnot.Value.y > nextKnot.Value.y) nextKnot.Value = nextKnot.Value.Move(N);
+                            else nextKnot.Value = nextKnot.Value.Move(S);
                         }
                         curKnot = nextKnot;
                     }

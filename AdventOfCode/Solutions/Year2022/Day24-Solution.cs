@@ -116,7 +116,7 @@ namespace AdventOfCode.Solutions.Year2022
             {
                 foreach (var d in b)
                 {
-                    var nextPos = p.MoveDirection(d, true);
+                    var nextPos = p.Move(d, true);
                     if (nextPos.x < 1) nextPos = (maxX, nextPos.y);
                     if (nextPos.x > maxX) nextPos = (1, nextPos.y);
                     if (nextPos.y < 1) nextPos = (nextPos.x, maxY);

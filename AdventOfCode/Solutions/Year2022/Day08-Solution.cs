@@ -39,7 +39,7 @@ namespace AdventOfCode.Solutions.Year2022
                         tallest = trees[(x, y)];
                         visibleTrees.Add((x, y));
                         //Search North
-                        next = (x, y).MoveDirection(N);
+                        next = (x, y).Move(N);
                         while (trees.TryGetValue(next, out int height))
                         {
                             if (height > tallest)
@@ -47,11 +47,11 @@ namespace AdventOfCode.Solutions.Year2022
                                 tallest = height;
                                 visibleTrees.Add(next);
                             }
-                            next = next.MoveDirection(N);
+                            next = next.Move(N);
                         }
                         //Search South
                         tallest = trees[(x, y)];
-                        next = (x, y).MoveDirection(S);
+                        next = (x, y).Move(S);
                         while (trees.TryGetValue(next, out int height))
                         {
                             if (height > tallest)
@@ -59,7 +59,7 @@ namespace AdventOfCode.Solutions.Year2022
                                 tallest = height;
                                 visibleTrees.Add(next);
                             }
-                            next = next.MoveDirection(S);
+                            next = next.Move(S);
                         }
                     }
                 }
@@ -68,7 +68,7 @@ namespace AdventOfCode.Solutions.Year2022
                     //Search East
                     tallest = trees[(0, y)];
                     visibleTrees.Add((0, y));
-                    next = (0, y).MoveDirection(E);
+                    next = (0, y).Move(E);
                     while (trees.TryGetValue(next, out int height))
                     {
                         if (height > tallest)
@@ -76,13 +76,13 @@ namespace AdventOfCode.Solutions.Year2022
                             tallest = height;
                             visibleTrees.Add(next);
                         }
-                        next = next.MoveDirection(E);
+                        next = next.Move(E);
                     }
 
                     //Search West
                     tallest = trees[(maxX, y)];
                     visibleTrees.Add((maxX, y));
-                    next = (maxX, y).MoveDirection(W);
+                    next = (maxX, y).Move(W);
                     while (trees.TryGetValue(next, out int height))
                     {
                         if (height > tallest)
@@ -90,7 +90,7 @@ namespace AdventOfCode.Solutions.Year2022
                             tallest = height;
                             visibleTrees.Add(next);
                         }
-                        next = next.MoveDirection(W);
+                        next = next.Move(W);
                     }
                 }
             }
@@ -108,7 +108,7 @@ namespace AdventOfCode.Solutions.Year2022
                     int maxAllowed = trees[(x, y)];
                     int scenicScore = 1;
                     int visTrees = 0;
-                    Coordinate2D next = (x, y).MoveDirection(N);
+                    Coordinate2D next = (x, y).Move(N);
                     //North
                     while(trees.TryGetValue(next, out int height))
                     {
@@ -118,13 +118,13 @@ namespace AdventOfCode.Solutions.Year2022
                             visTrees++;
                             break;
                         }
-                        next = next.MoveDirection(N);
+                        next = next.Move(N);
                     }
                     scenicScore *= visTrees;
                     if (scenicScore == 0) continue;
                     visTrees = 0;
                     //South
-                    next = (x, y).MoveDirection(S);
+                    next = (x, y).Move(S);
                     while (trees.TryGetValue(next, out int height))
                     {
                         if (height < maxAllowed) visTrees++;
@@ -133,14 +133,14 @@ namespace AdventOfCode.Solutions.Year2022
                             visTrees++;
                             break;
                         }
-                        next = next.MoveDirection(S);
+                        next = next.Move(S);
                     }
                     scenicScore *= visTrees;
                     if (scenicScore == 0) continue;
                     visTrees = 0;
 
                     //East
-                    next = (x, y).MoveDirection(E);
+                    next = (x, y).Move(E);
                     while (trees.TryGetValue(next, out int height))
                     {
                         if (height < maxAllowed) visTrees++;
@@ -149,14 +149,14 @@ namespace AdventOfCode.Solutions.Year2022
                             visTrees++;
                             break;
                         }
-                        next = next.MoveDirection(E);
+                        next = next.Move(E);
                     }
                     scenicScore *= visTrees;
                     if (scenicScore == 0) continue;
                     visTrees = 0;
 
                     //West
-                    next = (x, y).MoveDirection(W);
+                    next = (x, y).Move(W);
                     while (trees.TryGetValue(next, out int height))
                     {
                         if (height < maxAllowed) visTrees++;
@@ -165,7 +165,7 @@ namespace AdventOfCode.Solutions.Year2022
                             visTrees++;
                             break;
                         }
-                        next = next.MoveDirection(W);
+                        next = next.Move(W);
                     }
                     scenicScore *= visTrees;
                     if (scenicScore > maxScore) maxScore = scenicScore;

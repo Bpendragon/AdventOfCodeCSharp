@@ -68,7 +68,7 @@ namespace AdventOfCode.Solutions.Year2023
                 (var dist, var dir) = s;
                 wallSize += dist;
 
-                curLoc = curLoc.MoveDirection(dir, distance: dist);
+                curLoc = curLoc.Move(dir, distance: dist);
                 points.Add(curLoc);
             }
 

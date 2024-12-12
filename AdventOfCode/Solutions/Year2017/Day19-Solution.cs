@@ -33,7 +33,7 @@ namespace AdventOfCode.Solutions.Year2017
             {
                 while(map[curPos] is '|' or '-')
                 {
-                    curPos = curPos.MoveDirection(curDir);
+                    curPos = curPos.Move(curDir);
                     steps++;
                 }
 
@@ -43,10 +43,10 @@ namespace AdventOfCode.Solutions.Year2017
                     {
                         case N:
                         case S:
-                            if(map[curPos.MoveDirection(E)] == '-')
+                            if(map[curPos.Move(E)] == '-')
                             {
                                 curDir = E;
-                            } else if(map[curPos.MoveDirection(W)] == '-')
+                            } else if(map[curPos.Move(W)] == '-')
                             {
                                 curDir = W;
                             } else
@@ -56,11 +56,11 @@ namespace AdventOfCode.Solutions.Year2017
                             break;
                         case E:
                         case W:
-                            if (map[curPos.MoveDirection(N)] == '|')
+                            if (map[curPos.Move(N)] == '|')
                             {
                                 curDir = N;
                             }
-                            else if (map[curPos.MoveDirection(S)] == '|')
+                            else if (map[curPos.Move(S)] == '|')
                             {
                                 curDir = S;
                             }
@@ -78,7 +78,7 @@ namespace AdventOfCode.Solutions.Year2017
                 {
                     lettersSeen.Add(map[curPos]);
                 }
-                curPos = curPos.MoveDirection(curDir);
+                curPos = curPos.Move(curDir);
                 steps++;
             }
 

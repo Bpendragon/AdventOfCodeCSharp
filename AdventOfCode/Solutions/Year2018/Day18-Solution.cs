@@ -56,7 +56,7 @@ namespace AdventOfCode.Solutions.Year2018
                     int yards = 0;
                     foreach(var dir in (CompassDirection[])Enum.GetValues(typeof(CompassDirection)))
                     {
-                        char c = p1.GetValueOrDefault(cell.MoveDirection(dir), '~');
+                        char c = p1.GetValueOrDefault(cell.Move(dir), '~');
                         switch (c)
                         {
                             case '~': continue;

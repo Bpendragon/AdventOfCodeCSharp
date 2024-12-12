@@ -23,10 +23,10 @@ namespace AdventOfCode.Solutions.Year2015
             {
                 elf1 = c switch
                 {
-                    '^' => elf1.MoveDirection(N),
-                    'v' => elf1.MoveDirection(S),
-                    '>' => elf1.MoveDirection(E),
-                    '<' => elf1.MoveDirection(W),
+                    '^' => elf1.Move(N),
+                    'v' => elf1.Move(S),
+                    '>' => elf1.Move(E),
+                    '<' => elf1.Move(W),
                     _ => throw new Exception()
                 };
 
@@ -44,19 +44,19 @@ namespace AdventOfCode.Solutions.Year2015
             {
                 elf1 = Input[i] switch
                 {
-                    '^' => elf1.MoveDirection(N),
-                    'v' => elf1.MoveDirection(S),
-                    '>' => elf1.MoveDirection(E),
-                    '<' => elf1.MoveDirection(W),
+                    '^' => elf1.Move(N),
+                    'v' => elf1.Move(S),
+                    '>' => elf1.Move(E),
+                    '<' => elf1.Move(W),
                     _ => throw new Exception()
                 };
 
                 elf2 = Input[i + 1] switch
                 {
-                    '^' => elf2.MoveDirection(N),
-                    'v' => elf2.MoveDirection(S),
-                    '>' => elf2.MoveDirection(E),
-                    '<' => elf2.MoveDirection(W),
+                    '^' => elf2.Move(N),
+                    'v' => elf2.Move(S),
+                    '>' => elf2.Move(E),
+                    '<' => elf2.Move(W),
                     _ => throw new Exception()
                 };
                 HousesVisted2.Add(elf1);

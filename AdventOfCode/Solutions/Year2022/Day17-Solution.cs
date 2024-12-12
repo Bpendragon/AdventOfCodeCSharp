@@ -86,7 +86,7 @@ namespace AdventOfCode.Solutions.Year2022
             newHeights = heights;
             long jetAtStart = jetIndex;
 
-            shape = shape.Select(a => a.MoveDirection(E, distance: 2)).Select(a => a.MoveDirection(N, distance: (int)(maxHeight + 4))).ToList();
+            shape = shape.Select(a => a.Move(E, distance: 2)).Select(a => a.Move(N, distance: (int)(maxHeight + 4))).ToList();
 
             while(true)
             {
@@ -98,20 +98,20 @@ namespace AdventOfCode.Solutions.Year2022
                 };
 
                 //Check if sideways movement allowed and if so do it.
-                if (shape.All(a => a.MoveDirection(moveDir).x is >= 0 and < 7 && !tower.ContainsKey(a.MoveDirection(moveDir))))
+                if (shape.All(a => a.Move(moveDir).x is >= 0 and < 7 && !tower.ContainsKey(a.Move(moveDir))))
                 {
-                    shape = shape.Select(a => a.MoveDirection(moveDir)).ToList();
+                    shape = shape.Select(a => a.Move(moveDir)).ToList();
                 }
                 jetIndex++; //Always increase JetIndex
 
                 //Attempt to drop 1 tile
-                if(shape.Any(a => tower.ContainsKey(a.MoveDirection(drop))))
+                if(shape.Any(a => tower.ContainsKey(a.Move(drop))))
                 {
                     //Couldn't drop, cement in place
                     foreach(var s in shape) tower[s] = 1;
                     //if (UseDebugInput) DrawTower((int)(maxHeight + 4), 10);
                     break;
-                } else shape = shape.Select(a => a.MoveDirection(drop)).ToList();
+                } else shape = shape.Select(a => a.Move(drop)).ToList();
             }
 
             //Save state, update cache, retrun new maxHeights

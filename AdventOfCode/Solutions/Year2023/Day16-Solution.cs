@@ -80,13 +80,13 @@ namespace AdventOfCode.Solutions.Year2023
                     var newDirs = MirrorActions[(mirror, dir.Flip())];
                     foreach (var d in newDirs)
                     {
-                        if (loc.MoveDirection(d, true).BoundsCheck(maxX, maxY))
-                            toExplore.Enqueue((loc.MoveDirection(d, true), d));
+                        if (loc.Move(d, true).BoundsCheck(maxX, maxY))
+                            toExplore.Enqueue((loc.Move(d, true), d));
                     }
                 }
-                else if (loc.MoveDirection(dir, true).BoundsCheck(maxX, maxY))
+                else if (loc.Move(dir, true).BoundsCheck(maxX, maxY))
                 {
-                    toExplore.Enqueue((loc.MoveDirection(dir, true), dir));
+                    toExplore.Enqueue((loc.Move(dir, true), dir));
                 }
             }
             return energizedCells.Count;

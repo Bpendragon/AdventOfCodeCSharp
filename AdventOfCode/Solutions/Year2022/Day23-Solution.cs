@@ -48,48 +48,48 @@ namespace AdventOfCode.Solutions.Year2022
                         {
                             if (d == 'N')
                             {
-                                if (!(curMap.ContainsKey(k.MoveDirection(N, true))
-                                    || curMap.ContainsKey(k.MoveDirection(NE, true))
-                                    || curMap.ContainsKey(k.MoveDirection(NW, true))))
+                                if (!(curMap.ContainsKey(k.Move(N, true))
+                                    || curMap.ContainsKey(k.Move(NE, true))
+                                    || curMap.ContainsKey(k.Move(NW, true))))
                                 {
-                                    if (!proposed.ContainsKey(k.MoveDirection(N, true))) proposed[k.MoveDirection(N, true)] = new();
-                                    proposed[k.MoveDirection(N, true)].Add(k);
+                                    if (!proposed.ContainsKey(k.Move(N, true))) proposed[k.Move(N, true)] = new();
+                                    proposed[k.Move(N, true)].Add(k);
                                     hasMoved = true;
                                     break;
                                 }
                             }
                             if (d == 'S')
                             {
-                                if (!(curMap.ContainsKey(k.MoveDirection(S, true))
-                                    || curMap.ContainsKey(k.MoveDirection(SE, true))
-                                    || curMap.ContainsKey(k.MoveDirection(SW, true))))
+                                if (!(curMap.ContainsKey(k.Move(S, true))
+                                    || curMap.ContainsKey(k.Move(SE, true))
+                                    || curMap.ContainsKey(k.Move(SW, true))))
                                 {
-                                    if (!proposed.ContainsKey(k.MoveDirection(S, true))) proposed[k.MoveDirection(S, true)] = new();
-                                    proposed[k.MoveDirection(S, true)].Add(k);
+                                    if (!proposed.ContainsKey(k.Move(S, true))) proposed[k.Move(S, true)] = new();
+                                    proposed[k.Move(S, true)].Add(k);
                                     hasMoved = true;
                                     break;
                                 }
                             }
                             if (d == 'W')
                             {
-                                if (!(curMap.ContainsKey(k.MoveDirection(W, true))
-                                    || curMap.ContainsKey(k.MoveDirection(NW, true))
-                                    || curMap.ContainsKey(k.MoveDirection(SW, true))))
+                                if (!(curMap.ContainsKey(k.Move(W, true))
+                                    || curMap.ContainsKey(k.Move(NW, true))
+                                    || curMap.ContainsKey(k.Move(SW, true))))
                                 {
-                                    if (!proposed.ContainsKey(k.MoveDirection(W, true))) proposed[k.MoveDirection(W, true)] = new();
-                                    proposed[k.MoveDirection(W, true)].Add(k);
+                                    if (!proposed.ContainsKey(k.Move(W, true))) proposed[k.Move(W, true)] = new();
+                                    proposed[k.Move(W, true)].Add(k);
                                     hasMoved = true;
                                     break;
                                 }
                             }
                             if (d == 'E')
                             {
-                                if (!(curMap.ContainsKey(k.MoveDirection(E, true))
-                                    || curMap.ContainsKey(k.MoveDirection(NE, true))
-                                    || curMap.ContainsKey(k.MoveDirection(SE, true))))
+                                if (!(curMap.ContainsKey(k.Move(E, true))
+                                    || curMap.ContainsKey(k.Move(NE, true))
+                                    || curMap.ContainsKey(k.Move(SE, true))))
                                 {
-                                    if (!proposed.ContainsKey(k.MoveDirection(E, true))) proposed[k.MoveDirection(E, true)] = new();
-                                    proposed[k.MoveDirection(E, true)].Add(k);
+                                    if (!proposed.ContainsKey(k.Move(E, true))) proposed[k.Move(E, true)] = new();
+                                    proposed[k.Move(E, true)].Add(k);
                                     hasMoved = true;
                                     break;
                                 }

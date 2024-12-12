@@ -28,12 +28,12 @@ namespace AdventOfCode.Solutions.Year2017
 
             while(map.Count < target)
             {
-                if(!map.ContainsKey(curLoc.MoveDirection(curDirection.Turn("l"))))
+                if(!map.ContainsKey(curLoc.Move(curDirection.Turn("l"))))
                 {
                     curDirection = curDirection.Turn("l");
                 }
 
-                curLoc = curLoc.MoveDirection(curDirection);
+                curLoc = curLoc.Move(curDirection);
 
                 map[curLoc] = !p2Found ? map.Get2dNeighborVals(curLoc, 0, true).Sum() : 0;
                 if(!p2Found && map[curLoc] > target)

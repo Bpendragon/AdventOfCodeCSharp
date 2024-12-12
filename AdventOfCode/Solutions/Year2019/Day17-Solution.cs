@@ -157,9 +157,9 @@ namespace AdventOfCode.Solutions.Year2019
             visited.Add(curLoc);
             while (visited.Count < map.Keys.Count)
             {
-                if(map.ContainsKey(curLoc.MoveDirection(curDirection, true)))
+                if(map.ContainsKey(curLoc.Move(curDirection, true)))
                 {
-                    curLoc = curLoc.MoveDirection(curDirection, true);
+                    curLoc = curLoc.Move(curDirection, true);
                     distanceTraveled++;
                     visited.Add(curLoc);
                 } else
@@ -168,7 +168,7 @@ namespace AdventOfCode.Solutions.Year2019
                     switch(curDirection)
                     {
                         case N: 
-                            if(map.ContainsKey(curLoc.MoveDirection(W, true)))
+                            if(map.ContainsKey(curLoc.Move(W, true)))
                             {
                                 sb.Append("L,");
                                 curDirection = W;
@@ -180,7 +180,7 @@ namespace AdventOfCode.Solutions.Year2019
                             }
                             break;
                         case E:
-                            if (map.ContainsKey(curLoc.MoveDirection(N, true)))
+                            if (map.ContainsKey(curLoc.Move(N, true)))
                             {
                                 sb.Append("L,");
                                 curDirection = N;
@@ -192,7 +192,7 @@ namespace AdventOfCode.Solutions.Year2019
                             }
                             break;
                         case S:
-                            if (map.ContainsKey(curLoc.MoveDirection(E, true)))
+                            if (map.ContainsKey(curLoc.Move(E, true)))
                             {
                                 sb.Append("L,");
                                 curDirection = E;
@@ -204,7 +204,7 @@ namespace AdventOfCode.Solutions.Year2019
                             }
                             break;
                         case W:
-                            if (map.ContainsKey(curLoc.MoveDirection(S, true)))
+                            if (map.ContainsKey(curLoc.Move(S, true)))
                             {
                                 sb.Append("L,");
                                 curDirection = S;

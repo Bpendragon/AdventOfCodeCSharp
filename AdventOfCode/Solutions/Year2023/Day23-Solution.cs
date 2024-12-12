@@ -85,10 +85,10 @@ namespace AdventOfCode.Solutions.Year2023
             {
                 switch (map[curLoc])
                 {
-                    case '>': return res + FindLongestPath(curLoc.MoveDirection(E), Goal, locVisited);
-                    case '<': return res + FindLongestPath(curLoc.MoveDirection(W), Goal, locVisited);
-                    case '^': return res + FindLongestPath(curLoc.MoveDirection(N, true), Goal, locVisited);
-                    case 'v': return res + FindLongestPath(curLoc.MoveDirection(S, true), Goal, locVisited);
+                    case '>': return res + FindLongestPath(curLoc.Move(E), Goal, locVisited);
+                    case '<': return res + FindLongestPath(curLoc.Move(W), Goal, locVisited);
+                    case '^': return res + FindLongestPath(curLoc.Move(N, true), Goal, locVisited);
+                    case 'v': return res + FindLongestPath(curLoc.Move(S, true), Goal, locVisited);
                     default: break;
                 }
             }
