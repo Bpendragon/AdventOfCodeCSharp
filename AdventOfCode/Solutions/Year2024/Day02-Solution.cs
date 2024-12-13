@@ -8,6 +8,8 @@ namespace AdventOfCode.Solutions.Year2024
     class Day02 : ASolution
     {
         List<List<int>> levels = new();
+        List<List<int>> unsafeLevels = new();
+        int p1Solution = 0;
 
         public Day02() : base()
         {
@@ -23,8 +25,10 @@ namespace AdventOfCode.Solutions.Year2024
             foreach(var l in levels)
             {
                 if (TestList(l)) safeCount++;
+                else unsafeLevels.Add(l);
             }
-            return safeCount;
+            p1Solution = safeCount;
+            return p1Solution;
         }
 
 
@@ -32,7 +36,7 @@ namespace AdventOfCode.Solutions.Year2024
         {
             int safeCount = 0;
 
-            foreach(var l in levels)
+            foreach(var l in unsafeLevels)
             {
                 for (int i = 0; i < l.Count; i++)
                 {
@@ -47,7 +51,7 @@ namespace AdventOfCode.Solutions.Year2024
 
             }
 
-            return safeCount;
+            return safeCount + p1Solution;
         }
 
 

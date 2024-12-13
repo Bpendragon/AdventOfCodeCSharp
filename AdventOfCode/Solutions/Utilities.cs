@@ -988,6 +988,12 @@ namespace AdventOfCode.Solutions
         public readonly int x;
         public readonly int y;
 
+        public Coordinate2D()
+        {
+            this.x = new();
+            this.y = new();
+        }
+
         public Coordinate2D(int x, int y)
         {
             this.x = x;
@@ -1104,6 +1110,12 @@ namespace AdventOfCode.Solutions
         public static readonly Coordinate2DL unit_y = new(0, 1);
         public readonly long x;
         public readonly long y;
+
+        public Coordinate2DL()
+        {
+            this.x = new();
+            this.y = new();
+        }
 
         public Coordinate2DL(long x, long y)
         {
