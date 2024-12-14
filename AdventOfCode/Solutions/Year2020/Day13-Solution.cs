@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
+using static AdventOfCode.Solutions.Utilities;
+
 namespace AdventOfCode.Solutions.Year2020
 {
 
@@ -10,7 +12,7 @@ namespace AdventOfCode.Solutions.Year2020
     {
         readonly List<string> lines;
         readonly List<(long busID, long offSet)> busses = new();
-        public Day13() : base()
+        public Day13() : base(true)
         {
             lines = Input.SplitByNewline();
             string[] busProblem = lines[1].Split(',');
@@ -45,6 +47,21 @@ namespace AdventOfCode.Solutions.Year2020
 
         protected override object SolvePartTwo()
         {
+
+            List<long> periods = new();
+            List<long> remainders = new();
+
+            foreach(var b in busses)
+            {
+                periods.Add(b.busID);
+                remainders.Add(b.offSet);
+            }
+
+            long CRT = ChineseRemainderTheorem(periods, remainders);
+
+
+            return CRT;
+
             long curTime = 0;
             long curDelta = busses[0].busID;
             long totalPeriod = busses.Aggregate((a, b) => (a.busID * b.busID,1)).busID;

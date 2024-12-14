@@ -1,6 +1,9 @@
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+
+using static AdventOfCode.Solutions.Utilities;
 
 namespace AdventOfCode.Solutions.Year2024
 {
@@ -43,24 +46,32 @@ namespace AdventOfCode.Solutions.Year2024
         protected override object SolvePartTwo()
         {
             int count = 0;
-            while (true) 
+            List<int> vertGroups = new();
+            List<int> horizGroups = new();
+            while (vertGroups.Count < 2 || horizGroups.Count < 2) 
             {
                 HashSet<Coordinate2D> robotLocs = new();
-                bool isUnique = true;
-                foreach(var r in robots)
+                DefaultDictionary<int, int> vertLocs = new();
+                DefaultDictionary<int, int> horizLocs = new();
+                foreach (var r in robots)
                 {
                     r.Move(count);
-                    if(!robotLocs.Add(r.curLoc))
-                    {
-                        isUnique = false;
-                        break;
-                    }
+
+                    vertLocs[r.curLoc.y]++;
+                    horizLocs[r.curLoc.x]++;
                 }
-                if (isUnique) break;
+                if (horizLocs.Max(a => a.Value) > 20) horizGroups.Add(count);
+                if (vertLocs.Max(a => a.Value) > 20) vertGroups.Add(count);
                 count++;
             }
 
-            return count;
+            var vertOffset = (long)vertGroups[0];
+            var vertPeriod = (long)(vertGroups[1] - vertGroups[0]);
+
+            var horizOffset = (long)horizGroups[0];
+            var horizPeriod = (long)(horizGroups[1] - horizGroups[0]);
+
+            return ChineseRemainderTheorem(new List<long> { vertPeriod, horizPeriod }, new List<long> { vertOffset, horizOffset });
 
         }
 
@@ -76,9 +87,7 @@ namespace AdventOfCode.Solutions.Year2024
             public void Move(int steps)
             {
                 curLoc = startingLoc + (steps * startingVelocity);
-                curLoc = (curLoc.x % roomWidth, curLoc.y % roomHeight);
-                if (curLoc.x < 0) curLoc = (roomWidth + curLoc.x , curLoc.y);
-                if (curLoc.y < 0) curLoc = (curLoc.x, roomHeight + curLoc.y);
+                curLoc = (Mod(curLoc.x, roomWidth), Mod(curLoc.y, roomHeight));
             }
 
             public void Reset()

@@ -8,7 +8,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Numerics;
-using System.Runtime.CompilerServices;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -345,11 +344,78 @@ namespace AdventOfCode.Solutions
             for (int i = 0; i < count; i++) action();
         }
 
+        public static long ChineseRemainderTheorem(IEnumerable<long> periods, IEnumerable<long> remainders)
+        {
+            if (periods.Count() != remainders.Count()) throw new ArgumentException("Lists must be the same length");
+            var z = periods.Zip(remainders);
+
+            (long period, long remainder) curVal  = z.First();
+
+            foreach (var congruence in z.Skip(1))
+            {
+                curVal = CombinedPeriodAndRemainder(curVal, congruence);
+            }
+
+            return Mod(curVal.remainder, curVal.period);
+
+        }
+
+        //Gets a combined period and remainder for two numbers and their remainders. This is about half a step from finding the solution to a set of 2 congruences (i.e. Chinese Remainder Theorem)
+        public static (long period, long remainder) CombinedPeriodAndRemainder(long periodA, long remainderA, long periodB, long remainderB)
+        {
+            (var gcd, var s, var t) = ExtendedGCD(periodA, periodB);
+            long remainderDelta = remainderA - remainderB;
+            (var pdQ, var pdR) = DivMod(remainderDelta, gcd);
+            if (pdR != 0) throw new Exception($"Will never align, {periodA} and {periodB} must not be coprime");
+
+            long combinedPeriod = (periodA / gcd) * periodB;
+            long combinedRemainder;
+            try
+            {
+                combinedRemainder = Mod((remainderA - (s * pdQ * periodA)), combinedPeriod);
+            } catch(OverflowException e)
+            {
+                BigInteger bi = s;
+                bi = bi * pdQ;
+                bi = bi * periodA;
+                bi = remainderA - bi;
+                bi = bi % combinedPeriod;
+                bi = bi < 0 ? bi + combinedPeriod : bi;
+                combinedRemainder = long.Parse(bi.ToString());
+            }
+
+            return (combinedPeriod, combinedRemainder);
+        }
+
+        public static (long period, long remainder) CombinedPeriodAndRemainder((long period, long remainder) A, (long period, long remainder) B) => CombinedPeriodAndRemainder(A.period, A.remainder, B.period, B.remainder);
+
+        public static (long q, long r) DivMod(long a, long b) => (a / b, a % b);
+
         public static (long gcd, long x, long y) ExtendedGCD(long a, long b)
         {
-            if (b == 0) return (a, 1, 0);
-            var (gcd0, x0, y0) = ExtendedGCD(b, b % a);
-            return (gcd0, y0, x0 - (a / b) * y0);
+            long oldR = a;
+            long r = b;
+            long oldS = 1;
+            long s = 0;
+            long oldT = 0;
+            long t = 1;
+
+            while (r!= 0)
+            {
+                (var q, var rem) = DivMod(oldR, r);
+                oldR = r;
+                r = rem;
+
+                var tmp = s;
+                s = oldS - (q * s);
+                oldS = tmp;
+
+                tmp = t;
+                t = oldT - (q * t);
+                oldT = tmp;
+            }
+
+            return (oldR, oldS, oldT);
         }
 
         public static int Mod(int x, int m)
@@ -1514,4 +1580,5 @@ namespace AdventOfCode.Solutions
             set { base[key] = value; }
         }
     }
+
 }
