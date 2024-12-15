@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Numerics;
+using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -532,6 +533,30 @@ namespace AdventOfCode.Solutions
                 tmp[i] = array[i].JoinAsStrings();
             }
             return tmp;
+        }
+
+        public static IEnumerable<CompassDirection> GetMoves(this IEnumerable<char> s, bool flipY = false)
+        {
+            foreach(var c in s)
+            {
+                CompassDirection dir;
+                switch (c)
+                {
+                    case 'v':
+                    case 'V':
+                        dir = S;
+                        if (flipY) dir = N;
+                        break;
+                    case '^': dir = N;
+                        if (flipY) dir = S;
+                        break;
+                    case '<': dir = W; break;
+                    case '>': dir = E; break;
+                    default: continue;
+                }
+
+                yield return dir;
+            }
         }
 
         /// <summary>
