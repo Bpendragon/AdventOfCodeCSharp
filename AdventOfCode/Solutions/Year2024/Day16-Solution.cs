@@ -23,38 +23,6 @@ namespace AdventOfCode.Solutions.Year2024
 
         protected override object SolvePartOne()
         {
-            PriorityQueue<(int cost, Coordinate2D loc, CompassDirection dir), int> nodesToProcess = new();
-            Dictionary<(Coordinate2D loc, CompassDirection dir), int> seen = new();
-            seen[(startLoc, E)] = 0;
-            nodesToProcess.Enqueue((0, startLoc, startDir), 0);
-
-            while (nodesToProcess.TryDequeue(out var e, out _))
-            {
-                (var curCost, var curLoc, var curDir) = e;
-                if (curLoc == targetLoc) return curCost;
-                if (seen.GetValueOrDefault((curLoc, curDir), int.MaxValue) < curCost) continue;
-                seen[(curLoc, curDir)] = curCost;
-
-                List<(Coordinate2D loc, CompassDirection dir)> movN = new();
-                movN.Add((curLoc.Move(curDir, true), curDir));
-                movN.Add((curLoc.Move(curDir.Turn("r"), true), curDir.Turn("r")));
-                movN.Add((curLoc.Move(curDir.Turn("l"), true), curDir.Turn("l")));
-
-                foreach (var n in movN)
-                {
-                    if (maze.GetValueOrDefault(n.loc, '.') == '#') continue;
-                    if (n.dir == curDir) nodesToProcess.Enqueue((curCost + 1, n.loc, n.dir), curCost + 1);
-                    else nodesToProcess.Enqueue((curCost + 1001, n.loc, n.dir), curCost + 1001);
-                }
-
-
-            }
-
-            return -1;
-        }
-
-        protected override object SolvePartTwo()
-        {
             PriorityQueue<(int cost, Coordinate2D loc, CompassDirection dir, HashSet<Coordinate2D> visited), int> nodesToProcess = new();
             Dictionary<(Coordinate2D loc, CompassDirection dir), int> seen = new();
             HashSet<Coordinate2D> bestSeats = new();
@@ -87,11 +55,14 @@ namespace AdventOfCode.Solutions.Year2024
                     if (n.dir == curDir) nodesToProcess.Enqueue((curCost + 1, n.loc, n.dir, seenLocs), curCost + 1);
                     else nodesToProcess.Enqueue((curCost + 1001, n.loc, n.dir, seenLocs), curCost + 1001);
                 }
-
-
             }
+            part2Res = bestSeats.Count;
+            return bestScore;
+        }
 
-            return bestSeats.Count;
+        protected override object SolvePartTwo()
+        {
+            return part2Res;
         }
     }
 }
