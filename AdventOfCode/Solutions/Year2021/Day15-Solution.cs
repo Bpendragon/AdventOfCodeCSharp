@@ -70,5 +70,56 @@ namespace AdventOfCode.Solutions.Year2021
             AStar((0, 0), (largeMapDimensions - 1, largeMapDimensions - 1), map, out long cost, IncludePath: false);
             return (cost);
         }
+
+        private static List<Coordinate2D> AStar(Coordinate2D start, Coordinate2D goal, Dictionary<Coordinate2D, long> map, out long Cost, bool IncludeDiagonals = false, bool IncludePath = true)
+        {
+            PriorityQueue<Coordinate2D, long> openSet = new();
+            Dictionary<Coordinate2D, Coordinate2D> cameFrom = new();
+
+            Dictionary<Coordinate2D, long> gScore = new()
+            {
+                [start] = 0
+            };
+
+            openSet.Enqueue(start, 0);
+
+            while (openSet.TryDequeue(out Coordinate2D cur, out long _))
+            {
+                if (cur.Equals(goal))
+                {
+                    Cost = gScore[cur];
+                    return IncludePath ? ReconstructPath(cameFrom, cur) : null;
+                }
+
+                foreach (var n in cur.Neighbors(IncludeDiagonals).Where(a => map.ContainsKey(a)))
+                {
+                    var tentGScore = gScore[cur] + map[n];
+                    if (tentGScore < gScore.GetValueOrDefault(n, int.MaxValue))
+                    {
+                        cameFrom[n] = cur;
+                        gScore[n] = tentGScore;
+                        openSet.Enqueue(n, tentGScore + cur.ManDistance(goal));
+                    }
+                }
+            }
+
+            Cost = long.MaxValue;
+            return null;
+        }
+
+        private static List<Coordinate2D> ReconstructPath(Dictionary<Coordinate2D, Coordinate2D> cameFrom, Coordinate2D current)
+        {
+            List<Coordinate2D> res = new()
+            {
+                current
+            };
+            while (cameFrom.ContainsKey(current))
+            {
+                current = cameFrom[current];
+                res.Add(current);
+            }
+            res.Reverse();
+            return res;
+        }
     }
 }
