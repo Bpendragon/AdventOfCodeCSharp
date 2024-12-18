@@ -1,8 +1,8 @@
+using AdventOfCode.UserClasses.DataStructures;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
-
-using AdventOfCode.UserClasses.DataStructures;
 
 namespace AdventOfCode.Solutions.Year2018
 {
@@ -92,12 +92,12 @@ namespace AdventOfCode.Solutions.Year2018
                 }
 
             }
-            
+
         }
 
         private (int a, int b, int c, int d) RunCommand((string i, int a, int b, int c) ops)
         {
-            if(ops.i == "noop") return (Registers[0], Registers[1], Registers[2], Registers[3]);
+            if (ops.i == "noop") return (Registers[0], Registers[1], Registers[2], Registers[3]);
             Registers[ops.c] = (ops.i) switch
             {
                 "addr" => Registers[ops.a] + Registers[ops.b],

@@ -58,14 +58,14 @@ namespace AdventOfCode.Solutions.Year2024
 
         private void loopTest(Coordinate2D curLoc, CompassDirection curDir, Coordinate2D startingLoc)
         {
-            Coordinate2D newWall = curLoc.Move(curDir, flipY:true);
+            Coordinate2D newWall = curLoc.Move(curDir, flipY: true);
             if (visited.Contains(newWall)) return;
             HashSet<(Coordinate2D loc, CompassDirection dir)> newVisited = new();
 
             while (curLoc.BoundsCheck(maxX, maxY))
             {
                 newVisited.Add((curLoc, curDir));
-                while (map.GetDirection(curLoc, curDir, flipY: true) == '#' || curLoc.Move(curDir, flipY:true) == newWall)
+                while (map.GetDirection(curLoc, curDir, flipY: true) == '#' || curLoc.Move(curDir, flipY: true) == newWall)
                 {
                     curDir = curDir.Turn("r");
                 }

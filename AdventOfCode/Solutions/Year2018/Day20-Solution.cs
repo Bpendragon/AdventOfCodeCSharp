@@ -22,7 +22,8 @@ namespace AdventOfCode.Solutions.Year2018
                 switch (c)
                 {
                     case '(': s.Push((dist, curLoc)); break;
-                    case ')': tmp = s.Pop();
+                    case ')':
+                        tmp = s.Pop();
                         dist = tmp.dist;
                         curLoc = tmp.loc;
                         break;
@@ -52,7 +53,7 @@ namespace AdventOfCode.Solutions.Year2018
                         if (!map.ContainsKey(curLoc) || dist < map[curLoc]) map[curLoc] = dist;
                         break;
                 }
-                
+
             }
         }
 

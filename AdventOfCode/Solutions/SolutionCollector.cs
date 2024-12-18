@@ -48,14 +48,16 @@ namespace AdventOfCode.Solutions
                 .GetTypes()
                 .Where(type => type.BaseType == typeof(ASolution))
                 .Select(type => (type, info: type.GetCustomAttribute<DayInfoAttribute>()))
-                .Where(solution => {
+                .Where(solution =>
+                {
                     if (solution.info is null) return false;
                     return solution.info.Year == year && days.Contains(solution.info.Day);
                 })
                 .OrderBy(solution => solution.info.Year)
                 .ThenBy(solution => solution.info.Day)
                 .ThenBy(solution => solution.type.Name)
-                .Select(solution => {
+                .Select(solution =>
+                {
                     clock.Reset();
                     var ctor = Expression.Lambda<Func<ASolution>>(Expression.New(solution.type.GetConstructor(Type.EmptyTypes)))
                         .Compile();

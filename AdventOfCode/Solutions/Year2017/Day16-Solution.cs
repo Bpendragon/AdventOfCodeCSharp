@@ -32,7 +32,7 @@ namespace AdventOfCode.Solutions.Year2017
             {
                 foreach (string move in danceMoves) Dance(move);
 
-                
+
                 if (dancers.JoinAsStrings() == original) break;
                 completedDances.Add(dancers.JoinAsStrings());
             }

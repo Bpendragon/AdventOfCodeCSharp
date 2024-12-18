@@ -10,22 +10,22 @@ namespace AdventOfCode.Solutions.Year2015
         readonly Dictionary<string, Guest> GuestList = new();
         public Day13() : base()
         {
-            foreach(string line in Input.SplitByNewline())
+            foreach (string line in Input.SplitByNewline())
             {
                 string tmp = line.TrimEnd('.');
                 string[] tokens = tmp.Split();
-                if(!GuestList.ContainsKey(tokens[0]))
+                if (!GuestList.ContainsKey(tokens[0]))
                 {
                     GuestList[tokens[0]] = new Guest();
                 }
-                if(!GuestList.ContainsKey(tokens[^1]))
+                if (!GuestList.ContainsKey(tokens[^1]))
                 {
                     GuestList[tokens[^1]] = new Guest();
                 }
 
                 int change = int.Parse(tokens[3]);
 
-                switch(tokens[2])
+                switch (tokens[2])
                 {
                     case "gain":
                         GuestList[tokens[0]].Relationships[tokens[^1]] = change;
@@ -40,13 +40,13 @@ namespace AdventOfCode.Solutions.Year2015
         protected override object SolvePartOne()
         {
             List<int> orderScores = new();
-            foreach(var o in GuestList.Keys.Permutations())
+            foreach (var o in GuestList.Keys.Permutations())
             {
                 List<string> order = o.ToList();
                 int score = 0;
-                for(int i = 0; i < order.Count; i++)
+                for (int i = 0; i < order.Count; i++)
                 {
-                    score += (GuestList[order[i]].Relationships[order[(i + order.Count - 1) % order.Count]] + 
+                    score += (GuestList[order[i]].Relationships[order[(i + order.Count - 1) % order.Count]] +
                                 GuestList[order[i]].Relationships[order[(i + 1) % order.Count]]);
                 }
                 orderScores.Add(score);
@@ -58,7 +58,7 @@ namespace AdventOfCode.Solutions.Year2015
         {
             Guest myself = new();
             Dictionary<string, Guest> secondGuestList = new(GuestList);
-            foreach(string g in GuestList.Keys)
+            foreach (string g in GuestList.Keys)
             {
                 myself.Relationships[g] = 0;
                 secondGuestList[g].Relationships["myself"] = 0;

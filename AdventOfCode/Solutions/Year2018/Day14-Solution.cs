@@ -17,7 +17,7 @@ namespace AdventOfCode.Solutions.Year2018
             elf1 = 0;
             elf2 = 1;
 
-            while(recipes.Count < day1tgt + 10)
+            while (recipes.Count < day1tgt + 10)
             {
                 int newScore = recipes[elf1] + recipes[elf2];
                 if (newScore >= 10)
@@ -40,7 +40,7 @@ namespace AdventOfCode.Solutions.Year2018
 
         protected override object SolvePartTwo()
         {
-            int[] numbersToCheck = new int[] { 6,3,3,6,0,1 };
+            int[] numbersToCheck = new int[] { 6, 3, 3, 6, 0, 1 };
             int index = 0;
             int positionToCheck = 0;
             bool notFound = true;

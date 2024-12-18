@@ -110,10 +110,10 @@ namespace AdventOfCode.Solutions.Year2022
                     int visTrees = 0;
                     Coordinate2D next = (x, y).Move(N);
                     //North
-                    while(trees.TryGetValue(next, out int height))
+                    while (trees.TryGetValue(next, out int height))
                     {
                         if (height < maxAllowed) visTrees++;
-                        if(height == maxAllowed)
+                        if (height == maxAllowed)
                         {
                             visTrees++;
                             break;

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+
 using static AdventOfCode.Solutions.Utilities;
 
 namespace AdventOfCode.Solutions.Year2023
@@ -46,18 +47,18 @@ namespace AdventOfCode.Solutions.Year2023
         protected override object SolvePartTwo()
         {
             int ans = int.MinValue;
-            for(int i = 0; i <= maxX; i++)
+            for (int i = 0; i <= maxX; i++)
             {
                 ans = Math.Max(getCellCount((i, 0), S), ans);
                 ans = Math.Max(getCellCount((i, maxY), N), ans);
             }
 
-            for(int i=0; i <= maxY; i++)
+            for (int i = 0; i <= maxY; i++)
             {
                 ans = Math.Max(getCellCount((0, i), E), ans);
                 ans = Math.Max(getCellCount((maxX, i), W), ans);
             }
-            
+
             return ans;
         }
 

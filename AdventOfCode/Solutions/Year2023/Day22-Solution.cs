@@ -47,13 +47,13 @@ namespace AdventOfCode.Solutions.Year2023
             AllBricks.Sort((a, b) => a.Start.z.CompareTo(b.Start.z));
 
             //Get everyone's interactions with one another.
-            foreach(var b in AllBricks)
+            foreach (var b in AllBricks)
             {
-                foreach(var p in AllBricks.Where(a => a.Start.z == b.End.z + 1))
+                foreach (var p in AllBricks.Where(a => a.Start.z == b.End.z + 1))
                 {
-                    foreach(var m in b.Members())
+                    foreach (var m in b.Members())
                     {
-                        if(p.Members().Any(a => a.x == m.x && a.y == m.y && a.z - 1 == m.z))
+                        if (p.Members().Any(a => a.x == m.x && a.y == m.y && a.z - 1 == m.z))
                         {
                             b.Supports.Add(p);
                             p.SupportedBy.Add(b);
@@ -79,9 +79,9 @@ namespace AdventOfCode.Solutions.Year2023
         private void BrickFallCount(Brick b, List<char> toIgnore, bool updateDict = false)
         {
             toIgnore.Add(b.id);
-            if(b.Supports.Count == 0)
+            if (b.Supports.Count == 0)
             {
-                if(updateDict)BrickFallCounts[b.id] = 0;
+                if (updateDict) BrickFallCounts[b.id] = 0;
             }
 
             //Collect all that would fall with the removal of that support
@@ -91,12 +91,12 @@ namespace AdventOfCode.Solutions.Year2023
                 toIgnore.Add(p.id);
             }
 
-            foreach(var p in bricksThatFall)
+            foreach (var p in bricksThatFall)
             {
-                BrickFallCount(p, toIgnore); 
+                BrickFallCount(p, toIgnore);
             }
 
-            if(updateDict) BrickFallCounts[b.id] = toIgnore.Distinct().Count() - 1;
+            if (updateDict) BrickFallCounts[b.id] = toIgnore.Distinct().Count() - 1;
         }
 
         private class Brick
@@ -116,10 +116,10 @@ namespace AdventOfCode.Solutions.Year2023
                 var curLoc = Start;
                 while (curLoc != End)
                 {
-                   if (Start.x == End.x && Start.y == End.y) curLoc = curLoc + (0, 0, 1); //Vertically Oriented Brick 
-                   else if (Start.x == End.x && Start.z == End.z) curLoc = curLoc + (0, 1, 0); //Oriented Along Y- Axis
-                   else if (Start.y == End.y && Start.z == End.z) curLoc = curLoc + (1, 0, 0); //Oriented Along x- Axis
-                   yield return curLoc;
+                    if (Start.x == End.x && Start.y == End.y) curLoc = curLoc + (0, 0, 1); //Vertically Oriented Brick 
+                    else if (Start.x == End.x && Start.z == End.z) curLoc = curLoc + (0, 1, 0); //Oriented Along Y- Axis
+                    else if (Start.y == End.y && Start.z == End.z) curLoc = curLoc + (1, 0, 0); //Oriented Along x- Axis
+                    yield return curLoc;
                 }
             }
 

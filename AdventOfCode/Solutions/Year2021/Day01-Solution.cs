@@ -19,7 +19,7 @@ namespace AdventOfCode.Solutions.Year2021
             int increaseCount = 0;
             int prevRes = int.MaxValue;
 
-            foreach(var d in depths)
+            foreach (var d in depths)
             {
                 if (d > prevRes) increaseCount++;
                 prevRes = d;
@@ -30,7 +30,7 @@ namespace AdventOfCode.Solutions.Year2021
         protected override object SolvePartTwo()
         {
             int increaseCount = 0;
-            for(int i = 0; i < depths.Count - 3; i++)
+            for (int i = 0; i < depths.Count - 3; i++)
             {
                 if ((depths[i] + depths[i + 1] + depths[i + 2]) < (depths[i + 1] + depths[i + 2] + depths[i + 3])) increaseCount++;
             }

@@ -48,7 +48,7 @@ namespace AdventOfCode.Solutions.Year2017
 
         protected override object SolvePartOne()
         {
-            while(Particles.Where(x => x.MovingAway).Count() < Particles.Count)
+            while (Particles.Where(x => x.MovingAway).Count() < Particles.Count)
             {
                 Particles.ForEach(p => p.Update());
                 for (int i = 0; i < Particles.Count; i++)
@@ -84,7 +84,7 @@ namespace AdventOfCode.Solutions.Year2017
                 }
             }
 
-            Particles.Sort((a,b) => a.Distance.CompareTo(b.Distance));
+            Particles.Sort((a, b) => a.Distance.CompareTo(b.Distance));
 
             return Particles[0].ID;
         }

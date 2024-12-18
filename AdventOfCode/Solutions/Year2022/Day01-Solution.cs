@@ -1,6 +1,6 @@
 using System.Collections.Generic;
-using System.Linq;
 using System.Data;
+using System.Linq;
 
 namespace AdventOfCode.Solutions.Year2022
 {
@@ -11,10 +11,10 @@ namespace AdventOfCode.Solutions.Year2022
         readonly List<long> Elves = new();
         public Day01() : base()
         {
-            var asStrings = Input.SplitByNewline(blankLines:true).ToList();
+            var asStrings = Input.SplitByNewline(blankLines: true).ToList();
             long curSum = 0;
 
-            foreach(var cal in asStrings)
+            foreach (var cal in asStrings)
             {
                 if (long.TryParse(cal, out long t)) curSum += t;
                 else

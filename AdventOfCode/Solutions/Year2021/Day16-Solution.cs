@@ -40,12 +40,12 @@ namespace AdventOfCode.Solutions.Year2021
             tmpInc += 3;
             res.TypeID = Convert.ToInt32(binaryString.Substring(startPoint + tmpInc, 3), 2);
             tmpInc += 3;
-            
 
-            if(res.TypeID == 4)
+
+            if (res.TypeID == 4)
             {
                 StringBuilder litVal = new();
-                while(binaryString[startPoint + tmpInc] == '1')
+                while (binaryString[startPoint + tmpInc] == '1')
                 {
                     tmpInc++;
                     litVal.Append(binaryString.AsSpan(startPoint + tmpInc, 4));
@@ -56,7 +56,8 @@ namespace AdventOfCode.Solutions.Year2021
                 litVal.Append(binaryString.AsSpan(startPoint + tmpInc, 4));
                 tmpInc += 4;
                 res.LiteralValue = Convert.ToInt64(litVal.ToString(), 2);
-            } else
+            }
+            else
             {
                 int subTmpInc = 0;
                 if (binaryString[startPoint + tmpInc] == '0') //Next 15 bits encode total length in bits
@@ -64,11 +65,12 @@ namespace AdventOfCode.Solutions.Year2021
                     tmpInc++;
                     int totalLengthOfSubs = Convert.ToInt32(binaryString.Substring(startPoint + tmpInc, 15), 2);
                     tmpInc += 15;
-                    while(subTmpInc < totalLengthOfSubs)
+                    while (subTmpInc < totalLengthOfSubs)
                     {
                         res.SubPackets.Add(GetNextPacket(binaryString, startPoint + tmpInc + subTmpInc, ref subTmpInc));
                     }
-                } else //next 11 encode total number of subpackets
+                }
+                else //next 11 encode total number of subpackets
                 {
                     tmpInc++;
                     int totalCountOfSubs = Convert.ToInt32(binaryString.Substring(startPoint + tmpInc, 11), 2);

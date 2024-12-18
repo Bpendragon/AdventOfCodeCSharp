@@ -13,11 +13,11 @@ namespace AdventOfCode.Solutions.Year2015
         public Day04() : base()
         {
             long i = -1;
-            while(true)
+            while (true)
             {
                 var t = MD5Hash(Input + ++i);
                 if (firstRes == 0 && t.StartsWith("00000")) firstRes = i;
-                if(secondRes == 0 && t.StartsWith("000000"))
+                if (secondRes == 0 && t.StartsWith("000000"))
                 {
                     secondRes = i;
                     break;

@@ -11,7 +11,7 @@ namespace AdventOfCode.Solutions.Year2020
         readonly List<string> PartTwoExpressions = new();
         public Day18() : base()
         {
-            foreach(var l in Input.SplitByNewline())
+            foreach (var l in Input.SplitByNewline())
             {
                 Expressions.Add(l);
                 PartTwoExpressions.Add(ConvertForPart2(l));

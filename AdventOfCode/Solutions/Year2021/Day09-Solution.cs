@@ -12,10 +12,10 @@ namespace AdventOfCode.Solutions.Year2021
         public Day09() : base()
         {
             var lines = Input.SplitByNewline();
-            for(int y = 0; y < lines.Count; y++)
+            for (int y = 0; y < lines.Count; y++)
             {
                 var members = lines[y].ToIntList();
-                for(int x = 0; x < members.Count; x++)
+                for (int x = 0; x < members.Count; x++)
                 {
                     heightMap[(x, y)] = members[x];
                 }
@@ -24,8 +24,8 @@ namespace AdventOfCode.Solutions.Year2021
 
         protected override object SolvePartOne()
         {
-            long sum = 0; 
-            foreach(var kvp in heightMap)
+            long sum = 0;
+            foreach (var kvp in heightMap)
             {
                 if (heightMap.Get2dNeighborVals(kvp.Key, int.MaxValue).All(x => x > kvp.Value))
                 {
@@ -47,7 +47,7 @@ namespace AdventOfCode.Solutions.Year2021
                 Queue<Coordinate2D> q = new();
                 q.Enqueue(lp);
                 HashSet<Coordinate2D> basinMembers = new();
-                while(q.Count > 0)
+                while (q.Count > 0)
                 {
                     var cur = q.Dequeue();
                     if (heightMap.TryGetValue(cur, out int value) && value != 9)

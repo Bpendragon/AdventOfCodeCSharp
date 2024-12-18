@@ -21,16 +21,18 @@ namespace AdventOfCode.Solutions.Year2018
             int erosionLevel;
             for (int x = 0; x <= TargetLocation.x + 1000; x++)
             {
-                for(int y = 0; y <= SystemDepth; y++)
+                for (int y = 0; y <= SystemDepth; y++)
                 {
                     if ((x, y) == (0, 0) || (x, y) == TargetLocation) continue; //these are given by definition
-                     else if(x == 0)
+                    else if (x == 0)
                     {
                         erosionLevel = (((y * 48271) + SystemDepth) % 20183);
-                    }else if (y == 0)
+                    }
+                    else if (y == 0)
                     {
-                        erosionLevel =  (((x * 16807) + SystemDepth) % 20183);
-                    } else
+                        erosionLevel = (((x * 16807) + SystemDepth) % 20183);
+                    }
+                    else
                     {
                         erosionLevel = (((cave[(x - 1, y)] * cave[(x, y - 1)]) + SystemDepth) % 20183);
                     }
@@ -41,17 +43,17 @@ namespace AdventOfCode.Solutions.Year2018
         }
 
         protected override object SolvePartOne()
-        { 
-            return cave.Where(kvp => kvp.Key.x <= TargetLocation.x && kvp.Key.y <= TargetLocation.y).Sum(a=> a.Value % 3);
+        {
+            return cave.Where(kvp => kvp.Key.x <= TargetLocation.x && kvp.Key.y <= TargetLocation.y).Sum(a => a.Value % 3);
         }
 
         protected override object SolvePartTwo()
         {
-            return TraversalTime((0,0), TargetLocation);
+            return TraversalTime((0, 0), TargetLocation);
         }
 
         //A*, Hueristic is Manhattan + cost of gear change, this is why the sets also include an item for gear
-        private int TraversalTime((int x, int y) start, (int x, int y) tgt) 
+        private int TraversalTime((int x, int y) start, (int x, int y) tgt)
         {
             List<(int dX, int dY)> cardinalMoves = new() { (-1, 0), (1, 0), (0, -1), (0, 1) };
             List<((int x, int y) loc, Gear gear)> openSet = new(); // I wish ordered list allowed key collisions
@@ -63,7 +65,7 @@ namespace AdventOfCode.Solutions.Year2018
             gScore[(start, Gear.torch)] = 0;
             fScore[(start, Gear.torch)] = start.ManhattanDistance(tgt); //sinc they're both rockiy in a perfect world it's a straight shot
 
-            while(openSet.Count > 0)
+            while (openSet.Count > 0)
             {
                 var cur = openSet.OrderBy(a => fScore[a]).First();
                 if (cur.loc == tgt)
@@ -73,19 +75,19 @@ namespace AdventOfCode.Solutions.Year2018
                 }
 
                 openSet.Remove(cur);
-                foreach(var dir in cardinalMoves)
+                foreach (var dir in cardinalMoves)
                 {
                     var neighbor = cur.loc.Add(dir);
                     if (neighbor.x < 0 || neighbor.y < 0) continue; //out of bounds
                     int tentGScore = gScore[cur];
                     Gear nextTool = cur.gear;
-                    switch(cur.gear)
+                    switch (cur.gear)
                     {
                         case Gear.climbing:
-                            switch(cave2[cur.loc])
+                            switch (cave2[cur.loc])
                             {
                                 case SoilType.Rocky:
-                                    switch(cave2[neighbor])
+                                    switch (cave2[neighbor])
                                     {
                                         case SoilType.Rocky:
                                             tentGScore++;
@@ -117,7 +119,7 @@ namespace AdventOfCode.Solutions.Year2018
                             }
                             break;
                         case Gear.torch:
-                            switch(cave2[cur.loc])
+                            switch (cave2[cur.loc])
                             {
                                 case SoilType.Rocky:
                                     switch (cave2[neighbor])
@@ -210,8 +212,8 @@ namespace AdventOfCode.Solutions.Year2018
 
         private enum Gear
         {
-            climbing, 
-            torch, 
+            climbing,
+            torch,
             neither
         }
     }

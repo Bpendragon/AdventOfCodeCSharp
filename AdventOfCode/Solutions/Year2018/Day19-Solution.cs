@@ -13,7 +13,7 @@ namespace AdventOfCode.Solutions.Year2018
         readonly int boundRegister;
         public Day19() : base()
         {
-            for(int i = 0; i <= 5; i++)
+            for (int i = 0; i <= 5; i++)
             {
                 Registers[i] = 0;
             }
@@ -21,18 +21,18 @@ namespace AdventOfCode.Solutions.Year2018
             var lines = Input.SplitByNewline();
             boundRegister = int.Parse(lines[0].Split(" ")[1]);
 
-            foreach(var line in lines.Skip(1))
+            foreach (var line in lines.Skip(1))
             {
                 var tokens = line.Split();
                 instructions.Add((tokens[0], int.Parse(tokens[1]), int.Parse(tokens[2]), int.Parse(tokens[3])));
             }
 
-            
+
         }
 
         protected override object SolvePartOne()
         {
-            while(0 <= Registers[boundRegister] && Registers[boundRegister] < instructions.Count)
+            while (0 <= Registers[boundRegister] && Registers[boundRegister] < instructions.Count)
             {
                 RunCommand(instructions[Registers[boundRegister]]);
                 Registers[boundRegister]++;
@@ -43,7 +43,7 @@ namespace AdventOfCode.Solutions.Year2018
 
         protected override object SolvePartTwo()
         {//Tl;DR part 2 saves a really big number into C, and then brute-force checks ever single value from 1 to C to see if it's a divisor, it it is, add it to a running sum. 
-        //Returns the running sum.
+         //Returns the running sum.
             for (int i = 0; i <= 5; i++)
             {
                 Registers[i] = 0;
@@ -62,7 +62,7 @@ namespace AdventOfCode.Solutions.Year2018
 
 
             int divisorSum = C + 1; //C and 1 are by defition divisors
-            for(int i = 2; i < Math.Sqrt(C); i++)
+            for (int i = 2; i < Math.Sqrt(C); i++)
             {
                 if (C % i == 0)
                 {
@@ -75,7 +75,7 @@ namespace AdventOfCode.Solutions.Year2018
             if (sqrt == (int)Math.Floor(Math.Sqrt(C))) divisorSum += sqrt;
 
 
-                return divisorSum;
+            return divisorSum;
         }
 
 

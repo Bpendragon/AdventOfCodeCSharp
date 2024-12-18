@@ -18,7 +18,7 @@ namespace AdventOfCode.Solutions.Year2023
         {
             int sum = 0;
 
-            foreach(var l in Lines)
+            foreach (var l in Lines)
             {
                 var nums = l.ToCharArray().Where(char.IsDigit).ToArray();
                 if (int.TryParse($"{nums[0]}{nums[^1]}", out int val))
@@ -32,7 +32,7 @@ namespace AdventOfCode.Solutions.Year2023
         protected override object SolvePartTwo()
         {
             int sum = 0;
-            foreach(var l in Lines)
+            foreach (var l in Lines)
             {
                 StringBuilder sb = new(l);
                 sb.Replace("one", "o1e");

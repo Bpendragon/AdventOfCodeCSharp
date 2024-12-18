@@ -18,8 +18,8 @@ namespace AdventOfCode.Solutions.Year2015
         const int bossDef = 2;
         public Day21() : base()
         {
-                    var weapons = new[]
-            {
+            var weapons = new[]
+    {
                 new { Cost = 8, Attack = 4 },
                 new { Cost = 10, Attack = 5 },
                 new { Cost = 25, Attack = 6 },
@@ -28,8 +28,8 @@ namespace AdventOfCode.Solutions.Year2015
             };
 
 
-                    var Armor = new[]
-                {
+            var Armor = new[]
+        {
                 new { Cost = 0, Armor = 0 }, //The No Armor Option
                 new { Cost = 13, Armor = 1 },
                 new { Cost = 31, Armor = 2 },
@@ -38,8 +38,8 @@ namespace AdventOfCode.Solutions.Year2015
                 new { Cost = 102, Armor = 5 },
             };
 
-                    var rings = new[]
-                    {
+            var rings = new[]
+            {
                 new { Cost = 0, Attack = 0, Armor = 0, ID = 0 }, //Need 2 empties with different IDs for the "No Rings" option
                 new { Cost = 0, Attack = 0, Armor = 0, ID = 1  },
                 new { Cost = 25, Attack = 1, Armor = 0, ID = 2  },
@@ -52,19 +52,19 @@ namespace AdventOfCode.Solutions.Year2015
             };
 
 
-                    var combinations =
-                from w in weapons
-                from a in Armor
-                from ring1 in rings
-                from ring2 in rings.Where(x => ring1.ID != x.ID)
-                select new
-                {
-                    Attack = w.Attack + ring1.Attack + ring2.Attack,
-                    Defence = a.Armor + ring1.Armor + ring2.Armor,
-                    Cost = w.Cost + a.Cost + ring1.Cost + ring2.Cost
-                };
+            var combinations =
+        from w in weapons
+        from a in Armor
+        from ring1 in rings
+        from ring2 in rings.Where(x => ring1.ID != x.ID)
+        select new
+        {
+            Attack = w.Attack + ring1.Attack + ring2.Attack,
+            Defence = a.Armor + ring1.Armor + ring2.Armor,
+            Cost = w.Cost + a.Cost + ring1.Cost + ring2.Cost
+        };
 
-            foreach(var combo in combinations)
+            foreach (var combo in combinations)
             {
                 if (PlayerWins(combo.Attack, combo.Defence)) CostsOfVictory.Add(combo.Cost);
                 else CostsOfFailure.Add(combo.Cost);

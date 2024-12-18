@@ -18,7 +18,7 @@ namespace AdventOfCode.Solutions.Year2024
         {
             var halves = Input.SplitByDoubleNewline();
 
-            (map, maxX, maxY) = halves[0].GenerateMap(discardDot:false);
+            (map, maxX, maxY) = halves[0].GenerateMap(discardDot: false);
             instructions = halves[1];
         }
 
@@ -56,11 +56,11 @@ namespace AdventOfCode.Solutions.Year2024
         protected override object SolvePartTwo()
         {
             Dictionary<Coordinate2D, char> m = new();
-            for(int y = 0; y <= maxY; y++)
+            for (int y = 0; y <= maxY; y++)
             {
-                for(int x = 0; x <= maxX; x++)
+                for (int x = 0; x <= maxX; x++)
                 {
-                    switch (map[(x,y)])
+                    switch (map[(x, y)])
                     {
                         case '@':
                             m[(x * 2, y)] = '@';
@@ -90,10 +90,10 @@ namespace AdventOfCode.Solutions.Year2024
                 else if (tgt == '.') robotLoc = n;
                 else
                 {
-                    bool canMove; 
+                    bool canMove;
                     HashSet<Coordinate2D> toMove;
 
-                    if(dir == E || dir == W) (canMove, toMove) = CanMoveBoxes(m, robotLoc, dir);
+                    if (dir == E || dir == W) (canMove, toMove) = CanMoveBoxes(m, robotLoc, dir);
                     else
                     {
                         (var tB, var tHS) = CanMoveBoxes(m, robotLoc, dir);
@@ -115,7 +115,7 @@ namespace AdventOfCode.Solutions.Year2024
                     }
                 }
             }
-           
+
             return m.Where(a => a.Value == '[').Sum(a => 100 * a.Key.y + a.Key.x);
         }
 
@@ -127,7 +127,7 @@ namespace AdventOfCode.Solutions.Year2024
             if (atNext == '#') return (false, toMove);
             if (atNext == '.') return (true, toMove);
             toMove.Add(n);
-            if(dir == E || dir == W)
+            if (dir == E || dir == W)
             {
                 (bool tmpTstX, var tmpMoveX) = CanMoveBoxes(m, n, dir);
                 if (!tmpTstX) return (false, new());
@@ -137,7 +137,7 @@ namespace AdventOfCode.Solutions.Year2024
 
             (bool tmpTst, var tmpMove) = CanMoveBoxes(m, n, dir);
             if (!tmpTst) return (false, new());
-            
+
             HashSet<Coordinate2D> tmpMov2;
             bool tmpTst2;
             if (atNext == '[')
@@ -145,7 +145,7 @@ namespace AdventOfCode.Solutions.Year2024
                 toMove.Add(n.Move(E));
                 (tmpTst2, tmpMov2) = CanMoveBoxes(m, n.Move(E), dir);
             }
-            else 
+            else
             {
                 toMove.Add(n.Move(W));
                 (tmpTst2, tmpMov2) = CanMoveBoxes(m, n.Move(W), dir);

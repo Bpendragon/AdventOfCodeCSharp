@@ -24,9 +24,9 @@ namespace AdventOfCode.Solutions.Year2021
         protected override object SolvePartTwo()
         {
             int succesfulShots = 0;
-            for(int x = smallestPossibleXVelo; x < minX; x++)
+            for (int x = smallestPossibleXVelo; x < minX; x++)
             {
-                for(int y = maxY; y < Math.Abs(minY); y++)
+                for (int y = maxY; y < Math.Abs(minY); y++)
                 {
                     if (SimulateShot((0, 0), x, y)) succesfulShots++;
                 }
@@ -40,7 +40,7 @@ namespace AdventOfCode.Solutions.Year2021
             var curPos = initialPos;
             var velX = initX;
             var velY = initY;
-            while(true)
+            while (true)
             {
                 curPos += (velX, velY);
                 if (minX <= curPos.x && curPos.x <= maxX && minY <= curPos.y && curPos.y <= maxY) return true;

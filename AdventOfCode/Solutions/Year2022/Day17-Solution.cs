@@ -32,12 +32,12 @@ namespace AdventOfCode.Solutions.Year2022
         {
             long[] heights = new long[] { 0, 0, 0, 0, 0, 0, 0 };
             tower = new() { //Create floor at height 0
-                { new(0, 0), 1 }, 
-                { new(1, 0), 1 }, 
-                { new(2, 0), 1 }, 
-                { new(3, 0), 1 }, 
-                { new(4, 0), 1 }, 
-                { new(5, 0), 1 }, 
+                { new(0, 0), 1 },
+                { new(1, 0), 1 },
+                { new(2, 0), 1 },
+                { new(3, 0), 1 },
+                { new(4, 0), 1 },
+                { new(5, 0), 1 },
                 { new(6, 0), 1 },
             };
 
@@ -57,9 +57,9 @@ namespace AdventOfCode.Solutions.Year2022
             var cycleLength = i - cycleStart;
             var offset = cache[cycleStart].Max();
             var growth = newHeights.Max() - offset;
-            var p2cycleOffset = ((part2Count - cycleStart) % cycleLength) -1;
+            var p2cycleOffset = ((part2Count - cycleStart) % cycleLength) - 1;
             var p1cycleOffset = ((2022 - cycleStart) % cycleLength) - 1;
-            var p1numCycles = (2022 - cycleStart) / cycleLength; 
+            var p1numCycles = (2022 - cycleStart) / cycleLength;
             var p2numCycles = (part2Count - cycleStart) / cycleLength;
 
             part1 = offset + (p1numCycles * growth) + (cache[cycleStart + p1cycleOffset].Max() - offset);
@@ -88,7 +88,7 @@ namespace AdventOfCode.Solutions.Year2022
 
             shape = shape.Select(a => a.Move(E, distance: 2)).Select(a => a.Move(N, distance: (int)(maxHeight + 4))).ToList();
 
-            while(true)
+            while (true)
             {
                 var moveDir = Input[(int)(jetIndex % Input.Length)] switch
                 {
@@ -105,22 +105,23 @@ namespace AdventOfCode.Solutions.Year2022
                 jetIndex++; //Always increase JetIndex
 
                 //Attempt to drop 1 tile
-                if(shape.Any(a => tower.ContainsKey(a.Move(drop))))
+                if (shape.Any(a => tower.ContainsKey(a.Move(drop))))
                 {
                     //Couldn't drop, cement in place
-                    foreach(var s in shape) tower[s] = 1;
+                    foreach (var s in shape) tower[s] = 1;
                     //if (UseDebugInput) DrawTower((int)(maxHeight + 4), 10);
                     break;
-                } else shape = shape.Select(a => a.Move(drop)).ToList();
+                }
+                else shape = shape.Select(a => a.Move(drop)).ToList();
             }
 
             //Save state, update cache, retrun new maxHeights
 
             //Find new max heights by walking up from the old spots to 4 higher than the current overall max, in case the tall skinny one landed on top of the highest point.
 
-            for(int i = 0; i < 7; i++)
+            for (int i = 0; i < 7; i++)
             {
-                for(int j = 0; j < maxHeight + 5; j++)
+                for (int j = 0; j < maxHeight + 5; j++)
                 {
                     if (tower.ContainsKey((i, j))) newHeights[i] = j;
                 }
@@ -131,14 +132,14 @@ namespace AdventOfCode.Solutions.Year2022
             ulong toCache = 0;
             long topRow = newHeights.Max();
 
-            for(int i = 0; i < 63; i++) //63 cells is exactly 9 rows 
+            for (int i = 0; i < 63; i++) //63 cells is exactly 9 rows 
             {
                 toCache |= (ulong)(tower.GetValueOrDefault(new Coordinate2D(i % 7, (int)topRow - (i / 7)), 0)) << i;
             }
 
             cycleStart = states.GetValueOrDefault((toCache, shapeIndex % shapes.Length, jetAtStart % Input.Length), -1);
 
-            if(cycleStart == -1)
+            if (cycleStart == -1)
             {
                 states[(toCache, shapeIndex % shapes.Length, jetAtStart % Input.Length)] = (int)shapeIndex;
             }
@@ -150,7 +151,7 @@ namespace AdventOfCode.Solutions.Year2022
         {
             StringBuilder sb = new();
             //'█'
-            for(int y = 0; y < numRows; y++)
+            for (int y = 0; y < numRows; y++)
             {
                 if (maxHeight - y == 0)
                 {
@@ -158,7 +159,7 @@ namespace AdventOfCode.Solutions.Year2022
                     break;
                 }
                 sb.Append('|');
-                for(int x = 0; x < 7; x++)
+                for (int x = 0; x < 7; x++)
                 {
                     if (tower.ContainsKey((x, maxHeight - y))) sb.Append('#');
                     else sb.Append(' ');

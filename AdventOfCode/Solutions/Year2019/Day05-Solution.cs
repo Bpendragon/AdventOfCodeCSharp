@@ -1,7 +1,7 @@
+using AdventOfCode.UserClasses;
+
 using System;
 using System.Collections.Generic;
-
-using AdventOfCode.UserClasses;
 
 namespace AdventOfCode.Solutions.Year2019
 {
@@ -21,7 +21,7 @@ namespace AdventOfCode.Solutions.Year2019
         {
             long lastItem = long.MinValue;
             cpu.ReadyInput(1);
-            foreach(long item in cpu.RunProgram())
+            foreach (long item in cpu.RunProgram())
             {
                 Console.WriteLine(item);
                 lastItem = item;

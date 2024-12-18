@@ -22,13 +22,14 @@ namespace AdventOfCode.Solutions.Year2015
         protected override object SolvePartTwo()
         {
             int curFloor = 0;
-            foreach(int i in Enumerable.Range(0, Input.Length))
+            foreach (int i in Enumerable.Range(0, Input.Length))
             {
                 char c = Input[i];
-                if(c == '(')
+                if (c == '(')
                 {
                     curFloor++;
-                } else
+                }
+                else
                 {
                     curFloor--;
                 }

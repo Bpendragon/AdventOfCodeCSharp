@@ -21,13 +21,13 @@ namespace AdventOfCode.Solutions.Year2021
                 counts1[c] = counts1.GetValueOrDefault(c, 0) + 1;
             }
 
-            foreach(var l in tmp[1].SplitByNewline())
+            foreach (var l in tmp[1].SplitByNewline())
             {
                 var h = l.Split(" -> ");
                 subRules[h[0]] = h[1][0];
             }
 
-            foreach(var kvp in subRules)
+            foreach (var kvp in subRules)
             {
                 string left = string.Concat(kvp.Key[0], kvp.Value);
                 string right = string.Concat(kvp.Value, kvp.Key[1]);
@@ -55,17 +55,17 @@ namespace AdventOfCode.Solutions.Year2021
                 counts2[pair] = counts2.GetValueOrDefault(pair, 0) + 1;
             }
 
-            foreach (int _ in Enumerable.Range(0,40))
+            foreach (int _ in Enumerable.Range(0, 40))
             {
                 Dictionary<string, long> newCounts = new();
-                foreach(var kvp in counts2)
+                foreach (var kvp in counts2)
                 {
                     var pair = kvp.Key;
                     var count = kvp.Value;
                     var left = string.Concat(pair[0], subRules[pair]);
                     var right = string.Concat(subRules[pair], pair[1]);
 
-                    newCounts[left] = newCounts.GetValueOrDefault(left,0) + count;
+                    newCounts[left] = newCounts.GetValueOrDefault(left, 0) + count;
                     newCounts[right] = newCounts.GetValueOrDefault(right, 0) + count;
                 }
 

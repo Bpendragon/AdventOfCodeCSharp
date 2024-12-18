@@ -38,13 +38,13 @@ namespace AdventOfCode.Solutions.Year2023
                 }
             }
 
-            for(int i = -1; i <= maxX + 1; i++)
+            for (int i = -1; i <= maxX + 1; i++)
             {
                 squares.Add((i, -1));
                 squares.Add((i, maxY + 1));
             }
 
-            for(int i = 0; i <= maxY; i++)
+            for (int i = 0; i <= maxY; i++)
             {
                 squares.Add((-1, i));
                 squares.Add((maxX + 1, i));
@@ -57,7 +57,7 @@ namespace AdventOfCode.Solutions.Year2023
             tiltMap(N);
             int sum = 0;
 
-            foreach(var rock in circles)
+            foreach (var rock in circles)
             {
                 sum += maxY + 1 - rock.y;
             }
@@ -86,14 +86,15 @@ namespace AdventOfCode.Solutions.Year2023
                 if (!cache.ContainsKey(cycleString))
                 {
                     cache[cycleString] = i;
-                } else
+                }
+                else
                 {
                     int firstRepeated = cache[cycleString];
                     int cycleLength = i - firstRepeated;
 
                     List<string> cycle = new();
 
-                    for(int j = firstRepeated; j < i; j++)
+                    for (int j = firstRepeated; j < i; j++)
                     {
                         cycle.Add(cache.First(x => x.Value == j).Key);
                     }

@@ -18,7 +18,7 @@ namespace AdventOfCode.Solutions.Year2022
         List<string> SnafusLE = new();
         public Day25() : base()
         {
-            foreach(var l in Input.SplitByNewline())
+            foreach (var l in Input.SplitByNewline())
             {
                 SnafusLE.Add(l.Reverse());
             }
@@ -27,11 +27,11 @@ namespace AdventOfCode.Solutions.Year2022
         protected override object SolvePartOne()
         {
             long runningSum = 0;
-            foreach(var s in SnafusLE)
+            foreach (var s in SnafusLE)
             {
                 long tmp = 0;
                 long pwr = 1;
-                foreach(char c in s)
+                foreach (char c in s)
                 {
                     tmp += pwr * SnafuDigits[c];
 
@@ -56,10 +56,10 @@ namespace AdventOfCode.Solutions.Year2022
             if (num == 0) return "";
 
             var remainder = num % 5;
-            foreach(var kvp in SnafuDigits)
+            foreach (var kvp in SnafuDigits)
             {
                 var (k, v) = kvp;
-                if((v + 5) % 5 == remainder)
+                if ((v + 5) % 5 == remainder)
                 {
                     long nxt = (num - v) / 5;
                     return ToSnafu(nxt) + k;

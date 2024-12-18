@@ -6,7 +6,7 @@ namespace AdventOfCode.Solutions.Year2024
     [DayInfo(11, 2024, "Plutonian Pebbles")]
     class Day11 : ASolution
     {
-        DefaultDictionary<long, long> defaultDict= new();
+        DefaultDictionary<long, long> defaultDict = new();
         long p1 = 0;
 
 

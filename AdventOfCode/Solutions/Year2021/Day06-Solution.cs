@@ -13,7 +13,7 @@ namespace AdventOfCode.Solutions.Year2021
             var fishies = Input.ToIntList();
             long[] fishCounts = new long[9];
 
-            for(int i = 0; i <=8; i++) fishCounts[i] = fishies.Count(x => x == i);
+            for (int i = 0; i <= 8; i++) fishCounts[i] = fishies.Count(x => x == i);
 
             for (int i = 0; i < 256; i++)
             {

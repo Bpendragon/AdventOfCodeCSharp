@@ -16,7 +16,7 @@ namespace AdventOfCode.Solutions.Year2024
         protected override object SolvePartOne()
         {
             long sum = 0;
-            foreach(Match m in muls)
+            foreach (Match m in muls)
             {
                 var i = m.Value.ExtractLongs().ToArray();
                 sum += i[0] * i[1];
@@ -31,7 +31,7 @@ namespace AdventOfCode.Solutions.Year2024
             long sum = 0;
 
             foreach (Match m in muls)
-            { 
+            {
                 string lastInstruction = enables.LastOrDefault(a => a.Index < m.Index)?.Value ?? "do()";
                 if (lastInstruction == "do()")
                 {

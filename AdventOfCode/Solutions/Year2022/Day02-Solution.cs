@@ -15,9 +15,9 @@ namespace AdventOfCode.Solutions.Year2022
         protected override object SolvePartOne()
         {
             long score = 0;
-            foreach(var round in rounds)
+            foreach (var round in rounds)
             {
-                switch(round[0])
+                switch (round[0])
                 {
                     case 'A':
                         if (round[^1] == 'X') score += 4;

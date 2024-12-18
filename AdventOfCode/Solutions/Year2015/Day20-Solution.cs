@@ -25,7 +25,7 @@ namespace AdventOfCode.Solutions.Year2015
             }
 
             int k = 0;
-            while(true)
+            while (true)
             {
                 if (Houses[k] >= target) return (k);
                 k++;

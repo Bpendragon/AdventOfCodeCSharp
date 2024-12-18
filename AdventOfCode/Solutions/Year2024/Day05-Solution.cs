@@ -16,7 +16,7 @@ namespace AdventOfCode.Solutions.Year2024
         public Day05() : base()
         {
             var halves = Input.SplitByDoubleNewline();
-            foreach(var pair in halves[0].SplitByNewline())
+            foreach (var pair in halves[0].SplitByNewline())
             {
                 var nums = pair.ExtractInts().ToList();
 
@@ -33,10 +33,10 @@ namespace AdventOfCode.Solutions.Year2024
                 ruleGraph[nums[1]].Parents.Add(nums[0]);
 
             }
-            foreach(var l in halves[1].SplitByNewline())
+            foreach (var l in halves[1].SplitByNewline())
             {
                 List<RuleNode> curLine = new();
-                foreach(var i in l.ExtractInts())
+                foreach (var i in l.ExtractInts())
                 {
                     curLine.Add(ruleGraph.GetValueOrDefault(i, new(i)));
                 }
@@ -47,14 +47,15 @@ namespace AdventOfCode.Solutions.Year2024
         protected override object SolvePartOne()
         {
             int sum = 0;
-            foreach(var u in updates)
+            foreach (var u in updates)
             {
                 List<RuleNode> v = new(u);
                 v.Sort();
                 if (v.SequenceEqual(u))
                 {
                     sum += u[u.Count / 2].Value;
-                } else
+                }
+                else
                 {
                     updatesThatNeededFixed.Add(v);
                 }

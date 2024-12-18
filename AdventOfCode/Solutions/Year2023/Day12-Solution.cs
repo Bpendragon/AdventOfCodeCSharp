@@ -37,7 +37,7 @@ namespace AdventOfCode.Solutions.Year2023
                 bool blockMoved = true; //turns this into a bit of a do-while
                 while (blockMoved)
                 {
-                    if (IsPatternValid(states, badCounts, currentPositions)) 
+                    if (IsPatternValid(states, badCounts, currentPositions))
                         possibleCombos.Add(new(currentPositions));
 
 
@@ -77,7 +77,7 @@ namespace AdventOfCode.Solutions.Year2023
         {
             long sum = 0;
 
-            foreach(var l in Input.SplitByNewline())
+            foreach (var l in Input.SplitByNewline())
             {
                 var halves = l.Split();
                 string pattern = halves[0].Repeat(5, "?");
@@ -96,13 +96,14 @@ namespace AdventOfCode.Solutions.Year2023
             string brokenString = brokens.JoinAsStrings(",");
             if (cache.TryGetValue((pattern, size, brokenString), out long cVal)) return cVal;
 
-            if(brokens.Count == 0)
+            if (brokens.Count == 0)
             {
-                if(pattern.All(x => ".?".Contains(x))) //If there are no more brokens to be add, and all remaining parts of the pattern are not springs or unknown
+                if (pattern.All(x => ".?".Contains(x))) //If there are no more brokens to be add, and all remaining parts of the pattern are not springs or unknown
                 {
                     cache[(pattern, size, brokenString)] = 1;
                     return 1;
-                } else //There are no more broken springs to add, but the pattern expects a broken spring
+                }
+                else //There are no more broken springs to add, but the pattern expects a broken spring
                 {
                     cache[(pattern, size, brokenString)] = 0;
                     return 0;
@@ -111,7 +112,7 @@ namespace AdventOfCode.Solutions.Year2023
 
             int nextSpringGroup = brokens[0];
             List<int> remainingSpringGroups = new();
-            if(brokens.Count > 1)
+            if (brokens.Count > 1)
             {
                 remainingSpringGroups = brokens.Skip(1).ToList();
             }
@@ -121,10 +122,10 @@ namespace AdventOfCode.Solutions.Year2023
 
             int maxLead = size - remainingTiles - nextSpringGroup;
 
-            for(int i = 0; i <= maxLead; i++ )
+            for (int i = 0; i <= maxLead; i++)
             {
                 string nextGroup = new string('.', i) + new string('#', nextSpringGroup) + ".";
-                if(nextGroup.Zip(pattern).All(a => a.First == a.Second || a.Second == '?') && nextGroup.Length <= pattern.Length)
+                if (nextGroup.Zip(pattern).All(a => a.First == a.Second || a.Second == '?') && nextGroup.Length <= pattern.Length)
                 {
                     count += CountMatches(pattern[nextGroup.Length..], size - nextSpringGroup - i - 1, remainingSpringGroups);
                 }

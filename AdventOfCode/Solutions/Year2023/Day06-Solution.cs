@@ -22,10 +22,10 @@ namespace AdventOfCode.Solutions.Year2023
         {
             int winMult = 1;
             //distance = timeHeld  * (totalTime - timeHeld)//is that a PARABOLA?
-            foreach(var r in races)
+            foreach (var r in races)
             {
                 int numWins = 0;
-                for(int i = 0; i <= r.time; i++)
+                for (int i = 0; i <= r.time; i++)
                 {
                     int d = (r.time - i) * i;
                     if (d > r.dist) numWins++;

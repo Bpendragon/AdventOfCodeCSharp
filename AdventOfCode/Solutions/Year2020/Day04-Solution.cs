@@ -19,11 +19,11 @@ namespace AdventOfCode.Solutions.Year2020
         protected override object SolvePartOne()
         {
             int valid = 0;
-            string[] requiredItems = new string[] { "byr", "iyr", "eyr", "hgt", "hcl", "ecl", "pid"};
-            foreach(string passport in passports)
+            string[] requiredItems = new string[] { "byr", "iyr", "eyr", "hgt", "hcl", "ecl", "pid" };
+            foreach (string passport in passports)
             {
                 bool validB = true;
-                foreach(string item in requiredItems)
+                foreach (string item in requiredItems)
                 {
                     if (!passport.Contains(item)) validB = false;
                 }
@@ -41,17 +41,17 @@ namespace AdventOfCode.Solutions.Year2020
         protected override object SolvePartTwo()
         {
             int valid = 0;
-            foreach(string passport in semiValid)
+            foreach (string passport in semiValid)
             {
                 string[] tokens = passport.Split();
                 bool isValid = true;
 
-                foreach(string token in tokens)
+                foreach (string token in tokens)
                 {
                     if (!isValid) break;
                     string[] t = token.Split(':');
                     int value;
-                    switch(t[0])
+                    switch (t[0])
                     {
                         case "byr":
                             value = int.Parse(t[1]);
@@ -69,19 +69,21 @@ namespace AdventOfCode.Solutions.Year2020
                             string sub = t[1][^2..];
                             int hgt;
 
-                            if(sub == "in")
+                            if (sub == "in")
                             {
-                                if(!int.TryParse(t[1].TrimEnd(new char[] {'i','n'}), out hgt)) isValid = false;
+                                if (!int.TryParse(t[1].TrimEnd(new char[] { 'i', 'n' }), out hgt)) isValid = false;
                                 if (hgt < 59 || hgt > 76) isValid = false;
-                            } else if(sub == "cm")
+                            }
+                            else if (sub == "cm")
                             {
                                 if (!int.TryParse(t[1].TrimEnd(new char[] { 'c', 'm' }), out hgt)) isValid = false;
                                 if (hgt < 150 || hgt > 193) isValid = false;
-                            } else
+                            }
+                            else
                             {
                                 isValid = false;
                             }
-                            
+
                             break;
                         case "hcl":
                             if (!Regex.IsMatch(t[1], "^#[0-9a-f]{6}$")) isValid = false;
@@ -95,7 +97,7 @@ namespace AdventOfCode.Solutions.Year2020
                             if (!int.TryParse(t[1], out int l)) isValid = false;
                             break;
                     }
-                    
+
                 }
                 if (isValid) valid++;
             }

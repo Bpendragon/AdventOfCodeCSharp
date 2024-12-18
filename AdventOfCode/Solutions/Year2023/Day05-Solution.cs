@@ -73,14 +73,14 @@ namespace AdventOfCode.Solutions.Year2023
                 seedBag.children.Add(new TreeNode() { start = seeds[i], end = seeds[i] + seeds[i + 1] - 1, parent = seedBag, depth = 0 });
             }
 
-            foreach(var t in seedBag.children)
+            foreach (var t in seedBag.children)
             {
                 t.GenerateChildren();
                 nodes.Add(t);
             }
 
 
-            return nodes.Where(x => x.depth>= Almanac.Count).Min(a => a.start);
+            return nodes.Where(x => x.depth >= Almanac.Count).Min(a => a.start);
         }
 
 
@@ -135,17 +135,17 @@ namespace AdventOfCode.Solutions.Year2023
                         (long x, long y) a = (f.s, Math.Min(f.e, m.source));
                         (long x, long y) b = (Math.Max(f.s, m.source), Math.Min(m.max, f.e));
                         (long x, long y) c = (Math.Max(m.max, f.s), f.e);
-                        if (a.x < a.y) 
+                        if (a.x < a.y)
                             tmp.Add(a);
-                        if (b.x < b.y) 
+                        if (b.x < b.y)
                             mapped.Add((b.x - m.source + m.destination, b.y - m.source + m.destination));
-                        if (c.x < c.y) 
+                        if (c.x < c.y)
                             tmp.Add(c);
                     }
                     unmapped = tmp;
                 }
 
-                foreach(var r in mapped)
+                foreach (var r in mapped)
                 {
                     children.Add(new TreeNode() { start = r.s, end = r.e, parent = this, depth = this.depth + 1 });
                 }
@@ -161,7 +161,7 @@ namespace AdventOfCode.Solutions.Year2023
                     nodes.Add(t);
                 }
             }
-            
+
         }
     }
 

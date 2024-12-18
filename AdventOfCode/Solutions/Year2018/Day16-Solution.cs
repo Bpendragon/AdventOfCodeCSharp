@@ -14,7 +14,7 @@ namespace AdventOfCode.Solutions.Year2018
         readonly Dictionary<int, int> Registers = new();
         readonly List<TestCase> testCases = new();
         static readonly StringSplitOptions splitOpts = StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries;
-        readonly List<string> opNames = new(new string[]{ "addr", "addi", "mulr", "muli", "banr", "bani", "borr", "bori", "setr", "seti", "gtir", "gtri", "gtrr", "eqir", "eqri", "eqrr" });
+        readonly List<string> opNames = new(new string[] { "addr", "addi", "mulr", "muli", "banr", "bani", "borr", "bori", "setr", "seti", "gtir", "gtri", "gtrr", "eqir", "eqri", "eqrr" });
         public Day16() : base()
         {
             string[] parts = Input.Split("\n\n\n", splitOpts);
@@ -38,9 +38,9 @@ namespace AdventOfCode.Solutions.Year2018
                     InitialState = (initValues[0], initValues[1], initValues[2], initValues[3]),
                     ResultState = (resultValues[0], resultValues[1], resultValues[2], resultValues[3]),
                     Operands = (opValues[0], opValues[1], opValues[2], opValues[3])
-                }) ;
+                });
 
-                for (int i= 0; i < 16; i++)
+                for (int i = 0; i < 16; i++)
                 {
                     knownOpcodes[i] = new List<string>(opNames);
                 }
@@ -50,10 +50,10 @@ namespace AdventOfCode.Solutions.Year2018
         protected override object SolvePartOne()
         {
             int threeOrMore = 0;
-            foreach(var _case in testCases)
+            foreach (var _case in testCases)
             {
                 List<string> workingValues = new();
-                foreach(var op in opNames)
+                foreach (var op in opNames)
                 {
                     Registers[0] = _case.InitialState.a;
                     Registers[1] = _case.InitialState.b;
@@ -65,7 +65,7 @@ namespace AdventOfCode.Solutions.Year2018
                     if (res == _case.ResultState) workingValues.Add(op);
                 }
                 knownOpcodes[_case.Operands.i].RemoveAll(x => !workingValues.Contains(x));
-                
+
                 if (workingValues.Count >= 3) threeOrMore++;
             }
             return threeOrMore;
@@ -78,13 +78,13 @@ namespace AdventOfCode.Solutions.Year2018
             Registers[2] = 0;
             Registers[3] = 0;
 
-            while(knownOpcodes.Values.Any(x => x.Count > 1))
+            while (knownOpcodes.Values.Any(x => x.Count > 1))
             {
                 var alreadyReduced = knownOpcodes.Where(x => x.Value.Count == 1);
 
-                foreach(var kvp in alreadyReduced)
+                foreach (var kvp in alreadyReduced)
                 {
-                    for(int i = 0; i < 16; i++)
+                    for (int i = 0; i < 16; i++)
                     {
                         if (i == kvp.Key) continue;
 
@@ -93,7 +93,7 @@ namespace AdventOfCode.Solutions.Year2018
                 }
             }
 
-            foreach(var line in part2.SplitByNewline())
+            foreach (var line in part2.SplitByNewline())
             {
                 var ops = line.ToIntList(" ");
                 RunCommand((ops[0], ops[1], ops[2], ops[3]));
@@ -103,7 +103,8 @@ namespace AdventOfCode.Solutions.Year2018
             return Registers[0];
         }
 
-        private (int a, int b, int c, int d) RunCommand((int i, int a, int b, int c) ops, string overRide = null) {
+        private (int a, int b, int c, int d) RunCommand((int i, int a, int b, int c) ops, string overRide = null)
+        {
             overRide ??= knownOpcodes[ops.i][0];
 
             Registers[ops.c] = (overRide) switch
@@ -139,6 +140,6 @@ namespace AdventOfCode.Solutions.Year2018
         public (int i, int a, int b, int c) Operands;
     }
 
-    
+
 
 }

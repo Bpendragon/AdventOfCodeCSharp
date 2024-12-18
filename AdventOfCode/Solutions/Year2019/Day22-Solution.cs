@@ -1,7 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
-using static AdventOfCode.Solutions.Utilities;
 using System.Numerics;
+
+using static AdventOfCode.Solutions.Utilities;
 
 namespace AdventOfCode.Solutions.Year2019
 {
@@ -15,7 +16,7 @@ namespace AdventOfCode.Solutions.Year2019
         {
             //UseDebugInput = true;
 
-            foreach(var s in Input.SplitByNewline())
+            foreach (var s in Input.SplitByNewline())
             {
                 Steps.Add(s.Split(' '));
             }
@@ -39,7 +40,7 @@ namespace AdventOfCode.Solutions.Year2019
                 }
             }
 
-            foreach(var step in Steps)
+            foreach (var step in Steps)
             {
                 List<int> nextDeck = new(deck);
                 switch (step[1])
@@ -48,7 +49,7 @@ namespace AdventOfCode.Solutions.Year2019
                         int increment = int.Parse(step[3]);
                         int curIndex = 0;
 
-                        for(int i = 0; i < nextDeck.Count; i++)
+                        for (int i = 0; i < nextDeck.Count; i++)
                         {
                             nextDeck[curIndex] = deck[i];
                             curIndex += increment;
@@ -82,10 +83,10 @@ namespace AdventOfCode.Solutions.Year2019
             long iterations = 101_741_582_076_661;
 
             long a = 1, b = 0;
-            foreach(var step in Steps)
+            foreach (var step in Steps)
             {
                 long la, lb;
-                switch(step[1])
+                switch (step[1])
                 {
                     case "with":
                         la = long.Parse(step[3]);
@@ -100,7 +101,7 @@ namespace AdventOfCode.Solutions.Year2019
                         break;
                 }
                 a = Mod((la * a), deckSize);
-                b = Mod((la * b + lb) , deckSize);
+                b = Mod((la * b + lb), deckSize);
             }
 
             //A and b now hold states from one pass through the rules, time to extend that

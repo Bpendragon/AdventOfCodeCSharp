@@ -93,7 +93,7 @@ namespace AdventOfCode.Solutions.Year2021
                     }
                 }
             }
-            else 
+            else
             {
                 p2Pos += nextDice;
                 if (p2Pos > 10) p2Pos -= 10;
@@ -112,20 +112,20 @@ namespace AdventOfCode.Solutions.Year2021
             }
 
             //No one won, we need to simulate all three lower games. 
-            Coordinate2DL res = (0,0);
+            Coordinate2DL res = (0, 0);
             if (diceRolls == 2) //Time to swap player
             {
                 //Could toMove be a bool? Absolutely, for my sanity while writing this though I went with the int.
                 toMove = toMove == 1 ? 2 : 1;
-                res+=  DiracGame((p1Score, p2Score, p1Pos, p2Pos, 1, 0, toMove));
-                res+=  DiracGame((p1Score, p2Score, p1Pos, p2Pos, 2, 0, toMove));
-                res+=  DiracGame((p1Score, p2Score, p1Pos, p2Pos, 3, 0, toMove));
+                res += DiracGame((p1Score, p2Score, p1Pos, p2Pos, 1, 0, toMove));
+                res += DiracGame((p1Score, p2Score, p1Pos, p2Pos, 2, 0, toMove));
+                res += DiracGame((p1Score, p2Score, p1Pos, p2Pos, 3, 0, toMove));
             }
             else //Same player still
             {
-                res+= DiracGame((p1Score, p2Score, p1Pos, p2Pos, 1, diceRolls + 1, toMove));
-                res+= DiracGame((p1Score, p2Score, p1Pos, p2Pos, 2, diceRolls + 1, toMove));
-                res+= DiracGame((p1Score, p2Score, p1Pos, p2Pos, 3, diceRolls + 1, toMove));
+                res += DiracGame((p1Score, p2Score, p1Pos, p2Pos, 1, diceRolls + 1, toMove));
+                res += DiracGame((p1Score, p2Score, p1Pos, p2Pos, 2, diceRolls + 1, toMove));
+                res += DiracGame((p1Score, p2Score, p1Pos, p2Pos, 3, diceRolls + 1, toMove));
             }
 
 

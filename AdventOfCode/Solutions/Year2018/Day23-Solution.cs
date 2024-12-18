@@ -75,10 +75,10 @@ namespace AdventOfCode.Solutions.Year2018
                     }
                 }
 
-                resolution /= 2; 
-                xRange = (long)(xRange/2); 
-                yRange = (long)(yRange/2) ; 
-                zRange = (long)(zRange/2); //something like a binary search
+                resolution /= 2;
+                xRange = (long)(xRange / 2);
+                yRange = (long)(yRange / 2);
+                zRange = (long)(zRange / 2); //something like a binary search
                 minX = bestLoc.x - (xRange / 2); maxX = bestLoc.x + (xRange / 2);
                 minY = bestLoc.y - (yRange / 2); maxY = bestLoc.y + (yRange / 2);
                 minZ = bestLoc.z - (zRange / 2); maxZ = bestLoc.z + (zRange / 2);

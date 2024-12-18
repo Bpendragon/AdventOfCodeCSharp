@@ -20,7 +20,7 @@ namespace AdventOfCode.Solutions.Year2015
         const int heroH = 50;
         const int heroMana = 500;
         int heroAr = 0;
-        
+
 
         int boss;
         int hero;
@@ -71,7 +71,7 @@ namespace AdventOfCode.Solutions.Year2015
         {
             if (mana < costMissile) return ActionType.NotEnough;
 
-            for (;;) //Need an infinite loop? Why not Zoidberg?
+            for (; ; ) //Need an infinite loop? Why not Zoidberg?
             {
                 int next = r.Next(5);
                 if (next == 0 && mana >= costMissile)

@@ -14,7 +14,7 @@ namespace AdventOfCode.Solutions.Year2020
 
         public Day10() : base()
         {
-            Adapters = new List<int>(Input.ToIntList("\n")) ;
+            Adapters = new List<int>(Input.ToIntList("\n"));
             Adapters.Sort();
             yourAdapter = Adapters.Last() + 3;
             Adapters.Insert(0, 0);
@@ -27,8 +27,8 @@ namespace AdventOfCode.Solutions.Year2020
             List<int> p1Adapters = new(Adapters);
 
             int ones = 0;
-            int threes = 0; 
-            for(int i = 0; i < p1Adapters.Count - 1 ; i++)
+            int threes = 0;
+            for (int i = 0; i < p1Adapters.Count - 1; i++)
             {
                 if (p1Adapters[i + 1] - p1Adapters[i] == 3) threes++;
                 else if (p1Adapters[i + 1] - p1Adapters[i] == 1) ones++;
@@ -56,7 +56,7 @@ namespace AdventOfCode.Solutions.Year2020
             if (KnownCounts.TryGetValue(start, out long value)) return value;
 
             long tmp = 0;
-            for(int i = 1; i <= 3; i++)
+            for (int i = 1; i <= 3; i++)
             {
                 if ((start + i < Adapters.Count) && (Adapters[start + i] - Adapters[start] <= 3))
                 {
@@ -64,7 +64,7 @@ namespace AdventOfCode.Solutions.Year2020
                 }
             }
             KnownCounts[start] = tmp;
-            return tmp ;
+            return tmp;
         }
 
     }

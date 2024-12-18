@@ -14,7 +14,7 @@ namespace AdventOfCode.Solutions.Year2022
         public Day12() : base()
         {
             var cols = Input.SplitIntoColumns();
-            for(int x = 0; x < cols.Length; x++)
+            for (int x = 0; x < cols.Length; x++)
             {
                 for (int y = 0; y < cols[x].Length; y++)
                 {

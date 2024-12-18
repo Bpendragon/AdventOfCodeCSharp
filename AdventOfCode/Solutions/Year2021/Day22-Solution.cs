@@ -16,7 +16,7 @@ namespace AdventOfCode.Solutions.Year2021
             Dictionary<(int minX, int maxX, int minY, int maxY, int minZ, int maxZ), long> cubes = new();
 
             int lineNum = 1;
-            foreach(var line in Input.SplitByNewline())
+            foreach (var line in Input.SplitByNewline())
             {
                 Regex r = new("[^\\d-]+");
                 bool turnOn = line[..2] == "on";

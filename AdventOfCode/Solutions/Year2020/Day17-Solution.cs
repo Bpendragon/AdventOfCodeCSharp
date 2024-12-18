@@ -17,8 +17,8 @@ namespace AdventOfCode.Solutions.Year2020
                 for (int y = 0; y < lines[x].Length; y++)
                 {
                     cyoob[(x, y, 0)] = lines[x][y] == '#';
-                    cyoob4D[(x, y, 0,0)] = lines[x][y] == '#';
-                    
+                    cyoob4D[(x, y, 0, 0)] = lines[x][y] == '#';
+
                 }
             }
             foreach (var s in cyoob.Where(kvp => !kvp.Value).ToList()) cyoob.Remove(s.Key);

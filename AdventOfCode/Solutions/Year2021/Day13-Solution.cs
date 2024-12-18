@@ -24,7 +24,7 @@ namespace AdventOfCode.Solutions.Year2021
 
             folds = halves[1].SplitByNewline();
 
-            for(int i = 0; i < folds.Count; i++)
+            for (int i = 0; i < folds.Count; i++)
             {
                 var instruction = folds[i].Split()[2].Split("=");
                 int lineLoc = int.Parse(instruction[1]);

@@ -33,7 +33,7 @@ namespace AdventOfCode.Solutions.Year2015
         {
             //check 1
             bool contCheck = false;
-            for(int i = 0; i < pass.Length - 2; i++)
+            for (int i = 0; i < pass.Length - 2; i++)
             {
                 if (pass[i] + 1 == pass[i + 1] && pass[i + 1] + 1 == pass[i + 2]) { contCheck = true; break; }
             }
@@ -42,12 +42,13 @@ namespace AdventOfCode.Solutions.Year2015
             int pairs = 0;
             for (int i = 0; i < pass.Length - 1; i++)
             {
-                if (pass[i] == pass[i+1])
+                if (pass[i] == pass[i + 1])
                 {
-                    if(i > 0)
+                    if (i > 0)
                     {
                         if (pass[i] != pass[i - 1]) pairs++;
-                    } else
+                    }
+                    else
                     {
                         pairs++;
                     }
@@ -60,9 +61,9 @@ namespace AdventOfCode.Solutions.Year2015
         private char[] Increment(char[] pass, int index)
         {
             if (index > pass.Length) return pass;
-            switch(pass[^index])
+            switch (pass[^index])
             {
-                case 'z': 
+                case 'z':
                     pass[^index] = 'a';
                     return Increment(pass, index + 1);
                 case 'h':
@@ -74,7 +75,7 @@ namespace AdventOfCode.Solutions.Year2015
                 case 'n':
                     pass[^index] = 'p';
                     break;
-                default: 
+                default:
                     pass[^index]++;
                     break;
             }

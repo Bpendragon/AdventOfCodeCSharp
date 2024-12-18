@@ -21,10 +21,11 @@ namespace AdventOfCode.Solutions.Year2016
             int n = 1;
             while (n < tgt)
             {
-                if(n%2 == 0)
+                if (n % 2 == 0)
                 {
                     n = (n * 2) + 1;
-                } else
+                }
+                else
                 {
                     n *= 2;
                 }

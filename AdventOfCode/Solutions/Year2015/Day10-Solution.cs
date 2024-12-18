@@ -18,7 +18,7 @@ namespace AdventOfCode.Solutions.Year2015
             string s = Input.Clone().ToString();
 
             foreach (int i in Enumerable.Range(0, 40)) s = SpeakAndSay(s);
-            return s.Length.ToString() ;
+            return s.Length.ToString();
         }
 
         protected override object SolvePartTwo()
@@ -33,11 +33,11 @@ namespace AdventOfCode.Solutions.Year2015
         {
             StringBuilder sb = new();
             Queue<char> q = new(value);
-            while(q.Count > 0)
+            while (q.Count > 0)
             {
                 char cur = q.Dequeue();
                 int count = 1;
-                while(q.Count > 0 && q.Peek() == cur)
+                while (q.Count > 0 && q.Peek() == cur)
                 {
                     count++;
                     q.Dequeue();
@@ -45,7 +45,7 @@ namespace AdventOfCode.Solutions.Year2015
                 sb.Append(count + cur.ToString());
             }
 
-            return sb.ToString();    
+            return sb.ToString();
         }
     }
 }

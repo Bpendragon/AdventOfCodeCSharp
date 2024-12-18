@@ -1,13 +1,15 @@
-using System;
-using System.Text;
-using System.Collections.Generic;
 using AdventOfCode.UserClasses;
-using System.Linq;
+
+using System;
+using System.Collections.Generic;
 using System.Data;
-using System.Threading;
-using System.Security;
-using static AdventOfCode.Solutions.Utilities;
+using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Security;
+using System.Text;
+using System.Threading;
+
+using static AdventOfCode.Solutions.Utilities;
 
 namespace AdventOfCode.Solutions.Year2023
 {

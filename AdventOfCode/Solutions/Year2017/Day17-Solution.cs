@@ -17,7 +17,7 @@ namespace AdventOfCode.Solutions.Year2017
         {
             List<int> buffer = new() { 0 };
             int curPos = 0;
-            for(int i = 1; i <= 2017; i++)
+            for (int i = 1; i <= 2017; i++)
             {
                 curPos = (curPos + Steps) % buffer.Count;
                 buffer.Insert(curPos + 1, i);

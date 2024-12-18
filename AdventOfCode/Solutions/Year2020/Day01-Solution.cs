@@ -17,7 +17,7 @@ namespace AdventOfCode.Solutions.Year2020
         protected override object SolvePartOne()
         {
             int i = 0, j = 1;
-            while(true)
+            while (true)
             {
                 int sum = costs[i] + costs[^j];
                 if (sum == 2020) return (costs[i] * costs[^j]);
@@ -31,7 +31,7 @@ namespace AdventOfCode.Solutions.Year2020
         {
             int i = 0, j = 1, k = 1;
 
-            while(true)
+            while (true)
             {
                 int sum = costs[i] + costs[j] + costs[^k];
                 if (sum == 2020) return (costs[i] * costs[j] * costs[^k]);
@@ -43,7 +43,8 @@ namespace AdventOfCode.Solutions.Year2020
                         i++;
                         j = i + 1;
                     }
-                } else
+                }
+                else
                 {
                     if (j + 1 >= costs.Count - k) j = i + 1;
                     k++;

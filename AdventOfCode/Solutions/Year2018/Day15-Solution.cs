@@ -23,7 +23,7 @@ namespace AdventOfCode.Solutions.Year2018
 
         protected override object SolvePartTwo()
         {
-            for(int elfAttackPower = 4; ; elfAttackPower++)
+            for (int elfAttackPower = 4; ; elfAttackPower++)
             {
                 Game game = new(lines, elfAttackPower);
 
@@ -68,7 +68,7 @@ namespace AdventOfCode.Solutions.Year2018
                     Unit u = units[i];
                     //get all possible targets for the attacking unit
                     List<Unit> targets = units.Where(t => t.IsGoblin != u.IsGoblin).ToList();
-                    
+
                     //If no enemy, game is over
                     if (targets.Count == 0) return rounds * units.Sum(ru => ru.Health);
 
@@ -129,7 +129,7 @@ namespace AdventOfCode.Solutions.Year2018
                         continue;
 
                     queue.Enqueue(nei);
-                    prevs[nei] =  (x, y);
+                    prevs[nei] = (x, y);
                 }
             }
 
@@ -141,7 +141,7 @@ namespace AdventOfCode.Solutions.Year2018
                 (int x, int y) = (destX, destY);
                 while (x != u.X || y != u.Y)
                 {
-                    path.Insert(0,(x, y));
+                    path.Insert(0, (x, y));
                     (x, y) = prevs[(x, y)];
                 }
 

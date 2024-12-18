@@ -15,7 +15,7 @@ namespace AdventOfCode.Solutions.Year2022
         readonly Dictionary<Coordinate2D, int> Sensors = new();
         public Day15() : base()
         {
-            foreach(var line in Input.SplitByNewline())
+            foreach (var line in Input.SplitByNewline())
             {
                 var a = line.ExtractInts().ToArray();
                 Coordinate2D sensor = (a[0], a[1]);
@@ -34,16 +34,16 @@ namespace AdventOfCode.Solutions.Year2022
             if (UseDebugInput) yToCheck = 10;
             else yToCheck = 2_000_000;
             HashSet<Coordinate2D> points = new();
-            foreach(var s in Sensors)
+            foreach (var s in Sensors)
             {
                 var sensor = s.Key;
                 var maxDist = s.Value;
                 var vertDiff = sensor.ManDistance((sensor.x, yToCheck));
 
 
-                if ( vertDiff > maxDist) continue;
+                if (vertDiff > maxDist) continue;
 
-                for(int x = sensor.x - (maxDist - vertDiff); x <= sensor.x + (maxDist - vertDiff); x++)
+                for (int x = sensor.x - (maxDist - vertDiff); x <= sensor.x + (maxDist - vertDiff); x++)
                 {
                     if (map.TryGetValue((x, yToCheck), out char v) && v == 'B') continue;
                     points.Add((x, yToCheck));
@@ -57,7 +57,7 @@ namespace AdventOfCode.Solutions.Year2022
         protected override object SolvePartTwo()
         {
             Coordinate2D beaconSpot = (-1, -1);
-            
+
 
             var sensorsAsList = Sensors.Keys.ToArray();
             for (int i = 0; i < sensorsAsList.Length; i++)

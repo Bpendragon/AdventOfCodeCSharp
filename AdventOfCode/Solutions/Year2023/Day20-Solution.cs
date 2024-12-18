@@ -16,7 +16,7 @@ namespace AdventOfCode.Solutions.Year2023
 
         public Day20() : base()
         {
-            foreach(var n in Input.ExtractWords().Distinct())
+            foreach (var n in Input.ExtractWords().Distinct())
             {
                 PulseModule tmp = new PulseModule()
                 {
@@ -25,7 +25,7 @@ namespace AdventOfCode.Solutions.Year2023
 
                 modules[n] = tmp;
             }
-            foreach(var l in Input.SplitByNewline())
+            foreach (var l in Input.SplitByNewline())
             {
                 var relModules = l.ExtractWords().ToList();
                 string curMod = relModules[0];
@@ -36,7 +36,7 @@ namespace AdventOfCode.Solutions.Year2023
                     _ => PulseModuleType.Broadcast
                 };
 
-                foreach(var m in relModules[1..])
+                foreach (var m in relModules[1..])
                 {
                     modules[curMod].outputs.Add(m);
                     modules[m].lastReceivedPulses[curMod] = false;
@@ -53,7 +53,7 @@ namespace AdventOfCode.Solutions.Year2023
 
             modules["button"] = button;
 
-            foreach(var m in modules.Values.Where(a => a.outputs.Contains(rxFeeder)))
+            foreach (var m in modules.Values.Where(a => a.outputs.Contains(rxFeeder)))
             {
                 rxConjunctions[m.name] = 0;
             }
@@ -64,12 +64,12 @@ namespace AdventOfCode.Solutions.Year2023
             long lowPulses = 0;
             long highPulses = 0;
 
-            for(int i = 1; i <= 1000; i++)
+            for (int i = 1; i <= 1000; i++)
             {
                 modules["button"].incomingPulses.Enqueue(("finger", false));
                 processOrder.Enqueue("button");
 
-                while(processOrder.TryDequeue(out string nextPulseTarget))
+                while (processOrder.TryDequeue(out string nextPulseTarget))
                 {
                     (long pulsesSent, bool pulseVal) = modules[nextPulseTarget].ProcessPulse();
                     if (rxConjunctions.ContainsKey(nextPulseTarget) && rxConjunctions[nextPulseTarget] == 0 && pulseVal) rxConjunctions[nextPulseTarget] = i;
@@ -90,7 +90,7 @@ namespace AdventOfCode.Solutions.Year2023
 
                 while (processOrder.TryDequeue(out string name))
                 {
-                    (_, bool pulseVal)  = modules[name].ProcessPulse();
+                    (_, bool pulseVal) = modules[name].ProcessPulse();
                     if (rxConjunctions.ContainsKey(name) && rxConjunctions[name] == 0 && pulseVal) rxConjunctions[name] = i;
                 }
 
@@ -112,7 +112,7 @@ namespace AdventOfCode.Solutions.Year2023
             public void Reset()
             {
                 flipFlopState = false;
-                foreach(var k in lastReceivedPulses.Keys)
+                foreach (var k in lastReceivedPulses.Keys)
                 {
                     lastReceivedPulses[k] = false;
                 }

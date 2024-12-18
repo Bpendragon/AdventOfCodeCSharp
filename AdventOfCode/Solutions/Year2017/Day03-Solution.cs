@@ -1,4 +1,5 @@
 using AdventOfCode.Solutions.Year2019;
+
 using System.Collections.Generic;
 using System.Linq;
 
@@ -26,9 +27,9 @@ namespace AdventOfCode.Solutions.Year2017
             CompassDirection curDirection = N;
             bool p2Found = false;
 
-            while(map.Count < target)
+            while (map.Count < target)
             {
-                if(!map.ContainsKey(curLoc.Move(curDirection.Turn("l"))))
+                if (!map.ContainsKey(curLoc.Move(curDirection.Turn("l"))))
                 {
                     curDirection = curDirection.Turn("l");
                 }
@@ -36,7 +37,7 @@ namespace AdventOfCode.Solutions.Year2017
                 curLoc = curLoc.Move(curDirection);
 
                 map[curLoc] = !p2Found ? map.Get2dNeighborVals(curLoc, 0, true).Sum() : 0;
-                if(!p2Found && map[curLoc] > target)
+                if (!p2Found && map[curLoc] > target)
                 {
                     p2Found = true;
                     p2res = map[curLoc];

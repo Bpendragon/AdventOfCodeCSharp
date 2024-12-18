@@ -18,11 +18,11 @@ namespace AdventOfCode.Solutions.Year2015
             long tgt = Packages.Sum() / 3;
             List<long> QEs = new();
             bool setFound = false;
-            for(int i = 2; i < Packages.Count; i++)
+            for (int i = 2; i < Packages.Count; i++)
             {
-                foreach(var c in Packages.Combinations(i))
+                foreach (var c in Packages.Combinations(i))
                 {
-                    if(c.Sum() == tgt)
+                    if (c.Sum() == tgt)
                     {
                         setFound = true;
                         QEs.Add(c.Aggregate((a, b) => a * b));

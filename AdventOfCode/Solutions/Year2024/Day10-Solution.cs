@@ -28,16 +28,16 @@ namespace AdventOfCode.Solutions.Year2024
         private int TrailScore(Coordinate2D curPos, int curVal, bool part2 = false)
         {
             if (curVal == 0) peaksVisited.Clear();
-            if (curVal == 9) 
+            if (curVal == 9)
             {
                 peaksVisited.Add(curPos);
-                return 1; 
+                return 1;
             }
 
             int sum = 0;
-            foreach(var n in curPos.Neighbors())
+            foreach (var n in curPos.Neighbors())
             {
-                if(map.GetValueOrDefault(n, -1) == curVal + 1 )
+                if (map.GetValueOrDefault(n, -1) == curVal + 1)
                 {
                     if (part2 || !peaksVisited.Contains(n))
                     {

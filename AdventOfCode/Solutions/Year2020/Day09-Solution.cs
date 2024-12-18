@@ -12,19 +12,19 @@ namespace AdventOfCode.Solutions.Year2020
 
         public Day09() : base()
         {
-            Lines = new List<long>(Input.ToLongList("\n"));  
+            Lines = new List<long>(Input.ToLongList("\n"));
         }
 
         protected override object SolvePartOne()
         {
             int i = 25;
-            for(; i < Lines.Count; i++)
+            for (; i < Lines.Count; i++)
             {
                 List<long> prev25 = Lines.GetRange(i - 25, 25);
                 bool found = false;
-                foreach(IEnumerable<long> combo in prev25.Combinations(2))
+                foreach (IEnumerable<long> combo in prev25.Combinations(2))
                 {
-                    if(combo.Sum() == Lines[i])
+                    if (combo.Sum() == Lines[i])
                     {
                         found = true;
                         break;
@@ -44,7 +44,7 @@ namespace AdventOfCode.Solutions.Year2020
             int lower = 0;
             int upper = 1;
 
-            while(true)
+            while (true)
             {
                 List<long> r = Lines.GetRange(lower, (upper - lower) + 1);
                 long rSum = r.Sum();

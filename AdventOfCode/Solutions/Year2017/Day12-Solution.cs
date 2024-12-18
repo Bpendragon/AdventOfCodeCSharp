@@ -13,7 +13,7 @@ namespace AdventOfCode.Solutions.Year2017
         private int NumGroups = 0;
         public Day12() : base()
         {
-            foreach(string line in Input.SplitByNewline())
+            foreach (string line in Input.SplitByNewline())
             {
                 string[] tokens = line.Split(" <-> ", StringSplitOptions.RemoveEmptyEntries);
 
@@ -30,7 +30,7 @@ namespace AdventOfCode.Solutions.Year2017
 
         protected override object SolvePartTwo()
         {
-            while(Visited.Count < Pipes.Count)
+            while (Visited.Count < Pipes.Count)
             {
                 int n = Pipes.Keys.Where(x => !Visited.Contains(x)).First();
                 BFS(n);

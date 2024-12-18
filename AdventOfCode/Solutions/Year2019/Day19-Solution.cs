@@ -19,7 +19,7 @@ namespace AdventOfCode.Solutions.Year2019
         protected override object SolvePartOne()
         {
             int count = 0;
-            for(int x = 0; x < 50; x++)
+            for (int x = 0; x < 50; x++)
             {
                 for (int y = 0; y < 50; y++)
                 {
@@ -33,10 +33,10 @@ namespace AdventOfCode.Solutions.Year2019
         {
             int x = 0, y = 0;
 
-            while(!Scan(x+99, y))
+            while (!Scan(x + 99, y))
             {
                 y++;
-                while(!Scan(x, y+99))
+                while (!Scan(x, y + 99))
                 {
                     x++;
                 }

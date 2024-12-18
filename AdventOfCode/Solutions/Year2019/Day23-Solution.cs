@@ -1,5 +1,6 @@
-using System.Collections.Generic;
 using AdventOfCode.UserClasses;
+
+using System.Collections.Generic;
 using System.Linq;
 
 namespace AdventOfCode.Solutions.Year2019
@@ -77,7 +78,7 @@ namespace AdventOfCode.Solutions.Year2019
                 }
 
                 //Check for Idle, if everyone has made more than 10 read requests without getting a packet in, I'll consider the network idle
-                if(IdleTime.Values.Min() > 10)
+                if (IdleTime.Values.Min() > 10)
                 {
                     if (clockSinceLastWakeup < 10) continue;
                     clockSinceLastWakeup = 0;

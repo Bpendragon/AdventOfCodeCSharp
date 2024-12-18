@@ -1,9 +1,11 @@
-using System;
-using System.Text;
-using System.Collections.Generic;
 using AdventOfCode.UserClasses;
-using System.Linq;
+
+using System;
+using System.Collections.Generic;
 using System.Data;
+using System.Linq;
+using System.Text;
+
 using static AdventOfCode.Solutions.Utilities;
 
 namespace AdventOfCode.Solutions.Year2019
@@ -99,7 +101,7 @@ namespace AdventOfCode.Solutions.Year2019
             bot.Program[0] = 2;
             bot.ClearInputs();
 
-            foreach(var output in bot.RunProgram())
+            foreach (var output in bot.RunProgram())
             {
                 if (output >= 256) return output;
 
@@ -157,18 +159,19 @@ namespace AdventOfCode.Solutions.Year2019
             visited.Add(curLoc);
             while (visited.Count < map.Keys.Count)
             {
-                if(map.ContainsKey(curLoc.Move(curDirection, true)))
+                if (map.ContainsKey(curLoc.Move(curDirection, true)))
                 {
                     curLoc = curLoc.Move(curDirection, true);
                     distanceTraveled++;
                     visited.Add(curLoc);
-                } else
+                }
+                else
                 {
                     if (distanceTraveled != 0) sb.Append($"{distanceTraveled},");
-                    switch(curDirection)
+                    switch (curDirection)
                     {
-                        case N: 
-                            if(map.ContainsKey(curLoc.Move(W, true)))
+                        case N:
+                            if (map.ContainsKey(curLoc.Move(W, true)))
                             {
                                 sb.Append("L,");
                                 curDirection = W;

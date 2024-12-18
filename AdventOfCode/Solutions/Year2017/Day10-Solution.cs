@@ -1,5 +1,6 @@
-using System.Collections.Generic;
 using AdventOfCode.UserClasses;
+
+using System.Collections.Generic;
 using System.Linq;
 
 namespace AdventOfCode.Solutions.Year2017
@@ -20,7 +21,7 @@ namespace AdventOfCode.Solutions.Year2017
             List<int> knot = new(256);
             foreach (int i in Enumerable.Range(0, 256)) knot.Add(i);
             List<int> res = kn.Round(knot);
-            return (res[0]*res[1]);
+            return (res[0] * res[1]);
         }
 
         protected override object SolvePartTwo()

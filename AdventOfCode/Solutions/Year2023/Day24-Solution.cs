@@ -16,7 +16,7 @@ namespace AdventOfCode.Solutions.Year2023
 
         public Day24() : base()
         {
-            foreach(var l in Input.SplitByNewline())
+            foreach (var l in Input.SplitByNewline())
             {
                 var nums = l.ExtractLongs().ToList();
 
@@ -28,13 +28,14 @@ namespace AdventOfCode.Solutions.Year2023
         {
 
             long valid = 0;
-            foreach(var combo in Hailstones.Combinations(2)) {
+            foreach (var combo in Hailstones.Combinations(2))
+            {
                 Hailstone h1 = combo.First();
                 Hailstone h2 = combo.Last();
 
                 (var x1, var y1, var z1) = (h1.X, h1.Y, h1.Z);
                 (var x2, var y2, var z2) = (h1.p2.X, h1.p2.Y, h1.p2.Z);
-                (var x3, var y3, var z3) = (h2.X, h2.p2.Y, h2.p2.Z) ;
+                (var x3, var y3, var z3) = (h2.X, h2.p2.Y, h2.p2.Z);
                 (var x4, var y4, var z4) = (h2.p2.X, h2.p2.Y, h2.p2.Z);
 
                 var xNumerator = ((x1 * y2 - y1 * x2) * (x3 - x4)) - ((x1 - x2) * (x3 * y4 - y3 * x4));
@@ -51,7 +52,7 @@ namespace AdventOfCode.Solutions.Year2023
 
                     if (min <= xPos && xPos <= max && min <= yPos && yPos <= max)
                     {
-                        if (h1.TimeAtXYPosition(xPos, yPos) < 0 || h2.TimeAtXYPosition(xPos, yPos) < 0 )
+                        if (h1.TimeAtXYPosition(xPos, yPos) < 0 || h2.TimeAtXYPosition(xPos, yPos) < 0)
                         {
                             continue; //Occurred in someones past
                         }
@@ -71,24 +72,26 @@ namespace AdventOfCode.Solutions.Year2023
             HashSet<long> possibleYV = null;
             HashSet<long> possibleZV = null;
 
-            foreach(var c in Hailstones.Combinations(2).Where(a => a.First().dX == a.Last().dX))
+            foreach (var c in Hailstones.Combinations(2).Where(a => a.First().dX == a.Last().dX))
             {
                 HashSet<long> tmp = new();
                 long hailVelocity = (long)c.First().dX;
                 long distanceDiff = (long)(c.Last().X - c.First().X);
-                for(long i = -1000; i <= 1000; i++)
+                for (long i = -1000; i <= 1000; i++)
                 {
                     try
                     {
                         if (distanceDiff % (i - hailVelocity) == 0) tmp.Add(i);
-                    } catch { }
+                    }
+                    catch { }
                 }
 
 
-                if(possibleXV == null)
+                if (possibleXV == null)
                 {
                     possibleXV = new(tmp);
-                } else
+                }
+                else
                 {
                     possibleXV = possibleXV.Intersect(tmp).ToHashSet<long>();
                 }
@@ -181,7 +184,7 @@ namespace AdventOfCode.Solutions.Year2023
             Console.WriteLine($"{{{xPos}}}, {{{yPos}}}, {{{zPos}}}");
 
 
-            return xPos+yPos+zPos;
+            return xPos + yPos + zPos;
         }
 
         private class Hailstone

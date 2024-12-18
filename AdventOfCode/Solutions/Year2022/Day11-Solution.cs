@@ -15,7 +15,7 @@ namespace AdventOfCode.Solutions.Year2022
         {
 
             workingMonkeys ??= new();
-            foreach(var m in Input.SplitByDoubleNewline())
+            foreach (var m in Input.SplitByDoubleNewline())
             {
                 Monkey monk = new();
                 var monkDef = m.SplitByNewline();
@@ -27,7 +27,7 @@ namespace AdventOfCode.Solutions.Year2022
                 else monk.OperationConst = -1;
 
                 monk.TestDivisor = long.Parse(monkDef[3].Split(" ")[^1]);
-                monk.TrueTarget  = int.Parse(monkDef[4].Split(" ")[^1]);
+                monk.TrueTarget = int.Parse(monkDef[4].Split(" ")[^1]);
                 monk.FalseTarget = int.Parse(monkDef[5].Split(" ")[^1]);
 
                 monkeys.Add(monk);
@@ -40,9 +40,9 @@ namespace AdventOfCode.Solutions.Year2022
         {
             workingMonkeys.Clear();
             foreach (var m in monkeys) workingMonkeys.Add(m.Clone());
-            for(long i = 0; i < 20; i++)
+            for (long i = 0; i < 20; i++)
             {
-                foreach(var monkey in workingMonkeys)
+                foreach (var monkey in workingMonkeys)
                 {
                     while (monkey.Items.Count > 0)
                     {
@@ -53,7 +53,7 @@ namespace AdventOfCode.Solutions.Year2022
                 }
             }
 
-            return workingMonkeys.OrderByDescending(a => a.ItemsInspected).Take(2).Aggregate(1L, (a,b) => a * b.ItemsInspected);
+            return workingMonkeys.OrderByDescending(a => a.ItemsInspected).Take(2).Aggregate(1L, (a, b) => a * b.ItemsInspected);
         }
 
         protected override object SolvePartTwo()
@@ -90,11 +90,12 @@ namespace AdventOfCode.Solutions.Year2022
             {
                 ItemsInspected++;
                 long tmpVal = Items.First.Value;
-                if(IsMultiply)
+                if (IsMultiply)
                 {
                     if (OperationConst == -1) tmpVal *= tmpVal;
                     else tmpVal *= OperationConst;
-                } else
+                }
+                else
                 {
                     if (OperationConst == -1) tmpVal += tmpVal;
                     else tmpVal += OperationConst;
@@ -136,7 +137,7 @@ namespace AdventOfCode.Solutions.Year2022
                 };
 
                 var cur = Items.First;
-                while(cur != null)
+                while (cur != null)
                 {
                     tmpM.Items.AddLast(cur.Value);
                     cur = cur.Next;

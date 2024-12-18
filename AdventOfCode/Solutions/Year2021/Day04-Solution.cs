@@ -15,11 +15,11 @@ namespace AdventOfCode.Solutions.Year2021
         {
             List<string> tokens = new(Input.Split("\n\n"));
             calls = tokens[0].ToIntList(",");
-            for(int i = 1; i < tokens.Count; i++)
+            for (int i = 1; i < tokens.Count; i++)
             {
                 Board nextBoard = new();
                 var cur = tokens[i].SplitByNewline();
-                for(int y = 0; y < 5; y++)
+                for (int y = 0; y < 5; y++)
                 {
                     var line = cur[y].ToIntList(" ");
                     for (int x = 0; x < 5; x++)
@@ -39,11 +39,11 @@ namespace AdventOfCode.Solutions.Year2021
         protected override object SolvePartOne()
         {
             HashSet<Board> p1Boards = new(Boards);
-            foreach(int call in calls)
+            foreach (int call in calls)
             {
-                foreach(var b in p1Boards)
+                foreach (var b in p1Boards)
                 {
-                    if(b.inv.TryGetValue(call, out (int x, int y) pos)) 
+                    if (b.inv.TryGetValue(call, out (int x, int y) pos))
                     {
                         b.cells[pos].Marked = true;
                     }
@@ -51,7 +51,7 @@ namespace AdventOfCode.Solutions.Year2021
 
                 var compBoard = p1Boards.FirstOrDefault(x => x.IsComplete);
 
-                if(compBoard != null)
+                if (compBoard != null)
                 {
                     int tmp = compBoard.cells.Values.Where(x => !x.Marked).Sum(x => x.Value);
                     return (tmp * call);
@@ -89,7 +89,7 @@ namespace AdventOfCode.Solutions.Year2021
             return null;
         }
 
-        private class Board 
+        private class Board
         {
             public Dictionary<(int x, int y), Cell> cells = new();
             public Dictionary<int, (int x, int y)> inv = new();

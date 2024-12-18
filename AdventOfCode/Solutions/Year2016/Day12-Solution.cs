@@ -1,6 +1,6 @@
-using System.Collections.Generic;
-
 using AdventOfCode.UserClasses;
+
+using System.Collections.Generic;
 
 
 namespace AdventOfCode.Solutions.Year2016

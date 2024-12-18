@@ -19,12 +19,12 @@ namespace AdventOfCode.Solutions.Year2022
         protected override object SolvePartOne()
         {
             List<Node> nodes = new();
-            foreach(var n in initialList)
+            foreach (var n in initialList)
             {
                 nodes.Add(new(n));
             }
 
-            foreach(var (l, r) in nodes.Zip(nodes.Skip(1)))
+            foreach (var (l, r) in nodes.Zip(nodes.Skip(1)))
             {
                 l.Next = r;
                 r.Prev = l;
@@ -33,7 +33,7 @@ namespace AdventOfCode.Solutions.Year2022
             nodes[0].Prev = nodes[^1];
             nodes[^1].Next = nodes[0];
 
-            foreach(var n in nodes)
+            foreach (var n in nodes)
             {
                 //Remove our node from the loop
                 n.Prev.Next = n.Next;
@@ -42,7 +42,7 @@ namespace AdventOfCode.Solutions.Year2022
                 //Allows us to walk along the nodes.
                 Node l = n.Prev, r = n.Next;
 
-                foreach(var _ in Enumerable.Range(0, (int)(Math.Abs(n.Val) % (nodes.Count - 1)))) //Subtract 1 because our node is currently "Outside" the list.
+                foreach (var _ in Enumerable.Range(0, (int)(Math.Abs(n.Val) % (nodes.Count - 1)))) //Subtract 1 because our node is currently "Outside" the list.
                 {
                     if (n.Val < 0)
                     {
@@ -52,7 +52,7 @@ namespace AdventOfCode.Solutions.Year2022
                     else
                     {
                         l = l.Next;
-                        r = r.Next; 
+                        r = r.Next;
                     }
                 }
                 l.Next = n;
@@ -66,9 +66,9 @@ namespace AdventOfCode.Solutions.Year2022
 
             Node start = nodes.First(a => a.Val == 0);
 
-            foreach(var _ in Enumerable.Range(0, 3))
+            foreach (var _ in Enumerable.Range(0, 3))
             {
-                foreach(var _2 in Enumerable.Range(0,1000))
+                foreach (var _2 in Enumerable.Range(0, 1000))
                 {
                     start = start.Next;
                 }

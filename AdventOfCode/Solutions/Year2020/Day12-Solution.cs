@@ -20,13 +20,13 @@ namespace AdventOfCode.Solutions.Year2020
             (int x, int y) curPos = (0, 0);
             CompassDirection curDirection = E;
 
-            foreach(var line in Lines)
+            foreach (var line in Lines)
             {
                 char instruction = line[0];
                 int val = int.Parse(line[1..]);
-                switch(instruction)
+                switch (instruction)
                 {
-                    case 'N': curPos = curPos.Move(N, distance:val); break;
+                    case 'N': curPos = curPos.Move(N, distance: val); break;
                     case 'S': curPos = curPos.Move(S, distance: val); break;
                     case 'E': curPos = curPos.Move(E, distance: val); break;
                     case 'W': curPos = curPos.Move(W, distance: val); break;
@@ -35,7 +35,7 @@ namespace AdventOfCode.Solutions.Year2020
                     case 'R': curDirection = (CompassDirection)(((int)curDirection + val) % 360); break;
                 }
             }
-            return Utilities.ManhattanDistance((0,0), curPos);
+            return Utilities.ManhattanDistance((0, 0), curPos);
         }
 
         protected override object SolvePartTwo()
@@ -53,16 +53,16 @@ namespace AdventOfCode.Solutions.Year2020
                     case 'S': wayPoint = wayPoint.Move(S, distance: val); break;
                     case 'E': wayPoint = wayPoint.Move(E, distance: val); break;
                     case 'W': wayPoint = wayPoint.Move(W, distance: val); break;
-                    case 'F': 
+                    case 'F':
                         shipPos = shipPos.Add((val * wayPoint.x, val * wayPoint.y));
                         break;
                     case 'L':
-                        switch(val)
+                        switch (val)
                         {
                             case 90: wayPoint = (-wayPoint.y, wayPoint.x); break;
                             case 180: wayPoint = (-wayPoint.x, -wayPoint.y); break;
                             case 270: wayPoint = (wayPoint.y, -wayPoint.x); break;
-                        } 
+                        }
                         break;
                     case 'R':
                         switch (val)

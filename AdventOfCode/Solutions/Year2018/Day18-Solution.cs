@@ -1,7 +1,8 @@
 using System;
-using System.Text;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
+
 using static AdventOfCode.Solutions.Utilities;
 
 namespace AdventOfCode.Solutions.Year2018
@@ -14,9 +15,9 @@ namespace AdventOfCode.Solutions.Year2018
         public Day18() : base()
         {
             int y = 0;
-            foreach(var line in Input.SplitByNewline())
+            foreach (var line in Input.SplitByNewline())
             {
-                for(int x = 0; x < line.Length; x++)
+                for (int x = 0; x < line.Length; x++)
                 {
                     baseMap[(x, y)] = line[x];
                 }
@@ -54,7 +55,7 @@ namespace AdventOfCode.Solutions.Year2018
                     int trees = 0;
                     int clear = 0;
                     int yards = 0;
-                    foreach(var dir in (CompassDirection[])Enum.GetValues(typeof(CompassDirection)))
+                    foreach (var dir in (CompassDirection[])Enum.GetValues(typeof(CompassDirection)))
                     {
                         char c = p1.GetValueOrDefault(cell.Move(dir), '~');
                         switch (c)
@@ -81,20 +82,21 @@ namespace AdventOfCode.Solutions.Year2018
                 p1 = new Dictionary<(int x, int y), char>(next);
 
                 StringBuilder sb = new();
-                for(int y = 0; y < 50; y++)
+                for (int y = 0; y < 50; y++)
                 {
-                    for(int x = 0; x < 50; x++)
+                    for (int x = 0; x < 50; x++)
                     {
                         sb.Append(p1[(x, y)]);
                     }
                 }
                 var tmp = sb;
 
-                if(SeenLayouts.Contains(tmp.ToString()))
+                if (SeenLayouts.Contains(tmp.ToString()))
                 {
                     SeenLayouts.RemoveRange(0, SeenLayouts.IndexOf(tmp.ToString()));
                     return SeenLayouts[(numIterations - i) % SeenLayouts.Count];
-                } else
+                }
+                else
                 {
                     SeenLayouts.Add(tmp.ToString());
                 }

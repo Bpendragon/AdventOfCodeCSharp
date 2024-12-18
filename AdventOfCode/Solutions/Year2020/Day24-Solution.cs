@@ -28,18 +28,19 @@ namespace AdventOfCode.Solutions.Year2020
 
         protected override object SolvePartOne()
         {
-            foreach(var l in instructions)
+            foreach (var l in instructions)
             {
                 int i = 0;
                 (int q, int r) curPos = (0, 0);
-                while(i < l.Length)
+                while (i < l.Length)
                 {
                     string move;
-                    if(l[i] == 's' || l[i] == 'n')
+                    if (l[i] == 's' || l[i] == 'n')
                     {
                         move = l.Substring(i, 2);
                         i += 2;
-                    } else
+                    }
+                    else
                     {
                         move = l.Substring(i, 1);
                         i++;
@@ -48,10 +49,11 @@ namespace AdventOfCode.Solutions.Year2020
                     curPos = curPos.Add(Moves[move]);
                 }
 
-                if(TileStates.ContainsKey(curPos))
+                if (TileStates.ContainsKey(curPos))
                 {
                     TileStates[curPos] = !TileStates[curPos];
-                } else
+                }
+                else
                 {
                     TileStates[curPos] = true;
                 }
@@ -62,12 +64,12 @@ namespace AdventOfCode.Solutions.Year2020
         protected override object SolvePartTwo()
         {
             foreach (var s in TileStates.Where(kvp => !kvp.Value).ToList()) TileStates.Remove(s.Key);
-            for(int i = 0; i < 100; i++)
+            for (int i = 0; i < 100; i++)
             {
                 var tileList = TileStates.Keys.ToList();
-                foreach(var t in tileList)
+                foreach (var t in tileList)
                 {
-                    foreach(var m in Moves.Values)
+                    foreach (var m in Moves.Values)
                     {
                         var tmp = t.Add(m);
                         if (!TileStates.ContainsKey(tmp)) TileStates[tmp] = false;
@@ -75,20 +77,21 @@ namespace AdventOfCode.Solutions.Year2020
                 }
                 var nextTiles = new Dictionary<(int q, int r), bool>(TileStates);
                 var tileList2 = TileStates.Keys.ToList();
-                foreach(var t in tileList2)
+                foreach (var t in tileList2)
                 {
                     int numBlack = Moves.Values.Count(m => TileStates.GetValueOrDefault(t.Add(m), false));
 
-                    if(TileStates[t])
+                    if (TileStates[t])
                     {
                         nextTiles[t] = !(numBlack == 0 || numBlack > 2);
-                    } else
+                    }
+                    else
                     {
                         nextTiles[t] = (numBlack == 2);
                     }
                 }
 
-                
+
                 TileStates = new Dictionary<(int q, int r), bool>(nextTiles);
                 foreach (var s in TileStates.Where(kvp => !kvp.Value).ToList()) TileStates.Remove(s.Key);
             }

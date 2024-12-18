@@ -19,7 +19,7 @@ namespace AdventOfCode.Solutions.Year2023
 
             var stops = parts[1].ExtractWords().ToArray();
 
-            for(int i = 0; i < stops.Length; i+=3)
+            for (int i = 0; i < stops.Length; i += 3)
             {
                 string parent = stops[i];
                 string left = stops[i + 1];
@@ -34,7 +34,7 @@ namespace AdventOfCode.Solutions.Year2023
         {
             int steps = 0;
             var curNode = "AAA";
-            while(true)
+            while (true)
             {
                 if (curNode == "ZZZ") break;
 
@@ -49,7 +49,7 @@ namespace AdventOfCode.Solutions.Year2023
         protected override object SolvePartTwo()
         {
             List<long> walkLengths = new();
-            foreach(var n in nodes.Keys.Where(a => a.EndsWith('A')))
+            foreach (var n in nodes.Keys.Where(a => a.EndsWith('A')))
             {
                 long steps = 0;
                 var curNode = n;

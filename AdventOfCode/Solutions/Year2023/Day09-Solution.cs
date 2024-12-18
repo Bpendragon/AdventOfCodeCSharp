@@ -36,7 +36,7 @@ namespace AdventOfCode.Solutions.Year2023
                 foreach (var a in curReduction.Skip(1))
                 {
                     p1Val += a.Last();
-                    p2Val =  a.First() - p2Val;
+                    p2Val = a.First() - p2Val;
                 }
 
                 part1 += p1Val;

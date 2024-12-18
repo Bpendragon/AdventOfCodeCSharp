@@ -14,9 +14,9 @@ namespace AdventOfCode.Solutions.Year2017
         public Day19() : base()
         {
             Lines = new List<string>(Input.Split('\n'));
-            for(int j = 0; j < Lines.Count; j++)
+            for (int j = 0; j < Lines.Count; j++)
             {
-                for(int i = 0; i < Lines[j].Length; i++)
+                for (int i = 0; i < Lines[j].Length; i++)
                 {
                     map[(i, j)] = Lines[j][i];
                 }
@@ -31,25 +31,27 @@ namespace AdventOfCode.Solutions.Year2017
 
             while (true)
             {
-                while(map[curPos] is '|' or '-')
+                while (map[curPos] is '|' or '-')
                 {
                     curPos = curPos.Move(curDir);
                     steps++;
                 }
 
-                if(map[curPos] == '+')
+                if (map[curPos] == '+')
                 {
-                    switch(curDir)
+                    switch (curDir)
                     {
                         case N:
                         case S:
-                            if(map[curPos.Move(E)] == '-')
+                            if (map[curPos.Move(E)] == '-')
                             {
                                 curDir = E;
-                            } else if(map[curPos.Move(W)] == '-')
+                            }
+                            else if (map[curPos.Move(W)] == '-')
                             {
                                 curDir = W;
-                            } else
+                            }
+                            else
                             {
                                 throw new Exception();
                             }
@@ -71,10 +73,12 @@ namespace AdventOfCode.Solutions.Year2017
                             break;
                     }
 
-                } else if(map[curPos] == ' ')
+                }
+                else if (map[curPos] == ' ')
                 {
                     break;
-                } else
+                }
+                else
                 {
                     lettersSeen.Add(map[curPos]);
                 }

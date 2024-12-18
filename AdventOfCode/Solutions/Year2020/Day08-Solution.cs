@@ -19,7 +19,7 @@ namespace AdventOfCode.Solutions.Year2020
 
         protected override object SolvePartTwo()
         {
-            for(int i = 0; i < Lines.Count; i++)
+            for (int i = 0; i < Lines.Count; i++)
             {
                 List<string> copy = new(Lines);
 
@@ -33,9 +33,9 @@ namespace AdventOfCode.Solutions.Year2020
                 string str = tmp[0] + " " + tmp[1];
                 copy[i] = str;
 
-                if(TestProgram(copy))
+                if (TestProgram(copy))
                 {
-                    return RunProgram(copy).ToString() ;
+                    return RunProgram(copy).ToString();
                 }
             }
             return null;

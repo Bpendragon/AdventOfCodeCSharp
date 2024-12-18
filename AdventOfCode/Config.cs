@@ -21,7 +21,7 @@ namespace AdventOfCode
             get => _c;
             set
             {
-                if(Regex.IsMatch(value, "^session=[a-z0-9]+$")) _c = value;
+                if (Regex.IsMatch(value, "^session=[a-z0-9]+$")) _c = value;
             }
         }
         public int Year
@@ -29,7 +29,7 @@ namespace AdventOfCode
             get => _y;
             set
             {
-                if(value >= 2015 && value <= DateTime.Now.Year) _y = value;
+                if (value >= 2015 && value <= DateTime.Now.Year) _y = value;
             }
         }
         [JsonConverter(typeof(DaysConverter))]
@@ -41,11 +41,11 @@ namespace AdventOfCode
                 bool allDaysCovered = false;
                 _d = value.Where(v =>
                 {
-                    if(v == 0) allDaysCovered = true;
+                    if (v == 0) allDaysCovered = true;
                     return v > 0 && v < 26;
                 }).ToArray();
 
-                if(allDaysCovered)
+                if (allDaysCovered)
                 {
                     _d = new int[] { 0 };
                 }
@@ -62,7 +62,7 @@ namespace AdventOfCode
             //Make sure we're looking at EST, or it might break for most of the US
             DateTime CURRENT_EST = TimeZoneInfo.ConvertTime(DateTime.Now, TimeZoneInfo.Utc).AddHours(-5);
             if (Cookie == default) Cookie = "";
-            if(Year == default) Year = CURRENT_EST.Year;
+            if (Year == default) Year = CURRENT_EST.Year;
             if (Days == default(int[])) Days = (CURRENT_EST.Month == 12 && CURRENT_EST.Day <= 25) ? new int[] { CURRENT_EST.Day } : new int[] { 0 };
             else if (Days[0] == -1) Days = new int[] { CURRENT_EST.Day };
         }
@@ -76,7 +76,7 @@ namespace AdventOfCode
                 WriteIndented = true
             };
             Config config;
-            if(File.Exists(path))
+            if (File.Exists(path))
             {
                 config = JsonSerializer.Deserialize<Config>(File.ReadAllText(path), options);
                 config.SetDefaults();
@@ -106,14 +106,14 @@ namespace AdventOfCode
         {
             return str.Split(",").SelectMany<string, int>(str =>
             {
-                if(str.Contains(".."))
+                if (str.Contains(".."))
                 {
                     string[] split = str.Split("..");
                     int start = int.Parse(split[0]);
                     int stop = int.Parse(split[1]);
                     return Enumerable.Range(start, stop - start + 1);
                 }
-                else if(int.TryParse(str, out int day))
+                else if (int.TryParse(str, out int day))
                 {
                     return new int[] { day };
                 }
@@ -124,7 +124,7 @@ namespace AdventOfCode
         public override void Write(Utf8JsonWriter writer, int[] value, JsonSerializerOptions options)
         {
             writer.WriteStartArray();
-            foreach(int val in value) writer.WriteNumberValue(val);
+            foreach (int val in value) writer.WriteNumberValue(val);
             writer.WriteEndArray();
         }
     }

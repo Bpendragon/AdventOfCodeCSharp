@@ -20,10 +20,10 @@ namespace AdventOfCode.Solutions.Year2021
             var halves = Input.Split("\n\n");
             enhancementString = halves[0];
             var imageLines = halves[1].SplitByNewline();
-            for(int y = 0; y < imageLines.Count; y++)
+            for (int y = 0; y < imageLines.Count; y++)
             {
 
-                for(int x = 0; x < imageLines[0].Length; x++)
+                for (int x = 0; x < imageLines[0].Length; x++)
                 {
                     string val = imageLines[y][x] == '#' ? "1" : "0";
                     initialImage[(x, y)] = val;
@@ -44,7 +44,7 @@ namespace AdventOfCode.Solutions.Year2021
         }
 
         protected override object SolvePartTwo()
-        { 
+        {
             return initialImage.Values.Count(a => a == "1");
         }
 
@@ -58,11 +58,11 @@ namespace AdventOfCode.Solutions.Year2021
 
             StringBuilder sb = new();
 
-            for(int x = minX - 2; x < maxX + 2; x++)
+            for (int x = minX - 2; x < maxX + 2; x++)
             {
-                for(int y = minY - 2; y < maxY + 2; y++)
+                for (int y = minY - 2; y < maxY + 2; y++)
                 {
-                    foreach(var n in OrderedNeighbors)
+                    foreach (var n in OrderedNeighbors)
                     {
                         var tmp = passNum % 2 == 1 || UseDebugInput ? CurrentImage.GetValueOrDefault((x, y) + n, "0") : CurrentImage.GetValueOrDefault((x, y) + n, "1");
                         sb.Append(tmp);

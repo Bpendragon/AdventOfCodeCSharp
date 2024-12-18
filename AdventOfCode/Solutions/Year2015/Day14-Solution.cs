@@ -13,7 +13,7 @@ namespace AdventOfCode.Solutions.Year2015
         {
             Lines = new List<string>(Input.SplitByNewline());
 
-            foreach(string line in Lines)
+            foreach (string line in Lines)
             {
                 string[] tmp = line.Split();
                 Racers.Add(new Reindeer(tmp[0], int.Parse(tmp[3]), int.Parse(tmp[6]), int.Parse(tmp[^2])));
@@ -33,7 +33,7 @@ namespace AdventOfCode.Solutions.Year2015
 
         protected override object SolvePartOne()
         {
-            
+
             return Racers.Select(x => x.distanceCovered).Max();
         }
 
@@ -65,19 +65,20 @@ namespace AdventOfCode.Solutions.Year2015
 
         public void Step()
         {
-            if(isMoving)
+            if (isMoving)
             {
                 movingFor++;
                 distanceCovered += speed;
-                if(movingFor == moveTime)
+                if (movingFor == moveTime)
                 {
                     isMoving = false;
                     restingFor = 0;
                 }
-            } else
+            }
+            else
             {
                 restingFor++;
-                if(restingFor == restTime)
+                if (restingFor == restTime)
                 {
                     isMoving = true;
                     movingFor = 0;

@@ -1,7 +1,7 @@
 using System;
-using System.Text;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 
 namespace AdventOfCode.Solutions.Year2020
 {
@@ -9,7 +9,7 @@ namespace AdventOfCode.Solutions.Year2020
     [DayInfo(14, 2020, "Docking Data")]
     class Day14 : ASolution
     {
-         public Day14() : base()
+        public Day14() : base()
         {
 
         }
@@ -19,21 +19,22 @@ namespace AdventOfCode.Solutions.Year2020
             long[] memory = new long[100000];
             long curForcedMask = 0;
             long curMask = 0;
-            foreach(var line in Input.SplitByNewline())
+            foreach (var line in Input.SplitByNewline())
             {
                 var tokens = line.Split(" []=".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
-                if(tokens[0] == "mask")
+                if (tokens[0] == "mask")
                 {
                     StringBuilder forcedMask = new();
                     StringBuilder mask = new();
 
-                    foreach(char c in tokens[1])
+                    foreach (char c in tokens[1])
                     {
-                        if(c == 'X')
+                        if (c == 'X')
                         {
                             mask.Append('1');
                             forcedMask.Append('0');
-                        } else
+                        }
+                        else
                         {
                             mask.Append('0');
                             forcedMask.Append(c);
@@ -41,7 +42,8 @@ namespace AdventOfCode.Solutions.Year2020
                     }
                     curForcedMask = Convert.ToInt64(forcedMask.ToString(), 2);
                     curMask = Convert.ToInt64(mask.ToString(), 2);
-                } else
+                }
+                else
                 {
                     memory[int.Parse(tokens[1])] = curForcedMask + (long.Parse(tokens[2]) & curMask);
                 }
@@ -52,7 +54,7 @@ namespace AdventOfCode.Solutions.Year2020
         protected override object SolvePartTwo()
         {
             Dictionary<long, long> memory = new();
-            string curVariableString = null ;
+            string curVariableString = null;
             foreach (var line in Input.SplitByNewline())
             {
                 var tokens = line.Split(" []=".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
@@ -63,7 +65,7 @@ namespace AdventOfCode.Solutions.Year2020
                 else
                 {
                     var memLocations = GetMemLocations(long.Parse(tokens[1]), curVariableString);
-                   foreach (var memLocation in memLocations)
+                    foreach (var memLocation in memLocations)
                     {
                         memory[memLocation] = long.Parse(tokens[2]);
                     }
@@ -78,14 +80,14 @@ namespace AdventOfCode.Solutions.Year2020
             int numX = v.Count(c => c == 'X');
             long[] res = new long[(int)Math.Pow(2, numX)];
 
-            for(long i = 0; i < res.Length; i++)
+            for (long i = 0; i < res.Length; i++)
             {
                 string bin = Convert.ToString(i, 2).PadLeft(numX, '0'); //to filter in
                 char[] tmp = baseAddressString.ToCharArray();
                 int k = 0;
-                for(int j = 0; j < v.Length; j++)
+                for (int j = 0; j < v.Length; j++)
                 {
-                    switch(v[j])
+                    switch (v[j])
                     {
                         case 'X':
                             tmp[j] = bin[k];

@@ -44,14 +44,14 @@ namespace AdventOfCode.Solutions.Year2020
             return messages.Count(x => reg.IsMatch(x));
         }
 
-        
+
         private string BuildRegex(string ruleIn)
         {
             if (processedRules.TryGetValue(ruleIn, out string r)) return r; //We've already dug this deep before, return
 
             string baseRule = rules[ruleIn];
 
-            if(baseRule == "\"a\"" || baseRule == "\"b\"") //we've reached a terminator, return
+            if (baseRule == "\"a\"" || baseRule == "\"b\"") //we've reached a terminator, return
             {
                 return processedRules[ruleIn] = baseRule.Replace("\"", "").Trim();
             }

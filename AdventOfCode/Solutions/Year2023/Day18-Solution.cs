@@ -13,7 +13,7 @@ namespace AdventOfCode.Solutions.Year2023
         List<(long dist, CompassDirection dir)> p2Steps = new();
         public Day18() : base()
         {
-            foreach(var l in Input.SplitByNewline())
+            foreach (var l in Input.SplitByNewline())
             {
                 var parts = l.Split();
                 char dir = parts[0][0];

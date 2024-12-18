@@ -13,7 +13,7 @@ namespace AdventOfCode.Solutions.Year2024
 
         public Day02() : base()
         {
-            foreach(var n in Input.SplitByNewline())
+            foreach (var n in Input.SplitByNewline())
             {
                 levels.Add(n.ExtractInts().ToList());
             }
@@ -22,7 +22,7 @@ namespace AdventOfCode.Solutions.Year2024
         protected override object SolvePartOne()
         {
             int safeCount = 0;
-            foreach(var l in levels)
+            foreach (var l in levels)
             {
                 if (TestList(l)) safeCount++;
                 else unsafeLevels.Add(l);
@@ -36,7 +36,7 @@ namespace AdventOfCode.Solutions.Year2024
         {
             int safeCount = 0;
 
-            foreach(var l in unsafeLevels)
+            foreach (var l in unsafeLevels)
             {
                 for (int i = 0; i < l.Count; i++)
                 {

@@ -186,7 +186,7 @@ namespace AdventOfCode.Solutions.Year2015
 
         private void ResetCircuit()
         {
-            foreach(string key in circuit.Keys)
+            foreach (string key in circuit.Keys)
             {
                 circuit[key].Output = null;
             }

@@ -15,7 +15,7 @@ namespace AdventOfCode.Solutions.Year2017
         protected override object SolvePartOne()
         {
             int sum = 0;
-            for(int i = 0; i < vals.Count; i++)
+            for (int i = 0; i < vals.Count; i++)
             {
                 if (vals[i] == vals[(i + 1) % vals.Count]) sum += vals[i];
             }
@@ -27,7 +27,7 @@ namespace AdventOfCode.Solutions.Year2017
             int sum = 0;
             for (int i = 0; i < vals.Count; i++)
             {
-                if (vals[i] == vals[(i + (vals.Count/2)) % vals.Count]) sum += vals[i];
+                if (vals[i] == vals[(i + (vals.Count / 2)) % vals.Count]) sum += vals[i];
             }
             return sum;
         }

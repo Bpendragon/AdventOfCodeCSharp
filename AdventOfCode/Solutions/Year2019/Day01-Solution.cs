@@ -22,10 +22,10 @@ namespace AdventOfCode.Solutions.Year2019
         protected override object SolvePartTwo()
         {
             int sum = 0;
-            foreach(int n in modules)
+            foreach (int n in modules)
             {
                 int f = (n / 3) - 2;
-                while(f>0)
+                while (f > 0)
                 {
                     sum += f;
                     f = (f / 3) - 2;

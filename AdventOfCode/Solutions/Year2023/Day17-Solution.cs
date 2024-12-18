@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+
 using static AdventOfCode.Solutions.Utilities;
 
 namespace AdventOfCode.Solutions.Year2023
@@ -26,11 +27,11 @@ namespace AdventOfCode.Solutions.Year2023
             distances[((0, 0), E, 0)] = 0;
             Q.Enqueue(((0, 0), E, 0), 0);
 
-            while(Q.TryDequeue(out var res, out int CostToGet))
+            while (Q.TryDequeue(out var res, out int CostToGet))
             {
                 (var loc, var heading, var runL) = res;
                 if (loc == (maxX, maxY)) return CostToGet;
-                foreach(var n in checkDirs) //I need to build a tuple generator.
+                foreach (var n in checkDirs) //I need to build a tuple generator.
                 {
                     if (n == heading.Flip()) continue; //Disallow 180s
                     if (n == heading && runL == 3) continue; //Disallow long runs
@@ -40,7 +41,7 @@ namespace AdventOfCode.Solutions.Year2023
                     (Coordinate2D loc, CompassDirection heading, int runL) nextState = (next, n, n == heading ? runL + 1 : 1);
                     int cost = distances[res] + map[next];
 
-                    if(cost < distances.GetValueOrDefault(nextState, int.MaxValue))
+                    if (cost < distances.GetValueOrDefault(nextState, int.MaxValue))
                     {
                         distances[nextState] = cost;
                         prev[nextState] = res;
@@ -60,7 +61,7 @@ namespace AdventOfCode.Solutions.Year2023
 
             PriorityQueue<(Coordinate2D loc, CompassDirection heading, int runL), int> Q = new();
             distances[((0, 0), E, 0)] = 0;
-            Q.Enqueue(((0, 0), E, 0), 0); 
+            Q.Enqueue(((0, 0), E, 0), 0);
             distances[((0, 0), N, 0)] = 0;
             Q.Enqueue(((0, 0), N, 0), 0);
 

@@ -38,11 +38,11 @@ namespace AdventOfCode.Solutions.Year2015
             {
                 for (int j = 0; j < (100 - i); j++)
                 {
-                    for(int k = 0; k < (100 - i - j); k++)
+                    for (int k = 0; k < (100 - i - j); k++)
                     {
                         int l = 100 - i - j - k;
                         recipeScores.Add(GetScore(i, j, k, l));
-                        
+
                     }
                 }
             }
@@ -50,7 +50,7 @@ namespace AdventOfCode.Solutions.Year2015
             return recipeScores.Max();
         }
 
-       
+
 
         protected override object SolvePartTwo()
         {

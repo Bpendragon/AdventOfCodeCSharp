@@ -151,8 +151,8 @@ namespace AdventOfCode.Solutions.Year2018
                 }
             }
             if (units.Any(a => a.isImmuneSystem))
-            { 
-                isImmuneWin = true; 
+            {
+                isImmuneWin = true;
             }
             else isImmuneWin = false;
             return units.Sum(a => a.numAlive);
@@ -203,7 +203,7 @@ namespace AdventOfCode.Solutions.Year2018
                                 var k = part.Split(" to ");
                                 var set = new HashSet<string>(k[1].Split(", "));
                                 var list = new List<AttackTypes>();
-                                foreach(var item in set)
+                                foreach (var item in set)
                                 {
                                     list.Add((AttackTypes)Enum.Parse(typeof(AttackTypes), item, true));
                                 }

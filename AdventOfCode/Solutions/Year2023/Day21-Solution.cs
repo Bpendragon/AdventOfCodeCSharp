@@ -60,7 +60,7 @@ namespace AdventOfCode.Solutions.Year2023
                 (repeats * (topRightEven + bottomRightEven + topLeftEven + bottomLeftOdd)) +
                 ((repeats - 1) * (topRightOdd + bottomRightOdd + topLeftOdd + bottomLeftOdd));
 
-            for(long i = 1; i < repeats; i++)
+            for (long i = 1; i < repeats; i++)
             {
                 res += (i % 2) switch
                 {
@@ -86,7 +86,7 @@ namespace AdventOfCode.Solutions.Year2023
             if (forceOddParity) parity = 1;
             dists[input] = 0;
             toExplore.Enqueue(input);
-            
+
             while (toExplore.TryDequeue(out var curLoc))
             {
                 foreach (var n in curLoc.Neighbors())

@@ -56,7 +56,7 @@ namespace AdventOfCode.Solutions.Year2020
 
             for (int y = 0; y < BigTile.data.Length; y++)
             {
-                for(int x = 0; x < BigTile.data[0].Length; x++)
+                for (int x = 0; x < BigTile.data[0].Length; x++)
                 {
                     map[(x, y)] = BigTile.data[y][x];
                 }
@@ -65,7 +65,7 @@ namespace AdventOfCode.Solutions.Year2020
             for (int i = 0; i < 4; i++)
             {
                 var hashLocations = map.Where(x => x.Value == '#');
-                
+
                 foreach (var kvp in hashLocations)
                 {
                     bool success = true;
@@ -76,11 +76,11 @@ namespace AdventOfCode.Solutions.Year2020
                         { success = false; break; }
                     }
 
-                    if(success)
+                    if (success)
                     {
                         foreach (var offset in Nessie) map.Remove(kvp.Key.Add(offset));
                     }
-                   
+
                 }
 
                 hashLocations = map.Where(x => x.Value == '#');
@@ -104,7 +104,7 @@ namespace AdventOfCode.Solutions.Year2020
 
                 //rotate 90
                 var newNessie = new List<(int x, int y)>();
-                foreach(var (x, y) in Nessie)
+                foreach (var (x, y) in Nessie)
                 {
                     newNessie.Add((-y, x));
                 }
@@ -145,7 +145,7 @@ namespace AdventOfCode.Solutions.Year2020
                 }
             }
 
-            
+
             Tile getNeighbour(Tile tile, string pattern) => pairs[pattern].SingleOrDefault(other => other != tile);
 
             Tile putTileInPlace(Tile above, Tile left)

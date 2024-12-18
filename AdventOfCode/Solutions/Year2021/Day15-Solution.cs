@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+
 using static AdventOfCode.Solutions.Utilities;
 
 namespace AdventOfCode.Solutions.Year2021
@@ -15,10 +16,10 @@ namespace AdventOfCode.Solutions.Year2021
         public Day15() : base()
         {
             var lines = Input.SplitByNewline();
-            foreach(var y in Enumerable.Range(0, lines.Count))
+            foreach (var y in Enumerable.Range(0, lines.Count))
             {
                 var asInts = lines[y].ToLongList();
-                foreach(int x in Enumerable.Range(0, asInts.Count)) 
+                foreach (int x in Enumerable.Range(0, asInts.Count))
                 {
                     map[(x, y)] = asInts[x];
                 }

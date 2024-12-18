@@ -36,19 +36,22 @@ namespace AdventOfCode.Solutions.Year2023
                     if (boxes.TryGetValue(box, out var val))
                     {
                         var existing = val.FindLast(le);
-                        if(existing is not null)
+                        if (existing is not null)
                         {
                             existing.Value = le;
-                        } else
+                        }
+                        else
                         {
                             val.AddLast(le);
                         }
-                    } else
+                    }
+                    else
                     {
                         boxes[box] = new();
                         boxes[box].AddLast(le);
                     }
-                } else if (boxes.TryGetValue(box, out var val))
+                }
+                else if (boxes.TryGetValue(box, out var val))
                 {
                     le = new LensElement() { label = label, power = -1 };
                     var existing = val.FindLast(le);
@@ -57,12 +60,12 @@ namespace AdventOfCode.Solutions.Year2023
             }
 
             long sum = 0;
-            foreach(var b in boxes)
+            foreach (var b in boxes)
             {
                 var c = b.Value.First;
                 int tmp = 0;
                 int i = 1;
-                while(c != null)
+                while (c != null)
                 {
                     tmp += (b.Key + 1) * i * c.Value.power;
                     i++;

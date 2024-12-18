@@ -1,8 +1,9 @@
-using System;
-using System.Text;
-using System.Collections.Generic;
 using AdventOfCode.UserClasses;
+
+using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 
 namespace AdventOfCode.Solutions.Year2019
 {

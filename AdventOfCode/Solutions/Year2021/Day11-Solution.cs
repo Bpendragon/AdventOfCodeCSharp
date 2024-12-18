@@ -1,6 +1,6 @@
 using System.Collections.Generic;
-using System.Linq;
 using System.Data;
+using System.Linq;
 
 namespace AdventOfCode.Solutions.Year2021
 {
@@ -14,11 +14,11 @@ namespace AdventOfCode.Solutions.Year2021
         public Day11() : base()
         {
             var lines = Input.SplitByNewline();
-            for(int y = 0; y < lines.Count; y++)
+            for (int y = 0; y < lines.Count; y++)
             {
                 var line = lines[y];
                 var lineInts = line.ToIntList();
-                for(int x = 0; x < lineInts.Count; x++)
+                for (int x = 0; x < lineInts.Count; x++)
                 {
                     octopodes[(x, y)] = lineInts[x];
                 }

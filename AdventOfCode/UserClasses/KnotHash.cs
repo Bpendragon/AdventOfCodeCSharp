@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using AdventOfCode.Solutions;
+
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
-using AdventOfCode.Solutions;
 
 namespace AdventOfCode.UserClasses
 {
@@ -51,22 +51,23 @@ namespace AdventOfCode.UserClasses
         public List<int> Round(List<int> input)
         {
             List<int> res = new(input);
-            foreach(int length in Sequence)
+            foreach (int length in Sequence)
             {
                 //Get Substring and reverse
                 List<int> sub = new(res);
-                if(CurPosition + length >= res.Count)
+                if (CurPosition + length >= res.Count)
                 {
                     sub.AddRange(res);
                     sub.Reverse(CurPosition, length);
-                    for(int i = res.Count; i < CurPosition + length; i++)
+                    for (int i = res.Count; i < CurPosition + length; i++)
                     {
                         sub[i - res.Count] = sub[i];
                     }
                     sub = sub.GetRange(0, 256);
-                } else
+                }
+                else
                 {
-                    sub.Reverse(CurPosition, length);     
+                    sub.Reverse(CurPosition, length);
                 }
 
                 res = new List<int>(sub);
@@ -92,7 +93,7 @@ namespace AdventOfCode.UserClasses
             CurPosition = 0;
             SkipSize = 0;
             //get sparse
-            for(int i = 0; i < 64; i++)
+            for (int i = 0; i < 64; i++)
             {
                 knot = new List<int>(Round(knot));
             }
@@ -102,14 +103,14 @@ namespace AdventOfCode.UserClasses
 
             int[] hashVals = new int[16];
 
-            for(int i = 0; i < 16; i++)
+            for (int i = 0; i < 16; i++)
             {
                 hashVals[i] = groups[i].Aggregate((a, b) => a ^ b);
             }
 
             StringBuilder sb = new();
 
-            foreach(int i in hashVals)
+            foreach (int i in hashVals)
             {
                 sb.Append(i.ToString("X2"));
             }

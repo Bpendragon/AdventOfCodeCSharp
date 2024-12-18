@@ -73,13 +73,13 @@ namespace AdventOfCode.Solutions.Year2022
             indices.Reverse();
 
             impDists = dists;
-            foreach(var i in indices)
+            foreach (var i in indices)
             {
                 impDists = impDists.TrimArray(i, i);
             }
 
             valveMasks = new int[impDists.GetLength(0)];
-            for (int i = 0; i < valveMasks.Length; i++) valveMasks[i] = 1 << i; 
+            for (int i = 0; i < valveMasks.Length; i++) valveMasks[i] = 1 << i;
 
         }
 
@@ -99,9 +99,9 @@ namespace AdventOfCode.Solutions.Year2022
 
             var KVPs = cache.ToList();
 
-            for(int i = 0; i < KVPs.Count; i++)
+            for (int i = 0; i < KVPs.Count; i++)
             {
-                for(int j = i + 1; j < KVPs.Count; j++)
+                for (int j = i + 1; j < KVPs.Count; j++)
                 {
                     if ((KVPs[i].Key & KVPs[j].Key) != 0) continue;
                     curMax = int.Max(KVPs[i].Value + KVPs[j].Value, curMax);
@@ -121,7 +121,7 @@ namespace AdventOfCode.Solutions.Year2022
         private void Visit(int node, int time, int state, int flow, Dictionary<int, int> cache)
         {
             cache[state] = int.Max(cache.GetValueOrDefault(state, 0), flow); //Are we at a better point with the current valves turned on than last time we were at this point? if so, update value
-            for(int i = 0; i < impValves.Count; i++) //For all valves
+            for (int i = 0; i < impValves.Count; i++) //For all valves
             {
                 var newTime = time - impDists[node, i] - 1; //time remaining is time minus walking time, minus 1 minute to open valve
                 if ((valveMasks[i] & state) != 0 || newTime <= 0) continue; //Don't go to the same valve twice, don't go to a valve if it means we run out of time.

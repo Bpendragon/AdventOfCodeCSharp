@@ -19,8 +19,8 @@ namespace AdventOfCode.Solutions.Year2017
                 string from = tokens[0];
                 string to = tokens[1];
 
-                rulesMap[from] =  to;
-                rulesMap[FlipHorizontal(from)] =  to;
+                rulesMap[from] = to;
+                rulesMap[FlipHorizontal(from)] = to;
                 rulesMap.TryAdd(FlipVertical(from), to);
 
                 for (int i = 0; i < 3; i++)

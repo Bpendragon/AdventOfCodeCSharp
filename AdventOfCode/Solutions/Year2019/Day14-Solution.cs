@@ -8,7 +8,7 @@ namespace AdventOfCode.Solutions.Year2019
 
         public Day14() : base()
         {
-             
+
         }
 
         protected override object SolvePartOne()

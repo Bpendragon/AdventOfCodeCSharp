@@ -17,7 +17,7 @@ namespace AdventOfCode.Solutions.Year2024
 
         public Day14() : base()
         {
-            foreach(var p in Input.SplitByNewline())
+            foreach (var p in Input.SplitByNewline())
             {
                 var l = p.ExtractInts().ToList();
 
@@ -34,7 +34,7 @@ namespace AdventOfCode.Solutions.Year2024
         protected override object SolvePartOne()
         {
             DefaultDictionary<int, int> quads = new();
-            foreach(var r in robots)
+            foreach (var r in robots)
             {
                 r.Move(100);
                 quads[r.Quadrant]++;
@@ -48,7 +48,7 @@ namespace AdventOfCode.Solutions.Year2024
             int count = 0;
             List<int> vertGroups = new();
             List<int> horizGroups = new();
-            while (vertGroups.Count < 2 || horizGroups.Count < 2) 
+            while (vertGroups.Count < 2 || horizGroups.Count < 2)
             {
                 HashSet<Coordinate2D> robotLocs = new();
                 DefaultDictionary<int, int> vertLocs = new();

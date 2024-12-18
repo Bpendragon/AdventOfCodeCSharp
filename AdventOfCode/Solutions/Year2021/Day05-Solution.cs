@@ -17,9 +17,9 @@ namespace AdventOfCode.Solutions.Year2021
         {
             var lines = Input.SplitByNewline();
 
-            foreach(var l in lines)
+            foreach (var l in lines)
             {
-                var ends = l.Split(new string[] { " -> ", ","},StringSplitOptions.RemoveEmptyEntries);
+                var ends = l.Split(new string[] { " -> ", "," }, StringSplitOptions.RemoveEmptyEntries);
                 VentLine nVL = new()
                 {
                     Start = new(int.Parse(ends[0]), int.Parse(ends[1])),
@@ -33,9 +33,9 @@ namespace AdventOfCode.Solutions.Year2021
         protected override object SolvePartOne()
         {
             var straights = VentLines.Where(a => a.Start.x == a.End.x || a.Start.y == a.End.y);
-            foreach(var vl in straights)
+            foreach (var vl in straights)
             {
-                foreach(var p in vl.Coverage)
+                foreach (var p in vl.Coverage)
                 {
                     if (!map.ContainsKey(p)) map[p] = 1;
                     else map[p]++;
@@ -47,7 +47,7 @@ namespace AdventOfCode.Solutions.Year2021
         protected override object SolvePartTwo()
         {
             var diags = VentLines.Where(a => a.Start.x != a.End.x && a.Start.y != a.End.y);
-            foreach(var vl in diags)
+            foreach (var vl in diags)
             {
                 foreach (var p in vl.Coverage)
                 {
@@ -63,7 +63,7 @@ namespace AdventOfCode.Solutions.Year2021
             public Coordinate2D Start { get; set; }
             public Coordinate2D End { get; set; }
 
-            public HashSet<Coordinate2D> Coverage { get; private set; } 
+            public HashSet<Coordinate2D> Coverage { get; private set; }
 
             public void GenerateCoverage()
             {
@@ -104,7 +104,7 @@ namespace AdventOfCode.Solutions.Year2021
                     else
                     {
                         for (int i = Start.x; i >= End.x; i--)
-                        { 
+                        {
                             Coverage.Add(new Coordinate2D(i, Start.y));
                         }
                     }

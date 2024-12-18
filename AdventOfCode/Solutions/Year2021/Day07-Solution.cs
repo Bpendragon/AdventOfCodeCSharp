@@ -21,7 +21,7 @@ namespace AdventOfCode.Solutions.Year2021
             long bestSoFar = long.MaxValue;
             for (int i = median - 1; i <= median + 1; i++)
             {
-                var tmp = crabs.Sum(x => Math.Abs(x-i));
+                var tmp = crabs.Sum(x => Math.Abs(x - i));
                 if (tmp < bestSoFar) bestSoFar = tmp;
             }
             return bestSoFar;
@@ -35,7 +35,7 @@ namespace AdventOfCode.Solutions.Year2021
 
             for (int i = avg - 1; i <= avg + 1; i++)
             {
-                var tmp = crabs.Sum(x => Math.Abs(x - i) * (Math.Abs(x - i) + 1)/2);
+                var tmp = crabs.Sum(x => Math.Abs(x - i) * (Math.Abs(x - i) + 1) / 2);
                 if (tmp < bestSoFar) bestSoFar = tmp;
             }
 

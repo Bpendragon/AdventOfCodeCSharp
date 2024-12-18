@@ -1,23 +1,23 @@
 using System.Collections.Generic;
-using System.Linq;
 using System.Data;
+using System.Linq;
 
 namespace AdventOfCode.Solutions.Year2021
 {
 
     [DayInfo(25, 2021, "Sea Cucumber")]
     class Day25 : ASolution
-    {    
+    {
         readonly int maxX;
         readonly int maxY;
         readonly Dictionary<Coordinate2D, char> Cucumbers = new();
         public Day25() : base()
         {
             var lines = Input.SplitByNewline();
-            for(int y = 0; y < lines.Count; y++)
+            for (int y = 0; y < lines.Count; y++)
             {
                 var line = lines[y];
-                for(int x = 0; x < line.Length; x++)
+                for (int x = 0; x < line.Length; x++)
                 {
                     if (line[x] != '.') Cucumbers[(x, y)] = line[x];
                 }
@@ -32,18 +32,18 @@ namespace AdventOfCode.Solutions.Year2021
             int eastMovers = 1;
             int southMovers = 1;
             int stepCount = 0;
-            while(eastMovers > 0 || southMovers > 0)
+            while (eastMovers > 0 || southMovers > 0)
             {
                 List<Coordinate2D> eastMovingLocs = Cucumbers.Where(a => a.Value == '>' && !Cucumbers.ContainsKey(a.Key + (1, 0)) && a.Key.x < maxX - 1).Select(a => a.Key).ToList();
 
-                foreach(var cuc in Cucumbers.Where(a => a.Value == '>' && a.Key.x >= maxX - 1).Select(a => a.Key).ToList())
+                foreach (var cuc in Cucumbers.Where(a => a.Value == '>' && a.Key.x >= maxX - 1).Select(a => a.Key).ToList())
                 {
-                    if(Cucumbers.Remove(cuc)) eastMovingLocs.Add((-1, cuc.y));
+                    if (Cucumbers.Remove(cuc)) eastMovingLocs.Add((-1, cuc.y));
                 }
 
                 eastMovers = eastMovingLocs.Count;
 
-                foreach(var c in eastMovingLocs)
+                foreach (var c in eastMovingLocs)
                 {
                     Cucumbers.Remove(c);
                     Cucumbers[c + (1, 0)] = '>';

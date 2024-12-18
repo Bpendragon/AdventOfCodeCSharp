@@ -60,7 +60,7 @@ namespace AdventOfCode.Solutions.Year2018
             {
                 for (x = 0; x < grid.GetLength(0); x++)
                 {
-                    if (grid[x, y] == '~' || grid[x, y] == '|') 
+                    if (grid[x, y] == '~' || grid[x, y] == '|')
                     {
                         waterCount++;
                     }
@@ -88,21 +88,21 @@ namespace AdventOfCode.Solutions.Year2018
         private void DropWater(int x, int y)
         {
             grid[x, y] = '|';
-            while (!SpaceTaken(x, y+1))
+            while (!SpaceTaken(x, y + 1))
             {
                 y++;
                 if (y > maxY) return; //we've reached the end of the scan.
                 grid[x, y] = '|';
             }
 
-            while(true)
+            while (true)
             {
                 bool TravelLeft = false;
                 bool TravelRight = false;
                 int minX;
-                for(minX = x; minX >= 0; minX--)
+                for (minX = x; minX >= 0; minX--)
                 {
-                    if(!SpaceTaken(minX, y+1)) //check for empty space below, remember +y is down
+                    if (!SpaceTaken(minX, y + 1)) //check for empty space below, remember +y is down
                     {
                         TravelLeft = true;
                         break;

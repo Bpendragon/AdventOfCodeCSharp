@@ -1,6 +1,6 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System;
 
 namespace AdventOfCode.Solutions.Year2015
 {
@@ -40,7 +40,7 @@ namespace AdventOfCode.Solutions.Year2015
             (int x, int y) elf1 = (0, 0);
             (int x, int y) elf2 = (0, 0);
             HousesVisted2.Add(elf1);
-            for (int i = 0; i < Input.Length - 1; i+=2)
+            for (int i = 0; i < Input.Length - 1; i += 2)
             {
                 elf1 = Input[i] switch
                 {

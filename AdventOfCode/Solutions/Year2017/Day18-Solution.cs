@@ -22,7 +22,7 @@ namespace AdventOfCode.Solutions.Year2017
 
         protected override object SolvePartOne()
         {
-            foreach(var rcv in RunProgram())
+            foreach (var rcv in RunProgram())
             {
                 return rcv;
             }

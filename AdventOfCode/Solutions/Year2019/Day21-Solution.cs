@@ -1,6 +1,6 @@
-using System.Linq;
-
 using AdventOfCode.UserClasses;
+
+using System.Linq;
 
 using static AdventOfCode.Solutions.Utilities;
 

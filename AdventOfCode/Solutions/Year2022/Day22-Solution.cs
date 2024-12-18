@@ -16,7 +16,7 @@ namespace AdventOfCode.Solutions.Year2022
         readonly List<string> Turns;
         public Day22() : base()
         {
-            var halves = Input.SplitByDoubleNewline(shouldTrim:false);
+            var halves = Input.SplitByDoubleNewline(shouldTrim: false);
             var tmpPath = halves[1];
 
             Steps = tmpPath.ExtractInts().ToList();
@@ -24,9 +24,9 @@ namespace AdventOfCode.Solutions.Year2022
 
 
             int y = 1;
-            foreach(var line in halves[0].SplitByNewline(shouldTrim:false))
+            foreach (var line in halves[0].SplitByNewline(shouldTrim: false))
             {
-                for(int x = 0; x < line.Length; x++)
+                for (int x = 0; x < line.Length; x++)
                 {
                     int reg;
                     if (y <= 50)
@@ -53,17 +53,18 @@ namespace AdventOfCode.Solutions.Year2022
             Coordinate2D curLoc = Map.Keys.Where(a => a.y == 1).OrderBy(a => a.x).First();
             CompassDirection curDir = E;
 
-            for(int i = 0; i < Steps.Count; i++)
+            for (int i = 0; i < Steps.Count; i++)
             {
                 int numSteps = Steps[i];
 
-                for(int j = 0; j < numSteps; j++)
+                for (int j = 0; j < numSteps; j++)
                 {
-                    if(Map.TryGetValue(curLoc.Move(curDir, true), out var nxt))
+                    if (Map.TryGetValue(curLoc.Move(curDir, true), out var nxt))
                     {
                         if (nxt.val == '.') curLoc = curLoc.Move(curDir, true);
                         else break;
-                    } else
+                    }
+                    else
                     {
                         var searchDir = curDir.Turn("L", 180);
                         var tester = curLoc.Move(searchDir, true, 50);
@@ -75,7 +76,7 @@ namespace AdventOfCode.Solutions.Year2022
                     }
                 }
 
-                if(i < Turns.Count)
+                if (i < Turns.Count)
                 {
                     curDir = curDir.Turn(Turns[i]);
                 }
@@ -91,7 +92,7 @@ namespace AdventOfCode.Solutions.Year2022
                 _ => throw new ArgumentException($"{nameof(curDir)} Must be a Cardinal Direction")
             };
 
-            return (1000 * curLoc.y) + (4*curLoc.x) + dirSum;
+            return (1000 * curLoc.y) + (4 * curLoc.x) + dirSum;
         }
 
         protected override object SolvePartTwo()
@@ -117,7 +118,7 @@ namespace AdventOfCode.Solutions.Year2022
                         Coordinate2D nextLoc;
                         CompassDirection newDir;
 
-                        switch(curRegion)
+                        switch (curRegion)
                         {
                             case 1:
                                 newDir = E;
@@ -133,7 +134,7 @@ namespace AdventOfCode.Solutions.Year2022
                                 else if (curDir == E)
                                 {
                                     newDir = W;
-                                    nextLoc = (100, (50-curLoc.y) + 101);
+                                    nextLoc = (100, (50 - curLoc.y) + 101);
                                 }
                                 else
                                 {
@@ -142,7 +143,7 @@ namespace AdventOfCode.Solutions.Year2022
                                 }
                                 break;
                             case 3:
-                                if(curDir == E)
+                                if (curDir == E)
                                 {
                                     newDir = N;
                                     nextLoc = (curLoc.y + 50, 50);
@@ -164,15 +165,17 @@ namespace AdventOfCode.Solutions.Year2022
                                 else nextLoc = (150, 50 - ((curLoc.y - 51) % 50));
                                 break;
                             case 6:
-                                if(curDir == S)
+                                if (curDir == S)
                                 {
                                     newDir = S;
                                     nextLoc = (curLoc.x + 100, 1);
-                                } else if (curDir == W)
+                                }
+                                else if (curDir == W)
                                 {
                                     newDir = S;
                                     nextLoc = (curLoc.y - 100, 1);
-                                } else
+                                }
+                                else
                                 {
                                     newDir = N;
                                     nextLoc = (curLoc.y - 100, curLoc.x + 100);

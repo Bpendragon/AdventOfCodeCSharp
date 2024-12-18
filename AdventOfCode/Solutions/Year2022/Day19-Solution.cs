@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+
 using static AdventOfCode.Solutions.Utilities;
 
 namespace AdventOfCode.Solutions.Year2022
@@ -12,7 +13,7 @@ namespace AdventOfCode.Solutions.Year2022
         readonly Dictionary<(int time, int oR, int cR, int obR, int gR, int o, int c, int ob), int> p1cache = new();
         public Day19() : base()
         {
-            foreach(var l  in Input.SplitByNewline())
+            foreach (var l in Input.SplitByNewline())
             {
                 Blueprints.Add(new(l.ExtractInts().ToArray()));
             }
@@ -21,7 +22,7 @@ namespace AdventOfCode.Solutions.Year2022
         protected override object SolvePartOne()
         {
             var qualityLevel = 0;
-            foreach(var b in Blueprints)
+            foreach (var b in Blueprints)
             {
                 p1cache.Clear();
                 var best = FindBestResult(b, 24);
@@ -44,7 +45,7 @@ namespace AdventOfCode.Solutions.Year2022
 
 
         private static int FindBestResult(Blueprint b, int timeleft)
-        { 
+        {
             //All Hail BFS with aggressive pruning!
             //State is amount owned of: ore, clay, obsidian, geodes (cracked), ore robots, clay robots, obsidian robots, geode crackers, and time remaining 
             HashSet<(int, int, int, int, int, int, int, int, int)> seenStates = new();
@@ -55,7 +56,7 @@ namespace AdventOfCode.Solutions.Year2022
 
             Q.Enqueue(startState);
 
-            while(Q.TryDequeue(out var state))
+            while (Q.TryDequeue(out var state))
             {
                 var (ore, clay, obsidian, geodes, oreRobs, clayRobs, obRobs, gRobs, time) = state;
 

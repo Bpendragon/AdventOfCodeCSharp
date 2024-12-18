@@ -20,7 +20,7 @@ namespace AdventOfCode.Solutions.Year2023
                 var matches = PILES.Matches(g);
                 foreach (Match m in matches)
                 {
-                    (string color, int amount) = (m.Groups["color"].Value, int.Parse(m.Groups["amount"].Value)); 
+                    (string color, int amount) = (m.Groups["color"].Value, int.Parse(m.Groups["amount"].Value));
                     switch (color)
                     {
                         case "red": t.red = Math.Max(t.red, amount); break;

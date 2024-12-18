@@ -21,19 +21,19 @@ namespace AdventOfCode.Solutions.Year2020
                 string tmp = answer.Replace(" ", "").Replace("\n", "");
                 running += tmp.Distinct().Count();
             }
-            return running.ToString() ;
+            return running.ToString();
         }
 
         protected override object SolvePartTwo()
         {
             int running = 0;
-           foreach(string group in answers)
+            foreach (string group in answers)
             {
                 Dictionary<char, int> res = new();
                 List<string> members = new(group.SplitByNewline());
-                foreach(string member in members)
+                foreach (string member in members)
                 {
-                    foreach(char c in member)
+                    foreach (char c in member)
                     {
                         if (!res.ContainsKey(c))
                         {

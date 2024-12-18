@@ -21,7 +21,7 @@ namespace AdventOfCode.Solutions.Year2021
 
         protected override object SolvePartOne()
         {
-            for(int i = 0; i < columns.Count; i++)
+            for (int i = 0; i < columns.Count; i++)
             {
                 mostCommon[i] = columns[i].GroupBy(x => x).OrderByDescending(x => x.Count()).First().Key;
             }
@@ -45,7 +45,7 @@ namespace AdventOfCode.Solutions.Year2021
             int g = Convert.ToInt32(gamma.ToString(), 2);
             int e = Convert.ToInt32(epsilon.ToString(), 2);
 
-            return (g*e);
+            return (g * e);
         }
 
         protected override object SolvePartTwo()
@@ -57,16 +57,17 @@ namespace AdventOfCode.Solutions.Year2021
             {
                 int onesCount = 0;
                 int zeroesCount = 0;
-                foreach(var c in oxCandidates)
+                foreach (var c in oxCandidates)
                 {
                     if (c[i] == '1') onesCount++;
                     else zeroesCount++;
                 }
 
-                if(onesCount >= zeroesCount)
+                if (onesCount >= zeroesCount)
                 {
                     oxCandidates = oxCandidates.Where(x => x[i] == '1').ToList();
-                } else
+                }
+                else
                 {
                     oxCandidates = oxCandidates.Where(x => x[i] == '0').ToList();
                 }
@@ -93,7 +94,7 @@ namespace AdventOfCode.Solutions.Year2021
                 }
                 if (coCandidates.Count < 2) break;
             }
-            return (Convert.ToInt32(oxCandidates[0],2) * Convert.ToInt32(coCandidates[0],2));
+            return (Convert.ToInt32(oxCandidates[0], 2) * Convert.ToInt32(coCandidates[0], 2));
         }
     }
 }

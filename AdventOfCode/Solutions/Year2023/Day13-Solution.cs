@@ -11,7 +11,7 @@ namespace AdventOfCode.Solutions.Year2023
     class Day13 : ASolution
     {
         List<string> maps = new();
-        Dictionary<int, (int num, bool isRow)> initialMirrors= new(); 
+        Dictionary<int, (int num, bool isRow)> initialMirrors = new();
         public Day13() : base()
         {
             maps = Input.SplitByDoubleNewline();
@@ -43,12 +43,12 @@ namespace AdventOfCode.Solutions.Year2023
 
                     sb[i] = sb[i] == '.' ? '#' : '.';
                     int res = 0;
-                    if(TryFindReflection(sb.ToString(), j, out res))
+                    if (TryFindReflection(sb.ToString(), j, out res))
                     {
                         sum += res;
                         break;
                     }
-                    
+
                 }
             }
 
@@ -64,11 +64,11 @@ namespace AdventOfCode.Solutions.Year2023
             {
                 if (asRows.Take(i).Reverse().Zip(asRows.Skip(i)).All(x => x.First == x.Second))
                 {
-                    if(initialMirrors.TryGetValue(Id, out (int num, bool isRow) x))
+                    if (initialMirrors.TryGetValue(Id, out (int num, bool isRow) x))
                     {
                         if (x.isRow && x.num == i) continue;
                     }
-                    initialMirrors[Id] = (i, true); 
+                    initialMirrors[Id] = (i, true);
                     result = i * 100;
                     return true;
                 }
@@ -81,7 +81,7 @@ namespace AdventOfCode.Solutions.Year2023
                     if (initialMirrors.TryGetValue(Id, out (int num, bool isRow) x))
                     {
                         if (!x.isRow && x.num == i) continue;
-                        
+
                     }
                     initialMirrors[Id] = (i, false);
                     result = i;

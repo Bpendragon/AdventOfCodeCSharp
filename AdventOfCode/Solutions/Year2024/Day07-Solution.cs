@@ -23,10 +23,10 @@ namespace AdventOfCode.Solutions.Year2024
             {
                 long target = e.FirstOrDefault();
                 (var res, var p2) = DFS(e.Skip(1).First(), target, e.Skip(2));
-                if (res) 
-                { 
-                    p2Sum += target; 
-                    if(!p2) p1Sum += target; 
+                if (res)
+                {
+                    p2Sum += target;
+                    if (!p2) p1Sum += target;
                 }
             }
 
@@ -38,14 +38,14 @@ namespace AdventOfCode.Solutions.Year2024
             return p2Sum;
         }
 
-        private (bool res, bool part2Only) DFS (long curVal, long target, IEnumerable<long> remainingVals, bool part2Only = false)
+        private (bool res, bool part2Only) DFS(long curVal, long target, IEnumerable<long> remainingVals, bool part2Only = false)
         {
             if (remainingVals.Count() == 0) return (curVal == target, part2Only);
             if (curVal > target) return (false, part2Only);
             var resM = curVal * remainingVals.First();
             var resA = curVal + remainingVals.First();
-            
-            
+
+
             (bool resMres, bool resMp2) = DFS(resM, target, remainingVals.Skip(1), part2Only);
             if (resM <= target && resMres) return (true, resMp2);
 

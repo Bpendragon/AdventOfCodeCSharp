@@ -21,7 +21,7 @@ namespace AdventOfCode.Solutions.Year2015
             int curRow = 1;
             int curCol = 1;
 
-            for (; ;)
+            for (; ; )
             {
                 curRow--;
                 curCol++;

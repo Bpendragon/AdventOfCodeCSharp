@@ -14,7 +14,8 @@ namespace AdventOfCode.Solutions.Year2021
         {
             lines = Input.SplitByNewline();
 
-            foreach (var l in lines) { 
+            foreach (var l in lines)
+            {
                 Stack<char> stack = new();
                 bool badFound = false;
                 for (int i = 0; i < l.Length; i++)
@@ -45,7 +46,7 @@ namespace AdventOfCode.Solutions.Year2021
                             if (stack.Peek() == '<') stack.Pop();
                             else part1 += 25137;
                             break;
-                       
+
                     }
                     if (badFound) break;
                 }
@@ -72,13 +73,13 @@ namespace AdventOfCode.Solutions.Year2021
         }
 
         protected override object SolvePartOne()
-        { 
+        {
             return part1;
         }
 
         protected override object SolvePartTwo()
         {
-            return part2.Skip(part2.Count/2).Take(1).First();
+            return part2.Skip(part2.Count / 2).Take(1).First();
         }
     }
 }

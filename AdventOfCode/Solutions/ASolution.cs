@@ -5,6 +5,7 @@ using System.IO;
 using System.Net;
 using System.Reflection;
 using System.Text;
+
 using static AdventOfCode.Solutions.Utilities;
 
 namespace AdventOfCode.Solutions
@@ -56,44 +57,54 @@ namespace AdventOfCode.Solutions
             UseDebugInput = useDebugInput;
         }
 
-        public void Solve(int part = 0) {
-            if( Input == null ) return;
+        public void Solve(int part = 0)
+        {
+            if (Input == null) return;
 
             bool doOutput = false;
             StringBuilder output = new($"--- Day {Day}: {Title} --- \n");
-            if( DebugInput != null ) {
+            if (DebugInput != null)
+            {
                 output.Append($"!!! DebugInput used !!!\n");
             }
 
             output.Append($"Ctor in {TimeSpan.FromTicks(ContructionTime).TotalMilliseconds}ms\n");
-            if( part != 2 ) {
-                if( Part1 != "" ) {
+            if (part != 2)
+            {
+                if (Part1 != "")
+                {
                     output.Append($"Part 1:\tin {TimeSpan.FromTicks(_part1Time).TotalMilliseconds}ms\n{Part1}\n\n");
                     doOutput = true;
                 }
-                else {
+                else
+                {
                     output.Append("Part 1: Unsolved\n");
-                    if( part == 1 ) doOutput = true;
+                    if (part == 1) doOutput = true;
                 }
             }
-            if( part != 1 ) {
-                if( Part2 != "" ) {
+            if (part != 1)
+            {
+                if (Part2 != "")
+                {
                     output.Append($"Part 2:\tin {TimeSpan.FromTicks(_part2Time).TotalMilliseconds}ms\n{Part2}\n\n");
                     doOutput = true;
                 }
-                else {
+                else
+                {
                     output.Append("Part 2: Unsolved\n");
-                    if( part == 2 ) doOutput = true;
+                    if (part == 2) doOutput = true;
                 }
             }
 
-            if( doOutput ) {
+            if (doOutput)
+            {
                 Trace.Write(output.ToString());
                 Console.Write(output.ToString());
             }
         }
 
-        string LoadInput() {
+        string LoadInput()
+        {
             if (SkipInput) return "Empty Input";
             string DEBUGINPUT_FILEPATH = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, $"../../../Solutions/Year{Year}/Inputs/Day{Day:D2}-debugInput"));
             string DEBUGINPUT_FILEPATH_ALT = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, $"../../../Solutions/Year{Year}/Inputs/Day{Day:D2}-debugInput.txt"));
@@ -102,21 +113,24 @@ namespace AdventOfCode.Solutions
             string INPUT_URL = $"https://adventofcode.com/{Year}/day/{Day}/input";
             string input = "";
 
-            if (UseDebugInput && File.Exists(DEBUGINPUT_FILEPATH) && new FileInfo(DEBUGINPUT_FILEPATH).Length > 0) {
+            if (UseDebugInput && File.Exists(DEBUGINPUT_FILEPATH) && new FileInfo(DEBUGINPUT_FILEPATH).Length > 0)
+            {
                 input = DebugInput = File.ReadAllText(DEBUGINPUT_FILEPATH);
             }
             else if (UseDebugInput && File.Exists(DEBUGINPUT_FILEPATH_ALT) && new FileInfo(DEBUGINPUT_FILEPATH_ALT).Length > 0)
             {
                 input = DebugInput = File.ReadAllText(DEBUGINPUT_FILEPATH_ALT);
             }
-            else if (File.Exists(INPUT_FILEPATH) && new FileInfo(INPUT_FILEPATH).Length > 0) {
+            else if (File.Exists(INPUT_FILEPATH) && new FileInfo(INPUT_FILEPATH).Length > 0)
+            {
                 input = File.ReadAllText(INPUT_FILEPATH);
             }
             else if (File.Exists(INPUT_FILEPATH_ALT) && new FileInfo(INPUT_FILEPATH_ALT).Length > 0)
             {
                 input = File.ReadAllText(INPUT_FILEPATH_ALT);
             }
-            else {
+            else
+            {
                 try
                 {
                     DateTime CURRENT_EST = TimeZoneInfo.ConvertTime(DateTime.Now, TimeZoneInfo.Utc).AddHours(-5);
@@ -129,7 +143,9 @@ namespace AdventOfCode.Solutions
                     File.WriteAllText(INPUT_FILEPATH, input);
                     File.WriteAllText(DEBUGINPUT_FILEPATH, string.Empty);
 
-                } catch (WebException e) {
+                }
+                catch (WebException e)
+                {
 
                     if (((HttpWebResponse)e.Response).StatusCode == HttpStatusCode.BadRequest)
                     {
@@ -143,11 +159,13 @@ namespace AdventOfCode.Solutions
                     {
                         Console.WriteLine(e.ToString());
                     }
-                } 
-                catch( InvalidOperationException ) {
+                }
+                catch (InvalidOperationException)
+                {
                     Console.WriteLine($"Day {Day}: Cannot fetch puzzle input before given date (Eastern Standard Time).");
                 }
-                catch(ArgumentException e) {
+                catch (ArgumentException e)
+                {
                     Console.WriteLine(e.Message);
                 }
                 catch
@@ -161,14 +179,17 @@ namespace AdventOfCode.Solutions
         protected abstract object SolvePartOne();
         protected abstract object SolvePartTwo();
 
-        private static string SafelySolve(Func<object> partSolver, out long timeTaken) {
+        private static string SafelySolve(Func<object> partSolver, out long timeTaken)
+        {
             Stopwatch clock = new(); clock.Start();
             string solution = string.Empty;
-            try {
+            try
+            {
                 solution = (partSolver() ?? string.Empty).ToString();
-                if(string.IsNullOrWhiteSpace(solution)) solution = "No Answer Provided";
+                if (string.IsNullOrWhiteSpace(solution)) solution = "No Answer Provided";
             }
-            catch( Exception ex ) {
+            catch (Exception ex)
+            {
                 Trace.TraceError($"Caught Exception:\r\n{ex}");
             }
             clock.Stop();

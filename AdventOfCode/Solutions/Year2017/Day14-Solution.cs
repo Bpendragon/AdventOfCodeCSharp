@@ -1,5 +1,6 @@
-using System.Collections.Generic;
 using AdventOfCode.UserClasses;
+
+using System.Collections.Generic;
 using System.Linq;
 
 namespace AdventOfCode.Solutions.Year2017
@@ -26,14 +27,15 @@ namespace AdventOfCode.Solutions.Year2017
                 string tmp = kn.CalculateHash($"{Input}-{j}").HexStringToBinary();
                 foreach (int i in Enumerable.Range(0, 128))
                 {
-                    if(tmp[i] == '1')
+                    if (tmp[i] == '1')
                     {
                         nodes[(i, j)] = true;
                         onNodes.Add((i, j));
-                    } else
+                    }
+                    else
                     {
                         nodes[(i, j)] = false;
-                    } 
+                    }
                 }
             }
         }
@@ -52,7 +54,7 @@ namespace AdventOfCode.Solutions.Year2017
         {
             int regions = 0;
             List<(int, int)> visited = new();
-            while(onNodes.Count > 0)
+            while (onNodes.Count > 0)
             {
                 regions++;
                 Queue<(int, int)> q = new();
@@ -63,10 +65,10 @@ namespace AdventOfCode.Solutions.Year2017
                 while (q.Count > 0)
                 {
                     (int, int) v = q.Dequeue();
-                    foreach((int, int) d in dirs)
+                    foreach ((int, int) d in dirs)
                     {
                         (int, int) s = v.Add(d);
-                        if(nodes.TryGetValue(s, out bool value) && value && !visited.Contains(s))
+                        if (nodes.TryGetValue(s, out bool value) && value && !visited.Contains(s))
                         {
                             q.Enqueue(s);
                             visited.Add(s);
@@ -79,6 +81,6 @@ namespace AdventOfCode.Solutions.Year2017
             return regions;
         }
 
-        
+
     }
 }

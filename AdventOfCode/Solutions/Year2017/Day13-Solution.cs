@@ -9,7 +9,7 @@ namespace AdventOfCode.Solutions.Year2017
         readonly Dictionary<int, int> Sentries = new();
         public Day13() : base()
         {
-            foreach(string line in Input.SplitByNewline())
+            foreach (string line in Input.SplitByNewline())
             {
                 int[] s = line.ToIntList(": ").ToArray();
                 Sentries[s[0]] = s[^1];
@@ -27,11 +27,11 @@ namespace AdventOfCode.Solutions.Year2017
         {
             int offset = 0;
             bool caught = true;
-            while(caught)
+            while (caught)
             {
                 offset++;
                 CalculateSeverity(offset, out caught);
-                
+
             }
             return offset;
         }

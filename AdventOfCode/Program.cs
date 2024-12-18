@@ -1,9 +1,9 @@
-﻿using System;
+﻿using AdventOfCode.Solutions;
+
+using System;
 using System.Diagnostics;
 using System.Net.Http;
 using System.Net.Http.Headers;
-
-using AdventOfCode.Solutions;
 
 namespace AdventOfCode
 {
@@ -13,7 +13,8 @@ namespace AdventOfCode
         internal static Config Config = Config.Get("config.json");
         internal static readonly HttpClient Http = new();
 
-        static void Main(string[] args) {
+        static void Main(string[] args)
+        {
             var productVal = new ProductInfoHeaderValue(".NET", Environment.Version.ToString());
             var commentVal = new ProductInfoHeaderValue("(+Bpen's Advent of Code Template; https://github.com/Bpendragon/AdventOfCodeBase; github@bpendragon.horse)");
             Http.DefaultRequestHeaders.UserAgent.Add(productVal);

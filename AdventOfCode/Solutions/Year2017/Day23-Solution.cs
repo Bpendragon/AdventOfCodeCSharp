@@ -29,9 +29,9 @@ namespace AdventOfCode.Solutions.Year2017
         {
             int composites = 0;
             Utilities.WriteLine("The program outside of debug mode is a brute force primality check. See more info here: https://www.reddit.com/r/adventofcode/comments/7lms6p/2017_day_23_solutions/");
-            for(int i = 106700; i <= 123700; i+=17)
+            for (int i = 106700; i <= 123700; i += 17)
             {
-                for(int j = 2; j < i; j++)
+                for (int j = 2; j < i; j++)
                 {
                     if (i % j == 0)
                     {
@@ -40,7 +40,7 @@ namespace AdventOfCode.Solutions.Year2017
                     }
                 }
             }
-            
+
             return composites;
         }
 
@@ -48,13 +48,13 @@ namespace AdventOfCode.Solutions.Year2017
         {
             int pc = 0;
 
-            while(0 <= pc && pc < Commands.Count)
+            while (0 <= pc && pc < Commands.Count)
             {
                 string[] tokens = Commands[pc].Split();
                 long imm; //immediate value
                 long jmp; //jump length for jmp instructions
 
-                switch(tokens[0])
+                switch (tokens[0])
                 {
                     case "set":
                         if (long.TryParse(tokens[^1], out imm)) Registers[tokens[1]] = imm;

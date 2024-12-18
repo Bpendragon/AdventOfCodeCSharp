@@ -92,11 +92,11 @@ namespace AdventOfCode.Solutions.Year2024
                     {
                         if (!plots.Contains((x - 1, y)))
                         {
-                            edgeCount++; 
+                            edgeCount++;
                         }
                         else
                         {
-                            if (plots.Contains((x - 1, y - 1))) edgeCount++; 
+                            if (plots.Contains((x - 1, y - 1))) edgeCount++;
                         }
                     }
 
@@ -105,11 +105,11 @@ namespace AdventOfCode.Solutions.Year2024
                     {
                         if (!plots.Contains((x, y - 1)))
                         {
-                            edgeCount++; 
+                            edgeCount++;
                         }
                         else
                         {
-                            if (plots.Contains((x + 1, y - 1))) edgeCount++; 
+                            if (plots.Contains((x + 1, y - 1))) edgeCount++;
                         }
                     }
 
@@ -118,11 +118,11 @@ namespace AdventOfCode.Solutions.Year2024
                     {
                         if (!plots.Contains((x - 1, y)))
                         {
-                            edgeCount++; 
+                            edgeCount++;
                         }
                         else
                         {
-                            if (plots.Contains((x - 1, y + 1))) edgeCount++; 
+                            if (plots.Contains((x - 1, y + 1))) edgeCount++;
                         }
                     }
                 }

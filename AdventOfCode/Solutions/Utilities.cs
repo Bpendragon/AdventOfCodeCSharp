@@ -350,7 +350,7 @@ namespace AdventOfCode.Solutions
             if (periods.Count() != remainders.Count()) throw new ArgumentException("Lists must be the same length");
             var z = periods.Zip(remainders);
 
-            (long period, long remainder) curVal  = z.First();
+            (long period, long remainder) curVal = z.First();
 
             foreach (var congruence in z.Skip(1))
             {
@@ -374,7 +374,8 @@ namespace AdventOfCode.Solutions
             try
             {
                 combinedRemainder = Mod((remainderA - (s * pdQ * periodA)), combinedPeriod);
-            } catch(OverflowException e)
+            }
+            catch (OverflowException e)
             {
                 BigInteger bi = s;
                 bi = bi * pdQ;
@@ -401,7 +402,7 @@ namespace AdventOfCode.Solutions
             long oldT = 0;
             long t = 1;
 
-            while (r!= 0)
+            while (r != 0)
             {
                 (var q, var rem) = DivMod(oldR, r);
                 oldR = r;
@@ -537,7 +538,7 @@ namespace AdventOfCode.Solutions
 
         public static IEnumerable<CompassDirection> GetMoves(this IEnumerable<char> s, bool flipY = false)
         {
-            foreach(var c in s)
+            foreach (var c in s)
             {
                 CompassDirection dir;
                 switch (c)
@@ -547,7 +548,8 @@ namespace AdventOfCode.Solutions
                         dir = S;
                         if (flipY) dir = N;
                         break;
-                    case '^': dir = N;
+                    case '^':
+                        dir = N;
                         if (flipY) dir = S;
                         break;
                     case '<': dir = W; break;

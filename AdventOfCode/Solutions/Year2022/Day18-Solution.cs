@@ -55,9 +55,9 @@ namespace AdventOfCode.Solutions.Year2022
 
             int exposed = 0;
 
-            foreach(var blob in lavaBlobs)
+            foreach (var blob in lavaBlobs)
             {
-                foreach(var n in blob.GetImmediateNeighbors())
+                foreach (var n in blob.GetImmediateNeighbors())
                 {
                     if (airGap.Contains(n)) exposed++;
                 }

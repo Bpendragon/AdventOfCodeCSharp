@@ -58,22 +58,22 @@ namespace AdventOfCode.Solutions.Year2023
                 }
             }
 
-            return loopPath.Length/2;
+            return loopPath.Length / 2;
         }
 
         protected override object SolvePartTwo()
         {
             map[start] = CorrectS;
             var keyList = map.Keys.ToList();
-            foreach(var p in keyList.Where(x => !visited.Contains(x)))
+            foreach (var p in keyList.Where(x => !visited.Contains(x)))
             {
                 map[p] = '.';
             }
             List<string> cleanedMap = new();
-            for(int y = 0; y <= maxY; y++)
+            for (int y = 0; y <= maxY; y++)
             {
                 StringBuilder sb = new();
-                for(int x = 0; x <= maxX; x++)
+                for (int x = 0; x <= maxX; x++)
                 {
                     sb.Append(map[(x, y)]);
                 }
@@ -86,7 +86,7 @@ namespace AdventOfCode.Solutions.Year2023
             foreach (var l in cleanedMap)
             {
                 int parity = 0;
-                foreach(var c in l)
+                foreach (var c in l)
                 {
                     if (c == '|') parity++;
                     if (c == '.' && parity % 2 == 1) ans++;
@@ -116,9 +116,9 @@ namespace AdventOfCode.Solutions.Year2023
 
             HashSet<Coordinate2D> tempVisited = new();
             tempVisited.Add(start);
-            while(map.TryGetValue(cur.Move(curDir, true), out var nextPipe) && (nextPipe == 'S' || pipeDirChange.ContainsKey((nextPipe, curDir.Flip()))))
+            while (map.TryGetValue(cur.Move(curDir, true), out var nextPipe) && (nextPipe == 'S' || pipeDirChange.ContainsKey((nextPipe, curDir.Flip()))))
             {
-                if(nextPipe == 'S')
+                if (nextPipe == 'S')
                 {
                     isLoop = true;
                     visited = tempVisited;

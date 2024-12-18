@@ -1,8 +1,9 @@
-using System;
-using System.Text;
-using System.Collections.Generic;
 using AdventOfCode.UserClasses;
+
+using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 
 namespace AdventOfCode.Solutions.Year2019
 {
@@ -21,13 +22,13 @@ namespace AdventOfCode.Solutions.Year2019
             Dictionary<(long x, long y), long> screen = new();
             var outputStream = cab.RunProgram().ToList();
 
-            for(int i = 0; i < outputStream.Count;  i+=3)
+            for (int i = 0; i < outputStream.Count; i += 3)
             {
                 screen[(outputStream[i], outputStream[i + 1])] = outputStream[i + 2];
             }
 
             DrawScreen(screen);
-            return screen.Values.Count(x => x==2);
+            return screen.Values.Count(x => x == 2);
         }
 
         protected override object SolvePartTwo()
@@ -79,9 +80,9 @@ namespace AdventOfCode.Solutions.Year2019
                             {
                                 cab.ReadyInput(0);
                                 firstMove = false;
-                               
-                            } 
-                           
+
+                            }
+
                             break;
                         case 4:
                             screen[((long)nextX, (long)nextY)] = output;
@@ -91,7 +92,7 @@ namespace AdventOfCode.Solutions.Year2019
                             if (!firstMove)
                             {
                                 cab.ReadyInput(Math.Sign(ball.x - paddle.x));
-                               
+
                             }
 
                             break;
@@ -108,7 +109,7 @@ namespace AdventOfCode.Solutions.Year2019
         public static void DrawScreen(Dictionary<(long x, long y), long> screen)
         {
             StringBuilder sb = new();
-            if(screen.TryGetValue((-1,0), out long value))
+            if (screen.TryGetValue((-1, 0), out long value))
             {
                 sb.Append($"Score: {value}\n");
             }

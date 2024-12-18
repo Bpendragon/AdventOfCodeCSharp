@@ -17,7 +17,7 @@ namespace AdventOfCode.Solutions.Year2021
         public Day12() : base()
         {
             //UseDebugInput = true;
-            foreach(var l in Input.SplitByNewline())
+            foreach (var l in Input.SplitByNewline())
             {
                 var halves = l.Split('-');
                 if (!nodes.ContainsKey(halves[0]))
@@ -30,7 +30,7 @@ namespace AdventOfCode.Solutions.Year2021
                     nodes[halves[0]] = tmp;
                 }
 
-                if(!nodes.ContainsKey(halves[1]))
+                if (!nodes.ContainsKey(halves[1]))
                 {
                     var tmp = new Node()
                     {
@@ -80,18 +80,20 @@ namespace AdventOfCode.Solutions.Year2021
             {
                 if (visited.Contains(curNode.Name)) return;
                 if (curNode.IsSmolCave) visited.Add(curNode.Name);
-            } else
+            }
+            else
             {
                 if (visited.Contains(curNode.Name) && smolHasBeenVisitedTwice) return;
                 if (visited.Contains(curNode.Name))
                 {
                     smolHasBeenVisitedTwice = true;
                     smolCurrentlyVistedTwice = curNode.Name;
-                } else if (curNode.IsSmolCave) visited.Add(curNode.Name);
+                }
+                else if (curNode.IsSmolCave) visited.Add(curNode.Name);
             }
 
             currentPath.Add(curNode);
-            if(curNode.Name == "end")
+            if (curNode.Name == "end")
             {
                 if (!part2)
                 {
@@ -106,7 +108,7 @@ namespace AdventOfCode.Solutions.Year2021
                 currentPath.RemoveAt(currentPath.Count - 1);
                 return;
             }
-            foreach(var n in curNode.Neighbors)
+            foreach (var n in curNode.Neighbors)
             {
                 FindAllPaths(nodes[n], false, part2);
             }
@@ -114,14 +116,15 @@ namespace AdventOfCode.Solutions.Year2021
 
             currentPath.RemoveAt(currentPath.Count - 1);
 
-            if(!part2) visited.Remove(curNode.Name);
+            if (!part2) visited.Remove(curNode.Name);
             else
             {
                 if (curNode.Name == smolCurrentlyVistedTwice)
                 {
                     smolCurrentlyVistedTwice = string.Empty;
                     smolHasBeenVisitedTwice = false;
-                } else visited.Remove(curNode.Name);
+                }
+                else visited.Remove(curNode.Name);
             }
         }
     }

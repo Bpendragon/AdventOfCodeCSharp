@@ -18,7 +18,7 @@ namespace AdventOfCode.Solutions.Year2022
             int y = 0;
             foreach (var l in Input.SplitByNewline())
             {
-                for(int x = 0; x < l.Length; x++)
+                for (int x = 0; x < l.Length; x++)
                 {
                     if (l[x] == '#') BaseMap[(x, y)] = '#';
                 }
@@ -34,7 +34,7 @@ namespace AdventOfCode.Solutions.Year2022
             List<Coordinate2D> lonely = new();
 
             int i = 0;
-            while(lonely.Count != curMap.Count)
+            while (lonely.Count != curMap.Count)
             {
                 Dictionary<Coordinate2D, List<Coordinate2D>> proposed = new();
                 lonely.Clear();
@@ -153,7 +153,7 @@ namespace AdventOfCode.Solutions.Year2022
 
             StringBuilder sb = new();
 
-            for(int y = minY; y <= maxY; y++)
+            for (int y = minY; y <= maxY; y++)
             {
                 for (int x = minX; x <= maxX; x++)
                 {

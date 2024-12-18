@@ -14,7 +14,7 @@ namespace AdventOfCode.Solutions.Year2024
 
         public Day01() : base()
         {
-            foreach(var l in Input.SplitByNewline())
+            foreach (var l in Input.SplitByNewline())
             {
                 var ints = l.ExtractPosInts().ToArray();
                 list1.Add(ints[0]);
@@ -28,7 +28,7 @@ namespace AdventOfCode.Solutions.Year2024
 
         protected override object SolvePartOne()
         {
-            return list1.Zip(list2).Sum(a => Math.Abs(a.First-a.Second));
+            return list1.Zip(list2).Sum(a => Math.Abs(a.First - a.Second));
         }
 
         protected override object SolvePartTwo()

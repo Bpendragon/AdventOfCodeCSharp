@@ -16,7 +16,7 @@ namespace AdventOfCode.Solutions.Year2015
         protected override object SolvePartOne()
         {
             long sum = 0;
-            foreach(int[] package in packages)
+            foreach (int[] package in packages)
             {
                 int f1 = package[0] * package[1];
                 int f2 = package[0] * package[2];
@@ -37,7 +37,7 @@ namespace AdventOfCode.Solutions.Year2015
                 int f2 = 2 * package[0] + 2 * package[2];
                 int f3 = 2 * package[1] + 2 * package[2];
 
-                sum += package.Aggregate((a,b) => a*b) + Utilities.MinOfMany(f1, f2, f3);
+                sum += package.Aggregate((a, b) => a * b) + Utilities.MinOfMany(f1, f2, f3);
             }
 
             return sum;

@@ -10,13 +10,13 @@ namespace AdventOfCode.Solutions.Year2024
 
         public Day13() : base()
         {
-            foreach(var p in Input.SplitByDoubleNewline())
+            foreach (var p in Input.SplitByDoubleNewline())
             {
                 var nums = p.ExtractPosInts().ToArray();
                 machines.Add(new()
                 {
-                    buttonA  = (nums[0], nums[1]),
-                    buttonB  = (nums[2], nums[3]),
+                    buttonA = (nums[0], nums[1]),
+                    buttonB = (nums[2], nums[3]),
                     prizeLoc = (nums[4], nums[5])
                 });
             }
@@ -26,7 +26,7 @@ namespace AdventOfCode.Solutions.Year2024
         {
             long sum = 0;
 
-            foreach(var cm in machines)
+            foreach (var cm in machines)
             {
                 (var a, var b) = cm.GetPressCounts(true);
 
@@ -87,11 +87,11 @@ namespace AdventOfCode.Solutions.Year2024
 
                 long resA = -1, resB = -1;
 
-                if ((t.x * buttonB.y - buttonB.x * t.y) % (buttonA.x * buttonB.y - buttonB.x * buttonA.y) == 0) 
+                if ((t.x * buttonB.y - buttonB.x * t.y) % (buttonA.x * buttonB.y - buttonB.x * buttonA.y) == 0)
                 {
                     resA = (t.x * buttonB.y - buttonB.x * t.y) / (buttonA.x * buttonB.y - buttonB.x * buttonA.y);
                 }
-                if((buttonA.x * t.y - t.x * buttonA.y) % (buttonA.x * buttonB.y - buttonB.x * buttonA.y) == 0)
+                if ((buttonA.x * t.y - t.x * buttonA.y) % (buttonA.x * buttonB.y - buttonB.x * buttonA.y) == 0)
                 {
                     resB = (buttonA.x * t.y - t.x * buttonA.y) / (buttonA.x * buttonB.y - buttonB.x * buttonA.y);
                 }
@@ -105,7 +105,7 @@ namespace AdventOfCode.Solutions.Year2024
                 //// for button A: bA.X + bA.Y = 0
                 //// for button B: -bB.X - bB.Y + ((-bB.X*prizeLoc.y) - (-bB.Y*prizeLoc.X))
                 //// intersect occurs at (b1c2-b2c1)/(a1b2-a2b1) , (c1a2-c2a1)/(a1b2-a2b1)
-                
+
 
                 //long a1 = buttonA.y;
                 //long b1 = -buttonA.x;

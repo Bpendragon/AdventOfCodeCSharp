@@ -11,13 +11,13 @@ namespace AdventOfCode.Solutions.Year2020
         readonly Queue<long> crabCards = new();
         public Day22() : base()
         {
-            
+
         }
 
         protected override object SolvePartOne()
         {
             SetDecks();
-            while(playerCards.Count > 0 && crabCards.Count > 0)
+            while (playerCards.Count > 0 && crabCards.Count > 0)
             {
                 long p1 = playerCards.Dequeue();
                 long crab = crabCards.Dequeue();
@@ -26,7 +26,8 @@ namespace AdventOfCode.Solutions.Year2020
                 {
                     playerCards.Enqueue(p1);
                     playerCards.Enqueue(crab);
-                } else
+                }
+                else
                 {
                     crabCards.Enqueue(crab);
                     crabCards.Enqueue(p1);
@@ -37,11 +38,12 @@ namespace AdventOfCode.Solutions.Year2020
             if (playerCards.Count > 0)
             {
                 sum = CalculateScore(playerCards);
-            } else
+            }
+            else
             {
                 sum = CalculateScore(crabCards);
             }
-            return sum.ToString() ;
+            return sum.ToString();
         }
 
         protected override object SolvePartTwo()
@@ -66,22 +68,25 @@ namespace AdventOfCode.Solutions.Year2020
                 long p1 = p1Deck.Dequeue();
                 long p2 = p2Deck.Dequeue();
 
-                if(p1 <= p1Deck.Count && p2 <= p2Deck.Count)
+                if (p1 <= p1Deck.Count && p2 <= p2Deck.Count)
                 {
                     p1Wins = RecursiveCombat(new Queue<long>(p1Deck.Take((int)p1)), new Queue<long>(p2Deck.Take((int)p2)), out _);
-                } else if (p1 > p2)
+                }
+                else if (p1 > p2)
                 {
                     p1Wins = true;
-                } else
+                }
+                else
                 {
                     p1Wins = false;
                 }
 
-                if(p1Wins)
+                if (p1Wins)
                 {
                     p1Deck.Enqueue(p1);
                     p1Deck.Enqueue(p2);
-                } else
+                }
+                else
                 {
                     p2Deck.Enqueue(p2);
                     p2Deck.Enqueue(p1);
@@ -90,11 +95,12 @@ namespace AdventOfCode.Solutions.Year2020
                 curState = GetState(new Queue<long>(p1Deck), new Queue<long>(p2Deck));
             } while ((p1Deck.Count > 0 && p2Deck.Count > 0) && !previousStates.Contains(curState));
 
-            if(p1Deck.Count > 0)
+            if (p1Deck.Count > 0)
             {
                 WinnerScore = CalculateScore(new Queue<long>(p1Deck));
                 return true;
-            } else
+            }
+            else
             {
                 WinnerScore = CalculateScore(new Queue<long>(p2Deck));
                 return false;
@@ -108,7 +114,7 @@ namespace AdventOfCode.Solutions.Year2020
         private static long CalculateScore(Queue<long> deck)
         {
             long sum = 0;
-            while(deck.Count > 0)
+            while (deck.Count > 0)
             {
                 var tmp = deck.Dequeue();
                 sum += tmp * (deck.Count + 1);

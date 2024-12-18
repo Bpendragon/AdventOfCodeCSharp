@@ -19,7 +19,7 @@ namespace AdventOfCode.Solutions.Year2021
         {
             var lines = Input.SplitByNewline();
 
-            for(int i = 0; i < 14; i++)
+            for (int i = 0; i < 14; i++)
             {
                 divZ.Add(int.Parse(lines[(18 * i) + 4].Split()[2]));
                 addX.Add(int.Parse(lines[(18 * i) + 5].Split()[2]));
@@ -27,7 +27,7 @@ namespace AdventOfCode.Solutions.Year2021
             }
 
             //We can only divide by 26 so many times at each step, at some point we can bail early. 
-            for(int i = 0; i < divZ.Count; i++)
+            for (int i = 0; i < divZ.Count; i++)
             {
                 MaxZAtStep.Add(divZ.Skip(i).Aggregate(1L, (a, b) => a * b));
             }
@@ -51,7 +51,7 @@ namespace AdventOfCode.Solutions.Year2021
             long z = prevZ;
             long x = addX[groupNum] + z % 26;
             z /= divZ[groupNum];
-            if(x != input)
+            if (x != input)
             {
                 z *= 26;
                 z += input + addY[groupNum];
@@ -65,9 +65,9 @@ namespace AdventOfCode.Solutions.Year2021
             //We've Been here before...
             if (cacheDic.TryGetValue((groupNum, prevZ), out List<string> value)) return value;
             //We've gon past the end
-            if(groupNum >= 14)
+            if (groupNum >= 14)
             {
-                if (prevZ == 0) return new() {""};
+                if (prevZ == 0) return new() { "" };
                 return null;
             }
 
@@ -82,7 +82,7 @@ namespace AdventOfCode.Solutions.Year2021
 
             List<string> nextStrings;
             long nextZ;
-            if(0 < nextX && nextX < 10)
+            if (0 < nextX && nextX < 10)
             {
                 nextZ = RunGroup(groupNum, prevZ, nextX);
                 nextStrings = RecursiveSearch(groupNum + 1, nextZ);
@@ -93,7 +93,8 @@ namespace AdventOfCode.Solutions.Year2021
                         res.Add($"{nextX}{s}");
                     }
                 }
-            } else
+            }
+            else
             {
                 foreach (int i in Enumerable.Range(1, 9))
                 {

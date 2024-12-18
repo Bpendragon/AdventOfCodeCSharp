@@ -7,7 +7,7 @@ namespace AdventOfCode.Solutions.Year2023
     class Day03 : ASolution
     {
         Dictionary<Coordinate2D, char> engineMap = new();
-        Dictionary<Coordinate2D, List<int>> gears = new(); 
+        Dictionary<Coordinate2D, List<int>> gears = new();
         int maxX, maxY;
 
         public Day03() : base()
@@ -19,25 +19,25 @@ namespace AdventOfCode.Solutions.Year2023
         {
             int sum = 0;
 
-            for(int y = 0; y <= maxY; y++)
+            for (int y = 0; y <= maxY; y++)
             {
-                for(int x = 0; x <= maxX; x++)
+                for (int x = 0; x <= maxX; x++)
                 {
-                    if(engineMap.TryGetValue((x,y), out char c) && char.IsDigit(c))
+                    if (engineMap.TryGetValue((x, y), out char c) && char.IsDigit(c))
                     {
                         bool nextToSymbol = false;
                         bool symbolIsGear = false;
                         Coordinate2D gearLoc = (-1, -1);
                         int num = 0;
-                        while(engineMap.TryGetValue((x, y), out c) && char.IsDigit(c))
+                        while (engineMap.TryGetValue((x, y), out c) && char.IsDigit(c))
                         {
                             var neighbors = new Coordinate2D(x, y).Neighbors(true);
-                            foreach(var n in neighbors)
+                            foreach (var n in neighbors)
                             {
                                 if (engineMap.TryGetValue(n, out char d) && !char.IsDigit(d))
                                 {
                                     nextToSymbol = true;
-                                    if(d == '*')
+                                    if (d == '*')
                                     {
                                         symbolIsGear = true;
                                         gearLoc = n;
@@ -64,9 +64,9 @@ namespace AdventOfCode.Solutions.Year2023
         {
             long sum = 0;
 
-            foreach(var kvp in gears)
+            foreach (var kvp in gears)
             {
-                if(kvp.Value.Count == 2) sum += kvp.Value.Aggregate(1, (a, b) => a * b);
+                if (kvp.Value.Count == 2) sum += kvp.Value.Aggregate(1, (a, b) => a * b);
             }
 
             return sum;

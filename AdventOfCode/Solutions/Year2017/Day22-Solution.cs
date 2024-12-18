@@ -1,6 +1,7 @@
-using System.Text;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
+
 using static AdventOfCode.Solutions.Utilities;
 
 namespace AdventOfCode.Solutions.Year2017
@@ -46,11 +47,11 @@ namespace AdventOfCode.Solutions.Year2017
 
             int numInfected = 0;
 
-            foreach(int _ in Enumerable.Range(0, 10000))
+            foreach (int _ in Enumerable.Range(0, 10000))
             {
                 switch (newMap[curPosition])
                 {
-                    case '#': 
+                    case '#':
                         curDirection = curDirection.Turn(R);
                         newMap[curPosition] = '.';
                         break;

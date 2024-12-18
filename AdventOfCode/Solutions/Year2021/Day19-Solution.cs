@@ -50,31 +50,32 @@ namespace AdventOfCode.Solutions.Year2021
             int RotationIndex = -1;
             Coordinate3D translationVec = null;
 
-            while(scannersToCheck.TryDequeue(out int scanner))
+            while (scannersToCheck.TryDequeue(out int scanner))
             {
                 var curReadings = readings[scanner];
 
-                for(int i = 0; i < 24; i++)
+                for (int i = 0; i < 24; i++)
                 {
-                    if(TestRotation(knownDists, curReadings, i, out translationVec))
+                    if (TestRotation(knownDists, curReadings, i, out translationVec))
                     {
                         RotationIndex = i;
                         break;
                     }
                 }
 
-                if(translationVec is not null)
+                if (translationVec is not null)
                 {
                     var rotatedReadings = curReadings.Select(a => a.Rotations[RotationIndex]);
                     var translatedReadings = rotatedReadings.Select(a => translationVec + a);
 
-                    foreach(var beacon in translatedReadings)
+                    foreach (var beacon in translatedReadings)
                     {
                         beaconMap.Add(beacon);
                     }
                     knownDists = CalcDists(beaconMap);
                     scanners[scanner] = translationVec;
-                } else
+                }
+                else
                 {
                     scannersToCheck.Enqueue(scanner);
                 }
@@ -85,19 +86,19 @@ namespace AdventOfCode.Solutions.Year2021
         private static bool TestRotation(Dictionary<Coordinate3D, Coordinate3D> masterDistList, HashSet<Coordinate3D> beacons, int RotationIndex, out Coordinate3D TranslationVector)
         {
             int matches = 0;
-            foreach(var b in beacons)
+            foreach (var b in beacons)
             {
                 var bRotated = b.Rotations[RotationIndex];
-                foreach(var b2 in beacons)
+                foreach (var b2 in beacons)
                 {
                     if (b == b2) continue;
                     var b2Rotated = b2.Rotations[RotationIndex];
                     var dist = b2Rotated - bRotated;
 
-                    if(masterDistList.ContainsKey(dist))
+                    if (masterDistList.ContainsKey(dist))
                     {
                         matches++;
-                        if(matches == 12)
+                        if (matches == 12)
                         {
                             var x = masterDistList[dist];
                             TranslationVector = x - bRotated;
@@ -114,12 +115,12 @@ namespace AdventOfCode.Solutions.Year2021
         private static Dictionary<Coordinate3D, Coordinate3D> CalcDists(HashSet<Coordinate3D> map)
         {
             Dictionary<Coordinate3D, Coordinate3D> res = new();
-            foreach(var a in map)
+            foreach (var a in map)
             {
-                foreach(var b in map)
+                foreach (var b in map)
                 {
                     if (a == b) continue;
-                    var tmp = a-b;
+                    var tmp = a - b;
                     if (!res.ContainsKey(tmp)) res[tmp] = b;
                 }
             }

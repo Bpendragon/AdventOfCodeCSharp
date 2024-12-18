@@ -11,7 +11,7 @@ namespace AdventOfCode.Solutions.Year2023
         internal static readonly char[] separator = [':', '|'];
         public Day04() : base()
         {
-            foreach(var l in Input.SplitByNewline())
+            foreach (var l in Input.SplitByNewline())
             {
                 var parts = l.Split(separator, StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
                 Card c = new();
@@ -30,10 +30,10 @@ namespace AdventOfCode.Solutions.Year2023
         protected override object SolvePartTwo()
         {
             int i = 1;
-            while(cards.ContainsKey(i))
+            while (cards.ContainsKey(i))
             {
                 int nextCopies = cards[i].matches;
-                for(int j = 1; j <= nextCopies; j++)
+                for (int j = 1; j <= nextCopies; j++)
                 {
                     cards[i + j].copies += cards[i].copies;
                 }

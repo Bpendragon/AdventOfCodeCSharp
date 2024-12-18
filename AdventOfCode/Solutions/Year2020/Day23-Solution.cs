@@ -1,5 +1,5 @@
-using System.Text;
 using System.Collections.Generic;
+using System.Text;
 
 namespace AdventOfCode.Solutions.Year2020
 {
@@ -18,7 +18,7 @@ namespace AdventOfCode.Solutions.Year2020
             //UseDebugInput = true;
             Cups = new List<LLNode>(20);
             Cups2 = new List<LLNode>(20);
-            foreach(long i in Input.ToLongList())
+            foreach (long i in Input.ToLongList())
             {
                 var tmp = new LLNode(i);
                 var tmp2 = new LLNode(i);
@@ -27,7 +27,7 @@ namespace AdventOfCode.Solutions.Year2020
                 SmallCupsDict[i] = tmp;
                 BigCupsDict[i] = tmp2;
             }
-            for(int i = 0; i < Cups.Count; i++)
+            for (int i = 0; i < Cups.Count; i++)
             {
                 Cups[i].next = Cups[(i + 1) % Cups.Count]; //C# seriously doesn't have a circular linked list and it annoys me
                 Cups2[i].next = Cups2[(i + 1) % Cups.Count];
@@ -36,7 +36,7 @@ namespace AdventOfCode.Solutions.Year2020
 
             var cur = Cups2[^1]; //time to add a million more cups...
 
-            for(long i = 10; i <= 1_000_000; i++)
+            for (long i = 10; i <= 1_000_000; i++)
             {
                 cur.next = new LLNode(i);
                 cur = cur.next;
@@ -48,7 +48,7 @@ namespace AdventOfCode.Solutions.Year2020
         protected override object SolvePartOne()
         {
             LLNode cur = Cups[0];
-            for(long i = 0; i < 100; i++)
+            for (long i = 0; i < 100; i++)
             {
                 var groupStart = cur.next; //need to know where our group of three starts
                 cur.next = cur.next.next.next.next; //this is after we excise our group of 3
@@ -60,7 +60,7 @@ namespace AdventOfCode.Solutions.Year2020
                     groupStart.next.next.val
                 };
                 long nextNodeVal = cur.val == 1 ? 9 : cur.val - 1;
-                while(forbiddenValues.Contains(nextNodeVal))
+                while (forbiddenValues.Contains(nextNodeVal))
                 {
                     nextNodeVal--;
                     if (nextNodeVal < 1) nextNodeVal = 9;
@@ -75,13 +75,13 @@ namespace AdventOfCode.Solutions.Year2020
             }
 
             StringBuilder sb = new();
-            while(cur.val != 1)
+            while (cur.val != 1)
             {
                 cur = cur.next;
             }
             cur = cur.next; //start at 1 past the 1
 
-            while(cur.val != 1)
+            while (cur.val != 1)
             {
                 sb.Append(cur.val);
                 cur = cur.next;

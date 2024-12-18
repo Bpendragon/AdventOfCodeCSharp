@@ -23,13 +23,13 @@ namespace AdventOfCode.Solutions.Year2019
 
         protected override object SolvePartTwo()
         {
-            for(long i = 0; i < 100; i++)
+            for (long i = 0; i < 100; i++)
             {
-                for(long j = 0; j < 100; j++)
+                for (long j = 0; j < 100; j++)
                 {
                     pc.Program[1] = i;
                     pc.Program[2] = j;
-                    foreach (long _ in pc.RunProgram()){ };
+                    foreach (long _ in pc.RunProgram()) { };
 
                     if (pc.PreviousRunState[0] == 19690720) return ((100 * i) + j);
                 }

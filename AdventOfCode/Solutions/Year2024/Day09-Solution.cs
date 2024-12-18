@@ -25,7 +25,7 @@ namespace AdventOfCode.Solutions.Year2024
             long pointer = 0;
             long curFileId = 0;
             foreach (var i in Enumerable.Range(0, 10)) emptyRangeQueues[i] = new();
-            for(int i = 0; i < asLongs.Count; i++)
+            for (int i = 0; i < asLongs.Count; i++)
             {
                 if (i % 2 == 0)
                 {
@@ -42,7 +42,7 @@ namespace AdventOfCode.Solutions.Year2024
                     filesp1[curFileId] = newFile;
                     filesp2[curFileId] = newFile2;
                     curFileId++;
-                } 
+                }
                 else
                 {
                     if (asLongs[i] > 0)
@@ -75,7 +75,7 @@ namespace AdventOfCode.Solutions.Year2024
 
         protected override object SolvePartTwo()
         {
-            for(long i = maxFileID; i > 0; i--)
+            for (long i = maxFileID; i > 0; i--)
             {
                 if (!emptyRangeQueues.Any(a => a.Value.Count > 0)) break;
                 var reqSpace = filesp2[i].size;
@@ -133,7 +133,7 @@ namespace AdventOfCode.Solutions.Year2024
             public void moveFile(long startBlock)
             {
                 blocks = LongRange(startBlock, blocks.Count).ToList();
-            } 
+            }
         }
     }
 }

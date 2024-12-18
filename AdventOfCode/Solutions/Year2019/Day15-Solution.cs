@@ -1,8 +1,9 @@
-using System;
-using System.Text;
-using System.Collections.Generic;
 using AdventOfCode.UserClasses;
+
+using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 
 namespace AdventOfCode.Solutions.Year2019
 {
@@ -40,11 +41,11 @@ namespace AdventOfCode.Solutions.Year2019
 
 
         protected override object SolvePartOne()
-        {        
-          return (AStar((0, 0), oxyGenLocation, map).Count - 1); //-1 to account for the facct the path contains the start node, which is not a step, see also: fencepost problem
+        {
+            return (AStar((0, 0), oxyGenLocation, map).Count - 1); //-1 to account for the facct the path contains the start node, which is not a step, see also: fencepost problem
         }
 
-       
+
 
         protected override object SolvePartTwo()
         {
@@ -64,19 +65,19 @@ namespace AdventOfCode.Solutions.Year2019
             gScore[start] = 0;
             fScore[start] = 0;
 
-            while(openSet.Count >0)
+            while (openSet.Count > 0)
             {
                 var current = openSet.OrderBy(x => fScore.GetValueOrDefault(x, int.MaxValue)).First();
                 if (current == goal) return ReconstructPath(cameFrom, current);
                 openSet.Remove(current);
-                foreach(var dir in movementDirs)
+                foreach (var dir in movementDirs)
                 {
                     var tmp = current.Add(dir);
-                    if(map.TryGetValue(tmp, out var val))
+                    if (map.TryGetValue(tmp, out var val))
                     {
                         if (val == 0) continue; //this is a wall, skip it.
                         var tentGscore = gScore[current] + 1;
-                        if(tentGscore < gScore.GetValueOrDefault(tmp, int.MaxValue))
+                        if (tentGscore < gScore.GetValueOrDefault(tmp, int.MaxValue))
                         {
                             cameFrom[tmp] = current;
                             gScore[tmp] = tentGscore;
@@ -129,7 +130,7 @@ namespace AdventOfCode.Solutions.Year2019
             StringBuilder sb = new("\n");
             for (int y = map.Keys.Max(a => a.y) + 1; y >= map.Keys.Min(a => a.y) - 1; y--)
             {
-                for (int x = map.Keys.Min(a => a.x) -1 ; x <= map.Keys.Max(a => a.x) + 1; x++)
+                for (int x = map.Keys.Min(a => a.x) - 1; x <= map.Keys.Max(a => a.x) + 1; x++)
                 {
                     var val = map.GetValueOrDefault((x, y), 4);
                     if ((x, y) == botLocation)
@@ -137,17 +138,17 @@ namespace AdventOfCode.Solutions.Year2019
                         sb.Append('B');
                         continue;
                     }
-                    if((x,y) == (0,0))
+                    if ((x, y) == (0, 0))
                     {
                         sb.Append('*');
                         continue;
                     }
                     switch (val)
                     {
-                       
+
                         case 0: sb.Append('#'); break;
                         case 1: sb.Append(' '); break;
-                        case 2: sb.Append('O'); break; 
+                        case 2: sb.Append('O'); break;
                         case 4: sb.Append('?'); break;
                     }
                 }

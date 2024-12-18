@@ -44,7 +44,7 @@ namespace AdventOfCode.Solutions.Year2017
             F
         }
 
-        public TuringMachine ()
+        public TuringMachine()
         {
             Tape[Cursor] = 0;
         }
@@ -52,7 +52,7 @@ namespace AdventOfCode.Solutions.Year2017
         public void Step()
         {
             if (!Tape.ContainsKey(Cursor)) Tape[Cursor] = 0;
-            switch(CurrentState)
+            switch (CurrentState)
             {
                 case States.A:
                     if (Tape[Cursor] == 0)
@@ -60,7 +60,8 @@ namespace AdventOfCode.Solutions.Year2017
                         Tape[Cursor] = 1;
                         Cursor++;
                         CurrentState = States.B;
-                    } else
+                    }
+                    else
                     {
                         Tape[Cursor] = 0;
                         Cursor--;

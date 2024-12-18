@@ -16,7 +16,7 @@ namespace AdventOfCode.Solutions.Year2020
         {
             lines = Input.SplitByNewline();
             string[] busProblem = lines[1].Split(',');
-            
+
 
             for (int i = 0; i < busProblem.Length; i++)
             {
@@ -51,7 +51,7 @@ namespace AdventOfCode.Solutions.Year2020
             List<long> periods = new();
             List<long> remainders = new();
 
-            foreach(var b in busses)
+            foreach (var b in busses)
             {
                 periods.Add(b.busID);
                 remainders.Add(b.offSet);
@@ -64,7 +64,7 @@ namespace AdventOfCode.Solutions.Year2020
 
             long curTime = 0;
             long curDelta = busses[0].busID;
-            long totalPeriod = busses.Aggregate((a, b) => (a.busID * b.busID,1)).busID;
+            long totalPeriod = busses.Aggregate((a, b) => (a.busID * b.busID, 1)).busID;
 
 
             foreach (var (busID, offSet) in busses.Skip(1).SkipLast(1))
@@ -72,7 +72,7 @@ namespace AdventOfCode.Solutions.Year2020
                 long firstHit = 0;
                 long secondHit = 0;
 
-                while((curTime + offSet) % busID != 0)
+                while ((curTime + offSet) % busID != 0)
                 {
                     curTime += curDelta;
                 }
@@ -96,9 +96,9 @@ namespace AdventOfCode.Solutions.Year2020
             }
 
             return curTime;
-            
-            
-            
+
+
+
             //this should theoretically work, not sure why it isn't, works empirically on the first 4 items in the bus list. If it did, runs in mere ms
             /*
             long tgtPhase = 741745043105674;
@@ -161,8 +161,8 @@ namespace AdventOfCode.Solutions.Year2020
 
         public static void DivMod(long a, long b, out long div, out long mod)
         {
-             div = a / b;
-             mod = a % b;
+            div = a / b;
+            mod = a % b;
         }
     }
 }

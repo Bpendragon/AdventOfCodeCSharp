@@ -38,11 +38,11 @@ namespace AdventOfCode.Solutions.Year2015
             List<string> WorkingProgram = new(Program);
             int PC = 0;
 
-            while(PC < WorkingProgram.Count)
+            while (PC < WorkingProgram.Count)
             {
                 string[] tokens = WorkingProgram[PC].Replace(",", "").Split(" ", StringSplitOptions.RemoveEmptyEntries);
 
-                switch(tokens[0])
+                switch (tokens[0])
                 {
                     case "hlf": Regs[tokens[1]] /= 2; PC++; break;
                     case "tpl": Regs[tokens[1]] *= 3; PC++; break;
@@ -58,6 +58,6 @@ namespace AdventOfCode.Solutions.Year2015
                         break;
                 }
             }
-        } 
+        }
     }
 }

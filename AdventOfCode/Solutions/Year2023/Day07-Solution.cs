@@ -29,7 +29,7 @@ namespace AdventOfCode.Solutions.Year2023
 
             long total = 0;
 
-            for(int i = 0; i < p1Hands.Count; i++)
+            for (int i = 0; i < p1Hands.Count; i++)
             {
                 total += (i + 1) * p1Hands[i].bid;
             }
@@ -78,7 +78,7 @@ namespace AdventOfCode.Solutions.Year2023
             public int CompareTo(Part1Hand other)
             {
                 if (this.HandType != other.HandType) return this.HandType - other.HandType;
-                for(int i = 0; i < cards.Length; i++)
+                for (int i = 0; i < cards.Length; i++)
                 {
                     if (this.cards[i] == other.cards[i]) continue;
                     switch (this.cards[i])
@@ -119,13 +119,14 @@ namespace AdventOfCode.Solutions.Year2023
                 switch (groups[0].Count)
                 {
                     case 5: this.HandType = HandRanks.FiveMatch; break;
-                    case 4: this.HandType = groups.Any(x => x.Card == 'J') ? HandRanks.FiveMatch: HandRanks.FourOfAKind; break;
-                    case 3: 
-                        if(groups[1].Count == 2)
+                    case 4: this.HandType = groups.Any(x => x.Card == 'J') ? HandRanks.FiveMatch : HandRanks.FourOfAKind; break;
+                    case 3:
+                        if (groups[1].Count == 2)
                         {
                             if (groups[0].Card == 'J' || groups[1].Card == 'J') { this.HandType = HandRanks.FiveMatch; break; }
                             else { this.HandType = HandRanks.FullHouse; break; }
-                        } else
+                        }
+                        else
                         {
                             if (groups.Any(x => x.Card == 'J')) { this.HandType = HandRanks.FourOfAKind; break; }
                             else { this.HandType = HandRanks.ThreeOfAKind; break; }
@@ -180,7 +181,7 @@ namespace AdventOfCode.Solutions.Year2023
         private enum HandRanks
         {
             HighCard = 1,
-            OnePair = 2, 
+            OnePair = 2,
             TwoPair = 3,
             ThreeOfAKind = 4,
             FullHouse = 5,

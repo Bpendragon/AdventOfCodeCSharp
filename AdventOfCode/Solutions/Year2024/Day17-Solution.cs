@@ -40,7 +40,7 @@ namespace AdventOfCode.Solutions.Year2024
             List<long> res = new();
             if (depth > Operands.Count) return res;
             var tmp = curVal << 3;
-            for(int i = 0; i < 8; i++)
+            for (int i = 0; i < 8; i++)
             {
                 var tmpRes = RunProgram(tmp + i);
                 if (tmpRes.SequenceEqual(Operands.TakeLast(depth + 1)))
@@ -51,7 +51,7 @@ namespace AdventOfCode.Solutions.Year2024
             }
 
             return res;
-        } 
+        }
 
         private List<long> RunProgram(long regA)
         {

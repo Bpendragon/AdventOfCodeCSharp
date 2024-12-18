@@ -10,7 +10,7 @@ namespace AdventOfCode.Solutions.Year2017
         List<List<int>> rows = new();
         public Day02() : base()
         {
-            foreach(var r in Input.SplitByNewline())
+            foreach (var r in Input.SplitByNewline())
             {
                 rows.Add(new(r.ExtractInts()));
             }
@@ -24,7 +24,7 @@ namespace AdventOfCode.Solutions.Year2017
         protected override object SolvePartTwo()
         {
             int sum = 0;
-            foreach(var r in rows)
+            foreach (var r in rows)
             {
                 r.Sort((a, b) => b.CompareTo(a));
                 for (int i = 0; i < r.Count; i++)

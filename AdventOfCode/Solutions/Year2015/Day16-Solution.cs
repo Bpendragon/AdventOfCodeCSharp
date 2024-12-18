@@ -45,7 +45,7 @@ namespace AdventOfCode.Solutions.Year2015
         {
             List<AuntSue> shrunkList = new(Sues);
 
-            foreach(var p in tgtSue.Attributes)
+            foreach (var p in tgtSue.Attributes)
             {
                 shrunkList = shrunkList.Where(x => !(x.Attributes.ContainsKey(p.Key)) || x.Attributes[p.Key] == p.Value).ToList();
             }
@@ -58,17 +58,19 @@ namespace AdventOfCode.Solutions.Year2015
 
             foreach (var p in tgtSue.Attributes)
             {
-                if(p.Key == "cats" || p.Key == "trees")
+                if (p.Key == "cats" || p.Key == "trees")
                 {
                     shrunkList = shrunkList.Where(x => !(x.Attributes.ContainsKey(p.Key)) || x.Attributes[p.Key] > p.Value).ToList();
-                } else if (p.Key == "pomeranians" || p.Key == "goldfish")
+                }
+                else if (p.Key == "pomeranians" || p.Key == "goldfish")
                 {
                     shrunkList = shrunkList.Where(x => !(x.Attributes.ContainsKey(p.Key)) || x.Attributes[p.Key] < p.Value).ToList();
-                } else
+                }
+                else
                 {
                     shrunkList = shrunkList.Where(x => !(x.Attributes.ContainsKey(p.Key)) || x.Attributes[p.Key] == p.Value).ToList();
                 }
-                
+
             }
 
             return shrunkList[0].ID;

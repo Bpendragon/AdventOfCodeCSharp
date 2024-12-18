@@ -18,7 +18,7 @@ namespace AdventOfCode.Solutions.Year2022
 
             var unparsedStacks = parts[0].SplitIntoColumns().ToList();
 
-            foreach(var s in unparsedStacks)
+            foreach (var s in unparsedStacks)
             {
                 if (char.IsDigit(s[^1]))
                 {
@@ -35,7 +35,7 @@ namespace AdventOfCode.Solutions.Year2022
             }
 
             var unparsedIns = parts[1].SplitByNewline();
-            foreach(var l in unparsedIns)
+            foreach (var l in unparsedIns)
             {
                 var tokens = l.Split(" ");
                 instructions.Add((int.Parse(tokens[1]), int.Parse(tokens[3]), int.Parse(tokens[^1])));
@@ -44,8 +44,8 @@ namespace AdventOfCode.Solutions.Year2022
 
         protected override object SolvePartOne()
         {
-            foreach(var (cnt, src, dest) in instructions) for (int i = 0; i < cnt; i++) stacks[dest - 1].Push(stacks[src - 1].Pop());
-            
+            foreach (var (cnt, src, dest) in instructions) for (int i = 0; i < cnt; i++) stacks[dest - 1].Push(stacks[src - 1].Pop());
+
             StringBuilder sb = new();
             foreach (var s in stacks) sb.Append(s.Peek());
             return sb.ToString();

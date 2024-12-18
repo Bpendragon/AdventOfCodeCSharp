@@ -12,11 +12,11 @@ namespace AdventOfCode.Solutions.Year2015
         public Day09() : base()
         {
             Cities = new Dictionary<string, City>();
-            List<string>lines = Input.SplitByNewline(true);
-            foreach(string line in lines)
+            List<string> lines = Input.SplitByNewline(true);
+            foreach (string line in lines)
             {
                 string[] a = line.Split();
-                if(!Cities.ContainsKey(a[0]))
+                if (!Cities.ContainsKey(a[0]))
                 {
                     Cities[a[0]] = new City(a[0]);
                 }
@@ -45,7 +45,7 @@ namespace AdventOfCode.Solutions.Year2015
 
         protected override object SolvePartOne()
         {
-            
+
             return routeLengths.Min();
         }
 

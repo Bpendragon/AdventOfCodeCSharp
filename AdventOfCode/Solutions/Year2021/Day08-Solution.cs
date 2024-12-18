@@ -17,8 +17,8 @@ namespace AdventOfCode.Solutions.Year2021
 
         protected override object SolvePartOne()
         {
-            int[] uniques = {2,3,4,7};
-            return entries.Sum(x =>x.Split(new char []{ '|', ' ' },StringSplitOptions.RemoveEmptyEntries)[10..].Count(a => uniques.Contains(a.Length)));
+            int[] uniques = { 2, 3, 4, 7 };
+            return entries.Sum(x => x.Split(new char[] { '|', ' ' }, StringSplitOptions.RemoveEmptyEntries)[10..].Count(a => uniques.Contains(a.Length)));
         }
 
         protected override object SolvePartTwo()
@@ -31,7 +31,7 @@ namespace AdventOfCode.Solutions.Year2021
                 var tmp = line.Split(new char[] { '|', ' ' }, StringSplitOptions.RemoveEmptyEntries);
 
                 List<List<char>> wires = new();
-                foreach(var x in tmp[..10])
+                foreach (var x in tmp[..10])
                 {
                     var c = x.ToList();
                     c.Sort();
@@ -40,7 +40,7 @@ namespace AdventOfCode.Solutions.Year2021
 
                 List<string> outputs = new();
 
-                foreach(var x in tmp[10..])
+                foreach (var x in tmp[10..])
                 {
                     var c = x.ToList();
                     c.Sort();

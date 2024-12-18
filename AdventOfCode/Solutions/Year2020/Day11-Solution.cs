@@ -27,12 +27,12 @@ namespace AdventOfCode.Solutions.Year2020
         {
             List<string> lines = Input.SplitByNewline().ToList();
             maxY = lines.Count;
-            for(int j = 0; j < lines.Count; j++)
+            for (int j = 0; j < lines.Count; j++)
             {
-                for(int i = 0; i < lines[j].Length; i++)
+                for (int i = 0; i < lines[j].Length; i++)
                 {
                     if (lines[j][i] == 'L') Seats[(i, j)] = false;
-                    else if(lines[j][i] == '#') Seats[(i, j)] = false;
+                    else if (lines[j][i] == '#') Seats[(i, j)] = false;
                     if (i > maxX) maxX = i;
                 }
             }
@@ -47,7 +47,7 @@ namespace AdventOfCode.Solutions.Year2020
             {
                 seatsChanged = 0;
                 Dictionary<(int, int), bool> nextSeats = new(Seats);
-                foreach(KeyValuePair<(int, int), bool> seat in Seats)
+                foreach (KeyValuePair<(int, int), bool> seat in Seats)
                 {
                     bool nextVal = AliveNext(seat.Key);
                     if (nextVal != seat.Value) seatsChanged++;
@@ -90,7 +90,7 @@ namespace AdventOfCode.Solutions.Year2020
             foreach ((int, int) n in Neighbors)
             {
                 locNeighbors.Add(c.Add(n));
-                
+
                 if (part2)
                 {
                     (int, int) tmp = c.Add(n);
@@ -119,7 +119,8 @@ namespace AdventOfCode.Solutions.Year2020
                 {
                     return livingNeighbors == 0;
                 }
-            } else
+            }
+            else
             {
                 foreach ((int, int) n in locNeighbors)
                 {

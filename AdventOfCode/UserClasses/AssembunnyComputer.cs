@@ -40,14 +40,14 @@ namespace AdventOfCode.UserClasses
         public void Execute()
         {
             program = new List<string>(cleanProgram);
-            while(sp >= 0 && sp < program.Count)
+            while (sp >= 0 && sp < program.Count)
             {
                 string[] command = program[sp].Split();
 
 
                 int val; //value read from first instruction
                 int tgt; //num steps for a jnz/tgl etc
-                switch(command[0])
+                switch (command[0])
                 {
                     case "cpy":
                         if (int.TryParse(command[2], out _)) break;
@@ -69,7 +69,7 @@ namespace AdventOfCode.UserClasses
                     case "jnz":
                         if (!int.TryParse(command[1], out val)) val = registers[command[1]];
                         if (!int.TryParse(command[2], out tgt)) tgt = registers[command[2]];
-                        if(val != 0)
+                        if (val != 0)
                         {
                             sp += tgt;
                             continue;
@@ -98,7 +98,7 @@ namespace AdventOfCode.UserClasses
 
             string[] split = command.Split();
 
-            switch(split[0])
+            switch (split[0])
             {
                 case "jnz":
                     split[0] = "cpy";
@@ -109,7 +109,7 @@ namespace AdventOfCode.UserClasses
                 case "inc":
                     split[0] = "dec";
                     break;
-                case "dec": 
+                case "dec":
                 case "tgl":
                     split[0] = "inc";
                     break;
@@ -121,7 +121,7 @@ namespace AdventOfCode.UserClasses
 
     }
 
-    public class ABOutputEventArgs: EventArgs
+    public class ABOutputEventArgs : EventArgs
     {
         public int Output { get; set; }
     }

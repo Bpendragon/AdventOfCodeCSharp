@@ -19,23 +19,24 @@ namespace AdventOfCode.Solutions.Year2016
             {
                 string str = lines[i];
                 maze.Add(new List<bool>());
-                foreach(int j in Enumerable.Range(0,str.Length))
+                foreach (int j in Enumerable.Range(0, str.Length))
                 {
                     char c = str[j];
-                    if (c == '#') {
+                    if (c == '#')
+                    {
                         maze[i].Add(false);
                         continue;
                     }
 
                     maze[i].Add(true);
-                    if(c >= '0' && c <= '7')
+                    if (c >= '0' && c <= '7')
                     {
                         Wires[c.ToString()] = new Wire(c.ToString(), (i, j));
                     }
                 }
             }
-            
-            foreach(var combo in Wires.Keys.Combinations(2))
+
+            foreach (var combo in Wires.Keys.Combinations(2))
             {
                 string[] pair = combo.ToArray();
 
@@ -54,7 +55,7 @@ namespace AdventOfCode.Solutions.Year2016
             Queue<(int, int)> q = new();
             discovered[start] = (-1, -1);
             q.Enqueue(start);
-            while(q.Count > 0)
+            while (q.Count > 0)
             {
                 (int, int) v = q.Dequeue();
                 (int, int) S = (v.Item1, v.Item2 + 1); //it grows down, higher Y means further down/south on the map
@@ -65,7 +66,7 @@ namespace AdventOfCode.Solutions.Year2016
                 if (N == end ||
                     E == end ||
                     S == end ||
-                    W == end )
+                    W == end)
                 {
                     int length = 1;
                     (int, int) p = discovered[v];
@@ -134,7 +135,7 @@ namespace AdventOfCode.Solutions.Year2016
             public Dictionary<string, int> Distances { get; set; } = new Dictionary<string, int>();
             public string Name { get; set; }
 
-            public Wire (string Name, (int, int) Coords)
+            public Wire(string Name, (int, int) Coords)
             {
                 this.Name = Name;
                 this.Coords = Coords;

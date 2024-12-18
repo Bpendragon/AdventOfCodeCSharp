@@ -18,7 +18,7 @@ namespace AdventOfCode.Solutions.Year2020
             long cardLoop = 0;
 
             long cardCount = 1;
-            while(cardCount != cardPKey)
+            while (cardCount != cardPKey)
             {
                 cardCount *= subjectNumber;
                 cardCount %= 20201227;

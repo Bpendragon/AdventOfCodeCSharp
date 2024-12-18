@@ -1,14 +1,16 @@
-using System;
-using System.Text;
-using System.Collections.Generic;
 using AdventOfCode.UserClasses;
-using System.Linq;
+
+using System;
+using System.Collections.Generic;
 using System.Data;
-using System.Threading;
-using System.Security;
-using static AdventOfCode.Solutions.Utilities;
+using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Security;
 using System.Security.Cryptography.X509Certificates;
+using System.Text;
+using System.Threading;
+
+using static AdventOfCode.Solutions.Utilities;
 
 namespace AdventOfCode.Solutions.Year2023
 {
@@ -33,14 +35,14 @@ namespace AdventOfCode.Solutions.Year2023
             Goal = (maxX - 1, maxY);
 
             StartNode = new() { location = Start };
-            GoalNode = new() { location = Goal};
+            GoalNode = new() { location = Goal };
 
             Nodes[Start] = StartNode;
             Nodes[Goal] = GoalNode;
 
             var intersections = map.Where(a => a.Key.Neighbors().Count(b => map.ContainsKey(b) && "<>^v".Contains(map[b])) >= 3).Select(a => a.Key).ToList();
 
-            foreach(var i in intersections)
+            foreach (var i in intersections)
             {
                 Node tmp = new() { location = i };
                 Nodes[i] = tmp;
@@ -61,7 +63,7 @@ namespace AdventOfCode.Solutions.Year2023
         {
             public Coordinate2D location;
 
-            public List<(Node Neighbor, int dist)>  Neighbors = new();
+            public List<(Node Neighbor, int dist)> Neighbors = new();
 
             public override int GetHashCode()
             {
@@ -97,7 +99,8 @@ namespace AdventOfCode.Solutions.Year2023
             int runLength = 0;
 
             List<Coordinate2D> validPaths = new();
-            while (true) {
+            while (true)
+            {
                 validPaths = curLoc.Neighbors().Where(a => map.ContainsKey(a) && map[a] != '#' && !locVisited.Contains(a)).ToList();
 
                 if (validPaths.Count == 0)

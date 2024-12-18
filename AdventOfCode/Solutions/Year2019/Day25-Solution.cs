@@ -1,6 +1,6 @@
-using System;
-
 using AdventOfCode.UserClasses;
+
+using System;
 
 using static AdventOfCode.Solutions.Utilities;
 
@@ -36,7 +36,7 @@ namespace AdventOfCode.Solutions.Year2019
                 }
                 char c2 = (char)c;
                 Write(c2);
-                if(c2 == '?')
+                if (c2 == '?')
                 {
                     continue;
                 }

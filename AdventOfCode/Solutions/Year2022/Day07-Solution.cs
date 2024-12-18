@@ -10,7 +10,7 @@ namespace AdventOfCode.Solutions.Year2022
     {
         readonly List<string> cout;
         readonly Dictionary<string, Directory> Directories = new();
-        
+
         public Day07() : base()
         {
             cout = Input.SplitByNewline();
@@ -76,13 +76,13 @@ namespace AdventOfCode.Solutions.Year2022
 
         protected override object SolvePartOne()
         {
-            return Directories.Values.Where(a => a.Size <= 100_000).Sum(a=> a.Size);
+            return Directories.Values.Where(a => a.Size <= 100_000).Sum(a => a.Size);
         }
 
         protected override object SolvePartTwo()
         {
             long requiredSpace = 30_000_000 - (70_000_000 - Directories["/"].Size);
-            return Directories.Values.Where(a => a.Size >= requiredSpace).Min(b=>b.Size);
+            return Directories.Values.Where(a => a.Size >= requiredSpace).Min(b => b.Size);
         }
 
         private class Directory
@@ -122,5 +122,5 @@ namespace AdventOfCode.Solutions.Year2022
         }
     }
 
-    
+
 }

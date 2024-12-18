@@ -1,7 +1,7 @@
 using System;
-using System.Text;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 
 namespace AdventOfCode.Solutions.Year2020
 {
@@ -14,30 +14,32 @@ namespace AdventOfCode.Solutions.Year2020
         readonly StringSplitOptions splitOpts = StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries;
         public Day21() : base()
         {
-            foreach(var line in Input.SplitByNewline(true))
+            foreach (var line in Input.SplitByNewline(true))
             {
-                var halves = line.Split("()".ToCharArray(), splitOpts) ;
+                var halves = line.Split("()".ToCharArray(), splitOpts);
                 var ings = halves[0].Split();
-                
-                foreach(var ing in ings)
+
+                foreach (var ing in ings)
                 {
                     if (ingredientCounts.TryGetValue(ing, out _))
                     {
                         ingredientCounts[ing]++;
-                    } else
+                    }
+                    else
                     {
                         ingredientCounts[ing] = 1;
                     }
                 }
 
                 string[] allergens = halves[1].Split(' ', splitOpts);
-                for(int i = 1; i < allergens.Length; i++) //skip "contains
+                for (int i = 1; i < allergens.Length; i++) //skip "contains
                 {
                     var actAllergen = allergens[i].Trim(',');
-                    if(AllergenPossibilities.TryGetValue(actAllergen, out var currentList))
+                    if (AllergenPossibilities.TryGetValue(actAllergen, out var currentList))
                     {
                         AllergenPossibilities[actAllergen] = currentList.Intersect(ings).ToList();
-                    } else
+                    }
+                    else
                     {
                         AllergenPossibilities[actAllergen] = new List<string>(ings);
                     }
@@ -57,12 +59,12 @@ namespace AdventOfCode.Solutions.Year2020
             Dictionary<string, string> knownAllergens = new();
 
 
-            while(AllergenPossibilities.Any(x => x.Value.Count > 1))
+            while (AllergenPossibilities.Any(x => x.Value.Count > 1))
             {
                 var onlyOnes = AllergenPossibilities.Where(x => x.Value.Count == 1).ToList();
-                foreach(var s in onlyOnes)
+                foreach (var s in onlyOnes)
                 {
-                    foreach(var item in AllergenPossibilities.Where(x => x.Key != s.Key))
+                    foreach (var item in AllergenPossibilities.Where(x => x.Key != s.Key))
                     {
                         AllergenPossibilities[item.Key] = item.Value.Except(s.Value).ToList();
                     }
@@ -74,7 +76,7 @@ namespace AdventOfCode.Solutions.Year2020
             List<string> sortedAllergens = AllergenPossibilities.Keys.ToList();
             sortedAllergens.Sort();
 
-            foreach(var s in sortedAllergens)
+            foreach (var s in sortedAllergens)
             {
                 sb.Append($"{AllergenPossibilities[s][0]},");
             }

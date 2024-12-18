@@ -20,7 +20,7 @@ namespace AdventOfCode.Solutions.Year2024
         {
             HashSet<char> checkedChars = new();
 
-            foreach(var kvp in map)
+            foreach (var kvp in map)
             {
                 if (!checkedChars.Add(kvp.Value)) continue;
 
