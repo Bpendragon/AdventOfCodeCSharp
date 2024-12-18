@@ -9,41 +9,67 @@ namespace AdventOfCode.Solutions.Year2024
     {
         List<Coordinate2D> badRAM = new();
         int maxX, maxY;
+        Dictionary<Coordinate2D, char> map = new();
         public Day18() : base()
         {
             maxX = UseDebugInput ? 6 : 70;
             maxY = UseDebugInput ? 6 : 70;
-            foreach(var c in Input.SplitByNewline())
+            var coords = Input.SplitByNewline();
+            for (int i = 0; i < coords.Count; i++)
             {
-                badRAM.Add(new(c));
+                Coordinate2D c = new(coords[i]);
+                badRAM.Add(c);
+                if (i < 1024) map[c] = '#';
             }
         }
 
         protected override object SolvePartOne()
         {
+            return AStar().length;
+        }
+
+        protected override object SolvePartTwo()
+        {
+            int L = 1024; //Start at a point we already know works
+            int R = badRAM.Count - 1;
+            Dictionary<int, bool> results = new();
+            while (L <= R)
+            {
+                int m = (L + R) / 2;
+
+                (var succ, _) = AStar(m - 1024);
+                results[m - 1] = succ;
+                if (succ) L = m + 1;
+                else R = m - 1;
+
+            }
+            return badRAM[results.Where(a => !a.Value).Min(a => a.Key)];
+        }
+
+        private (bool success, int length) AStar(int extraBadSlots = 0)
+        {
+            Dictionary<Coordinate2D, char> localMap = new();
+
+            foreach (var c in badRAM.Skip(1024).Take(extraBadSlots)) localMap[c] = '#';
+
             Coordinate2D start = (0, 0);
             Coordinate2D target = (maxX, maxY);
 
-            Dictionary<Coordinate2D, char> map = new();
-
-            foreach(var c in badRAM.Take(UseDebugInput ? 12 : 1024))
-            {
-                map[c] = '#';
-            }
-
             PriorityQueue<Coordinate2D, int> openSet = new();
             Dictionary<Coordinate2D, int> gScore = new();
+            Dictionary<Coordinate2D, int> fScore = new();
             gScore[start] = 0;
-
+            fScore[start] = start.ManDistance(target);
 
             openSet.Enqueue(start, start.ManDistance(target));
 
-            while(openSet.TryDequeue(out var curLoc, out _))
+            while (openSet.TryDequeue(out var curLoc, out int priority))
             {
-                if (curLoc == target) break;
-                foreach(var n in curLoc.Neighbors().Where(a => a.BoundsCheck(maxX, maxY)))
+                if (fScore.GetValueOrDefault(curLoc) > priority) continue;
+                if (curLoc == target) return (true, gScore[target]);
+                foreach (var n in curLoc.Neighbors().Where(a => a.BoundsCheck(maxX, maxY)))
                 {
-                    if(map.GetValueOrDefault(n, '.') != '#')
+                    if (map.GetValueOrDefault(n, '.') != '#' && localMap.GetValueOrDefault(n, '.') != '#')
                     {
                         var tentGScore = gScore[curLoc] + 1;
                         if (tentGScore < gScore.GetValueOrDefault(n, int.MaxValue))
@@ -54,59 +80,7 @@ namespace AdventOfCode.Solutions.Year2024
                     }
                 }
             }
-
-            return gScore[target];
-        }
-
-        protected override object SolvePartTwo()
-        {
-            Coordinate2D start = (0, 0);
-            Coordinate2D target = (maxX, maxY);
-            int i;
-            Dictionary<Coordinate2D, char> map = new();
-
-            foreach (var c in badRAM.Take(1024))
-            {
-                map[c] = '#';
-            }
-            for (i = 1024; i <= badRAM.Count; i++)
-            {
-                map[badRAM[i - 1]] = '#';
-                HashSet<Coordinate2D> openSet = new();
-                Dictionary<Coordinate2D, int> gScore = new();
-                Dictionary<Coordinate2D, int> fScore = new();
-                gScore[start] = 0;
-                fScore[start] = start.ManDistance(target);
-
-                openSet.Add(start);
-                bool wasSolved = false;
-                while (openSet.Count > 0)
-                {
-                    Coordinate2D curLoc = openSet.MinBy(a => fScore[a]);
-                    openSet.Remove(curLoc);
-                    if (curLoc == target)
-                    {
-                        wasSolved = true;
-                        break;
-                    }
-                    foreach (var n in curLoc.Neighbors().Where(a => a.BoundsCheck(maxX, maxY)))
-                    {
-                        if (map.GetValueOrDefault(n, '.') != '#')
-                        {
-                            var tentGScore = gScore[curLoc] + 1;
-                            if (tentGScore < gScore.GetValueOrDefault(n, int.MaxValue))
-                            {
-                                gScore[n] = tentGScore;
-                                fScore[n] = n.ManDistance(target) + tentGScore;
-                                openSet.Add(n);
-                            }
-                        }
-                    }
-                }
-                if (!wasSolved) break;
-            }
-
-            return badRAM[i - 1];
+            return (false, int.MaxValue);
         }
     }
 }
