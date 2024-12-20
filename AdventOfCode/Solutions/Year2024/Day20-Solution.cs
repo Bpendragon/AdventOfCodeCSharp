@@ -1,5 +1,5 @@
+using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Linq;
 
 namespace AdventOfCode.Solutions.Year2024
@@ -31,11 +31,11 @@ namespace AdventOfCode.Solutions.Year2024
                 steps[curLoc] = ++stepCount;
             } while (curLoc != end);
 
-            foreach( (var loc, var s) in steps)
+            foreach ((var loc, var s) in steps)
             {
-                foreach(var n in loc.Neighbors(dist:2))
+                foreach (var n in loc.Neighbors(dist: 2))
                 {
-                    if(steps.ContainsKey(n))
+                    if (steps.ContainsKey(n))
                     {
                         int saved = steps[n] - steps[loc] - 2;
                         if (saved >= 100) savingsCount++;
@@ -51,14 +51,17 @@ namespace AdventOfCode.Solutions.Year2024
             int savingsCount = 0;
             foreach ((var loc, var s) in steps)
             {
-                foreach (var n in steps.Where(a => a.Key.ManDistance(loc) <= 20))
+                for (int y = -20; y <= 20; y++)
                 {
-                    if (steps.ContainsKey(n.Key))
+                    for (int x = Math.Abs(y) - 20; Math.Abs(x) + Math.Abs(y) <= 20; x++)
                     {
-                        int saved = n.Value - steps[loc] - n.Key.ManDistance(loc);
-                        if (saved >= 100)
+                        if (steps.ContainsKey(loc + (x,y)))
                         {
-                            savingsCount++;
+                            int saved = steps[loc + (x, y)] - s - (Math.Abs(x) + Math.Abs(y));
+                            if (saved >= 100)
+                            {
+                                savingsCount++;
+                            }
                         }
                     }
                 }
