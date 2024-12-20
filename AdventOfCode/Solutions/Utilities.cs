@@ -847,6 +847,17 @@ namespace AdventOfCode.Solutions
             return tmp;
         }
 
+        public static IEnumerable<Coordinate2D> ManDistSquare(int dist)
+        {
+            for(int y = -dist; y <= dist; y++)
+            {
+                for(int x = Math.Abs(y) - dist; Math.Abs(x) + Math.Abs(y) <= dist; x++)
+                {
+                    yield return (x, y);
+                }
+            }
+        }
+
         public static IEnumerable<Coordinate3D> GetImmediateNeighbors(this Coordinate3D self)
         {
             yield return (self.x + 1, self.y, self.z);
@@ -1113,12 +1124,7 @@ namespace AdventOfCode.Solutions
 
         public int ManDistance() => Math.Abs(x) + Math.Abs(y);
 
-        public int ManDistance(Coordinate2D other)
-        {
-            int x = Math.Abs(this.x - other.x);
-            int y = Math.Abs(this.y - other.y);
-            return x + y;
-        }
+        public int ManDistance(Coordinate2D other) => Math.Abs(this.x - other.x) + Math.Abs(this.y - other.y);
 
         public override bool Equals(object obj)
         {

@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -49,19 +48,17 @@ namespace AdventOfCode.Solutions.Year2024
         protected override object SolvePartTwo()
         {
             int savingsCount = 0;
+            List<Coordinate2D> sq = new(Utilities.ManDistSquare(20));
             foreach ((var loc, var s) in steps)
             {
-                for (int y = -20; y <= 20; y++)
+                foreach (var n in sq)
                 {
-                    for (int x = Math.Abs(y) - 20; Math.Abs(x) + Math.Abs(y) <= 20; x++)
+                    if (steps.ContainsKey(loc + n))
                     {
-                        if (steps.ContainsKey(loc + (x,y)))
+                        int saved = steps[loc + n] - s - n.ManDistance();
+                        if (saved >= 100)
                         {
-                            int saved = steps[loc + (x, y)] - s - (Math.Abs(x) + Math.Abs(y));
-                            if (saved >= 100)
-                            {
-                                savingsCount++;
-                            }
+                            savingsCount++;
                         }
                     }
                 }
