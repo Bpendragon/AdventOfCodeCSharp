@@ -1,15 +1,6 @@
-using AdventOfCode.UserClasses;
-
-using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Security;
-using System.Text;
-using System.Threading;
-
-using static AdventOfCode.Solutions.Utilities;
 
 namespace AdventOfCode.Solutions.Year2024
 {
@@ -18,14 +9,12 @@ namespace AdventOfCode.Solutions.Year2024
     {
         Dictionary<Coordinate2D, char> map;
         Dictionary<Coordinate2D, int> steps = new();
-        int baseSolveTime;
         Coordinate2D start;
         Coordinate2D end;
 
         public Day20() : base()
         {
             (map, _, _) = Input.GenerateMap(discardDot: false);
-            baseSolveTime = map.Count(a => a.Value != '#');
             start = map.First(a => a.Value == 'S').Key;
             end = map.First(a => a.Value == 'E').Key;
         }
@@ -48,8 +37,8 @@ namespace AdventOfCode.Solutions.Year2024
                 {
                     if(steps.ContainsKey(n))
                     {
-                        int saved = steps[n] - steps[loc];
-                        if (saved - 2 >= 100) savingsCount++;
+                        int saved = steps[n] - steps[loc] - 2;
+                        if (saved >= 100) savingsCount++;
                     }
                 }
             }
@@ -69,7 +58,6 @@ namespace AdventOfCode.Solutions.Year2024
                         int saved = n.Value - steps[loc] - n.Key.ManDistance(loc);
                         if (saved >= 100)
                         {
-                            //Console.WriteLine((loc, n.Key, saved));
                             savingsCount++;
                         }
                     }
