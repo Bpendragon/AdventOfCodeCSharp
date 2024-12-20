@@ -825,23 +825,23 @@ namespace AdventOfCode.Solutions
             return keyList;
         }
 
-        public static List<Coordinate2D> Neighbors(this Coordinate2D val, bool includeDiagonals = false)
+        public static List<Coordinate2D> Neighbors(this Coordinate2D val, bool includeDiagonals = false, int dist = 1)
         {
             var tmp = new List<Coordinate2D>()
             {
-                new(val.x - 1, val.y),
-                new(val.x + 1, val.y),
-                new(val.x, val.y - 1),
-                new(val.x, val.y + 1),
+                new(val.x - dist, val.y),
+                new(val.x + dist, val.y),
+                new(val.x, val.y - dist),
+                new(val.x, val.y + dist),
             };
             if (includeDiagonals)
             {
                 tmp.AddRange(new List<Coordinate2D>()
                 {
-                    new(val.x - 1, val.y - 1),
-                    new(val.x + 1, val.y - 1),
-                    new(val.x - 1, val.y + 1),
-                    new(val.x + 1, val.y + 1),
+                    new(val.x - dist, val.y - dist),
+                    new(val.x + dist, val.y - dist),
+                    new(val.x - dist, val.y + dist),
+                    new(val.x + dist, val.y + dist),
                 });
             }
             return tmp;
