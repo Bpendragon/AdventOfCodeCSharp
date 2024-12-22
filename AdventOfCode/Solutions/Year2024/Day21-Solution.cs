@@ -96,6 +96,13 @@ namespace AdventOfCode.Solutions.Year2024
             return res;
         }
 
+        /// <summary>
+        /// Finds the shortest path for some number of robots to push buttons
+        /// </summary>
+        /// <param name="code">The code the robot needs to type into the keypad</param>
+        /// <param name="depthLimit">How many intermediate robots.</param>
+        /// <param name="curDepth">Which robot is thinking, Depth 0 == robot at the numpad, DepthLimit == the robot you control directly</param>
+        /// <returns></returns>
         private long ShortestLength(string code, int depthLimit, int curDepth) //Depth 0 = numpad
         {
             long res = 0;

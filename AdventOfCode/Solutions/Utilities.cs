@@ -1436,6 +1436,11 @@ namespace AdventOfCode.Solutions
             return this == (Coordinate4D)obj;
         }
 
+        public override string ToString()
+        {
+            return base.ToString();
+        }
+
         public override int GetHashCode()
         {
             return (137 * x + 149 * y + 163 * z + 179 * w);
