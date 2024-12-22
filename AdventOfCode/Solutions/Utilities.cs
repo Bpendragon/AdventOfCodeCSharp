@@ -7,8 +7,8 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Numerics;
-using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -443,15 +443,50 @@ namespace AdventOfCode.Solutions
             return (long)BigInteger.ModPow(x, y, p);
         }
 
-        // https://github.com/tslater2006/AdventOfCode2019
+        //An actually useful algorithm because it allows for the same item to appear multiple times in the source list. See 2024 Day 21 for why that might be needed. 
         public static IEnumerable<IEnumerable<T>> Permutations<T>(this IEnumerable<T> values)
         {
-            return (values.Count() == 1) ? new[] { values } : values.SelectMany(v => Permutations(values.Where(x => x.Equals(v) == false)), (v, p) => p.Prepend(v)).ToList();
+            var valList = values.ToArray();
+            T[] current = new T[values.Count()];
+            yield return (T[])valList.Clone();
+
+            int[] indices = Enumerable.Range(0, valList.Length).ToArray();
+
+            int j, k;
+
+            while (true)
+            {
+                for (j = valList.Length - 2; j >= 0; j--)
+                    if (indices[j + 1] > indices[j]) break;
+
+                if (j == -1) yield break;
+
+                for (k = valList.Length - 1; k > j; k--)
+                    if (indices[k] > indices[j]) break;
+
+                int temp = indices[j];
+                indices[j] = indices[k];
+                indices[k] = temp;
+
+                for (int i = j + 1; i < indices.Length; i++)
+                {
+                    if (i > indices.Length - i + j) break;
+                    temp = indices[i];
+                    indices[i] = indices[indices.Length - i + j];
+                    indices[indices.Length - i + j] = temp;
+                }
+
+                for (int i = 0; i < valList.Length; i++)
+                    current[i] = valList[indices[i]];
+
+                yield return (T[])current.Clone();
+            }
+
         }
 
         public static IEnumerable<IEnumerable<T>> Permutations<T>(this IEnumerable<T> values, int subcount)
         {
-            var comboList = Combinations(values, subcount).ToList();
+            var comboList = values.Combinations(subcount).ToList();
             foreach (IEnumerable<T> combination in comboList)
             {
                 IEnumerable<IEnumerable<T>> perms = Permutations(combination);
@@ -464,6 +499,7 @@ namespace AdventOfCode.Solutions
         private static IEnumerable<int[]> Combinations(int m, int n)
         {
             int[] result = new int[m];
+
             Stack<int> stack = new(m);
             stack.Push(0);
             while (stack.Count > 0)
@@ -494,9 +530,11 @@ namespace AdventOfCode.Solutions
                 {
                     result[i] = array.ElementAt(j[i]);
                 }
-                yield return result;
+                yield return (IEnumerable<T>)result.Clone();
             }
         }
+
+
 
         public static IEnumerable<IEnumerable<T>> Split<T>(this IEnumerable<T> array, int size)
         {
@@ -1125,6 +1163,8 @@ namespace AdventOfCode.Solutions
         public int ManDistance() => Math.Abs(x) + Math.Abs(y);
 
         public int ManDistance(Coordinate2D other) => Math.Abs(this.x - other.x) + Math.Abs(this.y - other.y);
+
+        public (int dX, int dY) Delta(Coordinate2D other) => (other.x - this.x, other.y - this.y);
 
         public override bool Equals(object obj)
         {
