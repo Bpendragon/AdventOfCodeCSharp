@@ -1436,10 +1436,7 @@ namespace AdventOfCode.Solutions
             return this == (Coordinate4D)obj;
         }
 
-        public override string ToString()
-        {
-            return base.ToString();
-        }
+        public override string ToString() => $"({x}, {y}, {z}, {w})";
 
         public override int GetHashCode()
         {

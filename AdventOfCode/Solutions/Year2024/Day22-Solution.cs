@@ -1,15 +1,5 @@
-using AdventOfCode.UserClasses;
-
-using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Security;
-using System.Text;
-using System.Threading;
-
-using static AdventOfCode.Solutions.Utilities;
 
 namespace AdventOfCode.Solutions.Year2024
 {
@@ -17,6 +7,8 @@ namespace AdventOfCode.Solutions.Year2024
     class Day22 : ASolution
     {
         List<SecretNumber> secretNumbers = new();
+        DefaultDictionary<string, long> p2Groups = new();
+        long p2Max = 0;
         public Day22() : base()
         {
             foreach(var n in Input.ExtractLongs())
@@ -30,7 +22,17 @@ namespace AdventOfCode.Solutions.Year2024
             var sum = 0L;
             foreach(var n in secretNumbers)
             {
-                sum += n.GenerateNValues(2000);
+                long curVal = 0;
+                foreach(int i in Enumerable.Range(1, 2000))
+                {
+                    (curVal, var k, var add) = n.GenerateNext(i);
+                    if (add)
+                    {
+                        p2Groups[k] += curVal % 10;
+                        if (p2Groups[k] > p2Max) p2Max = p2Groups[k];
+                    }
+                }
+                sum += curVal;
 
             }
             return sum;
@@ -38,32 +40,23 @@ namespace AdventOfCode.Solutions.Year2024
 
         protected override object SolvePartTwo()
         {
-            DefaultDictionary<Coordinate4D, long> res = new();
-            
-            foreach(var n in secretNumbers)
-            {
-                foreach((var key, var value) in n.getSequences())
-                {
-                    res[key] += value;
-                }
-            }
-            
-            return res.Max(a => a.Value);
+            return p2Max;
         }
 
         private class SecretNumber
         {
             long curNumber = 0;
-            List<long> sequence = new();
-            List<int> changes = new();
+            long prevNumber = 0;
+            string changes = string.Empty;
+            private HashSet<string> seen = new();
 
             public SecretNumber(long seed)
             {
                 curNumber = seed;
-                sequence.Add(seed);
+                prevNumber = seed;
             }
 
-            private void GenerateNext()
+            public (long curVal, string changes, bool isFirstTime) GenerateNext(int counter)
             {
                 var tmp = curNumber * 64;
                 curNumber = curNumber ^ tmp;
@@ -75,37 +68,20 @@ namespace AdventOfCode.Solutions.Year2024
                 curNumber = curNumber ^ tmp;
                 curNumber %= 16777216;
 
+                changes += ((curNumber % 10) - (prevNumber % 10));
 
-                changes.Add((int)((curNumber % 10) - (sequence[^1] % 10)));
+                if (counter > 4 && changes[0] == '-') changes = changes[2..];
+                else if (counter > 4) changes = changes[1..];
 
+                prevNumber = curNumber;
 
-                sequence.Add(curNumber);
-            }
-
-            public long GenerateNValues(int n)
-            {
-                foreach(var i in Enumerable.Range(0, n))
+                if(counter >= 4)
                 {
-                    GenerateNext();
-                }
-
-                return curNumber;
-            }
-
-            public Dictionary<Coordinate4D, int> getSequences()
-            {
-                Dictionary<Coordinate4D, int> res = new();
-
-                for(int i = 0; i < changes.Count - 4; i++)
+                    return (curNumber, changes, seen.Add(changes));
+                } else
                 {
-                    var v = changes.Skip(i).Take(4).ToArray();
-                    var k = (v[0], v[1], v[2], v[3]);
-                    if (res.ContainsKey(k)) continue;
-                    res[k] = (int)sequence[i + 4]%10;
+                    return (curNumber, string.Empty, false);
                 }
-
-
-                return res;
             }
         }
     }
