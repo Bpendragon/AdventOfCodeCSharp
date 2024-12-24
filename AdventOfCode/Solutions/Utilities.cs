@@ -862,6 +862,15 @@ namespace AdventOfCode.Solutions
             return keyList;
         }
 
+        public static List<V> ValueList<K, V>(this Dictionary<K, V> dictionary, bool sorted = false)
+        {
+            List<V> valueList = [.. dictionary.Values];
+
+            if (sorted) valueList.Sort();
+
+            return valueList;
+        }
+
         public static List<Coordinate2D> Neighbors(this Coordinate2D val, bool includeDiagonals = false, int dist = 1)
         {
             var tmp = new List<Coordinate2D>()

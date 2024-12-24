@@ -6,7 +6,7 @@ namespace AdventOfCode.Solutions.Year2024
     [DayInfo(23, 2024, "LAN Party")]
     class Day23 : ASolution
     {
-        DefaultDictionary<string, HashSet<string>> cursedGraph = new();
+        DefaultDictionary<string, HashSet<string>> graph = new();
         HashSet<(string u, string v)> edges = new();
         HashSet<string> nodes = new();
         DefaultDictionary<int, HashSet<string>> nCliques = new();
@@ -19,6 +19,8 @@ namespace AdventOfCode.Solutions.Year2024
                 edges.Add((n[0], n[1]));
                 nodes.Add(n[0]);
                 nodes.Add(n[1]);
+                graph[n[0]].Add(n[1]);
+                graph[n[1]].Add(n[0]);
             }
         }
 
