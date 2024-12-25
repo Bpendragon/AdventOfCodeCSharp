@@ -13,35 +13,23 @@ namespace AdventOfCode.Solutions.Year2024
         {
             foreach(var schema in Input.SplitByDoubleNewline())
             {
-                if (schema[0] == '.') //It's a key
+                List<int> t = new();
+                foreach (var c in schema.SplitIntoColumns())
                 {
-                    List<int> t = new();
-                    foreach(var c in schema.SplitIntoColumns())
-                    {
-                        t.Add(c.Count(a => a == '#') - 1);
-                    }
-                    keys.Add(t);
-                } else //it's a lock
-                {
-                    List<int> t = new();
-                    foreach (var c in schema.SplitIntoColumns())
-                    {
-                        t.Add(c.Count(a => a == '#') - 1);
-                    }
-                    locks.Add(t);
+                    t.Add(c.Count(a => a == '#') - 1);
                 }
+
+                if (schema[0] == '.') keys.Add(t); //It's a key
+                else locks.Add(t); //It's a Lock
             }
         }
 
         protected override object SolvePartOne()
         {
             int count = 0;
-            foreach(var k in keys)
+            foreach( var c in locks.Combinations(keys))
             {
-                foreach(var l in locks)
-                {
-                    if (l.Zip(k).All(a => a.First + a.Second < 6)) count++;
-                }
+                if (c.First.Zip(c.Second).All(a => a.First + a.Second <= 5)) count++;
             }
             return count;
         }

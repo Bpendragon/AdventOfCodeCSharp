@@ -15,6 +15,7 @@ namespace AdventOfCode
 
         static void Main(string[] args)
         {
+            Console.OutputEncoding = System.Text.Encoding.UTF8;
             var productVal = new ProductInfoHeaderValue(".NET", Environment.Version.ToString());
             var commentVal = new ProductInfoHeaderValue("(+Bpen's Advent of Code Template; https://github.com/Bpendragon/AdventOfCodeBase; github@bpendragon.horse)");
             Http.DefaultRequestHeaders.UserAgent.Add(productVal);

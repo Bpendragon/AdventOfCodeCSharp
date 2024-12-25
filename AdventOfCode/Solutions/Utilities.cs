@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Numerics;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -490,6 +491,17 @@ namespace AdventOfCode.Solutions
             {
                 IEnumerable<IEnumerable<T>> perms = Permutations(combination);
                 foreach (int i in Enumerable.Range(0, perms.Count())) yield return perms.ElementAt(i);
+            }
+        }
+
+        public static IEnumerable<(TFirst First, TSecond Second)> Combinations<TFirst, TSecond>(this IEnumerable<TFirst> values, IEnumerable<TSecond> other)
+        {
+            foreach(var f in values)
+            {
+                foreach(var s in other)
+                {
+                    yield return (f, s);
+                }
             }
         }
 
