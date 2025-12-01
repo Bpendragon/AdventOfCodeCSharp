@@ -42,6 +42,7 @@ namespace AdventOfCode
                 _d = value.Where(v =>
                 {
                     if (v == 0) allDaysCovered = true;
+                    if (this.Year >= 2025) return v > 0 && v < 13;
                     return v > 0 && v < 26;
                 }).ToArray();
 
@@ -63,7 +64,18 @@ namespace AdventOfCode
             DateTime CURRENT_EST = TimeZoneInfo.ConvertTime(DateTime.Now, TimeZoneInfo.Utc).AddHours(-5);
             if (Cookie == default) Cookie = "";
             if (Year == default) Year = CURRENT_EST.Year;
-            if (Days == default(int[])) Days = (CURRENT_EST.Month == 12 && CURRENT_EST.Day <= 25) ? new int[] { CURRENT_EST.Day } : new int[] { 0 };
+
+            if (Days == default(int[]))
+            {
+                if (Year >= 2025)
+                {
+                    Days = (CURRENT_EST.Month == 12 && CURRENT_EST.Day <= 12) ? new int[] { CURRENT_EST.Day } : new int[] { 0 }; //2025+ are 12 day calenders
+                }
+                else
+                {
+                    Days = (CURRENT_EST.Month == 12 && CURRENT_EST.Day <= 25) ? new int[] { CURRENT_EST.Day } : new int[] { 0 };
+                }
+            }
             else if (Days[0] == -1) Days = new int[] { CURRENT_EST.Day };
         }
 

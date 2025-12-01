@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Text;
 using System.Collections.Generic;
 using AdventOfCode.UserClasses;
@@ -26,7 +26,7 @@ namespace AdventOfCode.Solutions.Year2025
 
         protected override object SolvePartTwo()
         {
-            return null;
+            return "❄️🎄Happy Advent of Code🎄❄️";
         }
     }
 }

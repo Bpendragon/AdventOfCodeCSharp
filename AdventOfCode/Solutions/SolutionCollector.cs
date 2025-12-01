@@ -41,7 +41,13 @@ namespace AdventOfCode.Solutions
         {
             if (days.Sum() == 0)
             {
-                days = Enumerable.Range(1, 25).ToArray();
+                if(year >= 2025)
+                {
+                    days = Enumerable.Range(1, 12).ToArray();
+                } else
+                {
+                    days = Enumerable.Range(1, 25).ToArray();
+                }     
             }
             Stopwatch clock = new();
             return Assembly.GetExecutingAssembly()
