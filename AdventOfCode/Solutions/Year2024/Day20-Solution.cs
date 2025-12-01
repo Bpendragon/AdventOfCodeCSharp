@@ -53,9 +53,10 @@ namespace AdventOfCode.Solutions.Year2024
             {
                 foreach (var n in sq)
                 {
-                    if (steps.ContainsKey(loc + n))
+                    int t = steps.GetValueOrDefault(loc + n, -1);
+                    if (t > s)
                     {
-                        int saved = steps[loc + n] - s - n.ManDistance();
+                        int saved = t - s - n.ManDistance();
                         if (saved >= 100)
                         {
                             savingsCount++;

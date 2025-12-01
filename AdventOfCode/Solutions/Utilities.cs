@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Numerics;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -293,6 +294,32 @@ namespace AdventOfCode.Solutions
             }
 
             return result;
+        }
+
+        public static IEnumerable<IEnumerable<T>> SlidingWindow<T>(this IEnumerable<T> source, int windowSize)
+        {
+            if(windowSize == source.Count())
+            {
+                yield return source;
+                yield break;
+            }
+            if (windowSize > source.Count())
+                throw new ArgumentException("Window Size must be less than input count");
+            Queue<T> q = new(windowSize);
+            int i;
+            for(i = 0; i < windowSize; i++)
+            {
+                q.Enqueue(source.ElementAt(i));
+            }
+            yield return q.ToArray();
+
+            while(i < source.Count())
+            {
+                q.Dequeue();
+                q.Enqueue(source.ElementAt(i));
+                yield return q.ToArray();
+                i++;
+            }
         }
 
         public static string Reverse(this string str)
@@ -656,7 +683,18 @@ namespace AdventOfCode.Solutions
         {
             if (string.IsNullOrEmpty(value))
                 throw new ArgumentException("the string to find may not be empty", nameof(value));
-            for (int index = 0; ; index += value.Length)
+            for (int index = 0; ; index++)
+            {
+                index = str.IndexOf(value, index);
+                if (index == -1)
+                    break;
+                yield return index;
+            }
+        }
+
+        public static IEnumerable<int> AllIndexesOf(this string str, char value)
+        {
+            for (int index = 0; ; index++)
             {
                 index = str.IndexOf(value, index);
                 if (index == -1)
