@@ -1,13 +1,6 @@
 using System;
-using System.Text;
 using System.Collections.Generic;
-using AdventOfCode.UserClasses;
 using System.Linq;
-using System.Data;
-using System.Threading;
-using System.Security;
-using static AdventOfCode.Solutions.Utilities;
-using System.Runtime.CompilerServices;
 
 namespace AdventOfCode.Solutions.Year2025
 {
@@ -27,21 +20,22 @@ namespace AdventOfCode.Solutions.Year2025
 
         protected override object SolvePartOne()
         {
-            List<long> invalidIDs = new();
+            long res = 0;
             foreach (var g in ranges)
             {
                 for (long i = g.s; i <= g.e; i++)
                 {
                     var cur = i.ToString();
-                    if (cur.Substring(0, cur.Length / 2) == cur.Substring(cur.Length / 2)) invalidIDs.Add(i);
+                    if (cur.Length % 2 == 1) continue;
+                    if (cur.Substring(0, cur.Length / 2) == cur.Substring(cur.Length / 2)) res += i;
                 }
             }
-            return invalidIDs.Sum();
+            return res;
         }
 
         protected override object SolvePartTwo()
         {
-            List<long> invalidIDs = new();
+            long res = 0;
             foreach (var g in ranges)
             {
                 for (long i = g.s; i <= g.e; i++)
@@ -50,16 +44,16 @@ namespace AdventOfCode.Solutions.Year2025
                     for (int j = 1; j <= cur.Length / 2; j++)
                     {
                         var chunks = cur.StringChunks(j);
-                        if (chunks.Distinct().Count() == 1)
+                        if (chunks.All(x => x == chunks.First()))
                         {
-                            invalidIDs.Add(i);
+                            res += i;
                             break;
                         }
                     }
                 }
             }
 
-            return invalidIDs.Sum();
+            return res;
         }
     }
 }
