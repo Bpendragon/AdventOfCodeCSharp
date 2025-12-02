@@ -118,6 +118,13 @@ namespace AdventOfCode.Solutions
             return Regex.Matches(str, "[a-zA-z]+").Select(a => a.Value);
         }
 
+        // Because trhe Built-in Chunk function returns char[] instead of string.
+        public static IEnumerable<string> StringChunks(this string str, int maxChunkSize)
+        {
+            for (int i = 0; i < str.Length; i += maxChunkSize)
+                yield return str.Substring(i, Math.Min(maxChunkSize, str.Length - i));
+        }
+
         public static List<long> ToLongList(this string str, string delimiter = "")
         {
             if (delimiter == "")
