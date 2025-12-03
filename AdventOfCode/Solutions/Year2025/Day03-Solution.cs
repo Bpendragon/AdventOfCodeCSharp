@@ -17,7 +17,7 @@ namespace AdventOfCode.Solutions.Year2025
     {
         List<string> battBanks = new();
 
-        public Day03() : base(true)
+        public Day03() : base()
         {
             battBanks = Input.SplitByNewline();
         }
@@ -55,15 +55,20 @@ namespace AdventOfCode.Solutions.Year2025
         {
             long res = 0;
 
-            foreach(var b in battBanks)
+            foreach(var battBank in battBanks)
             {
-                char[] batts = new char[12];
-                char i = '9';
-                while(batts.Any(x => x == 0))
+                var slots = 12;
+                long total = 0;
+                string bank = battBank;
+                while (slots > 0)
                 {
-
+                    string b = slots == 1 ? bank : bank.Substring(0, bank.Length - slots + 1);
+                    var c = b.Max();
+                    slots--;
+                    total = (total * 10) + c - 48;
+                    bank = bank.Substring(bank.IndexOf(c) + 1);
                 }
-
+                res += total;
             }
 
             return res;
