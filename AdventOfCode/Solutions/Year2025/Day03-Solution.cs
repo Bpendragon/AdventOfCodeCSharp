@@ -1,14 +1,5 @@
-using System;
-using System.Text;
 using System.Collections.Generic;
-using AdventOfCode.UserClasses;
 using System.Linq;
-using System.Data;
-using System.Threading;
-using System.Security;
-using static AdventOfCode.Solutions.Utilities;
-using System.Runtime.CompilerServices;
-using System.Reflection.Metadata.Ecma335;
 
 namespace AdventOfCode.Solutions.Year2025
 {
@@ -16,6 +7,7 @@ namespace AdventOfCode.Solutions.Year2025
     class Day03 : ASolution
     {
         List<string> battBanks = new();
+        int offset = '0';
 
         public Day03() : base()
         {
@@ -24,28 +16,11 @@ namespace AdventOfCode.Solutions.Year2025
 
         protected override object SolvePartOne()
         {
-            var res = 0;
+            long res = 0;
 
-            foreach(var b in battBanks)
+            foreach (var battBank in battBanks)
             {
-                for(char i = '9'; i > '0'; i--)
-                {
-                    var locs = b.AllIndexesOf(i);
-                    if (locs.Count() >= 1)
-                    {
-                        if (locs.First() == b.Length - 1) continue;
-                        for (char j = '9'; j > '0'; j--)
-                        {
-                            var locs2 = b.AllIndexesOf(j);
-                            if ((i != j && locs2.Any(k => k > locs.First())) || (i == j && locs.Count() > 1))
-                            {
-                                res += int.Parse($"{i}{j}");
-                                break;
-                            } 
-                        }
-                        break;
-                    }
-                }
+                res += GetMaxJoltage(battBank, 2);
             }
 
             return res;
@@ -57,21 +32,26 @@ namespace AdventOfCode.Solutions.Year2025
 
             foreach(var battBank in battBanks)
             {
-                var slots = 12;
-                long total = 0;
-                string bank = battBank;
-                while (slots > 0)
-                {
-                    string b = slots == 1 ? bank : bank.Substring(0, bank.Length - slots + 1);
-                    var c = b.Max();
-                    slots--;
-                    total = (total * 10) + c - 48;
-                    bank = bank.Substring(bank.IndexOf(c) + 1);
-                }
-                res += total;
+                res += GetMaxJoltage(battBank, 12);
+            }
+            
+            return res;
+        }
+
+        private long GetMaxJoltage(string battBank, int slots)
+        {
+            long total = 0;
+            string bank = battBank;
+            while (slots > 0)
+            {
+                string b = slots == 1 ? bank : bank.Substring(0, bank.Length - slots + 1);
+                var c = b.Max();
+                slots--;
+                total = (total * 10) + c - offset;
+                bank = bank.Substring(bank.IndexOf(c) + 1);
             }
 
-            return res;
+            return total;
         }
     }
 }
