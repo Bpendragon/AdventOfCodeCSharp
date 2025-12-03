@@ -8,25 +8,65 @@ using System.Threading;
 using System.Security;
 using static AdventOfCode.Solutions.Utilities;
 using System.Runtime.CompilerServices;
+using System.Reflection.Metadata.Ecma335;
 
 namespace AdventOfCode.Solutions.Year2025
 {
-    [DayInfo(03, 2025, "")]
+    [DayInfo(03, 2025, "Lobby")]
     class Day03 : ASolution
     {
-        public Day03() : base()
-        {
+        List<string> battBanks = new();
 
+        public Day03() : base(true)
+        {
+            battBanks = Input.SplitByNewline();
         }
 
         protected override object SolvePartOne()
         {
-            return null;
+            var res = 0;
+
+            foreach(var b in battBanks)
+            {
+                for(char i = '9'; i > '0'; i--)
+                {
+                    var locs = b.AllIndexesOf(i);
+                    if (locs.Count() >= 1)
+                    {
+                        if (locs.First() == b.Length - 1) continue;
+                        for (char j = '9'; j > '0'; j--)
+                        {
+                            var locs2 = b.AllIndexesOf(j);
+                            if ((i != j && locs2.Any(k => k > locs.First())) || (i == j && locs.Count() > 1))
+                            {
+                                res += int.Parse($"{i}{j}");
+                                break;
+                            } 
+                        }
+                        break;
+                    }
+                }
+            }
+
+            return res;
         }
 
         protected override object SolvePartTwo()
         {
-            return null;
+            long res = 0;
+
+            foreach(var b in battBanks)
+            {
+                char[] batts = new char[12];
+                char i = '9';
+                while(batts.Any(x => x == 0))
+                {
+
+                }
+
+            }
+
+            return res;
         }
     }
 }
