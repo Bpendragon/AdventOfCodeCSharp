@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 
 namespace AdventOfCode.Solutions.Year2025
 {
@@ -6,57 +7,61 @@ namespace AdventOfCode.Solutions.Year2025
     class Day04 : ASolution
     {
         Dictionary<Coordinate2D, char> wall = new();
-        int MaxX, MaxY;
+        int startingSpools;
+
         public Day04() : base()
         {
-            (wall, MaxX, MaxY) = Input.GenerateMap();
+            (wall, _, _) = Input.GenerateMap();
+            startingSpools = wall.Count();
         }
 
         protected override object SolvePartOne()
         {
-            int res = 0;
-            
-           foreach(var kvp in wall)
-            {
-                int neighborCount = 0;
-                foreach(var n in kvp.Key.Neighbors(true))
-                {
-                    if (wall.ContainsKey(n)) neighborCount++;
-                }
-                if (neighborCount < 4) res++;
-            }
-
-            return res;
+            return wall.Count(kvp => kvp.Key.Neighbors(true).Count(x => wall.ContainsKey(x)) < 4); ;
         }
 
         protected override object SolvePartTwo()
         {
-            int countRemoved;
-            int res = 0;
-            Dictionary<Coordinate2D, char> tmp = new(wall);
+            
 
-            do
+            int prevCount = 0;
+
+            while(wall.Count() != prevCount)
             {
-                countRemoved = 0;
-                foreach (var kvp in wall)
-                {
-                    int neighborCount = 0;
-                    foreach (var n in kvp.Key.Neighbors(true))
-                    {
-                        if (wall.ContainsKey(n)) neighborCount++;
-                    }
-                    if (neighborCount < 4)
-                    {
-                        countRemoved++;
-                        tmp.Remove(kvp.Key);
-                    }
-                }
+                prevCount = wall.Count();
 
-                wall = new(tmp);
-                res += countRemoved;
-            } while (countRemoved != 0);
+                wall = wall.Where(kvp => kvp.Key.Neighbors(true).Count(x => wall.ContainsKey(x)) >= 4).ToDictionary();
+            }
 
-            return res;
+            return startingSpools - prevCount;
+
+            // Original version, actually slightly faster than the one-liner above so kept for when trying for ultimate speed. 
+
+            //int countRemoved;
+            //int res = 0;
+            //Dictionary<Coordinate2D, char> tmp = new(wall);
+            //do
+            //{
+            //    countRemoved = 0;
+            //    foreach (var kvp in wall)
+            //    {
+            //        int neighborCount = 0;
+            //        foreach (var n in kvp.Key.Neighbors(true))
+            //        {
+            //            if (wall.ContainsKey(n)) neighborCount++;
+            //        }
+            //        if (neighborCount < 4)
+            //        {
+            //            countRemoved++;
+            //            tmp.Remove(kvp.Key);
+            //        }
+            //    }
+
+            //    wall = new(tmp);
+            //    res += countRemoved;
+            //} while (countRemoved != 0);
+
+            //return res;
         }
     }
 }

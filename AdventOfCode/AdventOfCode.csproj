@@ -2,15 +2,11 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>net9.0</TargetFramework>
-    <Configurations>Debug;Release;Release2</Configurations>
+    <Configurations>Debug;Release2</Configurations>
     <CheckForOverflowUnderflow>True</CheckForOverflowUnderflow>
     <StartupObject>AdventOfCode.Program</StartupObject>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
-    <WarningLevel>9999</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
     <WarningLevel>9999</WarningLevel>
   </PropertyGroup>
