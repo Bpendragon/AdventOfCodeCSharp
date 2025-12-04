@@ -1,32 +1,62 @@
-using System;
-using System.Text;
 using System.Collections.Generic;
-using AdventOfCode.UserClasses;
-using System.Linq;
-using System.Data;
-using System.Threading;
-using System.Security;
-using static AdventOfCode.Solutions.Utilities;
-using System.Runtime.CompilerServices;
 
 namespace AdventOfCode.Solutions.Year2025
 {
-    [DayInfo(04, 2025, "")]
+    [DayInfo(04, 2025, "Printing Department")]
     class Day04 : ASolution
     {
+        Dictionary<Coordinate2D, char> wall = new();
+        int MaxX, MaxY;
         public Day04() : base()
         {
-
+            (wall, MaxX, MaxY) = Input.GenerateMap();
         }
 
         protected override object SolvePartOne()
         {
-            return null;
+            int res = 0;
+            
+           foreach(var kvp in wall)
+            {
+                int neighborCount = 0;
+                foreach(var n in kvp.Key.Neighbors(true))
+                {
+                    if (wall.ContainsKey(n)) neighborCount++;
+                }
+                if (neighborCount < 4) res++;
+            }
+
+            return res;
         }
 
         protected override object SolvePartTwo()
         {
-            return null;
+            int countRemoved;
+            int res = 0;
+            Dictionary<Coordinate2D, char> tmp = new(wall);
+
+            do
+            {
+                countRemoved = 0;
+                foreach (var kvp in wall)
+                {
+                    int neighborCount = 0;
+                    foreach (var n in kvp.Key.Neighbors(true))
+                    {
+                        if (wall.ContainsKey(n)) neighborCount++;
+                    }
+                    if (neighborCount < 4)
+                    {
+                        countRemoved++;
+                        tmp.Remove(kvp.Key);
+                    }
+                }
+
+                wall = new(tmp);
+                res += countRemoved;
+            } while (countRemoved != 0);
+
+            return res;
         }
     }
 }
