@@ -1586,7 +1586,7 @@ namespace AdventOfCode.Solutions
     }
 
 
-    public class Range2023
+    public class Range2023 : IComparable<Range2023>, IEquatable<Range2023>
     {
         public long Start;
         public long End;
@@ -1608,6 +1608,16 @@ namespace AdventOfCode.Solutions
         public override string ToString()
         {
             return $"[{Start}, {End}] ({Len})";
+        }
+
+        public int CompareTo(Range2023 other)
+        {
+            return Start.CompareTo(other.Start);
+        }
+
+        public bool Equals(Range2023 other)
+        {
+            return Start == other.Start && End == other.End;
         }
     }
 

@@ -22,46 +22,44 @@ namespace AdventOfCode.Solutions.Year2025
 
         protected override object SolvePartTwo()
         {
-            
 
-            int prevCount = 0;
 
-            while(wall.Count() != prevCount)
-            {
-                prevCount = wall.Count();
+            //int prevCount = 0;
 
-                wall = wall.Where(kvp => kvp.Key.Neighbors(true).Count(x => wall.ContainsKey(x)) >= 4).ToDictionary();
-            }
+            //while(wall.Count() != prevCount)
+            //{
+            //    prevCount = wall.Count();
 
-            return startingSpools - prevCount;
+            //    wall = wall.Where(kvp => kvp.Key.Neighbors(true).Count(x => wall.ContainsKey(x)) >= 4).ToDictionary();
+            //}
+
+            //return startingSpools - prevCount;
 
             // Original version, actually slightly faster than the one-liner above so kept for when trying for ultimate speed. 
 
-            //int countRemoved;
-            //int res = 0;
-            //Dictionary<Coordinate2D, char> tmp = new(wall);
-            //do
-            //{
-            //    countRemoved = 0;
-            //    foreach (var kvp in wall)
-            //    {
-            //        int neighborCount = 0;
-            //        foreach (var n in kvp.Key.Neighbors(true))
-            //        {
-            //            if (wall.ContainsKey(n)) neighborCount++;
-            //        }
-            //        if (neighborCount < 4)
-            //        {
-            //            countRemoved++;
-            //            tmp.Remove(kvp.Key);
-            //        }
-            //    }
+            int countRemoved;
+            int res = 0;
+            do
+            {
+                countRemoved = 0;
+                foreach (var kvp in wall)
+                {
+                    int neighborCount = 0;
+                    foreach (var n in kvp.Key.Neighbors(true))
+                    {
+                        if (wall.ContainsKey(n)) neighborCount++;
+                    }
+                    if (neighborCount < 4)
+                    {
+                        countRemoved++;
+                        wall.Remove(kvp.Key);
+                    }
+                }
 
-            //    wall = new(tmp);
-            //    res += countRemoved;
-            //} while (countRemoved != 0);
+                res += countRemoved;
+            } while (countRemoved != 0);
 
-            //return res;
+            return res;
         }
     }
 }
