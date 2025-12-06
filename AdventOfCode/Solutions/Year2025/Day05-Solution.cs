@@ -7,11 +7,11 @@ namespace AdventOfCode.Solutions.Year2025
     class Day05 : ASolution
     {
         List<long> ingredients = new();
-        List<Range2023> combinedRanges = new();
+        List<MyRange> combinedRanges = new();
 
         public Day05() : base()
         {
-            List<Range2023> ranges = new();
+            List<MyRange> ranges = new();
             var halves = Input.SplitByDoubleNewline();
             var rangeBits = halves[0].ExtractPosLongs().ToArray();
 

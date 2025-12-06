@@ -4,6 +4,7 @@
  */
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -1586,23 +1587,29 @@ namespace AdventOfCode.Solutions
     }
 
 
-    public class Range2023 : IComparable<Range2023>, IEquatable<Range2023>
+    /// <summary>
+    /// A somewhat usable range class with comparison (on start element), equality (starts and ends both match), and enumeration (obeys it's own upperInclusive setting)
+    /// </summary>
+    public class MyRange : IComparable<MyRange>, IEquatable<MyRange>, IEnumerable<long>
     {
         public long Start;
         public long End;
         public long Len => End - Start + 1;
+        public bool UpperInclusive { get; }
 
-        public Range2023(long Start, long End)
+        public MyRange(long Start, long End, bool UpperInclusive = true)
         {
             this.Start = Start;
             this.End = End;
+            this.UpperInclusive = UpperInclusive;
         }
 
         //Forced Deep Copy
-        public Range2023(Range2023 other)
+        public MyRange(MyRange other)
         {
             this.Start = other.Start;
             this.End = other.End;
+            this.UpperInclusive = other.UpperInclusive;
         }
 
         public override string ToString()
@@ -1610,24 +1617,60 @@ namespace AdventOfCode.Solutions
             return $"[{Start}, {End}] ({Len})";
         }
 
-        public int CompareTo(Range2023 other)
+        public int CompareTo(MyRange other)
         {
             return Start.CompareTo(other.Start);
         }
 
-        public bool Equals(Range2023 other)
+        public bool Equals(MyRange other)
         {
-            return Start == other.Start && End == other.End;
+            return Start == other.Start && End == other.End && this.UpperInclusive == other.UpperInclusive;
+        }
+
+        public IEnumerator<long> GetEnumerator() => new RangeEnum(this);
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return (IEnumerator)GetEnumerator();
+        }
+
+        class RangeEnum : IEnumerator<long>
+        {
+            private long _pos;
+            private MyRange _range;
+
+            public RangeEnum(MyRange r)
+            {
+                _range = r;
+                _pos = -1;
+            }
+
+            public long Current => _range.Start + _pos;
+
+            object IEnumerator.Current => Current;
+
+            void IDisposable.Dispose() { }
+
+            public bool MoveNext()
+            {
+                _pos++;
+                return  _range.UpperInclusive ? _range.Start + _pos <= _range.End : _range.Start + _pos < _range.End;
+            }
+
+            public void Reset()
+            {
+                _pos = -1;
+            }
         }
     }
 
     public class MultiRange
     {
-        public List<Range2023> Ranges = new();
+        public List<MyRange> Ranges = new();
 
         public MultiRange() { }
 
-        public MultiRange(IEnumerable<Range2023> Ranges)
+        public MultiRange(IEnumerable<MyRange> Ranges)
         {
             this.Ranges = new(Ranges);
         }
@@ -1636,7 +1679,7 @@ namespace AdventOfCode.Solutions
         {
             foreach (var r in other.Ranges)
             {
-                Range2023 n = new(r);
+                MyRange n = new(r);
                 Ranges.Add(n);
             }
         }
@@ -1646,7 +1689,7 @@ namespace AdventOfCode.Solutions
 
     public class DictMultiRange<T>
     {
-        public Dictionary<T, Range2023> Ranges = new();
+        public Dictionary<T, MyRange> Ranges = new();
 
         public DictMultiRange() { }
 
@@ -1654,7 +1697,7 @@ namespace AdventOfCode.Solutions
         {
             foreach (var r in other.Ranges)
             {
-                Range2023 n = new(r.Value);
+                MyRange n = new(r.Value);
                 Ranges[r.Key] = n;
             }
         }
