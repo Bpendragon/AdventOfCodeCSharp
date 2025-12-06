@@ -6,58 +6,50 @@ namespace AdventOfCode.Solutions.Year2025
     [DayInfo(05, 2025, "Cafeteria")]
     class Day05 : ASolution
     {
-        List<Range2023> ranges = new();
         List<long> ingredients = new();
+        List<Range2023> combinedRanges = new();
 
         public Day05() : base()
         {
+            List<Range2023> ranges = new();
             var halves = Input.SplitByDoubleNewline();
+            var rangeBits = halves[0].ExtractPosLongs().ToArray();
 
-            foreach(var l in halves[0].SplitByNewline())
+            for(int i = 0; i < rangeBits.Length - 1; i +=2)
             {
-                var r = l.ExtractPosLongs();
-                ranges.Add(new(r.First(), r.Last()));
+                ranges.Add(new(rangeBits[i], rangeBits[i + 1]));
             }
 
             ingredients = halves[1].ExtractPosLongs().ToList();
             ranges.Sort();
-        }
-
-        protected override object SolvePartOne()
-        {
-            int count = 0;
-
-            foreach(var i in ingredients)
-            {
-                if (ranges.Any(r => r.Start <= i && r.End >= i)) count++;
-            }
-
-            return count;
-        }
-
-        protected override object SolvePartTwo()
-        {
-            List<Range2023> combinedRanges = new();
 
             combinedRanges.Add(ranges[0]);
 
-            foreach(var r in ranges.Skip(1))
+            foreach (var r in ranges.Skip(1))
             {
                 var lastR = combinedRanges[^1];
 
-                if(r.Start <= lastR.End)
+                if (r.Start <= lastR.End)
                 {
-                    if(r.End > lastR.End)
+                    if (r.End > lastR.End)
                     {
                         combinedRanges[^1] = new(lastR.Start, r.End);
                     }
-                } else
+                }
+                else
                 {
                     combinedRanges.Add(r);
                 }
             }
+        }
 
+        protected override object SolvePartOne()
+        {
+            return ingredients.Count(i => combinedRanges.Any(r => r.Start <= i && r.End >= i));
+        }
 
+        protected override object SolvePartTwo()
+        {
             return combinedRanges.Sum(r => r.Len);
         }
     }

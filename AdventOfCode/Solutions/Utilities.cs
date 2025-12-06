@@ -45,7 +45,7 @@ namespace AdventOfCode.Solutions
         }
 
         /// <summary>
-        /// Turns a string into a list of ints. 
+        /// Turns a string into a list of int. 
         /// </summary>
         /// <param name="str">The string to split up</param>
         /// <param name="delimiter">How to split. Default is each character becomes an int.</param>
@@ -69,7 +69,7 @@ namespace AdventOfCode.Solutions
         }
 
         /// <summary>
-        /// Extract all the positive integers from a string, automatically deliminates on all non numeric chars
+        /// Extract all the positive integers from a string, automatically delimits on all non numeric chars
         /// </summary>
         /// <param name="str">String to search</param>
         /// <returns>An ordered enumerable of the integers found in the string.</returns>
@@ -79,7 +79,7 @@ namespace AdventOfCode.Solutions
         }
 
         /// <summary>
-        /// Extracts all ints from a string, treats `-` as a negative sign.
+        /// Extracts all int from a string, treats `-` as a negative sign.
         /// </summary>
         /// <param name="str">String to search</param>
         /// <returns>An ordered enumerable of the integers found in the string.</returns>
