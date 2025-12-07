@@ -1,3 +1,9 @@
+using AdventOfCode.UserClasses;
+
+using System;
+
+using static AdventOfCode.Solutions.Utilities;
+
 namespace AdventOfCode.Solutions.Year2025
 {
     [DayInfo(01, 2025, "Secret Entrance")]
@@ -9,35 +15,22 @@ namespace AdventOfCode.Solutions.Year2025
         public Day01() : base()
         {
             int curPos = 50;
-            foreach (var l in Input.SplitByNewline())
+            int prevPos = 50;
+            
+            foreach (var s in Input.Replace('L', '-').ExtractInts())
             {
-                (var dir, var stepCount) =  (l[0], int.Parse(l[1..]));
-                if (dir == 'L')
+                curPos += s;
+
+                if((curPos < 0 && prevPos != 0) || curPos < -100 || curPos > 100)
                 {
-                    for (int i = 0; i < stepCount; i++)
-                    {
-                        curPos--;
-                        if (curPos == 0) passed++;
-                        if (curPos == -1) curPos = 99;
-                    }
+                    int t = curPos;
+                    if (t < 0) t = Math.Abs(t + 100) + 100;
+                    passed += t / 100;
                 }
-                else
-                {
-                    for (int i = 0; i < stepCount; i++)
-                    {
-                        curPos++;
-                        if (curPos == 100)
-                        {
-                            passed++;
-                            curPos = 0;
-                        }
-                    }
-                }
-                if (curPos == 0)
-                {
-                    passed--;
-                    stoppedOn++;
-                }
+
+                curPos = Mod(curPos, 100);
+                if (curPos == 0) stoppedOn++;
+                prevPos = curPos;
             }
         }
 

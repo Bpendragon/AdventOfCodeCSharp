@@ -22,21 +22,6 @@ namespace AdventOfCode.Solutions.Year2025
 
         protected override object SolvePartTwo()
         {
-
-
-            //int prevCount = 0;
-
-            //while(wall.Count() != prevCount)
-            //{
-            //    prevCount = wall.Count();
-
-            //    wall = wall.Where(kvp => kvp.Key.Neighbors(true).Count(x => wall.ContainsKey(x)) >= 4).ToDictionary();
-            //}
-
-            //return startingSpools - prevCount;
-
-            // Original version, actually slightly faster than the one-liner above so kept for when trying for ultimate speed. 
-
             int countRemoved;
             int res = 0;
             do

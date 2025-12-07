@@ -467,6 +467,7 @@ namespace AdventOfCode.Solutions
             return r < 0 ? r + m : r;
         }
 
+
         //Fermat was a Genius
         public static long ModInverse(long a, long n)
         {
@@ -998,6 +999,7 @@ namespace AdventOfCode.Solutions
             }
             return (res, maxX, maxY);
         }
+
 
         public static (Dictionary<Coordinate2D, int> map, int maxX, int maxY) GenerateIntMap(this string self, bool discardDot = true)
         {

@@ -9,10 +9,12 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
     <WarningLevel>9999</WarningLevel>
+    <DebugType>full</DebugType>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release2|AnyCPU'">
     <Optimize>True</Optimize>
     <WarningLevel>9999</WarningLevel>
+    <DebugType>none</DebugType>
   </PropertyGroup>
   <ItemGroup>
     <None Remove="Solutions\Year2015\Day01\Solution.cs~RF18d6b49d.TMP" />
@@ -29,6 +31,7 @@
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Properties\" />
     <Folder Include="Solutions\Year2017\Inputs\" />
     <Folder Include="Solutions\Year2023\Inputs\" />
   </ItemGroup>
