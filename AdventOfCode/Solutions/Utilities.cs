@@ -1766,6 +1766,7 @@ namespace AdventOfCode.Solutions
 
             public bool MoveNext()
             {
+                if (_range.Start > _range.End) return false;
                 _pos++;
                 return  _range.UpperInclusive ? _range.Start + _pos <= _range.End : _range.Start + _pos < _range.End;
             }
