@@ -581,6 +581,17 @@ namespace AdventOfCode.Solutions
             }
         }
 
+        public static IEnumerable<(T, T)> Pairs<T>(this IEnumerable<T> array)
+        {
+            if (array.Count() < 2)
+                throw new ArgumentException("Array length can't be less than number of selected elements");
+            T[] result = new T[2];
+            foreach (int[] j in Combinations(2, array.Count()))
+            {
+                yield return (array.ElementAt(j[0]), array.ElementAt(j[1]));
+            }
+        }
+
 
 
         public static IEnumerable<IEnumerable<T>> Split<T>(this IEnumerable<T> array, int size)
@@ -1405,6 +1416,7 @@ namespace AdventOfCode.Solutions
 
         public int ManhattanDistance(Coordinate3D other) => (int)(Math.Abs(x - other.x) + Math.Abs(y - other.y) + Math.Abs(z - other.z));
         public int ManhattanMagnitude() => Math.Abs(x) + Math.Abs(y) + Math.Abs(z);
+        public double EuclidDistance(Coordinate3D other) => Math.Sqrt(Math.Pow(other.x - this.x, 2) + Math.Pow(other.y - this.y, 2) + Math.Pow(other.z - this.z, 2));
 
         public override bool Equals(object obj)
         {
@@ -1442,6 +1454,105 @@ namespace AdventOfCode.Solutions
         };
 
         public List<Coordinate3D> Rotations => new()
+        {
+            (x,y,z),
+            (x,z,-y),
+            (x,-y,-z),
+            (x,-z,y),
+            (y,x,-z),
+            (y,z,x),
+            (y,-x,z),
+            (y,-z,-x),
+            (z,x,y),
+            (z,y,-x),
+            (z,-x,-y),
+            (z,-y,x),
+            (-x,y,-z),
+            (-x,z,y),
+            (-x,-y,z),
+            (-x,-z,-y),
+            (-y,x,z),
+            (-y,z,-x),
+            (-y,-x,-z),
+            (-y,-z,x),
+            (-z,x,-y),
+            (-z,y,x),
+            (-z,-x,y),
+            (-z,-y,-x)
+        };
+    }
+
+    public class Coordinate3DL
+    {
+        public readonly long x;
+        public readonly long y;
+        public readonly long z;
+
+        public Coordinate3DL(long x, long y, long z)
+        {
+            this.x = x;
+            this.y = y;
+            this.z = z;
+        }
+
+        public Coordinate3DL(string stringformat)
+        {
+            var n = stringformat.ExtractLongs().ToArray();
+            x = n[0];
+            y = n[1];
+            z = n[2];
+        }
+
+        public static implicit operator Coordinate3DL((long x, long y, long z) a) => new(a.x, a.y, a.z);
+
+        public static implicit operator (long x, long y, long z)(Coordinate3DL a) => (a.x, a.y, a.z);
+        public static Coordinate3DL operator +(Coordinate3DL a) => a;
+        public static Coordinate3DL operator +(Coordinate3DL a, Coordinate3DL b) => new(a.x + b.x, a.y + b.y, a.z + b.z);
+        public static Coordinate3DL operator -(Coordinate3DL a) => new(-a.x, -a.y, -a.z);
+        public static Coordinate3DL operator -(Coordinate3DL a, Coordinate3DL b) => a + (-b);
+        public static bool operator ==(Coordinate3DL a, Coordinate3DL b) => (a.x == b.x && a.y == b.y && a.z == b.z);
+        public static bool operator !=(Coordinate3DL a, Coordinate3DL b) => (a.x != b.x || a.y != b.y || a.z != b.z);
+
+        public long ManhattanDistance(Coordinate3DL other) => (long)(Math.Abs(x - other.x) + Math.Abs(y - other.y) + Math.Abs(z - other.z));
+        public long ManhattanMagnitude() => Math.Abs(x) + Math.Abs(y) + Math.Abs(z);
+        public double EuclidDistance(Coordinate3DL other) => Math.Sqrt(Math.Pow(other.x - this.x, 2) + Math.Pow(other.y - this.y, 2) + Math.Pow(other.z - this.z, 2));
+
+        public override bool Equals(object obj)
+        {
+            if (obj.GetType() != typeof(Coordinate3DL)) return false;
+            return this == (Coordinate3DL)obj;
+        }
+
+        public override int GetHashCode()
+        {
+            //Primes times coordinates for fewer collisions
+            return (int)(137 * x + 149 * y + 163 * z);
+        }
+        public override string ToString()
+        {
+            return $"{x}, {y}, {z}";
+        }
+
+        public static Coordinate3DL[] GetNeighbors()
+        {
+            return neighbors3D;
+        }
+
+        internal void Deconstruct(out long x, out long y, out long z)
+        {
+            x = this.x;
+            y = this.y;
+            z = this.z;
+        }
+
+        private static readonly Coordinate3DL[] neighbors3D =
+        {
+            (-1,-1,-1),(-1,-1,0),(-1,-1,1),(-1,0,-1),(-1,0,0),(-1,0,1),(-1,1,-1),(-1,1,0),(-1,1,1),
+            (0,-1,-1), (0,-1,0), (0,-1,1), (0,0,-1),          (0,0,1), (0,1,-1), (0,1,0), (0,1,1),
+            (1,-1,-1), (1,-1,0), (1,-1,1), (1,0,-1), (1,0,0), (1,0,1), (1,1,-1), (1,1,0), (1,1,1)
+        };
+
+        public List<Coordinate3DL> Rotations => new()
         {
             (x,y,z),
             (x,z,-y),

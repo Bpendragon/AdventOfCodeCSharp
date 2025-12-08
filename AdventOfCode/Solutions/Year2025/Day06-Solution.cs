@@ -7,17 +7,21 @@ namespace AdventOfCode.Solutions.Year2025
     [DayInfo(06, 2025, "Trash Compactor")]
     class Day06 : ASolution
     {
-        List<List<string>> rows = new();
+        List<List<long>> rows = new();
+        List<string> operators = new();
+        string[] asCols;
+
         public Day06() : base()
         {
-            foreach(var r in Input.SplitByNewline())
+            var lines = Input.SplitByNewline();
+            foreach(var r in lines.SkipLast(1))
             {
-                rows.Add(new());
-                foreach(var s in r.Split(' ', StringSplitOptions.RemoveEmptyEntries|StringSplitOptions.TrimEntries))
-                {
-                    rows[^1].Add(s);
-                }
+                rows.Add(r.ExtractPosLongs().ToList());
             }
+
+            operators = lines.Last().Split(" ", StringSplitOptions.RemoveEmptyEntries).ToList();
+
+            asCols = Input.SplitIntoColumns();
         }
 
         protected override object SolvePartOne()
@@ -26,19 +30,19 @@ namespace AdventOfCode.Solutions.Year2025
             for(int i = 0; i < rows[0].Count(); i++)
             {
                 long tmp;
-                if (rows[^1][i] == "+")
+                if (operators[i] == "+")
                 {
                     tmp = 0;
-                    for(int j = 0; j < rows.Count - 1; j++)
+                    for(int j = 0; j < rows.Count; j++)
                     {
-                        tmp += long.Parse(rows[j][i]);
+                        tmp += rows[j][i];
                     }
                 } else
                 {
                     tmp = 1;
-                    for (int j = 0; j < rows.Count - 1; j++)
+                    for (int j = 0; j < rows.Count; j++)
                     {
-                        tmp *= long.Parse(rows[j][i]);
+                        tmp *= rows[j][i];
                     }
                 }
                 res += tmp;
@@ -48,8 +52,6 @@ namespace AdventOfCode.Solutions.Year2025
 
         protected override object SolvePartTwo()
         {
-            var asCols = Input.SplitIntoColumns();
-
             long res = 0;
             long pAns = 0;
 
