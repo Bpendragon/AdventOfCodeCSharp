@@ -25,49 +25,52 @@ namespace AdventOfCode.Solutions.Year2025
 
             int connAttempts = 0;
 
-            PriorityQueue<(Coordinate3D, Coordinate3D), double> pQueue = new();
+            List<((Coordinate3D, Coordinate3D), double)> pQueue = new();
 
             if (UseDebugInput)
             {
                 foreach (var p in boxes.Pairs())
                 {
-                    pQueue.Enqueue(p, p.Item1.EuclidDistance(p.Item2));
+                    pQueue.Add((p, p.Item1.EuclidDistance(p.Item2)));
                 }
             }
             else
             {
-                double limit = 0;
+                int limit = 0;
+                Dictionary<(Coordinate3D, Coordinate3D), double> firstFew = new();
 
                 foreach(int i in new MyRange(0,50, false))
                 {
                     foreach(int j in new MyRange(i + 1, boxes.Count, false))
                     {
-                        var p1 = boxes[i];
-                        var p2 = boxes[j];
-                        var dist = p1.EuclidDistance(p2);
-                        if (dist > limit) limit = dist;
-                        pQueue.Enqueue((p1, p2), dist);
+                        pQueue.Add(((boxes[i], boxes[j]), boxes[i].EuclidDistance(boxes[j])));
                     }
                 }
 
-                foreach (int i in new MyRange(50, boxes.Count, false))
+                pQueue.Sort((x, y) => x.Item2.CompareTo(y.Item2));
+
+
+
+                foreach (int i in new MyRange(51, boxes.Count, false))
                 {
                     foreach (int j in new MyRange(i + 1, boxes.Count, false))
                     {
                         var p1 = boxes[i];
                         var p2 = boxes[j];
                         var dist = p1.EuclidDistance(p2);
-                        if (dist > limit) continue;
-                        pQueue.Enqueue((p1, p2), dist);
+                        if (Math.Abs(p1.x - p2.x) > limit || Math.Abs(p1.y - p2.y) > limit || Math.Abs(p1.z - p2.z) > limit) continue;
+                        pQueue.Add(((p1, p2), dist));
                     }
                 }
             }
 
-            while (pQueue.TryDequeue(out var p, out double _))
+            pQueue.Sort((x, y) => x.Item2.CompareTo(y.Item2));
+
+            foreach(var p in pQueue)
             {
                 if (connAttempts == connsToMake) p1Ans = circuits.OrderByDescending(x => x.Count()).Take(3).Aggregate(1L, (a, b) => a *= b.Count);
 
-                (var p1, var p2) = p;
+                (var p1, var p2) = p.Item1;
 
                 var existingCircuits = circuits.Where(x => x.Contains(p1) || x.Contains(p2)).ToList();
 

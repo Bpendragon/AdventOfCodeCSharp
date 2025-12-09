@@ -570,7 +570,19 @@ namespace AdventOfCode.Solutions
                 throw new ArgumentException("Array length can't be less than number of selected elements");
             if (m < 1)
                 throw new ArgumentException("Number of selected elements can't be less than 1");
+
             T[] result = new T[m];
+            if (m == 2) //Short Circuit to much faster method
+            {
+                foreach (var p in array.Pairs())
+                {
+                    result[0] = p.Item1;
+                    result[1] = p.Item2;
+                    yield return (IEnumerable<T>)result.Clone();
+                }
+                yield break;
+            }
+
             foreach (int[] j in Combinations(m, array.Count()))
             {
                 for (int i = 0; i < m; i++)
@@ -583,12 +595,15 @@ namespace AdventOfCode.Solutions
 
         public static IEnumerable<(T, T)> Pairs<T>(this IEnumerable<T> array)
         {
+            var t = array.ToList();
             if (array.Count() < 2)
                 throw new ArgumentException("Array length can't be less than number of selected elements");
-            T[] result = new T[2];
-            foreach (int[] j in Combinations(2, array.Count()))
+            foreach(int i in new MyRange(0, t.Count, false))
             {
-                yield return (array.ElementAt(j[0]), array.ElementAt(j[1]));
+                foreach(int j in new MyRange(i+ 1, t.Count, false))
+                {
+                    yield return (t[i], t[j]);
+                }
             }
         }
 
