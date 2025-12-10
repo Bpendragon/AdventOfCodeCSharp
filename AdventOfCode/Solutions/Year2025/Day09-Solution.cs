@@ -1,32 +1,66 @@
 using System;
-using System.Text;
 using System.Collections.Generic;
-using AdventOfCode.UserClasses;
-using System.Linq;
 using System.Data;
-using System.Threading;
-using System.Security;
-using static AdventOfCode.Solutions.Utilities;
-using System.Runtime.CompilerServices;
+using System.Linq;
 
 namespace AdventOfCode.Solutions.Year2025
 {
-    [DayInfo(09, 2025, "")]
+    [DayInfo(09, 2025, "Movie Theater")]
     class Day09 : ASolution
     {
+        Dictionary<(Coordinate2DL, Coordinate2DL), bool> lineSegments = new();
+        List<(Coordinate2DL, Coordinate2DL)> tilePairs;
+        long maxX, maxY, minX, minY;
         public Day09() : base()
         {
+            var tiles = Input.SplitByNewline().Select(x => new Coordinate2DL(x)).ToList();
+            tilePairs = tiles.Pairs().OrderByDescending(a => (Math.Abs(a.Item1.x - a.Item2.x) + 1) * (Math.Abs(a.Item1.y - a.Item2.y) + 1)).ToList();
 
+            maxX = minX = tiles[0].x;
+            maxY = minY = tiles[0].y;
+
+            foreach (int i in new MyRange(0, tiles.Count - 1))
+            {
+                var cur = tiles[i];
+                var next = tiles[(i + 1) % tiles.Count];
+                lineSegments.Add((cur, next), cur.x == next.x);
+            }
         }
 
         protected override object SolvePartOne()
         {
-            return null;
+            return Math.Abs(tilePairs[0].Item1.x - tilePairs[0].Item2.x + 1) * Math.Abs(tilePairs[0].Item1.y - tilePairs[0].Item2.y + 1);
         }
 
         protected override object SolvePartTwo()
         {
+            foreach(var pair in tilePairs)
+            {
+                (long xrMin, long xrMax) = pair.Item1.x < pair.Item2.x ? (pair.Item1.x + 1, pair.Item2.x - 1) : (pair.Item2.x + 1, pair.Item1.x - 1);
+                (long yrMin, long yrMax) = pair.Item1.y < pair.Item2.y ? (pair.Item1.y + 1, pair.Item2.y - 1) : (pair.Item2.y + 1, pair.Item1.y - 1);
+
+                if (lineSegments.Any(ls => ls.Value && IsIntersecting(ls.Key, ((xrMin, yrMin), (xrMax, yrMin))))) continue;
+                if (lineSegments.Any(ls => ls.Value && IsIntersecting(ls.Key, ((xrMin, yrMax), (xrMax, yrMax))))) continue;
+                if (lineSegments.Any(ls => !ls.Value && IsIntersecting(ls.Key, ((xrMin, yrMin), (xrMin, yrMax))))) continue;
+                if (lineSegments.Any(ls => !ls.Value && IsIntersecting(ls.Key, ((xrMax, yrMin), (xrMax, yrMax))))) continue;
+
+                return (Math.Abs(pair.Item1.x - pair.Item2.x) + 1) * (Math.Abs(pair.Item1.y - pair.Item2.y) + 1);
+            }
             return null;
+        }
+
+        bool IsIntersecting((Coordinate2DL, Coordinate2DL) l1, (Coordinate2DL, Coordinate2DL) l2)
+        {
+            var (a, b) = l1;
+            var (c, d) = l2;
+
+            return orientation(a, c, d) != orientation(b, c, d) && orientation(a, b, c) != orientation(a, b, d);
+
+        }
+
+        bool orientation(Coordinate2DL p, Coordinate2DL q, Coordinate2DL r)
+        {
+            return ((q.y - p.y) * (r.x - q.x)) < ((q.x - p.x) * (r.y - q.y));
         }
     }
 }

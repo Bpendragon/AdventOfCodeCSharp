@@ -1311,6 +1311,13 @@ namespace AdventOfCode.Solutions
             this.y = coord.y;
         }
 
+        public Coordinate2DL(string StringPair)
+        {
+            var t = StringPair.Split(',');
+            x = long.Parse(t[0]);
+            y = long.Parse(t[1]);
+        }
+
         public Coordinate2DL RotateCW(int degrees, Coordinate2DL center)
         {
             Coordinate2DL offset = center - this;
