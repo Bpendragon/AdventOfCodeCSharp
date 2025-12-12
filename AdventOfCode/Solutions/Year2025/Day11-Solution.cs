@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace AdventOfCode.Solutions.Year2025
 {
-    [DayInfo(11, 2025, "")]
+    [DayInfo(11, 2025, "Reactor")]
     class Day11 : ASolution
     {
         Dictionary<string, HashSet<string>> devices = new();
@@ -14,23 +14,23 @@ namespace AdventOfCode.Solutions.Year2025
         {
             foreach(var l in Input.SplitByNewline())
             {
-                var c = l.Split([' ', ':'], StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries);
-                devices[c.First()] = new(c.Skip(1));
+                var c = l.Split([' ', ':'], StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries).ToList();
+                devices[c[0]] = new(c[1..]);
             }
+            DFS("svr", false, false);
         }
 
         protected override object SolvePartOne()
         {
-            return DFS("you");
+            return pathCounts[("you", true, true)];
         }
 
         protected override object SolvePartTwo()
         {
-            pathCounts.Clear();
-            return DFS("svr", false, false);
+            return pathCounts[("svr", false, false)];
         }
 
-        long DFS(string node, bool VisitedDac = true, bool VisitedFFT = true)
+        long DFS(string node, bool VisitedDac, bool VisitedFFT)
         {
             long res = 0;
             if (node == "dac") VisitedDac = true;

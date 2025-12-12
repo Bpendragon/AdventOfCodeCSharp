@@ -14,6 +14,8 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Text.RegularExpressions;
 
+using static System.Runtime.InteropServices.JavaScript.JSType;
+
 
 namespace AdventOfCode.Solutions
 {
@@ -222,6 +224,24 @@ namespace AdventOfCode.Solutions
         public static string JoinAsStrings<T>(this IEnumerable<T> items, string seperator)
         {
             return string.Join(seperator, items);
+        }
+
+        /// <summary>
+        /// Converts an int to a binary string, left padded to a given length 
+        /// </summary>
+        /// <param name="n">int to convert.</param>
+        /// <param name="bits">Total number of bits.</param>
+        /// <returns>String representation</returns>
+        /// <example>
+        /// Shows how padding works.
+        /// <code>
+        ///     2.ToBinaryString(4)
+        ///     > 0011 #The binary Value of 2 is 10, left padded to 4 digits
+        /// </code>
+        /// </example>
+        public static string ToBinaryString(this int n, int bits = 32)
+        {
+            return Convert.ToString(n, 2).PadLeft(bits, '0');
         }
 
         public static List<string> SplitByNewline(this string input, bool blankLines = false, bool shouldTrim = true)
