@@ -15,7 +15,8 @@ namespace AdventOfCode.Solutions.Year2015
             long i = -1;
             while (true)
             {
-                var t = MD5Hash(Input + ++i);
+                i++;
+                var t = MD5Hash(Input + i);
                 if (firstRes == 0 && t.StartsWith("00000")) firstRes = i;
                 if (secondRes == 0 && t.StartsWith("000000"))
                 {

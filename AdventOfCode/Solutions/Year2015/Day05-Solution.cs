@@ -15,7 +15,7 @@ namespace AdventOfCode.Solutions.Year2015
         const string vowels = "aeiou";
         readonly string[] p1Naughty = { "ab", "cd", "pq", "xy" };
 
-        public Day05() : base(true)
+        public Day05() : base()
         {
             n = Input.SplitByNewline();
         }
@@ -38,17 +38,20 @@ namespace AdventOfCode.Solutions.Year2015
 
             foreach(var s in n)
             {
-                if (s.SlidingWindow(3).All(a => a.First() != a.Last())) continue;
-                foreach(var p in s.SlidingWindow(2))
+                if (s.SlidingWindow(3).Any(a => a.First() == a.Last()))
                 {
-                    var ps = p.JoinAsStrings();
-                    var t = s.AllIndexesOf(ps);
-                    if (t.Count() > 1 && t.Last() - t.First() > 1)
+                    foreach (var p in s.SlidingWindow(2))
                     {
-                        count++;
-                        continue;
+                        var ps = p.JoinAsStrings();
+                        var t = s.AllIndexesOf(ps);
+                        if (t.Count() > 1 && t.Last() - t.First() > 1)
+                        {
+                            count++;
+                            goto nextLine;
+                        }
                     }
                 }
+            nextLine:;
             }
 
             return count;

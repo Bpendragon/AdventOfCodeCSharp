@@ -99,7 +99,7 @@ namespace AdventOfCode.Solutions.Year2023
                         cycle.Add(cache.First(x => x.Value == j).Key);
                     }
 
-                    resSet = cycle[(part2Cycles - firstRepeated) % cycleLength].PointCloudFromString();
+                    (resSet, _, _) = cycle[(part2Cycles - firstRepeated) % cycleLength].PointCloudFromString();
                     break;
                 }
             }

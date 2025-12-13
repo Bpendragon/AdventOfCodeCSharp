@@ -174,7 +174,10 @@ namespace AdventOfCode.Solutions.Year2015
                                     gateToCheck.Output = gateToCheck.Inputs[0].Output;
                                     break;
                                 case GateTypes.Not:
-                                    gateToCheck.Output = (ushort)~gateToCheck.Inputs[0].Output;
+                                    int tmp = (ushort)gateToCheck.Inputs[0].Output;
+                                    tmp = ~tmp;
+                                    tmp &= 0b0000_0000_0000_0000_1111_1111_1111_1111;
+                                    gateToCheck.Output = (ushort)tmp;
                                     break;
                             }
                             changes++;

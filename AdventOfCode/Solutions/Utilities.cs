@@ -1126,12 +1126,14 @@ namespace AdventOfCode.Solutions
             return sb.ToString();
         }
 
-        public static HashSet<Coordinate2D> PointCloudFromString(this string self)
+        public static (HashSet<Coordinate2D>, int MaxX, int MaxY) PointCloudFromString(this string self)
         {
             HashSet<Coordinate2D> res = new();
 
             int x = 0;
             int y = 0;
+            int maxX = 0;
+            int maxY = 0;
             for (int i = 0; i < self.Length; i++)
             {
                 switch (self[i])
@@ -1143,12 +1145,14 @@ namespace AdventOfCode.Solutions
                         break;
                     default:
                         res.Add((x, y));
+                        maxX = Math.Max(x, maxX);
+                        maxY = Math.Max(y, maxY);
                         break;
                 }
                 x++;
             }
 
-            return res;
+            return (res, maxX, maxY);
         }
 
         public static string StringFromPointCloud(this HashSet<Coordinate2D> self, int maxX, int maxY, char nonEmpty = '#')

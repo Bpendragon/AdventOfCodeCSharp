@@ -5,7 +5,7 @@ using System.Linq;
 namespace AdventOfCode.Solutions.Year2015
 {
 
-    [DayInfo(03, 2015, "")]
+    [DayInfo(03, 2015, "Perfectly Spherical Houses in a Vacuum")]
     class Day03 : ASolution
     {
         readonly HashSet<(int x, int y)> HousesVisted1 = new();
@@ -32,7 +32,7 @@ namespace AdventOfCode.Solutions.Year2015
 
                 HousesVisted1.Add(elf1);
             }
-            return HousesVisted1.Distinct().Count();
+            return HousesVisted1.Count();
         }
 
         protected override object SolvePartTwo()
@@ -62,7 +62,7 @@ namespace AdventOfCode.Solutions.Year2015
                 HousesVisted2.Add(elf1);
                 HousesVisted2.Add(elf2);
             }
-            return HousesVisted2.Distinct().Count();
+            return HousesVisted2.Count();
         }
     }
 }

@@ -4,7 +4,7 @@ using System.Linq;
 namespace AdventOfCode.Solutions.Year2015
 {
 
-    [DayInfo(02, 2015, "")]
+    [DayInfo(02, 2015, "I Was Told There Would Be No Math")]
     class Day02 : ASolution
     {
         readonly List<int[]> packages;
