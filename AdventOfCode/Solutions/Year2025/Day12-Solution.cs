@@ -12,22 +12,12 @@ namespace AdventOfCode.Solutions.Year2025
         public Day12() : base()
         {
             var sections = Input.SplitByDoubleNewline();
-            foreach(var s in sections.SkipLast(1))
-            {
-                p.Add(s.Count(a => a == '#'));
-            }
 
             foreach(var region in sections.Last().SplitByNewline())
             {
                 var r = region.ExtractInts().ToArray();
-                res += r[0] * r[1] > 
-                        (r[2] * p[0]) 
-                        + (r[3] * p[1]) 
-                        + (r[4] * p[1]) 
-                        + (r[5] * p[3]) 
-                        + (r[6] * p[4]) 
-                        + (r[7] * p[5]) 
-                        ? 1 : 0;
+                int t = (r[0] / 3) * (r[1] / 3);
+                if (r[2..].Sum() <= t) res++;
             }
         }
 

@@ -1,10 +1,12 @@
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Data;
 using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 
 namespace AdventOfCode.Solutions.Year2025
 {
@@ -65,9 +67,12 @@ namespace AdventOfCode.Solutions.Year2025
 
         protected override object SolvePartTwo()
         {
+            var vals = from m in machines.AsParallel().WithDegreeOfParallelism(System.Environment.ProcessorCount)
+                       select reduceAndSub(m.buttonsLists, m.joltage);
 
-            return machines.Sum(m => reduceAndSub(m.buttonsLists, m.joltage));
+            return vals.Sum();
         }
+
 
         int reduceAndSub(List<List<int>> buttons, List<int> joltages)
         {

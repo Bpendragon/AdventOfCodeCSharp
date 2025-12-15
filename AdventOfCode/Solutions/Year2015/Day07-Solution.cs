@@ -174,9 +174,11 @@ namespace AdventOfCode.Solutions.Year2015
                                     gateToCheck.Output = gateToCheck.Inputs[0].Output;
                                     break;
                                 case GateTypes.Not:
+                                    // C# does not do the unary not (~) on short types, only int and long, which then leads to overflow
+                                    // So we just mask off the top half of the int.
                                     int tmp = (ushort)gateToCheck.Inputs[0].Output;
                                     tmp = ~tmp;
-                                    tmp &= 0b0000_0000_0000_0000_1111_1111_1111_1111;
+                                    tmp &= 0b0000_0000_0000_0000_1111_1111_1111_1111; 
                                     gateToCheck.Output = (ushort)tmp;
                                     break;
                             }

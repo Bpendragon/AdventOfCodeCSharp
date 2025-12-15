@@ -32,6 +32,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\" />
+    <Folder Include="Solutions\Year2015\Inputs\" />
     <Folder Include="Solutions\Year2017\Inputs\" />
     <Folder Include="Solutions\Year2023\Inputs\" />
   </ItemGroup>
